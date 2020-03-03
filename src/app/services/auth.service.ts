@@ -49,7 +49,7 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.fireAuth.auth.signInWithPopup(provider);
-    // Create Stripe customer with credential info
+
     this.loginModal.toggleModal.emit(false)
 
     return this.updateUserData(credential.user);
@@ -82,16 +82,16 @@ export class AuthService {
   private async updateUserData( user: User , name?: string) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
-    // const customerId = await this.customerService.createStripeCustomer( name, user.email )
-    //                              .then( ( res: any ) => { return res.id } )   
-    //                              .catch( err => this.notification.snackbarAlert( err ))
+    const customerId = await this.customerService.createStripeCustomer( name, user.email )
+                                 .then( ( res: any ) => { return res.id } )   
+                                 .catch( err => this.notification.snackbarAlert( err ))
           
     const data = { 
       uid: user.uid, 
       email: user.email, 
       displayName: name ? name : user.displayName, 
       photoURL: user.photoURL,
-      stripeCustomerId: 'sfg'
+      stripeCustomerId: customerId
     } 
 
     return userRef.set(data, { merge: true })
