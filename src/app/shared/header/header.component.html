@@ -1,0 +1,25 @@
+
+<div class="nav-bar" >
+    <ul>
+        <li><a routerLink="/shop">Shop</a></li>
+    </ul>
+    <i class="material-icons" [matBadge]="storage.length" routerLink="/checkout"> shopping_basket</i>
+    <div class="auth">
+    <div *ngIf='!(auth.user$ | async )'>
+        <button 
+            class="login"
+            (click)="openModal()"
+            > 
+            Login
+        </button>
+    </div>
+    <div *ngIf='auth.user$ | async as user'>
+        <h3>Welcome, {{ firstName( user.displayName) }}! </h3>
+        <img [src]='user.photoURL' 
+             class='profile'
+             *ngIf='user.photoURL'>
+        <button (click)="auth.signOut()">Logout</button>
+    </div>
+</div>
+</div>
+<app-login-modal [toggleModal]="toggleModal" *ngIf="toggleModal"></app-login-modal>

@@ -1,0 +1,60 @@
+<div 
+    [ngClass]="{ 'modal-open' : toggleModal }"
+    *ngIf="toggleModal"
+    (click)="closeModal()"
+    >
+</div>
+<div *ngIf="toggleModal"
+     class="modal">
+        <h1>Hello</h1>
+        <form [formGroup]="form" >
+            <div class="form-group" *ngIf="!toggleLoginForm">
+                <mat-form-field >
+                    <mat-label>Name</mat-label>
+                    <input
+                    placeholder="First & Last"
+                    formControlName="name"
+                    matInput required
+                    id="name"
+                    type="text">
+                </mat-form-field>
+                </div>
+            <div class="form-group">
+                <mat-form-field >
+                    <mat-label>Email</mat-label>
+                    <input
+                    formControlName="email"
+                    matInput required
+                    id="email"
+                    type="text">
+                </mat-form-field>
+            </div>
+            <div class="form-group">
+                <mat-form-field >
+                    <mat-label>Password</mat-label>
+                    <input
+                    formControlName="password"
+                    matInput required
+                    id="password"
+                    type="password">
+                </mat-form-field>
+            <button *ngIf="!toggleLoginForm"
+                    mat-flat-button 
+                    color="accent" 
+                    (click)="emailRegister()"
+                    >Register</button>
+            <button *ngIf="toggleLoginForm"
+                    mat-flat-button 
+                    color="accent" 
+                    (click)="emailLogin()"
+                    >Log In</button>
+                    <a (click)="loginForm()" *ngIf="!toggleLoginForm">Login</a>
+                    <a (click)="loginForm()" *ngIf="toggleLoginForm">Back</a>
+            </div>
+        </form>
+        <button (click)="auth.googleSignin()"
+                mat-flat-button
+                color="primary">
+            Google sign in
+        </button>
+</div>

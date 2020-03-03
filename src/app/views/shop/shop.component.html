@@ -1,0 +1,5 @@
+<!-- <div *ngIf=" productService.products | async as product"> -->
+<div *ngFor="let product of products$ | async">
+    <h1> {{product.title}}</h1>
+    <button [routerLink]="['/product', product.sku]">See Product</button>
+</div>
