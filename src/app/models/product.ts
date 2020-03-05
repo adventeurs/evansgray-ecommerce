@@ -5,6 +5,6 @@ export interface Product {
     price: number;
     sku: string;
     parent: string;
-    amount: string;
+    quantity: string;
     type: string;
   }

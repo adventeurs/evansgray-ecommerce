@@ -11,6 +11,8 @@ import { ActivatedRoute } from '@angular/router';
 export class ProductPageComponent implements OnInit, OnDestroy {
   product$;
   subscription: any;
+  inventory: any;
+  quantity = 1;
   
   constructor(
     private productService: ProductService,
@@ -23,15 +25,32 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.router.paramMap
         .subscribe( param => {
-            this.subscription = this.productService.getProductByTitle(param.get('title'))
+            this.subscription = this.productService.getProductBySku(param.get('sku'))
                 .valueChanges()
-                .subscribe( info => this.product$ = info[0])
+                .subscribe( info => {
+                  this.product$ = info[0];
+                  this.inventory = this.createInventoryArray(info[0].inventory);
+                })
           })
     
   }
 
   ngOnDestroy(){
     this.subscription.unsubscribe();
+  }
+
+  createInventoryArray( inventory ){
+    let inventoryArray= [];
+
+    for(let i = 1; i < inventory + 1; i++){
+      inventoryArray.push(i)
+    }
+    return inventoryArray
+  }
+
+  addToCart( product , amount ){
+    console.log(amount)
+    // this.cartService.addToCart( product , amount )
   }
 
 }

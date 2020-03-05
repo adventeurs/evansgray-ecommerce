@@ -34,6 +34,7 @@ export class AuthService {
       fireAuth.authState.pipe(
         switchMap( user => {
           if ( user ){
+            localStorage.setItem('cartId', user.uid )
             return this.db.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
             return of(null)

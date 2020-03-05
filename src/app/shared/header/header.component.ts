@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoginModalService } from 'src/app/services/login-modal.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent implements OnInit {
   @Input() toggleLoginFrom: boolean;
-  storage: any;
+  size: Observable<Number>;
   toggleModal: boolean;
   clearImg: boolean = false;
   
@@ -21,12 +22,11 @@ export class HeaderComponent implements OnInit {
         private cartService: CartService,
         public router: Router
         ) { 
-        this.storage = this.cartService.storage
       }
 
   ngOnInit() {
-    this.modal.toggleModal.subscribe( bool => this.toggleModal = bool )
-    // setTimeout( function(){ console.log(this.auth.isLoggedIn()) }, 1000)
+    this.modal.toggleModal.subscribe( bool => this.toggleModal = bool );
+    this.size = this.cartService.size;
   }
 
    

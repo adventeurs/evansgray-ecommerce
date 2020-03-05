@@ -28,6 +28,8 @@ import { RouterModule } from '@angular/router';
 import { SuccessComponent } from './views/success/success.component';
 import { CheckoutComponent } from './payments-module/checkout/checkout.component';
 import { CartDisplayComponent } from './payments-module/checkout/cart-display/cart-display.component';
+import { PaymentModule } from './payments-module/payment.module';
+import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
 
 
 
@@ -44,8 +46,9 @@ import { CartDisplayComponent } from './payments-module/checkout/cart-display/ca
     AccountComponent,
     ProductPageComponent,
     LoginModalComponent,
-    SuccessComponent,
     CheckoutComponent,
+    ShippingComponent,
+    MakePaymentComponent,
     CartDisplayComponent
   ],
   imports: [
@@ -68,7 +71,7 @@ import { CartDisplayComponent } from './payments-module/checkout/cart-display/ca
         path: 'shop', component: ShopComponent 
       },
       { 
-        path: 'product/:title', component: ProductPageComponent 
+        path: 'product/:sku', component: ProductPageComponent 
       },
       { 
         path: 'checkout', component: CheckoutComponent 

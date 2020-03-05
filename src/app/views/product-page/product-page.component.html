@@ -1,6 +1,13 @@
 <div *ngIf="product$">
         <h1> {{product$.title}}</h1>
         <h1>{{product$.amount}}</h1>
-        <button (click)='cartService.addProductToCart(product$, 2)'>Add to Cart</button>
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <mat-select matNativeControl required [(value)]="quantity">
+                <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <p>{{quantity}}</p>
+        <button (click)='addToCart(product$, quantity)'>Add to Cart</button>
     </div>
 <div>HELLO</div>

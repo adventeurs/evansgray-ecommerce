@@ -1,1 +1,5 @@
-<p>cart-display works!</p>
+<div *ngFor="let product of displayCart">
+    <h2>{{product.title}}</h2>
+    <p>{{product.amount | dollars}}</p>
+</div>
+<div>{{ cartTotal | async | dollars }}</div>

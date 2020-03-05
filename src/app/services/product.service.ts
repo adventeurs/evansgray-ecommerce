@@ -8,12 +8,12 @@ import { Observable } from 'rxjs';
 })
 
 export class ProductService {
-  productsCollection: AngularFirestoreCollection<Product>;
-  products: Observable<any[]>;
-  product: Observable<any>;
+  // productsCollection: AngularFirestoreCollection<Product>;
+  // products: Observable<any[]>;
+  // product: Observable<any>;
 
   constructor( public db: AngularFirestore ) { 
-      this.products = this.db.collection('products').doc('categories').collection('ribbon').snapshotChanges();
+      // this.products = this.db.collection('products').doc('categories').collection('ribbon').snapshotChanges();
              
   }
 
@@ -21,10 +21,9 @@ export class ProductService {
    return this.db.collection('products').doc('categories').collection('ribbon')
   }
 
-  getProductByTitle( title ){
-    console.log(title)
+  getProductBySku( sku ){
     return this.db.collection('products').doc('categories').collection('ribbon',
-                ref => ref.where( 'sku', '==', title ) )
+                ref => ref.where( 'sku', '==', sku ).limit(1) )
   }
 
 }
