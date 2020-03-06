@@ -3,7 +3,7 @@
     <ul>
         <li><a routerLink="/shop">Shop</a></li>
     </ul>
-    <i class="material-icons" [matBadge]="size | async" routerLink="/checkout"> shopping_basket</i>
+    <i  *ngIf='auth.user$ | async' class="material-icons" [matBadge]="this.cartService.size | async" routerLink="/checkout"> shopping_basket</i>
     <div class="auth">
     <div *ngIf='!(auth.user$ | async )'>
         <button 

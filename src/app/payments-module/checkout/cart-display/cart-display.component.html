@@ -1,5 +1,8 @@
-<div *ngFor="let product of displayCart">
-    <h2>{{product.title}}</h2>
-    <p>{{product.amount | dollars}}</p>
+<div *ngIf='auth.user$ | async '>
+    <div *ngFor="let product of displayCart">
+        <h2>{{product.title}}</h2>
+        <p>{{product.amount | dollars}}</p>
+    </div>
+    <div>{{ cartTotal | async | dollars }}</div>
 </div>
-<div>{{ cartTotal | async | dollars }}</div>
+

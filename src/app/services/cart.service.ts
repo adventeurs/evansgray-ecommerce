@@ -1,11 +1,11 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Product } from '../models/product';
-import { Observable, BehaviorSubject, ReplaySubject, of } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, of, from } from 'rxjs';
 import { CartProduct } from '../models/cartProduct';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { User } from '../models/user';
-import { take, map, pluck, reduce, switchMap } from 'rxjs/operators';
+import { take, map, pluck, reduce, switchMap, takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from './customer.service';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -15,7 +15,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class CartService {
   private cartRef: AngularFirestoreDocument;
-  private cart$: Observable<firebase.firestore.DocumentData>;
+  public cart$: Observable<firebase.firestore.DocumentData>;
   private cartTotal = new ReplaySubject<Number>(1);
   private cartSize = new ReplaySubject<Number>(1);
   // cartTotal;
@@ -35,7 +35,7 @@ export class CartService {
   }
 
   get size(): Observable<Number> {
-  
+
     this.cart$.pipe( 
       map( product => 
         Object.keys(product).map( key => product[key].quantity ) ),
@@ -45,7 +45,6 @@ export class CartService {
       this.cartSize.next(val));
 
     return this.cartSize.asObservable();
-    
   }
   
 
@@ -55,17 +54,19 @@ export class CartService {
     private auth: AuthService,
     private fireAuth: AngularFireAuth
   ) { 
-    this.cart$ = fireAuth.authState.pipe(
-      switchMap( user => {
+    this.fireAuth.authState.subscribe( user => console.log(user))
+    this.cart$ = this.fireAuth.authState.pipe(
+       switchMap( user => {
         if ( user ){
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
-          return this.cartRef.valueChanges();
+          return this.cart$ = this.cartRef.valueChanges();
         } else {
+          this.cartSize.unsubscribe
+          this.cartTotal.unsubscribe
           return of(null)
         }
-      })
-    )
-    }
+       }))
+  }
 
 
 
@@ -90,6 +91,46 @@ export class CartService {
   async removeCartItem(){
     //  find sku and remove
   }
+
+  //   )
+  // }
+
+  // addProductToCart(product: Product, total: number){
+  //   const{ amount, parent, type, title } = product
+  //   const cartProduct = { amount, parent, type, title }
+    
+  //   for(let i = 0; i < total; i++){
+  //   this.storage.push(cartProduct);
+
+  //   localStorage.setItem(
+  //       'products',
+  //       JSON.stringify(this.storage)
+  //     );
+  //   }
+  // }
+
+  // getProductsFromCart(){
+  //   return JSON.parse(localStorage.getItem('products'));
+
+  // }
+
+  // removeAllProductsFromCart(){
+  //   this.storage = [];
+  //   localStorage.clear;
+
+  // }
+
+  // removeProductFromCart(product: Product){
+  //   let storage = JSON.parse( localStorage.getItem( 'products' ));
+
+  //   let removed = storage.filter( product.sku != product.sku );
+    
+  //   let updated = JSON.stringify( removed );
+  //   localStorage.setItem( 'products', updated )
+
+  //   }
+
+    // Update cart count
 
   }
   

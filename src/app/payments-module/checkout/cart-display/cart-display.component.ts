@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-cart-display',
@@ -12,7 +13,8 @@ export class CartDisplayComponent implements OnInit {
   cartTotal;
 
   constructor(
-    private cart: CartService
+    private cart: CartService,
+    private auth: AuthService
   ) { 
   }
 
