@@ -1,11 +1,14 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { Product } from '../models/product';
-import { Observable, BehaviorSubject, ReplaySubject } from 'rxjs';
+import { Observable, BehaviorSubject, ReplaySubject, of } from 'rxjs';
 import { CartProduct } from '../models/cartProduct';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { User } from '../models/user';
-import { take, map, pluck, reduce } from 'rxjs/operators';
+import { take, map, pluck, reduce, switchMap } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { CustomerService } from './customer.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -18,47 +21,52 @@ export class CartService {
   // cartTotal;
 
   get total(): Observable<Number> {
+
     this.cart$.pipe( 
       map( product => 
-        Object.keys(product).map( key => product[key].price * product[key].quantity ) 
-        ),
+        Object.keys(product).map( key => product[key].price * product[key].quantity ) ),
       map( totals => 
-        totals.reduce( ( a , b) => a + b, 0) 
-        )
-    ).subscribe( val => 
+        totals.reduce( ( a , b) => a + b, 0) ))
+      .subscribe( val => 
       this.cartTotal.next(val));
 
     return this.cartTotal.asObservable();
+    
   }
 
   get size(): Observable<Number> {
+  
     this.cart$.pipe( 
       map( product => 
-        Object.keys(product).map( key => product[key].quantity ) 
-        ),
+        Object.keys(product).map( key => product[key].quantity ) ),
       map( totals => 
-        totals.reduce( ( a , b) => a + b, 0) 
-        )
-    ).subscribe( val => 
+        totals.reduce( ( a , b) => a + b, 0) ))
+      .subscribe( val => 
       this.cartSize.next(val));
 
     return this.cartSize.asObservable();
+    
   }
   
 
  
   constructor(
     private db: AngularFirestore,
-    private auth: AuthService
+    private auth: AuthService,
+    private fireAuth: AngularFireAuth
   ) { 
-      let cartId = this.getCartId();
-      this.cartRef = db.doc<Product>(`carts/${cartId}`);
-      this.cart$ = this.cartRef.valueChanges()
-  }
+    this.cart$ = fireAuth.authState.pipe(
+      switchMap( user => {
+        if ( user ){
+          this.cartRef = db.doc<Product>(`carts/${user.uid}`);
+          return this.cartRef.valueChanges();
+        } else {
+          return of(null)
+        }
+      })
+    )
+    }
 
-  private getCartId(){
-    return localStorage.getItem('cartId');
-  }
 
 
   addToCart( product: Product, quantity: number){
@@ -79,49 +87,9 @@ export class CartService {
     })
   }
 
-  removeCartItem(){
+  async removeCartItem(){
     //  find sku and remove
   }
-
-  //   )
-  // }
-
-  // addProductToCart(product: Product, total: number){
-  //   const{ amount, parent, type, title } = product
-  //   const cartProduct = { amount, parent, type, title }
-    
-  //   for(let i = 0; i < total; i++){
-  //   this.storage.push(cartProduct);
-
-  //   localStorage.setItem(
-  //       'products',
-  //       JSON.stringify(this.storage)
-  //     );
-  //   }
-  // }
-
-  // getProductsFromCart(){
-  //   return JSON.parse(localStorage.getItem('products'));
-
-  // }
-
-  // removeAllProductsFromCart(){
-  //   this.storage = [];
-  //   localStorage.clear;
-
-  // }
-
-  // removeProductFromCart(product: Product){
-  //   let storage = JSON.parse( localStorage.getItem( 'products' ));
-
-  //   let removed = storage.filter( product.sku != product.sku );
-    
-  //   let updated = JSON.stringify( removed );
-  //   localStorage.setItem( 'products', updated )
-
-  //   }
-
-    // Update cart count
 
   }
   

@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
 import { ActivatedRoute } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-product-page',
@@ -12,12 +13,13 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   product$;
   subscription: any;
   inventory: any;
-  quantity = 1;
+  quantity: number = 1;
   
   constructor(
     private productService: ProductService,
     private cartService: CartService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private notification: NotificationService
   ) { 
 
   }
@@ -39,8 +41,8 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  createInventoryArray( inventory ){
-    let inventoryArray= [];
+  createInventoryArray( inventory ): Number[]{
+    let inventoryArray: Number[]= [];
 
     for(let i = 1; i < inventory + 1; i++){
       inventoryArray.push(i)
@@ -48,9 +50,10 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     return inventoryArray
   }
 
-  addToCart( product , amount ){
-    console.log(amount)
-    // this.cartService.addToCart( product , amount )
+  addToCart( product , _amount ){
+    let amount = parseInt(_amount)
+    this.cartService.addToCart( product , amount )
+    this.notification.snackbarProduct(product)
   }
 
 }

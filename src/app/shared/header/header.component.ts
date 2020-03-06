@@ -27,6 +27,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.modal.toggleModal.subscribe( bool => this.toggleModal = bool );
     this.size = this.cartService.size;
+
   }
 
    

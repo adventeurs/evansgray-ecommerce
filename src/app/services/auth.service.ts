@@ -12,16 +12,19 @@ import { auth } from 'firebase/app';
 import { LoginModalService } from './login-modal.service';
 import { NotificationService } from './notification.service';
 import { CustomerService } from './customer.service';
+import { Product } from '../models/product';
 
 @Injectable({ 
   providedIn: 'root'
 })
 export class AuthService {
   private loggedInUser = new ReplaySubject<firebase.User>(1)
+  private cartRef: AngularFirestoreDocument;
 
   get user$(): Observable<firebase.User> {
-    return this.loggedInUser.asObservable()
+     return this.loggedInUser.asObservable()
   }
+  
   
   constructor(
       private db: AngularFirestore,
@@ -34,7 +37,6 @@ export class AuthService {
       fireAuth.authState.pipe(
         switchMap( user => {
           if ( user ){
-            localStorage.setItem('cartId', user.uid )
             return this.db.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
             return of(null)
@@ -71,7 +73,7 @@ export class AuthService {
   }
 
   async emailLogin( email: string, password: string){
-    this.fireAuth.auth.signInWithEmailAndPassword( email , password )
+    return this.fireAuth.auth.signInWithEmailAndPassword( email , password )
         .then( () => this.loginModal.toggleModal.emit(false) )
         .catch( ( err ) => {
           this.notification.snackbarAlert( err )
