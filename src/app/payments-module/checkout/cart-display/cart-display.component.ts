@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cart-display',
@@ -9,8 +10,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./cart-display.component.scss']
 })
 export class CartDisplayComponent implements OnInit {
-  displayCart: Product[];
-  cartTotal;
+  displayCart: Observable<String[]>;
+  cartTotal: Observable<Number>;
+  show: boolean = false;
+  quantity;
+  inventory:  Number[] = [];
 
   constructor(
     private cart: CartService,
@@ -20,15 +24,21 @@ export class CartDisplayComponent implements OnInit {
 
   ngOnInit() {
    this.cartTotal = this.cart.total
+   this.displayCart = this.cart.displayCart
   }
 
-  // cartTotals( products: Product[]): number {
-  //   this.cartTotal = 0;
+  removeFromCart( product ){
+    console.log(product)
+    this.cart.removeCartItem( product )
+  }
 
-  //   for( let i = 0; i < products.length; i++ ){
-  //     this.cartTotal += JSON.parse(products[i]['amount'])
-  //   }
+  display( inventory ){
+    this.inventory = this.cart.createInventoryArray(inventory)
+    this.show = !this.show
+  }
 
-  //   return this.cartTotal;
-  // }
+  addToCart( product, quantity){
+    this.cart.addToCart( product, quantity)
+    this.show = !this.show
+  }
 }

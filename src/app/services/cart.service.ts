@@ -9,6 +9,8 @@ import { take, map, pluck, reduce, switchMap, takeUntil } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CustomerService } from './customer.service';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { firestore } from 'firebase/app'
+import { convertPropertyBinding } from '@angular/compiler/src/compiler_util/expression_converter';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +20,19 @@ export class CartService {
   public cart$: Observable<firebase.firestore.DocumentData>;
   private cartTotal = new ReplaySubject<Number>(1);
   private cartSize = new ReplaySubject<Number>(1);
+  private cart = new ReplaySubject<any>(1);
   // cartTotal;
+
+  get displayCart() {
+
+    this.cart$.subscribe( products => {
+      let converted = this.convertCart(products)
+      console.log(converted)
+      this.cart.next(converted)
+    });
+
+    return this.cart.asObservable();
+  }
 
   get total(): Observable<Number> {
 
@@ -46,7 +60,6 @@ export class CartService {
 
     return this.cartSize.asObservable();
   }
-  
 
  
   constructor(
@@ -68,7 +81,25 @@ export class CartService {
        }))
   }
 
+  private convertCart( obj ){
+    let keys = Object.keys(obj);
+    let newObj = [];
 
+    for( let prop of keys){
+      newObj.push(obj[prop])
+    }
+
+    return newObj
+  }
+
+  createInventoryArray( inventory ): Number[]{
+    let inventoryArray: Number[]= [];
+
+    for(let i = 1; i < inventory + 1; i++){
+      inventoryArray.push(i)
+    }
+    return inventoryArray
+  }
 
   addToCart( product: Product, quantity: number){
     let productToAdd = {
@@ -88,8 +119,12 @@ export class CartService {
     })
   }
 
-  async removeCartItem(){
+  async removeCartItem( product ){
     //  find sku and remove
+    this.cartRef.update({
+      [product.sku] : firestore.FieldValue.delete()
+    })
+
   }
 
   //   )

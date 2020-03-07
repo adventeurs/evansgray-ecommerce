@@ -1,7 +1,19 @@
 <div *ngIf='auth.user$ | async '>
-    <div *ngFor="let product of displayCart">
+    <div *ngFor="let product of displayCart | async">
         <h2>{{product.title}}</h2>
-        <p>{{product.amount | dollars}}</p>
+        <p>{{product.price | dollars}}</p>
+        <p>Quantity: {{product.quantity}}</p>
+        <button (click)="removeFromCart(product)">Remove from cart</button>
+        <button (click)="display(product.inventory)" [hidden]="show">Change quantity</button>
+        <div [hidden]="!show">
+            <mat-form-field >
+                <mat-label>Quantity</mat-label>
+                <mat-select matNativeControl required [(value)]="quantity">
+                    <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <button (click)='addToCart(product, quantity)'>Add to Cart</button>
+        </div>
     </div>
     <div>{{ cartTotal | async | dollars }}</div>
 </div>

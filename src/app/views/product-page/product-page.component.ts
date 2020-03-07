@@ -17,7 +17,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   
   constructor(
     private productService: ProductService,
-    private cartService: CartService,
+    private cart: CartService,
     private router: ActivatedRoute,
     private notification: NotificationService
   ) { 
@@ -31,7 +31,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 .valueChanges()
                 .subscribe( info => {
                   this.product$ = info[0];
-                  this.inventory = this.createInventoryArray(info[0].inventory);
+                  this.inventory = this.cart.createInventoryArray(info[0].inventory);
                 })
           })
     
@@ -41,19 +41,14 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     this.subscription.unsubscribe();
   }
 
-  createInventoryArray( inventory ): Number[]{
-    let inventoryArray: Number[]= [];
-
-    for(let i = 1; i < inventory + 1; i++){
-      inventoryArray.push(i)
-    }
-    return inventoryArray
-  }
-
   addToCart( product , _amount ){
     let amount = parseInt(_amount)
-    this.cartService.addToCart( product , amount )
+    this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
+  }
+
+  removeCartItem( product ){
+    this.cart.removeCartItem( product )
   }
 
 }
