@@ -7,7 +7,14 @@
                 <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <button (click)='addToCart(product$, quantity)'>Add to Cart</button>
-        <button (click)='removeCartItem(product$)'>Remove from Cart</button>
+        <button *ngIf="!inCart" 
+                [hidden]='remove'
+                (click)='addToCart(product$, quantity)'>
+                Add to Cart</button>
+        <button *ngIf="inCart" 
+                (click)='addToCart(product$, quantity)'>
+                Change Quantity</button>
+        <button [hidden]='!remove'
+                (click)='removeCartItem(product$)'>
+                Remove from Cart</button>
     </div>
-<div>HELLO</div>

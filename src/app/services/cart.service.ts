@@ -27,7 +27,6 @@ export class CartService {
 
     this.cart$.subscribe( products => {
       let converted = this.convertCart(products)
-      console.log(converted)
       this.cart.next(converted)
     });
 
@@ -67,7 +66,6 @@ export class CartService {
     private auth: AuthService,
     private fireAuth: AngularFireAuth
   ) { 
-    this.fireAuth.authState.subscribe( user => console.log(user))
     this.cart$ = this.fireAuth.authState.pipe(
        switchMap( user => {
         if ( user ){
@@ -109,7 +107,8 @@ export class CartService {
         type: product.type,
         quantity: quantity,
         parent: product.parent,
-        price: product.price
+        price: product.price,
+        inventory: product.inventory
       }
     }
 

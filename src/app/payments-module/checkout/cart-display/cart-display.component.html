@@ -4,7 +4,7 @@
         <p>{{product.price | dollars}}</p>
         <p>Quantity: {{product.quantity}}</p>
         <button (click)="removeFromCart(product)">Remove from cart</button>
-        <button (click)="display(product.inventory)" [hidden]="show">Change quantity</button>
+        <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
         <div [hidden]="!show">
             <mat-form-field >
                 <mat-label>Quantity</mat-label>

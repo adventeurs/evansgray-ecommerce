@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData'
 import {Location} from '@angular/common';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-make-payment',
@@ -13,7 +14,7 @@ import {Location} from '@angular/common';
 
 export class MakePaymentComponent implements OnInit {
   @ViewChild('cardElement', {static: false}) cardElement: ElementRef;
-  @Input() orderData: OrderData ;
+  orderData: OrderData ;
 
   stripe: any;
   handler: any;
@@ -22,7 +23,8 @@ export class MakePaymentComponent implements OnInit {
   constructor(
       public auth: AuthService,
       public stripePayment: PaymentService,
-      public location: Location
+      public location: Location,
+      private cart: CartService
       ) { 
         
       }

@@ -7,4 +7,5 @@ export interface Product {
     parent: string;
     quantity: string;
     type: string;
+    inventory: number;
   }

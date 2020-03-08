@@ -32,12 +32,14 @@ export class CartDisplayComponent implements OnInit {
     this.cart.removeCartItem( product )
   }
 
-  display( inventory ){
+  display( inventory, event: Event){
+    event.preventDefault();
     this.inventory = this.cart.createInventoryArray(inventory)
     this.show = !this.show
   }
 
-  addToCart( product, quantity){
+  addToCart( product, _quantity){
+    let quantity = parseInt(_quantity)
     this.cart.addToCart( product, quantity)
     this.show = !this.show
   }

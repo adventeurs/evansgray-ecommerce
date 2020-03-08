@@ -4,9 +4,22 @@
 }
 
 .nav-bar{
-    height: 200px;
+    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     padding: 1em;
+}
+
+.nav-links{
+    background: tan;
+    padding: 1em;
+    height: 1em;
+    text-decoration: none;
+    list-style: none;
+    margin: 0 1em
+}
+
+.basket{
+    margin: .5em 1em;
 }

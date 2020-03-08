@@ -27,11 +27,4 @@ export class CustomerService {
     return this.http.post('http://localhost:3000/customer', data).toPromise()
   }
 
-  async cartId(){
-    let data = {
- 
-    }
-
-    return this.http.post('http://localhost:3000/customer', data).toPromise()
-  }
 }

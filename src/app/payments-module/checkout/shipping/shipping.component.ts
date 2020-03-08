@@ -1,19 +1,25 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
+import { SubscriptionCollection } from 'src/app/models/subscriptionCollection';
+import { unsubscriber } from 'src/app/services/utility'
 
 @Component({
   selector: 'app-shipping',
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
-export class ShippingComponent implements OnInit {
-  @Input() cartTotal: number;
+export class ShippingComponent implements OnInit, OnDestroy {
+  cartTotal: Number;
+  items;
   orderData: OrderData;
   customer;
+  cartSub;
+  subscription: SubscriptionCollection = {};
+
   orderForm = new FormGroup({
     name: new FormControl( '', [
 
@@ -38,29 +44,44 @@ export class ShippingComponent implements OnInit {
 
   constructor(
     public auth: AuthService,
-    private cart: CartService,
+    private cart: CartService
   ) { }
 
   ngOnInit() {
-    this.auth.user$.subscribe( user => this.customer = user)
+    this.subscription['cart'] = 
+                    this.cart.total.subscribe( total => {
+                      this.cartTotal = total;
+                    });
+    this.subscription['stripeId'] = 
+                    this.auth.user$.subscribe( user => 
+                      this.customer = user
+                      );
+    this.subscription['stripeId'] = 
+                    this.cart.displayCart.subscribe( cart =>
+                      this.items = cart 
+                      );
     // console.log(this.displayCart)
   }
 
-  // proceed( value ){
-  //   this.orderData = {
-  //     customer: this.customer.stripeCustomerId,
-  //     currency: 'usd',
-  //     items: this.cart.storage,
-  //     shipping: {
-  //     address: {
-  //       city: value.city,
-  //       line1: value.line1,
-  //       line2: value.line2,
-  //       postal_code: value.postal_code,
-  //       state: value.state
-  //     },
-  //     name: value.name
-  //   }
-  //   }
-  // }
+  ngOnDestroy(){
+    unsubscriber( ...Object.values(this.subscription) )
+  }
+
+  proceed( value ){
+    this.orderData = {
+      customer: this.customer.stripeCustomerId,
+      currency: 'usd',
+      items: this.items,
+      shipping: {
+        address: {
+          city: value.city,
+          line1: value.line1,
+          line2: value.line2,
+          postal_code: value.postal_code,
+          state: value.state
+        },
+      name: value.name
+    }
+    }
+  }
 }
