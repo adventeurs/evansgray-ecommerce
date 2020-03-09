@@ -6,6 +6,7 @@ import { NotificationService } from 'src/app/services/notification.service';
 import { Product } from 'src/app/models/product';
 import { Subscription } from 'rxjs';
 import { DocumentData } from 'angularfire2/firestore';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-product-page',
@@ -14,7 +15,7 @@ import { DocumentData } from 'angularfire2/firestore';
 })
 export class ProductPageComponent implements OnInit, OnDestroy {
   cartSubscription: Subscription;
-  subscription: Subscription;
+  productSubscription: Subscription;
   product$: DocumentData;
   inventory: Number[];
   quantity: number = 1;
@@ -25,14 +26,15 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     private productService: ProductService,
     private cart: CartService,
     private router: ActivatedRoute,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private auth: AuthService
   ) { 
   }
 
   ngOnInit() {
     this.router.paramMap
         .subscribe( param => {
-            this.subscription = this.productService.getProductBySku(param.get('sku'))
+            this.productSubscription = this.productService.getProductBySku(param.get('sku'))
                 .valueChanges()
                 .subscribe( info => {
                   this.product$ = info[0];
@@ -51,16 +53,17 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy(){
-    this.subscription.unsubscribe();
+    this.productSubscription.unsubscribe();
     this.cartSubscription.unsubscribe();
   }
 
-  addToCart( product , _amount ){
+  addToCart( product , _amount){
     let amount = parseInt(_amount)
     this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
     if(!this.inCart)
       this.remove = !this.remove
+
   }
 
   removeCartItem( product ){

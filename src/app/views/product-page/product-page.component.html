@@ -1,20 +1,32 @@
 <div *ngIf="product$">
-        <h1> {{product$.title}}</h1>
+        <h1>{{product$.title}}</h1>
         <h1>{{product$.amount}}</h1>
-        <mat-form-field>
-            <mat-label>Quantity</mat-label>
-            <mat-select matNativeControl required [(value)]="quantity">
-                <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
-            </mat-select>
-        </mat-form-field>
-        <button *ngIf="!inCart" 
-                [hidden]='remove'
-                (click)='addToCart(product$, quantity)'>
-                Add to Cart</button>
-        <button *ngIf="inCart" 
-                (click)='addToCart(product$, quantity)'>
-                Change Quantity</button>
-        <button [hidden]='!remove'
-                (click)='removeCartItem(product$)'>
-                Remove from Cart</button>
+        <div class="product-selection">
+                <mat-form-field>
+                <mat-label>Quantity</mat-label>
+                <mat-select matNativeControl 
+                                required 
+                                [(value)]="quantity">
+                        <mat-option *ngFor="let number of inventory" 
+                                value="{{number}}">
+                                {{number}}</mat-option>
+                </mat-select>
+                </mat-form-field>
+                <div *ngIf="!(auth.user$ | async)">
+                        <button>
+                        Please login</button>
+                </div>
+                <div *ngIf="auth.user$ | async">
+                <button *ngIf="!inCart" 
+                        [hidden]='remove'
+                        (click)='addToCart(product$, quantity, auth.user$)'>
+                        Add to Cart</button>
+                <button *ngIf="inCart" 
+                        (click)='addToCart(product$, quantity)'>
+                        Change Quantity</button>
+                <button [hidden]='!remove'
+                        (click)='removeCartItem(product$)'>
+                        Remove from Cart</button>
+                </div>
+        </div>
     </div>

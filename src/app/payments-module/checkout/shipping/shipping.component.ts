@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
 import { SubscriptionCollection } from 'src/app/models/subscriptionCollection';
 import { unsubscriber } from 'src/app/services/utility'
+import { StatesService } from 'src/app/services/states.service';
 
 @Component({
   selector: 'app-shipping',
@@ -18,6 +19,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
   orderData: OrderData;
   customer;
   cartSub;
+  states: String[];
   subscription: SubscriptionCollection = {};
 
   orderForm = new FormGroup({
@@ -44,7 +46,8 @@ export class ShippingComponent implements OnInit, OnDestroy {
 
   constructor(
     public auth: AuthService,
-    private cart: CartService
+    private cart: CartService,
+    private stateService: StatesService
   ) { }
 
   ngOnInit() {
@@ -60,7 +63,8 @@ export class ShippingComponent implements OnInit, OnDestroy {
                     this.cart.displayCart.subscribe( cart =>
                       this.items = cart 
                       );
-    // console.log(this.displayCart)
+    
+    this.states = this.stateService.getStates();
   }
 
   ngOnDestroy(){

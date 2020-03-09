@@ -1,54 +1,67 @@
-<div *ngIf="!(auth.user$ | async)">NOOPE</div>
-<form [formGroup]='orderForm' *ngIf="auth.user$ | async">
-  <div class="form-group" >
-    <mat-form-field >
-        <mat-label>Name</mat-label>
-        <input
-         formControlName="name"
-        matInput required
-        id="name"
-        type="text">
-    </mat-form-field>
-    </div>
-    <div class="form-group" >
-      <mat-form-field >
-          <mat-label>Address </mat-label>
-          <input
-          formControlName="line1"
-          matInput required
-          id="h"
-          type="text">
-      </mat-form-field>
-      </div>
-      <div class="form-group" >
+<div class='shipping-form'>
+    <div *ngIf="!(auth.user$ | async)">NOOPE</div>
+    <form [formGroup]='orderForm' *ngIf="auth.user$ | async">
+      <div class="form-group name" >
         <mat-form-field >
-            <mat-label>Line 2 </mat-label>
+            <mat-label>Name</mat-label>
             <input
-            formControlName="line2"
+             formControlName="name"
             matInput required
-            id="hg"
+            id="name"
             type="text">
         </mat-form-field>
         </div>
-        <div class="form-group" >
+        <div class="shipping-title"><h2>Shipping</h2></div>
+        <div class="form-group line1" >
           <mat-form-field >
               <mat-label>Address </mat-label>
               <input
-              formControlName="city"
+              formControlName="line1"
               matInput required
-              id="fgh"
+              id="h"
               type="text">
           </mat-form-field>
-          </div>
-          <div class="form-group" >
-            <mat-form-field >
-                <mat-label>Postal Code </mat-label>
-                <input
-                formControlName="postal_code"
-                matInput required
-                id="fgdfh"
-                type="text">
-            </mat-form-field>
-            </div>
-            <button (click)="proceed(orderForm.value)">Proceed</button>
-</form>
+        </div>
+        <div class="form-group line2" >
+          <mat-form-field >
+              <mat-label>Line 2 </mat-label>
+              <input
+              formControlName="line2"
+              matInput required
+              id="hg"
+              type="text">
+          </mat-form-field>
+        </div>
+        <div class="form-group city" >
+          <mat-form-field >
+              <mat-label>City</mat-label>
+              <input
+              formControlName="city"
+              matInput required
+              id="city"
+              type="text">
+          </mat-form-field>
+        </div>
+        <div class="form-group postal-code" >
+          <mat-form-field >
+              <mat-label>Postal Code </mat-label>
+              <input
+              formControlName="postal_code"
+              matInput required
+              id="postal-code"
+              type="text">
+          </mat-form-field>
+        </div>
+        <mat-form-field class="form-group states">
+            <mat-label>State</mat-label>
+            <mat-select matNativeControl 
+                        required 
+                        [(value)]="quantity">
+              <mat-option *ngFor="let state of states" 
+                          value="{{state}}">
+                          {{state}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <button (click)="proceed(orderForm.value)">Proceed</button>
+    </form>
+</div>

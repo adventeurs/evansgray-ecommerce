@@ -15,6 +15,18 @@
             <button (click)='addToCart(product, quantity)'>Add to Cart</button>
         </div>
     </div>
-    <div>{{ cartTotal | async | dollars }}</div>
+    <div class="totals">
+        <div class="column">
+            <div><h5>Shipping</h5></div>
+            <div><h5>Free!</h5></div>
+        </div>
+        <div class="column">
+            <div><h5>Tax</h5></div>
+            <div><h5>...</h5></div>
+        </div>
+        <div class="column">
+            <div><h5>Total</h5></div>
+            <div><h5>{{ cartTotal | async | dollars }}</h5></div>
+        </div>
 </div>
 
