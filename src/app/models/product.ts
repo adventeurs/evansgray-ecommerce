@@ -8,4 +8,6 @@ export interface Product {
     quantity: string;
     type: string;
     inventory: number;
+    main: string;
+    categories: string[];
   }

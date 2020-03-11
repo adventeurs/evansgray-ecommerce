@@ -13,5 +13,6 @@ export class AppComponent {
 
   constructor(
     public _router: Router
-  ){    }
+  ){
+  }
 }

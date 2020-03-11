@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore} from 'angularfire2/firestore';
 import { Product } from '../models/product';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +25,10 @@ export class ProductService {
                 ref => ref.where( 'sku', '==', sku ).limit(1) )
   }
 
+  filterSearch( terms: String[], products: Product[] ) : Product[] {
+    
+
+    return
+  }
+  
 }

@@ -1,5 +1,22 @@
-<!-- <div *ngIf=" productService.products | async as product"> -->
-<div *ngFor="let product of products$ | async">
-    <h1> {{product.title}}</h1>
-    <button [routerLink]="['/product', product.sku]">See Product</button>
+<!-- Category directive, Ribbon - Apron - Accessories - Etc -->
+
+<!-- Container for product listing -->
+<!-- Radio buttons to filter by category or by assets -->
+<!-- Place cards here that are filtered -->
+<div class="search-results">
+    <div class="card" *ngFor="let product of productListing$ ">
+    <div class="container-bck"></div>
+    <div class="product-img">
+        <img src="/assets/{{product.main}}" alt="">
+    </div>
+    <div class="product-title">
+            <h1> {{product.title}}</h1>
+    </div>
+    <div class="info">
+        <h3>{{product.price | dollars}}</h3>
+        <button [routerLink]="['/product', product.sku]">info</button>
+    </div>
+    </div>
+
 </div>
+
