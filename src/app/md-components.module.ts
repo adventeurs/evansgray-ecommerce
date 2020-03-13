@@ -5,6 +5,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatBadgeModule} from '@angular/material/badge';
 import { MatSelectModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+
 
 
 
@@ -17,7 +19,8 @@ import {MatMenuModule} from '@angular/material/menu';
     MatSnackBarModule,
     MatBadgeModule,
     MatSelectModule,
-    MatMenuModule
+    MatMenuModule,
+    MatCheckboxModule
   ]
 })
 export class MdComponentsModule { }

@@ -2,9 +2,19 @@
 
 <!-- Container for product listing -->
 <!-- Radio buttons to filter by category or by assets -->
+<div class="filters">
+    <div 
+                     *ngFor="let f of filter$">
+        <mat-checkbox value='{{f}}'
+                      (change)="event($event, f)"
+                      [checked]='this.filter ? this.filter.includes(f) : false'>
+                      {{f}}</mat-checkbox>
+</div>
+<button (click)="delete()">delete</button>
+</div>
 <!-- Place cards here that are filtered -->
 <div class="search-results">
-    <div class="card" *ngFor="let product of productListing$ ">
+    <div class="card" *ngFor="let product of productListing ">
     <div class="container-bck"></div>
     <div class="product-img">
         <img src="/assets/{{product.main}}" alt="">
