@@ -3,7 +3,7 @@ import { Product } from '../models/product';
 import { Observable,ReplaySubject, of} from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
-import {  map,  switchMap } from 'rxjs/operators';
+import {  map,  switchMap, mapTo, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase/app'
 
@@ -12,60 +12,44 @@ import { firestore } from 'firebase/app'
 })
 export class CartService {
   private cartRef: AngularFirestoreDocument;
-  public cart$: Observable<firebase.firestore.DocumentData>;
-  private cartTotal = new ReplaySubject<Number>(1);
-  private cartSize = new ReplaySubject<Number>(1);
-  private cart = new ReplaySubject<any>(1);
+  public cartTotal = new ReplaySubject<Number>(1);
+  public cartSize = new ReplaySubject<Number>(1);
+  public cart = new ReplaySubject<Product[]>(1);
 
-  get displayCart() {
 
-    this.cart$.subscribe( products => {
-      let converted = this.convertCart(products)
-      this.cart.next(converted)
-    });
-
-    return this.cart.asObservable();
-  }
-
-  get total(): Observable<Number> {
-
-    this.cart$.pipe( 
-      map( product => this.quantifyPrice( product ) ),
-      map( totals => this.reducer( totals ) ))
-      .subscribe( val => 
-      this.cartTotal.next(val) );
-
-    return this.cartTotal.asObservable();
-  }
-
-  get size(): Observable<Number> {
-
-    this.cart$.pipe( 
-      map( product => this.quantifySize(product) ),
-      map( totals => this.reducer(totals) ))
-      .subscribe( val => 
-      this.cartSize.next(val));
-
-    return this.cartSize.asObservable();
-  }
-
- 
   constructor(
     private db: AngularFirestore,
     private auth: AuthService,
     private fireAuth: AngularFireAuth
   ) { 
-    this.cart$ = this.fireAuth.authState.pipe(
+    this.fireAuth.authState.pipe(
        switchMap( user => {
         if ( user ){
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
-          return this.cart$ = this.cartRef.valueChanges();
+          return this.cartRef.valueChanges()
+                                    .pipe(
+                                      tap( ( cart: Product[]) =>{
+                                        let convertedCart = this.convertCart(cart);
+                                        this.cart.next(convertedCart)
+                                      }),
+                                      tap( cart => {
+                                        let totals = this.sumQuantity(cart);
+                                        let total = this.reducer(totals);
+                                        this.cartSize.next(total)
+                                      }),
+                                      tap( cart => {
+                                        let totals = this.sumPrices(cart);
+                                        let total = this.reducer(totals);
+                                        this.cartTotal.next(total)
+                                      })
+                                    );
         } else {
-          this.cartSize.unsubscribe
-          this.cartTotal.unsubscribe
+          this.cartSize.unsubscribe()
+          this.cartTotal.unsubscribe()
+          this.cart.unsubscribe()
           return of(null)
         }
-       }))
+       })).subscribe()
   }
 
 
@@ -120,11 +104,11 @@ export class CartService {
 
   // Calculation methods 
 
-  private quantifyPrice( product ){
+  private sumPrices( product ){
     return Object.keys(product).map( key => product[key].price * product[key].quantity );
   }
 
-  private quantifySize( product ){
+  private sumQuantity( product ){
     return Object.keys(product).map( key => product[key].quantity );
   }
 
@@ -132,7 +116,7 @@ export class CartService {
     return totals.reduce( ( a , b) => a + b, 0);
   }
 
-  private convertCart( obj ){
+  private convertCart( obj ): Product[]{
     let keys = Object.keys(obj);
     let newObj = [];
 

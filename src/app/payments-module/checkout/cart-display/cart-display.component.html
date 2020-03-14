@@ -1,14 +1,17 @@
 <div *ngIf='auth.user$ | async '>
     <div class="checkout-card" *ngFor="let product of displayCart | async">
-        <div class="checkout-img">
-            <img src="/assets/{{product.main}}" alt="">
+        <div class="checkout-img"
+             [matBadge]="product.quantity">
+             <div class="img-container">
+                    <img src="/assets/{{product.main}}" alt="">
+             </div>
         </div>
         <div class="checkout-info">
             <div class="top">
-                <h4>{{product.title}}</h4>
-                <p>{{product.price | dollars}}</p>
+                <h4>{{product.title}}</h4>              
             </div>
             <div class="bottom">
+                <p>{{product.price | dollars}}</p>
                 <i class="material-icons"
                     (click)="removeFromCart(product)"
                     matTooltip="Remove from cart">
@@ -16,15 +19,14 @@
                 <div class="change-qty">
                     <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
                     <div [hidden]="!show">
-                        <mat-form-field class="qty">
+                        <mat-form-field class="qty" style="width: 45px;">
                             <mat-label>qty.</mat-label>
-                            <mat-select matNativeControl required [(value)]="quantity">
+                            <mat-select matNativeControl [(value)]="quantity" required>
                                 <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button (click)='addToCart(product, quantity)'>Update</button>
+                        <button (click)='addToCart(product, quantity)' class="update">Update</button>
                 </div>
-                <p>qty: {{product.quantity}}</p>
             </div>
             </div>
         </div>
@@ -42,5 +44,6 @@
             <div><h5>Total</h5></div>
             <div><h5>{{ cartTotal | async | dollars }}</h5></div>
         </div>
+        <button (click)="see()">this</button>
 </div>
 

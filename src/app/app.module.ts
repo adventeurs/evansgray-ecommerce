@@ -25,10 +25,8 @@ import { LoginModalComponent } from './shared/header/login-modal/login-modal.com
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MdComponentsModule } from './md-components.module';
 import { RouterModule } from '@angular/router';
-import { SuccessComponent } from './views/success/success.component';
 import { CheckoutComponent } from './payments-module/checkout/checkout.component';
 import { CartDisplayComponent } from './payments-module/checkout/cart-display/cart-display.component';
-import { PaymentModule } from './payments-module/payment.module';
 import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
 import { SearchFilterComponent } from './views/shop/search-filter/search-filter.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';

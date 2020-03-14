@@ -13,7 +13,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 })
 export class HeaderComponent implements OnInit {
   @Input() toggleLoginFrom: boolean;
-  size: Observable<Number>;
+  size;
   toggleModal: boolean;
   clearImg: boolean = false;
   
@@ -28,12 +28,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.modal.toggleModal.subscribe( bool => this.toggleModal = bool ); 
-    this.size = this.cartService.size
-    // this.fireAuth.authState.subscribe( user => {
-    //   if(user){
-    //     this.size = this.cartService.size
-    //   }
-    // })
+    this.size = this.cartService.cartSize
+
   }
 
    

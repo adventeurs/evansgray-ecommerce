@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./cart-display.component.scss']
 })
 export class CartDisplayComponent implements OnInit {
-  displayCart: Observable<String[]>;
+  displayCart: Observable<Product[]>;
   cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
@@ -23,8 +23,9 @@ export class CartDisplayComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.cartTotal = this.cart.total
-   this.displayCart = this.cart.displayCart
+   this.cartTotal = this.cart.cartTotal
+   this.displayCart = this.cart.cart
+
   }
 
   removeFromCart( product ){
@@ -42,4 +43,6 @@ export class CartDisplayComponent implements OnInit {
     this.cart.addToCart( product, quantity)
     this.show = !this.show
   }
+
+
 }
