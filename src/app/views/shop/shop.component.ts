@@ -1,38 +1,34 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { CartService } from 'src/app/services/cart.service';
+import { Subscription } from 'rxjs';
+import { switchMap} from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
-import { Subscription, Observable, BehaviorSubject, from } from 'rxjs';
-import { filter, map, switchMap} from 'rxjs/operators';
-import { RouteConfigLoadEnd, ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
+export class ShopComponent implements OnInit, OnDestroy {
   // SHOP BY CATEGORY
   // FILTER SEARCH RESULTS
   productListing;
-  products;
+  products: Product[] ;
   productSubscription: Subscription;
   filter;
-  filter$ = ['blue', 'gold']
+
   constructor(
       private productService: ProductService,
-      private cartService: CartService,
       private route: ActivatedRoute,
-      private _router: Router
       ) { 
        }
 
-  ngOnInit() {                                                         
+  ngOnInit() {
+  this.productSubscription =                                                         
   this.productService.getAllProducts()
         .pipe(
-          switchMap( products => {
+          switchMap( ( products : Product[] ) => {
             this.products = products;
             return this.route.queryParamMap
           }))
@@ -40,36 +36,16 @@ export class ShopComponent implements OnInit {
             this.filter = params.getAll('filter').toString()
 
             this.productListing = this.filter ?
-                this.products.filter( products => this.productService.filter( products, this.filter.split(',') ) ) :
-                this.products
-          })
-  }
+                this.products.filter( products =>
+                     this.productService.filter( products, this.filter.split(',') ) ) 
+                : this.products
+          });
 
-  event( e,  _filter ){
-    let currentParams = Object.assign({}, this.route.snapshot.queryParams);
-    let params: string [] = currentParams.filter ? currentParams.filter.split(',') : [];
-
-    if( e.checked )
-      params.push(_filter);
-    else {
-      params = params.filter( value => _filter != value);
-        if(params.length == 0 ){
-          console.log('hi')
-          this._router.navigate([], {replaceUrl: true})
-          }
     }
 
-    this.setQueryParams( params.toString() )
-
+  ngOnDestroy(){
+    this.productSubscription.unsubscribe()
   }
 
 
-  setQueryParams( params ){
-    this._router.navigate( [] , {
-      queryParams: {
-        filter: params
-      },
-      queryParamsHandling: 'merge'
-    })
-  }
 }

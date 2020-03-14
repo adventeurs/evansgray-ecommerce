@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {Location} from '@angular/common';
+import { OrderData } from 'src/app/models/orderData';
 
 
 @Component({
@@ -7,16 +8,28 @@ import {Location} from '@angular/common';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss']
 })
-export class CheckoutComponent implements OnInit {
+export class CheckoutComponent {
+  orderData: OrderData;
+  close: boolean = false;
 
   constructor(
     private _location: Location
   ) { }
 
-  ngOnInit() {
-  }
-
   previous(){
     this._location.back()
   }
+
+  receiveOrder( $event){
+    this.orderData = $event
+  }
+
+  receiveClose( $event){
+    this.close = $event
+  }
+
+  returnToShipping(){
+    this.close = !this.close
+  }
+
 }

@@ -81,6 +81,7 @@ export class CartService {
   addToCart( product: Product, quantity: number){
     let productToAdd = {
       [product.sku] : {
+        main: product.main,
         sku: product.sku,
         title: product.title,
         type: product.type,

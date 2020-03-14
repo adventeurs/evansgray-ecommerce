@@ -14,7 +14,7 @@ import { CartService } from 'src/app/services/cart.service';
 
 export class MakePaymentComponent implements OnInit {
   @ViewChild('cardElement', {static: false}) cardElement: ElementRef;
-  orderData: OrderData ;
+  @Input() orderData: OrderData ;
 
   stripe: any;
   handler: any;

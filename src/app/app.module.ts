@@ -9,7 +9,7 @@ import { ProductService } from './services/product.service';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './views/app/app.component';
+import { AppComponent } from './views/app.component';
 import { HomeComponent } from './views/home/home.component';
 import { AboutComponent } from './views/about/about.component';
 import { HeaderComponent } from './shared/header/header.component';
@@ -30,6 +30,8 @@ import { CheckoutComponent } from './payments-module/checkout/checkout.component
 import { CartDisplayComponent } from './payments-module/checkout/cart-display/cart-display.component';
 import { PaymentModule } from './payments-module/payment.module';
 import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
+import { SearchFilterComponent } from './views/shop/search-filter/search-filter.component';
+import { ProductCardComponent } from './shared/product-card/product-card.component';
 
 
 
@@ -49,7 +51,9 @@ import { ShippingComponent } from './payments-module/checkout/shipping/shipping.
     CheckoutComponent,
     ShippingComponent,
     MakePaymentComponent,
-    CartDisplayComponent
+    CartDisplayComponent,
+    SearchFilterComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

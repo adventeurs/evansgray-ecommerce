@@ -1,0 +1,14 @@
+<div class="card">
+    <div class="product-img">
+        <img src="/assets/{{product.main}}" alt="">
+    </div>
+    <div class="product-title">
+            <h3> {{product.title}}</h3>
+    </div>
+    <div class="info">
+        <h4 *ngIf="product.inventory == 0">Sold Out</h4>
+        <h4 *ngIf="product.inventory > 0">{{product.price | dollars}}</h4>
+        <span *ngIf="product.inventory > 0" class="spacer"></span>
+        <a  *ngIf="product.inventory > 0" [routerLink]="['/product', product.sku]">info</a>
+    </div>
+</div>

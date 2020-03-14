@@ -57,11 +57,11 @@
             <mat-select matNativeControl 
                         required 
                         [(value)]="quantity">
-              <mat-option *ngFor="let state of states" 
+              <mat-option *ngFor="let state of state" 
                           value="{{state}}">
                           {{state}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <button (click)="proceed(orderForm.value)">Proceed</button>
+        <button (click)="proceedToPayment(orderForm.value)">Proceed</button>
     </form>
 </div>

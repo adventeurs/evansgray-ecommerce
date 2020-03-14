@@ -9,3 +9,43 @@
     justify-content: space-between;
     padding: 0 1em;
 }
+
+.checkout-card{
+    height: 200px;
+    margin: 1em;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+}
+
+.checkout-img{
+    height: 120px;
+    width: 120px;
+    overflow: hidden;
+}
+
+.checkout-img img{
+    width: 100%;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.top h4{
+    margin: auto;
+    padding: 10px;
+}
+
+.top p{
+    margin: auto;
+    padding: 10px;
+}
+
+.bottom{
+    display: flex;
+    flex-basis: row;
+}

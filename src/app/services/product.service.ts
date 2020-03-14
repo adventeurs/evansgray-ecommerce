@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore} from 'angularfire2/firestore';
-import { Product } from '../models/product';
-import { from, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductService {
-  filter$ = of(['gold', 'blue', 'green'])
+  searchFilter
 
-  constructor( public db: AngularFirestore ) { 
-      // this.products = this.db.collection('products').doc('categories').collection('ribbon').snapshotChanges();
-             
+  constructor( 
+    public db: AngularFirestore 
+    ){ 
   }
 
   getAllProducts(){
@@ -23,6 +21,11 @@ export class ProductService {
   getProductBySku( sku ){
     return this.db.collection('products').doc('categories').collection('ribbon',
                 ref => ref.where( 'sku', '==', sku ).limit(1) )
+  }
+
+  retrieveFilters(){
+    return this.db.collection('filters').doc('product-filters')
+               .valueChanges()
   }
 
   filter(  product, filter: String[]){

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData';
@@ -7,6 +7,7 @@ import { Product } from 'src/app/models/product';
 import { SubscriptionCollection } from 'src/app/models/subscriptionCollection';
 import { unsubscriber } from 'src/app/services/utility'
 import { StatesService } from 'src/app/services/states.service';
+import { User } from 'firebase';
 
 @Component({
   selector: 'app-shipping',
@@ -15,10 +16,12 @@ import { StatesService } from 'src/app/services/states.service';
 })
 export class ShippingComponent implements OnInit, OnDestroy {
   cartTotal: Number;
-  items;
+  items: Product[];
   orderData: OrderData;
+  @Output() orderEvent = new EventEmitter<OrderData>()
+  @Output() closeEvent = new EventEmitter<boolean>();
+  @Input() close: boolean;
   customer;
-  cartSub;
   states: String[];
   subscription: SubscriptionCollection = {};
 
@@ -48,7 +51,8 @@ export class ShippingComponent implements OnInit, OnDestroy {
     public auth: AuthService,
     private cart: CartService,
     private stateService: StatesService
-  ) { }
+  ) { 
+  }
 
   ngOnInit() {
     this.subscription['cart'] = 
@@ -56,11 +60,11 @@ export class ShippingComponent implements OnInit, OnDestroy {
                       this.cartTotal = total;
                     });
     this.subscription['stripeId'] = 
-                    this.auth.user$.subscribe( user => 
+                    this.auth.user$.subscribe( ( user: User ) => 
                       this.customer = user
                       );
-    this.subscription['stripeId'] = 
-                    this.cart.displayCart.subscribe( cart =>
+    this.subscription['cartDisplay'] = 
+                    this.cart.displayCart.subscribe( (cart: Product[]) =>
                       this.items = cart 
                       );
     
@@ -71,7 +75,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
     unsubscriber( ...Object.values(this.subscription) )
   }
 
-  proceed( value ){
+  proceedToPayment( value ){
     this.orderData = {
       customer: this.customer.stripeCustomerId,
       currency: 'usd',
@@ -85,7 +89,10 @@ export class ShippingComponent implements OnInit, OnDestroy {
           state: value.state
         },
       name: value.name
+      }
     }
-    }
+
+    this.orderEvent.emit(this.orderData)
+    this.closeEvent.emit(true)
   }
 }

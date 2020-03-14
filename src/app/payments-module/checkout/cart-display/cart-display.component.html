@@ -1,18 +1,32 @@
 <div *ngIf='auth.user$ | async '>
-    <div *ngFor="let product of displayCart | async">
-        <h2>{{product.title}}</h2>
-        <p>{{product.price | dollars}}</p>
-        <p>Quantity: {{product.quantity}}</p>
-        <button (click)="removeFromCart(product)">Remove from cart</button>
-        <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
-        <div [hidden]="!show">
-            <mat-form-field >
-                <mat-label>Quantity</mat-label>
-                <mat-select matNativeControl required [(value)]="quantity">
-                    <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-            <button (click)='addToCart(product, quantity)'>Add to Cart</button>
+    <div class="checkout-card" *ngFor="let product of displayCart | async">
+        <div class="checkout-img">
+            <img src="/assets/{{product.main}}" alt="">
+        </div>
+        <div class="checkout-info">
+            <div class="top">
+                <h4>{{product.title}}</h4>
+                <p>{{product.price | dollars}}</p>
+            </div>
+            <div class="bottom">
+                <i class="material-icons"
+                    (click)="removeFromCart(product)"
+                    matTooltip="Remove from cart">
+                        remove_circle</i>
+                <div class="change-qty">
+                    <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
+                    <div [hidden]="!show">
+                        <mat-form-field class="qty">
+                            <mat-label>qty.</mat-label>
+                            <mat-select matNativeControl required [(value)]="quantity">
+                                <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                        <button (click)='addToCart(product, quantity)'>Update</button>
+                </div>
+                <p>qty: {{product.quantity}}</p>
+            </div>
+            </div>
         </div>
     </div>
     <div class="totals">

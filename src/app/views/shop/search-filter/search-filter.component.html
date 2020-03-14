@@ -1,0 +1,29 @@
+<div class="filters">
+    <div class="categories">
+        <h4>Categories</h4>
+        <div *ngFor="let cat of categories">
+                <mat-checkbox value='{{cat}}'
+                              (change)="setFilter($event, cat)"
+                              [checked]='this.filter ? this.filter.includes(cat) : false'>
+                              {{cat}}</mat-checkbox>
+        </div>
+    </div>
+    <div class="colors">
+        <h4>Colors</h4>
+        <div *ngFor="let color of colors">
+                <mat-checkbox value='{{color}}'
+                                (change)="setFilter($event, color)"
+                                [checked]='this.filter ? this.filter.includes(color) : false'>
+                                {{color}}</mat-checkbox>
+        </div>
+    </div>
+    <div class="material">
+        <h4>Material</h4>
+        <div *ngFor="let mat of materials">
+                <mat-checkbox value='{{mat}}'
+                                (change)="setFilter($event, mat)"
+                                [checked]='this.filter ? this.filter.includes(mat) : false'>
+                                {{mat}}</mat-checkbox>
+        </div>
+    </div>
+</div>
