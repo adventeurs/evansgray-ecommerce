@@ -28,18 +28,21 @@ export class CartService {
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
           return this.cartRef.valueChanges()
                                     .pipe(
-                                      tap( ( cart: Product[]) =>{
+                                      tap( ( cart: Product[] ) =>{
                                         let convertedCart = this.convertCart(cart);
+
                                         this.cart.next(convertedCart)
                                       }),
-                                      tap( cart => {
+                                      tap( ( cart: Product[] ) => {
                                         let totals = this.sumQuantity(cart);
                                         let total = this.reducer(totals);
+
                                         this.cartSize.next(total)
                                       }),
-                                      tap( cart => {
+                                      tap( ( cart: Product[] ) => {
                                         let totals = this.sumPrices(cart);
                                         let total = this.reducer(totals);
+                                        
                                         this.cartTotal.next(total)
                                       })
                                     );

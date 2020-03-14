@@ -35,8 +35,8 @@ export class ShopComponent implements OnInit, OnDestroy {
           .subscribe( params => {
             this.filter = params.getAll('filter').toString()
 
-            this.productListing = this.filter ?
-                this.products.filter( products =>
+            this.productListing = this.filter 
+                ? this.products.filter( products =>
                      this.productService.filter( products, this.filter.split(',') ) ) 
                 : this.products
           });
