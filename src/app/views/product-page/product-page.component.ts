@@ -42,7 +42,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                 });
           });
     this.cartSubscription = 
-          this.cart.cart.subscribe( (cart: Product[]) =>
+          this.cart.cartArray.subscribe( (cart: Product[]) =>
             cart.filter( product => {
               if(product){
               if(product.sku === this.product$.sku)

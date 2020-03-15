@@ -56,7 +56,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.subscription['cart'] = 
-                    this.cart.cartTotal.subscribe( total => {
+                    this.cart.total.subscribe( total => {
                       this.cartTotal = total;
                     });
     this.subscription['stripeId'] = 
@@ -64,7 +64,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
                       this.customer = user
                       );
     this.subscription['cartDisplay'] = 
-                    this.cart.cart.subscribe( (cart: Product[]) =>
+                    this.cart.cartArray.subscribe( (cart: Product[]) =>
                       this.items = cart 
                       );
     

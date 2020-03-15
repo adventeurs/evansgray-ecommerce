@@ -23,8 +23,8 @@ export class CartDisplayComponent implements OnInit {
   }
 
   ngOnInit() {
-   this.cartTotal = this.cart.cartTotal
-   this.displayCart = this.cart.cart
+   this.cartTotal = this.cart.total
+   this.displayCart = this.cart.cartArray
 
   }
 

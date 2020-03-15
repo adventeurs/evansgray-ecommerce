@@ -5,7 +5,7 @@
     </ul>
     <i  *ngIf='auth.user$ | async' 
         class="material-icons basket" 
-        [matBadge]="size | async" 
+        [matBadge]="size | async " 
         [matBadgeHidden]="!(size | async)"
         routerLink="/checkout"> 
         shopping_basket</i>

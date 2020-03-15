@@ -1,9 +1,9 @@
 import { Injectable} from '@angular/core';
 import { Product } from '../models/product';
-import { Observable,ReplaySubject, of} from 'rxjs';
+import { ReplaySubject, of} from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
-import {  map,  switchMap, mapTo, tap } from 'rxjs/operators';
+import {  switchMap, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase/app'
 
@@ -12,10 +12,21 @@ import { firestore } from 'firebase/app'
 })
 export class CartService {
   private cartRef: AngularFirestoreDocument;
-  public cartTotal = new ReplaySubject<Number>(1);
-  public cartSize = new ReplaySubject<Number>(1);
-  public cart = new ReplaySubject<Product[]>(1);
+  private cartTotal = new ReplaySubject<Number>(1);
+  private cartSize = new ReplaySubject<Number>(1);
+  private cart = new ReplaySubject<Product[]>(1);
 
+  get total(){
+    return this.cartTotal;
+  }
+
+  get size(){
+    return this.cartSize;
+  }
+
+  get cartArray(){
+    return this.cart;
+  }
 
   constructor(
     private db: AngularFirestore,
@@ -29,20 +40,20 @@ export class CartService {
           return this.cartRef.valueChanges()
                                     .pipe(
                                       tap( ( cart: Product[] ) =>{
-                                        let convertedCart = this.convertCart(cart);
+                                        let cartArr = this.convertCart(cart);
 
-                                        this.cart.next(convertedCart)
+                                        this.cart.next(cartArr)
                                       }),
                                       tap( ( cart: Product[] ) => {
-                                        let totals = this.sumQuantity(cart);
-                                        let total = this.reducer(totals);
+                                        let items = this.sumQuantity(cart);
+                                        let quantity = this.reduce(items);
 
-                                        this.cartSize.next(total)
+                                        this.cartSize.next(quantity)
                                       }),
                                       tap( ( cart: Product[] ) => {
-                                        let totals = this.sumPrices(cart);
-                                        let total = this.reducer(totals);
-                                        
+                                        let prices = this.sumPrices(cart);
+                                        let total = this.reduce(prices);
+
                                         this.cartTotal.next(total)
                                       })
                                     );
@@ -92,18 +103,7 @@ export class CartService {
     });
 
   }
-
-  filterResults( filters: string[] , results: Product[] ){
-    const newResults = [];
-
-    for( let i = 0; i < results.length; i++){
-      if( filters.filter( term => results[i].categories.includes(term)) ){
-        newResults.push( results[i] )
-      } 
-    }
-
-    return newResults;
-  }
+  
 
   // Calculation methods 
 
@@ -115,19 +115,12 @@ export class CartService {
     return Object.keys(product).map( key => product[key].quantity );
   }
 
-  private reducer( totals ){
+  private reduce( totals ){
     return totals.reduce( ( a , b) => a + b, 0);
   }
 
-  private convertCart( obj ): Product[]{
-    let keys = Object.keys(obj);
-    let newObj = [];
-
-    for( let prop of keys){
-      newObj.push(obj[prop])
-    }
-
-    return newObj
+  private convertCart( obj: Object ): Product[]{
+    return [...Object.values(obj)];
   }
   
   }

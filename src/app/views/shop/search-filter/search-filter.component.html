@@ -10,11 +10,13 @@
     </div>
     <div class="colors">
         <h4>Colors</h4>
-        <div *ngFor="let color of colors">
+        <div class="color-selection">
+            <div *ngFor="let color of colors">
                 <mat-checkbox value='{{color}}'
                                 (change)="setFilter($event, color)"
                                 [checked]='this.filter ? this.filter.includes(color) : false'>
                                 {{color}}</mat-checkbox>
+            </div>
         </div>
     </div>
     <div class="material">
