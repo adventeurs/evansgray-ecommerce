@@ -19,13 +19,14 @@
                 <div class="change-qty">
                     <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
                     <div [hidden]="!show">
-                        <mat-form-field class="qty" style="width: 45px;">
+                        <mat-form-field class="qty" style="width: 45px;"
+                        (change)="addToCart(product, quantity)">
                             <mat-label>qty.</mat-label>
                             <mat-select matNativeControl [(value)]="quantity" required>
-                                <mat-option *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
+                                <mat-option (change)="addToCart(product, quantity)" *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <button (click)='addToCart(product, quantity)' class="update">Update</button>
+                        <!-- <button (click)='addToCart(product, quantity)' class="update">Update</button> -->
                 </div>
             </div>
             </div>

@@ -30,6 +30,7 @@ import { CartDisplayComponent } from './payments-module/checkout/cart-display/ca
 import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
 import { SearchFilterComponent } from './views/shop/search-filter/search-filter.component';
 import { ProductCardComponent } from './shared/product-card/product-card.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 
 
@@ -51,7 +52,8 @@ import { ProductCardComponent } from './shared/product-card/product-card.compone
     MakePaymentComponent,
     CartDisplayComponent,
     SearchFilterComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

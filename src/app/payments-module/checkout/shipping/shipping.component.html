@@ -1,6 +1,7 @@
 <div class='shipping-form'>
     <div *ngIf="!(auth.user$ | async)">NOOPE</div>
     <form [formGroup]='orderForm' *ngIf="auth.user$ | async">
+        <div class="shipping-title"><h2>Shipping</h2></div>
       <div class="form-group name" >
         <mat-form-field >
             <mat-label>Name</mat-label>
@@ -11,7 +12,6 @@
             type="text">
         </mat-form-field>
         </div>
-        <div class="shipping-title"><h2>Shipping</h2></div>
         <div class="form-group line1" >
           <mat-form-field >
               <mat-label>Address </mat-label>

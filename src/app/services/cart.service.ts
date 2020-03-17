@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { Product } from '../models/product';
-import { ReplaySubject, of} from 'rxjs';
+import { ReplaySubject, of, BehaviorSubject, Observable} from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import {  switchMap, tap } from 'rxjs/operators';
@@ -38,25 +38,10 @@ export class CartService {
         if ( user ){
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
           return this.cartRef.valueChanges()
-                                    .pipe(
-                                      tap( ( cart: Product[] ) =>{
-                                        let cartArr = this.convertCart(cart);
-
-                                        this.cart.next(cartArr)
-                                      }),
-                                      tap( ( cart: Product[] ) => {
-                                        let items = this.sumQuantity(cart);
-                                        let quantity = this.reduce(items);
-
-                                        this.cartSize.next(quantity)
-                                      }),
-                                      tap( ( cart: Product[] ) => {
-                                        let prices = this.sumPrices(cart);
-                                        let total = this.reduce(prices);
-
-                                        this.cartTotal.next(total)
-                                      })
-                                    );
+                      .pipe(
+                        tap( cart => this.nextSize(cart) ),
+                        switchMap( cart => this.convertCart(cart) )
+                      );
         } else {
           this.cartSize.unsubscribe()
           this.cartTotal.unsubscribe()
@@ -64,6 +49,7 @@ export class CartService {
           return of(null)
         }
        })).subscribe()
+       
   }
 
 
@@ -123,6 +109,11 @@ export class CartService {
     return [...Object.values(obj)];
   }
   
+  private nextSize( cart ){
+    let items = this.sumQuantity(cart);
+    let quantity = this.reduce(items);
+    this.cartSize.next(quantity)
+  }
   }
   
 
