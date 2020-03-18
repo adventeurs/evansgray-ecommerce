@@ -1,0 +1,21 @@
+.checkout{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.payment-info{
+    width: 60%
+}
+
+.shopping-cart{
+    width: 40%;
+    padding: 2em;
+    background-color: #FDEAEA;
+    box-shadow: inset 7px 0 9px -7px #ffd6d6;
+}
+
+.checkout-header{
+    position: absolute;
+
+}

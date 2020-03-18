@@ -1,6 +1,6 @@
 .filters{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     max-width: 800px;
     max-height: 250px;
     margin: auto;
@@ -11,21 +11,16 @@
 }
 
 .colors{
-    flex: 2;
-    display: flex;
-    flex-direction: column;
+
 }
 
 .colors h4{
-    margin: auto;
 }
 
 .color-selection{
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    padding: 0 4em;
-    margin-left: 10%;
 }
 
 .color-selection div{

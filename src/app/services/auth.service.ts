@@ -1,25 +1,20 @@
 import { Injectable} from '@angular/core';
 import { User } from '../models/user';
-
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-
 import { Router } from '@angular/router';
-
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { switchMap, map, take } from 'rxjs/operators'
+import { switchMap } from 'rxjs/operators'
 import { auth } from 'firebase/app';
 import { LoginModalService } from './login-modal.service';
 import { NotificationService } from './notification.service';
 import { CustomerService } from './customer.service';
-import { Product } from '../models/product';
 
 @Injectable({ 
   providedIn: 'root'
 })
 export class AuthService {
   private loggedInUser = new ReplaySubject<firebase.User>(1)
-  private cartRef: AngularFirestoreDocument;
 
   get user$(): Observable<firebase.User> {
      return this.loggedInUser.asObservable()

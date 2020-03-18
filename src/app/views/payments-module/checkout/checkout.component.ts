@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import {Location} from '@angular/common';
 import { OrderData } from 'src/app/models/orderData';
 

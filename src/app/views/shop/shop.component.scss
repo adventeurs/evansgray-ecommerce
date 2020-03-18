@@ -1,5 +1,26 @@
-.search-results{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+
+cdk-virtual-scroll-viewport{
+    height: 100%;
+    width: 100%;
+
+     .cdk-virtual-scroll-content-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
 }
+
+.display-products{
+    display: flex;
+    flex-direction: row;
+}
+
+.filters{
+    flex: 1;
+}
+
+.search-results{
+    flex: 3;
+    height: 800px;
+}
+

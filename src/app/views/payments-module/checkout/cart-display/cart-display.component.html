@@ -1,4 +1,5 @@
-<div *ngIf='auth.user$ | async '>
+<div class="cart">
+    <div *ngIf='auth.user$ | async ' class="cart-holder">
     <div class="checkout-card" *ngFor="let product of displayCart | async">
         <div class="checkout-img"
              [matBadge]="product.quantity">
@@ -12,22 +13,26 @@
             </div>
             <div class="bottom">
                 <p>{{product.price | dollars}}</p>
-                <i class="material-icons"
-                    (click)="removeFromCart(product)"
-                    matTooltip="Remove from cart">
-                        remove_circle</i>
+                    <i class="material-icons"
+                        (click)="removeFromCart(product)"
+                        matTooltip="Remove from cart"
+                        style="font-size: 20px;">
+                            remove_circle
+                    </i>
                 <div class="change-qty">
-                    <button (click)="display(product.inventory, $event)" [hidden]="show">Change quantity</button>
-                    <div [hidden]="!show">
-                        <mat-form-field class="qty" style="width: 45px;"
-                        (change)="addToCart(product, quantity)">
-                            <mat-label>qty.</mat-label>
-                            <mat-select matNativeControl [(value)]="quantity" required>
-                                <mat-option (change)="addToCart(product, quantity)" *ngFor="let number of inventory" value="{{number}}">{{number}}</mat-option>
+                        <mat-form-field class="qty" style="width: 45px;">
+                            <mat-label>
+                                qty.
+                            </mat-label>
+                            <mat-select (selectionChange)='addToCart(product, $event.value)' 
+                                        matNativeControl 
+                                        [value]="quantity" 
+                                        >
+                                <mat-option *ngFor="let number of inventory(product)" value="{{number}}">
+                                    {{number}}
+                                </mat-option>
                             </mat-select>
                         </mat-form-field>
-                        <!-- <button (click)='addToCart(product, quantity)' class="update">Update</button> -->
-                </div>
             </div>
             </div>
         </div>
@@ -45,6 +50,5 @@
             <div><h5>Total</h5></div>
             <div><h5>{{ cartTotal | async | dollars }}</h5></div>
         </div>
-        <button (click)="see()">this</button>
+    </div>
 </div>
-

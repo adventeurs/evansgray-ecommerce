@@ -13,7 +13,7 @@ export class ProductService {
     ){ 
   }
 
-  getAllProducts(){
+  getProducts(){
    return this.db.collection('products').doc('categories').collection('ribbon')
               .valueChanges()
   }   

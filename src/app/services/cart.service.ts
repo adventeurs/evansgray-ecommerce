@@ -1,6 +1,6 @@
 import { Injectable} from '@angular/core';
 import { Product } from '../models/product';
-import { ReplaySubject, of, BehaviorSubject, Observable} from 'rxjs';
+import { ReplaySubject, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import {  switchMap, tap } from 'rxjs/operators';
@@ -40,8 +40,9 @@ export class CartService {
           return this.cartRef.valueChanges()
                       .pipe(
                         tap( cart => this.nextSize(cart) ),
-                        switchMap( cart => this.convertCart(cart) )
-                      );
+                        tap( cart => this.cart.next( [...Object.values(cart)] ) ),
+                        tap( cart => this.nextTotal(cart) )
+                        )
         } else {
           this.cartSize.unsubscribe()
           this.cartTotal.unsubscribe()
@@ -105,13 +106,17 @@ export class CartService {
     return totals.reduce( ( a , b) => a + b, 0);
   }
 
-  private convertCart( obj: Object ): Product[]{
-    return [...Object.values(obj)];
+  private nextTotal( product ){
+    let totals =  Object.keys(product).map( key => product[key].price * product[key].quantity );
+    let finalTotal = totals.reduce( ( a , b) => a + b, 0);
+
+    this.cartTotal.next(finalTotal)
   }
   
   private nextSize( cart ){
     let items = this.sumQuantity(cart);
     let quantity = this.reduce(items);
+
     this.cartSize.next(quantity)
   }
   }

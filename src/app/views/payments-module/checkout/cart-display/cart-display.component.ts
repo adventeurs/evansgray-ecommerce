@@ -14,7 +14,6 @@ export class CartDisplayComponent implements OnInit {
   cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
-  inventory:  Number[] = [];
 
   constructor(
     private cart: CartService,
@@ -32,17 +31,15 @@ export class CartDisplayComponent implements OnInit {
     this.cart.removeCartItem( product )
   }
 
-  display( inventory, event: Event){
-    event.preventDefault();
-    this.inventory = this.cart.createInventoryArray(inventory)
-    this.show = !this.show
+  inventory( product ): Number[] {
+    let inventory = this.cart.createInventoryArray(product.inventory)
+    return inventory
   }
 
   addToCart( product, _quantity){
     let quantity = parseInt(_quantity)
     this.cart.addToCart( product, quantity)
-    this.show = !this.show
+     
   }
-
 
 }

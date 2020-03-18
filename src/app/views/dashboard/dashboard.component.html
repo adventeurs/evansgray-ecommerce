@@ -1,1 +1,96 @@
-<p>dashboard works!</p>
+
+  <form [formGroup]='productInput' class='form'>
+
+        <mat-form-field >
+            <mat-label>Inventory amount</mat-label>
+            <input
+            formControlName="inventory"
+            matInput required
+            type="number">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Product title</mat-label>
+            <input
+            formControlName="title"
+            matInput required
+            type="text">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>SKU</mat-label>
+            <input
+            formControlName="sku"
+            matInput required
+            type="text">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Category</mat-label>
+            <input
+            formControlName="category"
+            matInput required
+            type="text">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Price</mat-label>
+            <input
+            formControlName="price"
+            matInput required
+            type="number">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Searchable</mat-label>
+            <textarea
+            formControlName="searchable"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Color</mat-label>
+            <textarea
+            formControlName="color"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Styling</mat-label>
+            <textarea
+            formControlName="styling"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>Care</mat-label>
+            <textarea
+            formControlName="care"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>descrption</mat-label>
+            <textarea
+            formControlName="description"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>snippet</mat-label>
+            <textarea
+            formControlName="snippet"
+            matInput required
+            type="text"></textarea>
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>main</mat-label>
+            <input
+            formControlName="main"
+            matInput required
+            type="string">
+        </mat-form-field>
+        <mat-form-field >
+            <mat-label>imgs</mat-label>
+            <input
+            formControlName="imgs"
+            matInput required
+            type="string">
+        </mat-form-field>
+       
+        <button (click)="addProduct(productInput.value)">Submit</button>

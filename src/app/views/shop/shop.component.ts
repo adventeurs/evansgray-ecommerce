@@ -5,6 +5,7 @@ import { switchMap} from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from 'src/app/models/product';
 
+
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
@@ -26,20 +27,20 @@ export class ShopComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
   this.productSubscription =                                                         
-  this.productService.getAllProducts()
-        .pipe(
-          switchMap( ( products : Product[] ) => {
-            this.products = products;
-            return this.route.queryParamMap
-          }))
-          .subscribe( params => {
-            this.filter = params.getAll('filter').toString()
-            console.log(this.products)
-            this.productListing = this.filter 
-                ? this.products.filter( products =>
-                     this.productService.filter( products, this.filter.split(',') ) ) 
-                : this.products
-          });
+    this.productService.getProducts()
+          .pipe(
+            switchMap( ( products : Product[] ) => {
+              this.products = products;
+              return this.route.queryParamMap
+            }))
+            .subscribe( params => {
+              this.filter = params.getAll('filter').toString()
+
+              this.productListing = this.filter 
+                  ? this.products.filter( products =>
+                      this.productService.filter( products, this.filter.split(',') ) ) 
+                  : this.products
+            });
 
     }
 

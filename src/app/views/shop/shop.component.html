@@ -2,14 +2,17 @@
 
 <!-- Container for product listing -->
 <!-- Radio buttons to filter by category or by assets -->
-<div class="filters">
-   <app-search-filter [filter]='filter'></app-search-filter>
+<div class="display-products">
+        <div class="filters">
+                <app-search-filter [filter]='filter'></app-search-filter>
+             </div>
+             <div class="search-results">
+                 <cdk-virtual-scroll-viewport itemSize="100">
+                     <div *cdkVirtualFor="let product of productListing ">
+                         <product-card [product]="product"></product-card>
+                     </div>
+                 </cdk-virtual-scroll-viewport>
+              </div>
 </div>
 
-<!-- Place cards here that are filtered -->
-<div class="search-results">
-    <div *ngFor="let product of productListing ">
-        <product-card [product]="product"></product-card>
-    </div>
-</div>
 
