@@ -1,15 +1,23 @@
-<div  class="checkout-header">
-    <button (click)="previous()">Back</button>
-</div>
 <div class="checkout">
-    <button *ngIf="orderData && close" (click)="returnToShipping()">shipping</button>
-    <div class="payment-info">
+       <div class="payment-info">
+            <div  class="checkout-header">
+                    <button (click)="previous()">Back</button>
+                </div>
         <app-shipping *ngIf="!close" 
                       [close]='close'
                       (orderEvent)="receiveOrder( $event )"
                       (closeEvent)="receiveClose( $event )"></app-shipping>
         <app-make-payment *ngIf="orderData && close" 
-                          [orderData]="orderData" ></app-make-payment>
+                          (closeEvent)="receiveClose( $event )"
+                          [orderData]="orderData" 
+                          class='payment'></app-make-payment>
+        <div class="info">
+            <mat-divider></mat-divider>
+            <ul>
+                <li #refunds (click)="openDialog( refunds.innerHTML )">Refunds</li>
+                <li #shipping (click)="openDialog( shipping.innerHTML )">Shipping</li>
+            </ul>
+        </div>
     </div>
     
     <div class="shopping-cart">

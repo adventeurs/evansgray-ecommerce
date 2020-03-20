@@ -7,7 +7,9 @@ import { MatSelectModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatMenuModule,
     MatCheckboxModule,
     MatTooltipModule, 
-    MatExpansionModule
+    MatExpansionModule,
+    MatDividerModule,
+    MatDialogModule
   ]
 })
 export class MdComponentsModule { }

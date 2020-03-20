@@ -32,6 +32,9 @@ import { SearchFilterComponent } from './views/shop/search-filter/search-filter.
 import { ProductCardComponent } from './shared/product-card/product-card.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { ShippingInfoComponent } from './shared/shipping-info/shipping-info.component';
+import { RefundInfoComponent } from './shared/refund-info/refund-info.component';
+
 
 
 
@@ -54,7 +57,13 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     CartDisplayComponent,
     SearchFilterComponent,
     ProductCardComponent,
-    DashboardComponent
+    DashboardComponent,
+    ShippingInfoComponent,
+    RefundInfoComponent
+  ],
+  entryComponents: [
+    ShippingInfoComponent,
+    RefundInfoComponent
   ],
   imports: [
     BrowserModule,

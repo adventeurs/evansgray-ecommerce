@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { PaymentService } from '../../services/payment.service';
 import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
@@ -15,10 +15,9 @@ import { CartService } from 'src/app/services/cart.service';
 export class MakePaymentComponent implements OnInit {
   @ViewChild('cardElement', {static: false}) cardElement: ElementRef;
   @Input() orderData: OrderData ;
-
+  @Output() closeEvent = new EventEmitter<boolean>();
   stripe: any;
   handler: any;
-  
 
   constructor(
       public auth: AuthService,
@@ -54,6 +53,10 @@ export class MakePaymentComponent implements OnInit {
       card.addEventListener( 'submit', ()=>{
         this.stripePayment.pay( stripe, card, this.orderData );
       })
+  }
+
+  returnToShipping(){
+    this.closeEvent.emit(false)
   }
 
 }

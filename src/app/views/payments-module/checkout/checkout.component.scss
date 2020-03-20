@@ -5,17 +5,43 @@
 }
 
 .payment-info{
-    width: 60%
+    width: 60%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    padding: 1em 0;
 }
 
 .shopping-cart{
     width: 40%;
-    padding: 2em;
+    padding: 2em 0;
     background-color: #FDEAEA;
-    box-shadow: inset 7px 0 9px -7px #ffd6d6;
+    box-shadow: inset 0px 0 7px 3px #ffd6d6;
 }
 
 .checkout-header{
-    position: absolute;
+    padding: 2em;
+}
 
+.info{
+    width: 50%;
+
+ ul{
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+
+    li{
+        padding: 1em;
+    }
+}
+}
+
+.payment{
+    width: 100%;
 }

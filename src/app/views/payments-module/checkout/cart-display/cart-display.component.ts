@@ -3,6 +3,8 @@ import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
+import { ShippingInfoComponent } from 'src/app/shared/shipping-info/shipping-info.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-cart-display',
@@ -17,7 +19,8 @@ export class CartDisplayComponent implements OnInit {
 
   constructor(
     private cart: CartService,
-    private auth: AuthService
+    private auth: AuthService,
+    private dialog: MatDialog
   ) { 
   }
 
@@ -41,5 +44,10 @@ export class CartDisplayComponent implements OnInit {
     this.cart.addToCart( product, quantity)
      
   }
+
+  openDialog(){
+      this.dialog.open(ShippingInfoComponent)
+    }
+
 
 }

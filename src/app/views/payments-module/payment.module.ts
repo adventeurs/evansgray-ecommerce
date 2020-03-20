@@ -7,7 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ShippingComponent } from './checkout/shipping/shipping.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { CartDisplayComponent } from './checkout/cart-display/cart-display.component';
-
+import { ShippingInfoComponent } from '../../shared/shipping-info/shipping-info.component'
+import { RefundInfoComponent } from '../../shared/refund-info/refund-info.component'
 
 
 @NgModule({
@@ -16,6 +17,10 @@ import { CartDisplayComponent } from './checkout/cart-display/cart-display.compo
     ShippingComponent,
     MakePaymentComponent,
     CartDisplayComponent
+  ],
+  entryComponents: [
+    ShippingInfoComponent,
+    RefundInfoComponent
   ],
   imports: [
     CommonModule,

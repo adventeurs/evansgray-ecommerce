@@ -38,14 +38,21 @@
         </div>
     </div>
     <div class="totals">
+            <mat-divider></mat-divider>
         <div class="column">
-            <div><h5>Shipping</h5></div>
+            <div class="shipping"><h5>Shipping</h5>
+                <span class="material-icons" style="margin-left: 5px; font-size: 20px; cursor: pointer;"
+                      (click)="openDialog()">
+                      help
+                </span>
+            </div>
             <div><h5>Free!</h5></div>
         </div>
         <div class="column">
             <div><h5>Tax</h5></div>
-            <div><h5>...</h5></div>
+            <div><h5>calculated before payment</h5></div>
         </div>
+        <mat-divider></mat-divider>
         <div class="column">
             <div><h5>Total</h5></div>
             <div><h5>{{ cartTotal | async | dollars }}</h5></div>
