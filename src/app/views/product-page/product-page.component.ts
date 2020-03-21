@@ -7,7 +7,6 @@ import { Product } from 'src/app/models/product';
 import { Subscription } from 'rxjs';
 import { DocumentData } from 'angularfire2/firestore';
 import { AuthService } from 'src/app/services/auth.service';
-import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-page',
@@ -19,10 +18,9 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   productSubscription: Subscription;
   product$: DocumentData;
   inventory: Number[];
-  sku: string;
   quantity: number = 1;
   inCart: boolean = false;
-  remove: boolean = true;
+  remove: boolean = false;
   
   constructor(
     private productService: ProductService,
@@ -33,27 +31,24 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   ) { 
   }
 
-  async ngOnInit() {
-    this.productSubscription = this.router.paramMap
+  ngOnInit() {
+    this.router.paramMap
         .subscribe( param => {
-            this.product$ = this.productService.getProductBySku(param.get('sku'))
-                                .valueChanges().pipe(
-                                  tap( product =>{
-                                    this.inventory = this.cart.createInventoryArray(product[0].inventory )
-                                    this.sku = product[0].sku
-                                  }));
-        });
-
+            this.productSubscription = this.productService.getProductBySku(param.get('sku'))
+                .valueChanges()
+                .subscribe( info => {
+                  this.product$ = info[0];
+                  this.inventory = this.cart.createInventoryArray(info[0].inventory);
+                });
+          });
     this.cartSubscription = 
           this.cart.cartArray.subscribe( (cart: Product[]) =>
             cart.filter( product => {
               if(product){
-              if(product.sku === this.sku)
+              if(product.sku === this.product$.sku)
                 this.inCart = true
               }
             }));
-
-    this.product$.subscribe( val => console.log(val))
   }
 
 
@@ -66,7 +61,6 @@ export class ProductPageComponent implements OnInit, OnDestroy {
     let amount = parseInt(_amount)
     this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
-
     if(!this.inCart)
       this.remove = !this.remove
 

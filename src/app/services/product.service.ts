@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData} from 'angularfire2/firestore';
-import { OrderData } from '../models/orderData';
+import { AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class ProductService {
               .valueChanges()
   }   
 
-  getProductBySku( sku ): DocumentData{
+  getProductBySku( sku ){
     return this.db.collection('products').doc('categories').collection('ribbon',
                 ref => ref.where( 'sku', '==', sku ).limit(1) )
   }
