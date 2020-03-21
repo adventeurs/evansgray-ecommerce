@@ -1,7 +1,9 @@
 
 <div class="nav-bar" >
     <ul class="nav-links">
-        <li routerLink="/shop">Shop</li>
+        <li routerLink="/about" class="about"><h2>About</h2></li>
+        <li routerLink="/shop" class='shop'>Shop</li>
+        <li routerLink="/contact" class="contact">Contact</li>
     </ul>
     <i  *ngIf='auth.user$ | async' 
         class="material-icons basket" 
@@ -20,7 +22,7 @@
     </div>
     <div *ngIf='auth.user$ | async as user'>
         <button mat-button [matMenuTriggerFor]='userMenu'>
-                Welcome, {{ firstName( user.displayName) }}! 
+                Welcome, {{ firstName(user.displayName) }}! 
                 <i class="material-icons">
                         expand_more
                         </i>

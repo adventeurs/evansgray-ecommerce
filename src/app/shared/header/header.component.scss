@@ -1,3 +1,5 @@
+@import '../../../_variables.scss';
+
 .profile{
     width: 2.5em;
     border-radius: 50%;
@@ -11,20 +13,34 @@
 }
 
 .nav-bar{
-    height: 100px;
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     padding: 1em;
+    align-items: center;
 }
 
 .nav-links{
-    background: tan;
-    padding: 1em;
-    height: 1em;
     text-decoration: none;
     list-style: none;
-    margin: 0 1em
+    display: flex;
+
+    li{
+        padding: 7px 23px;
+        color: white;
+    }
+}
+
+.about{
+    background-color: $blue;
+}
+
+.shop{
+    background-color: $teal;
+}
+
+.contact{
+    background-color: $pink;
 }
 
 .basket{

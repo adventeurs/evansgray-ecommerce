@@ -1,32 +1,89 @@
-<div *ngIf="product$">
-        <h1>{{product$.title}}</h1>
-        <h1>{{product$.amount}}</h1>
-        <div class="product-selection">
-                <mat-form-field>
-                <mat-label>Quantity</mat-label>
-                <mat-select matNativeControl 
-                                required 
-                                [(value)]="quantity">
-                        <mat-option *ngFor="let number of inventory" 
-                                value="{{number}}">
-                                {{number}}</mat-option>
-                </mat-select>
-                </mat-form-field>
-                <div *ngIf="!(auth.user$ | async)">
-                        <button>
-                        Please login</button>
+<div class="product" *ngIf="product$ | async as product; else loading">
+        <div class="main-img">
+                <!-- <div class="thumbnails" *ngFor="let image of product$.images">
+                        <img src="/assets/{{image}}" alt="">
+                </div> -->
+                <img src="/assets/{{product[0].main}}" alt="">
+        </div>
+        <div class="product-info">
+                <mat-tab-group mat-stretch-tabs class="tabs">
+                        <mat-tab >
+                                <ng-template mat-tab-label >
+                                        Description
+                                        <span class="material-icons"
+                                              style="margin-left: 10px;">
+                                              loyalty</span>
+                                </ng-template>
+                                <div class="description">
+                                         <h3>{{product[0].title}}</h3>
+                                         <p>{{product[0].description}}</p>
+                                </div>
+                                <div class="color">
+                                        <span class="material-icons">color_lens</span>
+                                        <p>{{product[0].color}}</p>
+                                </div>
+                        </mat-tab>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        Styling
+                                        <span class="material-icons" 
+                                              style="margin-left: 10px;">
+                                              style</span>
+                                </ng-template>
+                                {{product[0].styling}}
+                        </mat-tab>
+                        <mat-tab>
+                                <ng-template mat-tab-label>
+                                        Care
+                                        <span class="material-icons"
+                                              style="margin-left: 10px;">
+                                              local_laundry_service</span>
+                                </ng-template>
+                                <div>{{product[0].care}}</div>
+                        </mat-tab>
+                </mat-tab-group>
+        <div class="purchase">
+                <div class="product-selection">
+                        <mat-form-field style="width: 100px;">
+                        <mat-label>Quantity</mat-label>
+                        <mat-select matNativeControl 
+                                        required 
+                                        [(value)]="quantity">
+                                <mat-option *ngFor="let number of inventory" 
+                                        value="{{number}}">
+                                        {{number}}</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="!(auth.user$ | async)">
+                                <a>
+                                Login to add item to your basket</a>
+                        </div>
+                        <div *ngIf="auth.user$ | async">
+                        <div *ngIf="!inCart && remove" 
+                             (click)='addToCart(product[0], quantity)'
+                             matTooltip="Add from basket"
+                             class="add">
+                                <span class="material-icons">
+                                add
+                                </span>
+                        </div>
+                        <button *ngIf="inCart" 
+                                (click)='addToCart(product[0], quantity)'>
+                                Change Quantity</button>
+                        <i class="material-icons"
+                           *ngIf="!remove"
+                           (click)="removeCartItem(product[0])"
+                           matTooltip="Remove from cart"
+                           style="font-size: 20px;">
+                                remove_circle
+                        </i>
+                       
                 </div>
-                <div *ngIf="auth.user$ | async">
-                <button *ngIf="!inCart" 
-                        [hidden]='remove'
-                        (click)='addToCart(product$, quantity, auth.user$)'>
-                        Add to Cart</button>
-                <button *ngIf="inCart" 
-                        (click)='addToCart(product$, quantity)'>
-                        Change Quantity</button>
-                <button [hidden]='!remove'
-                        (click)='removeCartItem(product$)'>
-                        Remove from Cart</button>
+                <div class="price">
+                                {{product[0].price | dollars}}
+                        </div>
                 </div>
         </div>
-    </div>
+        </div>
+</div>
+{{product$.title}}

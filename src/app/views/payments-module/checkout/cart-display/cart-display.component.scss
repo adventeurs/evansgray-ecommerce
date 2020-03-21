@@ -27,13 +27,11 @@
 
 .checkout-card{
     margin: 1em;
-    padding: 1em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     box-shadow: 2px 3px 6px #ffd6d6;
     padding: 15px;
-    padding-bottom: 0;
     background-color: white;
     border-radius: 0 10px 0 10px;
 }
@@ -52,7 +50,7 @@
     justify-content: space-between;
     flex-direction: column;
     flex: 2;
-    padding: 10px;
+    padding: 0 10px;
 }
 
 .img-container{
@@ -74,6 +72,7 @@
     flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: -20px;
 }
 
 .botttom p{
