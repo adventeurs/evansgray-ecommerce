@@ -6,7 +6,6 @@
 </div>
 <div *ngIf="toggleModal"
      class="modal">
-        <h1>Hello</h1>
         <form [formGroup]="form" >
             <div class="form-group" *ngIf="!toggleLoginForm">
                 <mat-form-field >
@@ -52,7 +51,7 @@
                     <a (click)="loginForm()" *ngIf="toggleLoginForm">Back</a>
             </div>
         </form>
-        <button (click)="auth.googleSignin()"
+        <button (click)="googleSignIn()"
                 mat-flat-button
                 color="primary">
             Google sign in

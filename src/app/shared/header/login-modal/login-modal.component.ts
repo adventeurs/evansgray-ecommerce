@@ -1,6 +1,5 @@
 import { Component, Output, Input, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
-import { LoginModalService } from 'src/app/services/login-modal.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -9,6 +8,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
   styleUrls: ['./login-modal.component.scss']
 })
 export class LoginModalComponent{
+  @Output() toggleEvent = new EventEmitter<boolean>();
+  @Input() toggleModal: boolean;
+  toggleLoginForm: boolean;
+
   form = new FormGroup({
     email: new FormControl('', [
       Validators.required,
@@ -22,25 +25,31 @@ export class LoginModalComponent{
       Validators.required
     ])
   });
-  @Input() toggleModal: boolean;
-  toggleLoginForm: boolean = false;
 
   constructor( 
           public auth: AuthService,
-          public modal: LoginModalService
           ) { 
     }
   
     closeModal(){
-      this.modal.toggleModal.emit(false)
+      this.toggleEvent.emit(false)
     }
 
-    emailRegister(){
-      this.auth.emailSignUp( this.form.value.email, this.form.value.password, this.form.value.name );
+    async googleSignIn(){
+      await this.auth.googleSignin()
+                  .then(_ => this.toggleModal = false);
+
     }
 
-    emailLogin(){
-      this.auth.emailLogin( this.form.value.email, this.form.value.password );
+    async emailRegister(){
+      await this.auth.emailSignUp( this.form.value.email, this.form.value.password, this.form.value.name )
+                  .then(_ => this.toggleModal = false);
+      
+    }
+
+    async emailLogin(){
+      await this.auth.emailLogin( this.form.value.email, this.form.value.password )
+                 .then(_ => this.toggleModal = false);
     }
 
     loginForm(){

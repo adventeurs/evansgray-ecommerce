@@ -45,4 +45,5 @@
 </div>
 </div>
 <app-login-modal [toggleModal]="toggleModal" 
-                 *ngIf="toggleModal"></app-login-modal>
+                 *ngIf="toggleModal"
+                 (toggleEvent)="recieveToggle($event)"></app-login-modal>

@@ -44,9 +44,6 @@ export class CartService {
                         tap( cart => this.nextTotal(cart) )
                         )
         } else {
-          this.cartSize.unsubscribe()
-          this.cartTotal.unsubscribe()
-          this.cart.unsubscribe()
           return of(null)
         }
        })).subscribe()

@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { switchMap } from 'rxjs/operators'
 import { auth } from 'firebase/app';
-import { LoginModalService } from './login-modal.service';
 import { NotificationService } from './notification.service';
-import { CustomerService } from './customer.service';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({ 
   providedIn: 'root'
@@ -25,11 +25,10 @@ export class AuthService {
       private db: AngularFirestore,
       private fireAuth: AngularFireAuth,
       private router: Router,
-      public loginModal: LoginModalService,
       private notification: NotificationService,
-      private customerService: CustomerService,
+      private http: HttpClient
       ) { 
-      fireAuth.authState.pipe(
+    fireAuth.authState.pipe(
         switchMap( user => {
           if ( user ){
             return this.db.doc<User>(`users/${user.uid}`).valueChanges();
@@ -48,18 +47,15 @@ export class AuthService {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.fireAuth.auth.signInWithPopup(provider);
 
-    this.loginModal.toggleModal.emit(false)
-
-    return this.updateUserData(credential.user);
+     this.updateUserData(credential.user);
 
   }
 
   async emailSignUp( email: string, password: string, name?: string ){
-    this.fireAuth.auth.createUserWithEmailAndPassword( email , password )
+    return this.fireAuth.auth.createUserWithEmailAndPassword( email , password )
         .then( async res => {
           this.updateUserData(res.user, name)        
         })
-        .then( () => this.loginModal.toggleModal.emit(false) )
         .catch( ( err ) =>{
           console.log(err);
           this.notification.snackbarAlert( err )}
@@ -69,7 +65,6 @@ export class AuthService {
 
   async emailLogin( email: string, password: string){
     return this.fireAuth.auth.signInWithEmailAndPassword( email , password )
-        .then( () => this.loginModal.toggleModal.emit(false) )
         .catch( ( err ) => {
           this.notification.snackbarAlert( err )
         });
@@ -80,7 +75,7 @@ export class AuthService {
   private async updateUserData( user: User , name?: string) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
-    const customerId = await this.customerService.createStripeCustomer( name, user.email )
+    const customerId = await this.createStripeCustomer( name, user.email )
                                  .then( ( res: any ) => { return res.id } )   
                                  .catch( err => this.notification.snackbarAlert( err ))
           
@@ -99,6 +94,16 @@ export class AuthService {
   async signOut() {
     await this.fireAuth.auth.signOut();
     this.router.navigate(['/']);
+
+  }
+
+  async createStripeCustomer( name$, email$ ){
+    let data = {
+      'name': name$,
+      'email': email$
+    }
+
+    return this.http.post('http://localhost:3000/customer', data).toPromise()
   }
 
 }
