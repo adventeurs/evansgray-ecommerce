@@ -34,16 +34,6 @@ app.get('/', function (req, res) {
   });
 
 
-const calculateOrderTotal = ( order ) => {
-    let total = 0;
-
-    for( let i = 0; i < order.length; i++ ) 
-        total += order[i].price;
-
-    return total;
-};
-
-
 app.post('/customer', async ( req, res ) => {
     const { name, email } = req.body
 
@@ -67,15 +57,15 @@ app.post('/payment', async ( req, res ) => {
             shipping,
             customer,
             stripeCustomerId } = req.body
-    // const orderTotal = calculateOrderTotal(items);
+
+
     let order = await stripe.orders.create({
-        currency: currency,
-        items: items,
-        email: customer,
-        items: [{ type: 'sku', parent: 'RHAG52' }],
-        shipping: shipping,
-        customer: stripeCustomerId
-    })
+                            currency: currency,
+                            items: items,
+                            email: customer,
+                            shipping: shipping,
+                            customer: stripeCustomerId
+                        })
 
 
     try{
@@ -83,18 +73,19 @@ app.post('/payment', async ( req, res ) => {
         if( paymentMethodId ){
             paymentIntent = await stripe.paymentIntents.create({
                 // create stripe payment intent object
-                amount: 500,
+                amount: order.amount,
                 currency: currency,
                 payment_method: paymentMethodId,
                 confirmation_method: 'manual',
-                customer: 'cus_Go7RwMHsX1sqgh',
-                // includes shipping.address & shipping.name
+                customer: customer,
                 shipping: shipping,
                 confirm: true
             })
 
         }
-        res.send(generateResponse(paymentIntent));
+        res.send({ intent: generateResponse(paymentIntent),
+                   order: order
+                });
     } catch ( e ){
         res.send({ error: e.message })
     }
@@ -121,6 +112,8 @@ const generateResponse = ( intent ) => {
             };
     }
 }
+
+
 
 
 const port = process.env.PORT || 3000;

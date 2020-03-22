@@ -3,6 +3,7 @@
     <div *ngIf="!(auth.user$ | async)">NOOPE</div>
 
     <form [formGroup]='orderForm' *ngIf="auth.user$ | async">
+      <!-- user account: name and contact info ? chagne -->
         <div class="shipping-title" >
           <h2>Shipping Information</h2>
         </div>
@@ -58,13 +59,13 @@
             <mat-label>State</mat-label>
             <mat-select matNativeControl 
                         required >
-              <mat-option *ngFor="let state of states" 
+              <mat-option *ngFor="let state of stateService.getStates();" 
                           value="{{state}}">
                           {{state}}</mat-option>
             </mat-select>
         </mat-form-field>
         <div class="button">
-            <h3 (click)="proceedToPayment(orderForm.value)">Proceed to payment <span class="material-icons">
+            <h3 (click)="proceedToPayment(orderForm.value, customer$)">Proceed to payment <span class="material-icons">
                 payment
                 </span></h3>
         </div>

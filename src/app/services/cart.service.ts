@@ -71,7 +71,7 @@ export class CartService {
         parent: product.parent,
         price: product.price,
         inventory: product.inventory
-      }
+      } 
     }
 
     this.cartRef.set( productToAdd, { merge: true } )

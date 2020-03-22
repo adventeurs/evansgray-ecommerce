@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root' 
@@ -14,9 +18,10 @@ export class PaymentService {
   stripe: any;
 
   constructor(
-    private db: AngularFirestore,
+    private auth: AuthService,
     private http: HttpClient,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private router: Router
   ) { 
   }
 
@@ -34,10 +39,9 @@ export class PaymentService {
       .then( res => res
         .subscribe( paymentData => {
         if(paymentData.requiresAction){
-          console.log('requires action');
+          this.notification.snackbarAlert('requires action');
         }
         else if (paymentData.error ){
-          console.log(paymentData.error)
           this.notification.snackbarAlert( paymentData.error)
         }
         else {
@@ -49,12 +53,9 @@ export class PaymentService {
       let completeOrder = ( clientSecret ) => { 
         stripe.retrievePaymentIntent(clientSecret)
           .then( res => {
-            console.log(res)
-            const paymentIntent = res.paymentIntent;
-            const paymentIntentJson = JSON.stringify( paymentIntent, null, 2 )
-           console.log(paymentIntentJson)
-            // call display method here 
-            // console.log( paymentIntent )
+            const receipt = this.auth.orderSuccess(res).then(data => resolve(data))
+
+            this.router.navigate(['/success', { amount: receipt.amount, name: receipt.name, date: receipt.date, items: receipt.items}]);
           })
       }
   }

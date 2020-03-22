@@ -7,7 +7,10 @@ import { Product } from 'src/app/models/product';
 import { SubscriptionCollection } from 'src/app/models/subscriptionCollection';
 import { unsubscriber } from 'src/app/services/utility'
 import { StatesService } from 'src/app/services/states.service';
-import { User } from 'firebase';
+import { NotificationService } from 'src/app/services/notification.service';
+import { StripeOrderObject } from 'src/app/models/stripeOrderObject';
+import { User } from 'src/app/models/user';
+import { resolve } from 'q';
 
 @Component({
   selector: 'app-shipping',
@@ -21,8 +24,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
   @Output() orderEvent = new EventEmitter<OrderData>()
   @Output() closeEvent = new EventEmitter<boolean>();
   @Input() close: boolean;
-  customer;
-  states: String[];
+  customer$;
   subscription: SubscriptionCollection = {};
 
   orderForm = new FormGroup({
@@ -50,7 +52,8 @@ export class ShippingComponent implements OnInit, OnDestroy {
   constructor(
     public auth: AuthService,
     private cart: CartService,
-    private stateService: StatesService
+    private stateService: StatesService,
+    private notification: NotificationService
   ) { 
   }
 
@@ -59,40 +62,76 @@ export class ShippingComponent implements OnInit, OnDestroy {
                     this.cart.total.subscribe( total => {
                       this.cartTotal = total;
                     });
-    this.subscription['stripeId'] = 
-                    this.auth.user$.subscribe( ( user: User ) => 
-                      this.customer = user
-                      );
+
     this.subscription['cartDisplay'] = 
                     this.cart.cartArray.subscribe( (cart: Product[]) =>
                       this.items = cart 
                       );
     
-    this.states = this.stateService.getStates();
+    this.customer$ = this.auth.user$
+  
   }
 
   ngOnDestroy(){
     unsubscriber( ...Object.values(this.subscription) )
   }
 
-  proceedToPayment( value ){
-    this.orderData = {
-      customer: this.customer.stripeCustomerId,
-      currency: 'usd',
-      items: this.items,
-      shipping: {
-        address: {
-          city: value.city,
-          line1: value.line1,
-          line2: value.line2,
-          postal_code: value.postal_code,
-          state: value.state
-        },
-      name: value.name
+  async proceedToPayment( value , user: User ){
+    let order;
+    try{
+      if(user.stripeCustomerId){
+        order = this.createOrder( value, user.stripeCustomerId )
+      } else{
+        let customer = await this.auth.createStripeCustomer( value.name, value.email, user )
+                                  .then( ( res: any ) => { return res.id } )   
+        order = this.createOrder( value, customer )
       }
+    } catch( err ){
+      this.notification.snackbarAlert( err )
     }
 
-    this.orderEvent.emit(this.orderData)
+    this.orderEvent.emit(order)
     this.closeEvent.emit(true)
+  }
+
+
+  createOrder( 
+    { city, line1, line2, postal_code, state, name }: 
+    { city: string, line1: string, line2: string, postal_code: number, state: string, name: string }, 
+    customer: string )
+    : OrderData {
+
+    let items = this.createStripeObject(this.items)
+
+    return this.orderData = {
+      customer,
+      currency: 'usd',
+      items: items,
+      shipping: {
+        address: {
+          city,
+          line1,
+          line2,
+          postal_code,
+          state
+        },
+      name
+      }
+    }
+  }
+
+  createStripeObject( items: Product[] ): StripeOrderObject[]{
+
+   let stripeOrderObject = items.map( (product: Product) => {  
+                  let { parent, quantity, type } = product
+
+                  return {
+                    parent,
+                    quantity,
+                    type
+                        };
+                    });
+
+    return stripeOrderObject;
   }
 }

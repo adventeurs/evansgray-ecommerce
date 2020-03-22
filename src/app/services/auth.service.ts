@@ -4,10 +4,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
 import { Observable, of, ReplaySubject } from 'rxjs';
-import { switchMap } from 'rxjs/operators'
+import { switchMap, tap } from 'rxjs/operators'
 import { auth } from 'firebase/app';
 import { NotificationService } from './notification.service';
 import { HttpClient } from '@angular/common/http';
+import { resolve } from 'dns';
 
 
 @Injectable({ 
@@ -75,16 +76,12 @@ export class AuthService {
   private async updateUserData( user: User , name?: string) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
-    const customerId = await this.createStripeCustomer( name, user.email )
-                                 .then( ( res: any ) => { return res.id } )   
-                                 .catch( err => this.notification.snackbarAlert( err ))
-          
+              
     const data = { 
       uid: user.uid, 
       email: user.email, 
       displayName: name ? name : user.displayName, 
       photoURL: user.photoURL,
-      stripeCustomerId: customerId
     } 
 
     return userRef.set(data, { merge: true })
@@ -97,13 +94,48 @@ export class AuthService {
 
   }
 
-  async createStripeCustomer( name$, email$ ){
+  async createStripeCustomer( name$, email$, customer ){
     let data = {
       'name': name$,
       'email': email$
     }
+    
+    return this.http.post('http://localhost:3000/customer', data)
+                      .pipe(
+                        tap( ( res: any ) => {
+                          this.db.doc(`users/${customer.uid}`).set( 
+                            { stripeCustomerId : res.id} 
+                          )
+                        })).toPromise()
+  }
 
-    return this.http.post('http://localhost:3000/customer', data).toPromise()
+  async orderSuccess( paymentObject ): Promise<Object> {
+    const { intent, order } = paymentObject
+    let time = new Date()
+    
+    this.loggedInUser.subscribe( user => {
+                this.db.doc(`users/${user.uid}`).update({
+                  order: [
+                    { date: time,
+                      shipping: intent.shipping,
+                      items: order.items,
+                      amount: order.amount,
+                      paymentIntent: intent,
+                      order: order
+                      }
+                  ]
+                }).catch( err =>{
+                  console.log(err);
+                  this.notification.snackbarAlert(err);
+                });
+              }).unsubscribe()
+    
+    return {
+      name: order.name,
+      email: order.email,
+      amount: order.amount,
+      date: time,
+    }       
   }
 
 }

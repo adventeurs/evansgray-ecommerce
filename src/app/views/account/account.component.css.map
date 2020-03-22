@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "account.component.scss"
+    ],
+    "names": [],
+    "file": "account.component.css"
+}

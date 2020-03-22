@@ -18,6 +18,7 @@ export class MakePaymentComponent implements OnInit {
   @Output() closeEvent = new EventEmitter<boolean>();
   stripe: any;
   handler: any;
+  card;
 
   constructor(
       public auth: AuthService,
@@ -48,15 +49,19 @@ export class MakePaymentComponent implements OnInit {
         }
       };
 
-      const card = elements.create('card', { style: style });
-      card.mount('#card-element');
-      card.addEventListener( 'submit', ()=>{
-        this.stripePayment.pay( stripe, card, this.orderData );
+      this.card = elements.create('card', { style: style });
+      this.card.mount('#card-element');
+      this.card.addEventListener( 'submit', ()=>{
+        this.stripePayment.pay( stripe, this.card, this.orderData);
       })
   }
 
   returnToShipping(){
     this.closeEvent.emit(false)
+  }
+
+  pay(){
+    this.stripePayment.pay( stripe, this.card, this.orderData );
   }
 
 }
