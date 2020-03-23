@@ -34,7 +34,7 @@ import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ShippingInfoComponent } from './shared/shipping-info/shipping-info.component';
 import { RefundInfoComponent } from './shared/refund-info/refund-info.component';
-
+import { SuccessComponent } from './views/payments-module/checkout/success/success.component'
 
 
 
@@ -59,7 +59,8 @@ import { RefundInfoComponent } from './shared/refund-info/refund-info.component'
     ProductCardComponent,
     DashboardComponent,
     ShippingInfoComponent,
-    RefundInfoComponent
+    RefundInfoComponent,
+    SuccessComponent
   ],
   entryComponents: [
     ShippingInfoComponent,
@@ -89,7 +90,10 @@ import { RefundInfoComponent } from './shared/refund-info/refund-info.component'
         path: 'product/:sku', component: ProductPageComponent 
       },
       { 
-        path: 'checkout', component: CheckoutComponent 
+        path: 'checkout', component: CheckoutComponent,
+        children: [
+          { path: 'success/:email/:amount', component: SuccessComponent}
+        ] 
       },
       { 
         path: 'about', component: AboutComponent 
@@ -99,7 +103,7 @@ import { RefundInfoComponent } from './shared/refund-info/refund-info.component'
       },
       { 
         path: 'dashboard', component: DashboardComponent 
-      }
+      },
       // { 
       //   path: 'category/:category', component: CategoryComponent 
       // },

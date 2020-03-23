@@ -16,7 +16,7 @@ import { RefundInfoComponent } from '../../shared/refund-info/refund-info.compon
     CheckoutComponent,
     ShippingComponent,
     MakePaymentComponent,
-    CartDisplayComponent
+    CartDisplayComponent,
   ],
   entryComponents: [
     ShippingInfoComponent,
@@ -35,7 +35,7 @@ import { RefundInfoComponent } from '../../shared/refund-info/refund-info.compon
     ShippingComponent,
     CartDisplayComponent,
     MakePaymentComponent,
-    CheckoutComponent
-  ]
+    CheckoutComponent,
+    ]
 })
 export class PaymentModule { }

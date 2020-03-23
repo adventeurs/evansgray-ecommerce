@@ -1,4 +1,4 @@
-<div class="checkout">
+<div class="checkout" *ngIf="!_router.url.includes('success')">
        <div class="payment-info">
             <div  class="checkout-header">
                     <button (click)="previous()">Back</button>
@@ -22,5 +22,6 @@
     
     <div class="shopping-cart">
         <app-cart-display></app-cart-display>
-    </div>
+    </div>  
 </div>
+<router-outlet></router-outlet>

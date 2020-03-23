@@ -4,6 +4,7 @@ import { OrderData } from 'src/app/models/orderData';
 import { MatDialog } from '@angular/material';
 import { RefundInfoComponent } from 'src/app/shared/refund-info/refund-info.component';
 import { ShippingInfoComponent } from 'src/app/shared/shipping-info/shipping-info.component';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -17,7 +18,8 @@ export class CheckoutComponent {
 
   constructor(
     private _location: Location,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    public _router: Router
   ) { }
 
   previous(){

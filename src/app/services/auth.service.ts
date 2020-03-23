@@ -5,10 +5,10 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import { Router } from '@angular/router';
 import { Observable, of, ReplaySubject } from 'rxjs';
 import { switchMap, tap } from 'rxjs/operators'
-import { auth } from 'firebase/app';
+import { auth, firestore } from 'firebase/app';
 import { NotificationService } from './notification.service';
 import { HttpClient } from '@angular/common/http';
-import { resolve } from 'dns';
+import { AnimationDurations } from '@angular/material';
 
 
 @Injectable({ 
@@ -103,39 +103,29 @@ export class AuthService {
     return this.http.post('http://localhost:3000/customer', data)
                       .pipe(
                         tap( ( res: any ) => {
-                          this.db.doc(`users/${customer.uid}`).set( 
-                            { stripeCustomerId : res.id} 
+                          this.db.doc(`users/${customer.uid}`).set({
+                             stripeCustomerId : res.id 
+                            }, { merge: true } 
                           )
                         })).toPromise()
   }
 
-  async orderSuccess( paymentObject ): Promise<Object> {
-    const { intent, order } = paymentObject
+  async orderSuccess({ paymentIntent, order }: { paymentIntent; order; }){
     let time = new Date()
     
-    this.loggedInUser.subscribe( user => {
-                this.db.doc(`users/${user.uid}`).update({
-                  order: [
-                    { date: time,
-                      shipping: intent.shipping,
-                      items: order.items,
-                      amount: order.amount,
-                      paymentIntent: intent,
+    this.fireAuth.user.subscribe( user => {
+                console.log(user)
+                this.db.collection('users').doc(user.uid).update({
+                  orders: firestore.FieldValue.arrayUnion({
+                      paymentIntent: paymentIntent,
                       order: order
-                      }
-                  ]
+                      })
                 }).catch( err =>{
                   console.log(err);
                   this.notification.snackbarAlert(err);
                 });
-              }).unsubscribe()
-    
-    return {
-      name: order.name,
-      email: order.email,
-      amount: order.amount,
-      date: time,
-    }       
+              })
+
   }
 
 }

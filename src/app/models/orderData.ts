@@ -1,7 +1,9 @@
 import { Product } from './product'
 import { StripeOrderObject } from './stripeOrderObject';
+import { EmailValidator } from '@angular/forms';
 
 export interface OrderData{
+email: string;
 customer: string;
 currency: string;
 items: StripeOrderObject[];

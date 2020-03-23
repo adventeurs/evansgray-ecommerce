@@ -28,6 +28,7 @@ export class ShippingComponent implements OnInit, OnDestroy {
   subscription: SubscriptionCollection = {};
 
   orderForm = new FormGroup({
+    email: new FormControl('', []),
     name: new FormControl( '', [
 
     ]),
@@ -67,8 +68,6 @@ export class ShippingComponent implements OnInit, OnDestroy {
                     this.cart.cartArray.subscribe( (cart: Product[]) =>
                       this.items = cart 
                       );
-    
-    this.customer$ = this.auth.user$
   
   }
 
@@ -77,33 +76,37 @@ export class ShippingComponent implements OnInit, OnDestroy {
   }
 
   async proceedToPayment( value , user: User ){
-    let order;
+    console.log(user)
+    let orderObject;
     try{
-      if(user.stripeCustomerId){
-        order = this.createOrder( value, user.stripeCustomerId )
-      } else{
+      if(!user.stripeCustomerId){
         let customer = await this.auth.createStripeCustomer( value.name, value.email, user )
                                   .then( ( res: any ) => { return res.id } )   
-        order = this.createOrder( value, customer )
+        orderObject = this.createOrderObject( value, customer )
+      } else{
+        orderObject = this.createOrderObject( value, user.stripeCustomerId )
+
       }
     } catch( err ){
       this.notification.snackbarAlert( err )
     }
 
-    this.orderEvent.emit(order)
+    this.orderEvent.emit(orderObject)
     this.closeEvent.emit(true)
   }
 
 
-  createOrder( 
-    { city, line1, line2, postal_code, state, name }: 
-    { city: string, line1: string, line2: string, postal_code: number, state: string, name: string }, 
+  createOrderObject( 
+    { city, line1, line2, postal_code, state, name, email }: 
+    { city: string, line1: string, line2: string, postal_code: number, 
+      state: string, name: string, email: string }, 
     customer: string )
     : OrderData {
 
     let items = this.createStripeObject(this.items)
 
     return this.orderData = {
+      email,
       customer,
       currency: 'usd',
       items: items,

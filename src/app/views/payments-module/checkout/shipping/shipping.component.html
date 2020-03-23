@@ -2,11 +2,21 @@
 
     <div *ngIf="!(auth.user$ | async)">NOOPE</div>
 
-    <form [formGroup]='orderForm' *ngIf="auth.user$ | async">
+    <form [formGroup]='orderForm' *ngIf="(auth.user$ | async) as user">
       <!-- user account: name and contact info ? chagne -->
         <div class="shipping-title" >
           <h2>Shipping Information</h2>
         </div>
+        <div class="form-group name" >
+          <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>Contact</mat-label>
+              <input
+               formControlName="email"
+              matInput required
+              id="email"
+              type="text">
+          </mat-form-field>
+          </div>
       <div class="form-group name" >
         <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Name</mat-label>
@@ -32,7 +42,7 @@
               <mat-label>Line 2 </mat-label>
               <input
               formControlName="line2"
-              matInput required
+              matInput 
               id="hg"
               type="text">
           </mat-form-field>
@@ -65,7 +75,7 @@
             </mat-select>
         </mat-form-field>
         <div class="button">
-            <h3 (click)="proceedToPayment(orderForm.value, customer$)">Proceed to payment <span class="material-icons">
+            <h3 (click)="proceedToPayment(orderForm.value, user)">Proceed to payment <span class="material-icons">
                 payment
                 </span></h3>
         </div>

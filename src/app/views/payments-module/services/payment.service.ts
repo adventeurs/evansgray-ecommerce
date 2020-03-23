@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { resolve } from 'dns';
 
 @Injectable({
   providedIn: 'root' 
@@ -25,7 +22,7 @@ export class PaymentService {
   ) { 
   }
 
-  async pay( stripe, card, orderData ){
+  pay( stripe, card, orderData ){
     stripe.createPaymentMethod( 'card', card )
       .then( res => {
         if ( res.error ) {
@@ -38,30 +35,29 @@ export class PaymentService {
       })
       .then( res => res
         .subscribe( paymentData => {
-        if(paymentData.requiresAction){
+        if(paymentData.intent.requiresAction){
           this.notification.snackbarAlert('requires action');
         }
-        else if (paymentData.error ){
+        else if (paymentData.intent.error ){
           this.notification.snackbarAlert( paymentData.error)
         }
         else {
-          completeOrder( paymentData.clientSecret );
+          completeOrder( paymentData.intent.clientSecret, paymentData.order );
         }
       }));    
 
       // Display order confirmation
-      let completeOrder = ( clientSecret ) => { 
+      let completeOrder = ( clientSecret, order ) => { 
         stripe.retrievePaymentIntent(clientSecret)
-          .then( res => {
-            const receipt = this.auth.orderSuccess(res).then(data => resolve(data))
+          .then( async res => {
+            await this.auth.orderSuccess({ paymentIntent: res, order })
 
-            this.router.navigate(['/success', { amount: receipt.amount, name: receipt.name, date: receipt.date, items: receipt.items}]);
+            this.router.navigate(['/','checkout','success', order.email, order.amount ])
           })
       }
   }
 
   // Create method to display order confirmation
-
   // Email customer order information and confirmation
 
   

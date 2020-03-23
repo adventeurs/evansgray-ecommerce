@@ -30,6 +30,7 @@ export class MakePaymentComponent implements OnInit {
       }
 
   ngOnInit(){
+      console.log(this.orderData)
       const stripe = Stripe(environment.stripeKey);
       const elements = stripe.elements();
 
@@ -60,8 +61,8 @@ export class MakePaymentComponent implements OnInit {
     this.closeEvent.emit(false)
   }
 
-  pay(){
-    this.stripePayment.pay( stripe, this.card, this.orderData );
+ pay(){
+     this.stripePayment.pay( stripe, this.card, this.orderData );
   }
 
 }

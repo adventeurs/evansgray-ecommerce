@@ -56,19 +56,19 @@ app.post('/payment', async ( req, res ) => {
             items,
             shipping,
             customer,
-            stripeCustomerId } = req.body
+            email  } = req.body
 
-
-    let order = await stripe.orders.create({
-                            currency: currency,
-                            items: items,
-                            email: customer,
-                            shipping: shipping,
-                            customer: stripeCustomerId
+    try{
+        let order = await stripe.orders.create({
+                            currency,
+                            items,
+                            email,
+                            shipping,
+                            customer
                         })
 
 
-    try{
+    
         let paymentIntent;
         if( paymentMethodId ){
             paymentIntent = await stripe.paymentIntents.create({
