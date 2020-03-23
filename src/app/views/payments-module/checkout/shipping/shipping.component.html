@@ -4,19 +4,23 @@
 
     <form [formGroup]='orderForm' *ngIf="(auth.user$ | async) as user">
       <!-- user account: name and contact info ? chagne -->
-        <div class="shipping-title" >
-          <h2>Shipping Information</h2>
+      <div class="shipping-title" >
+          <h2>Contact</h2>
         </div>
-        <div class="form-group name" >
+      <div class="form-group name" >
           <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Contact</mat-label>
+              <mat-label>Email</mat-label>
               <input
                formControlName="email"
               matInput required
               id="email"
               type="text">
           </mat-form-field>
-          </div>
+        </div>
+        <div class="shipping-title" >
+          <h2>Shipping Information</h2>
+        </div>
+        
       <div class="form-group name" >
         <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Name</mat-label>
@@ -68,9 +72,10 @@
         <mat-form-field class="form-group states" style="width: 100px;">
             <mat-label>State</mat-label>
             <mat-select matNativeControl 
+                        formControlName="state"
                         required >
               <mat-option *ngFor="let state of stateService.getStates();" 
-                          value="{{state}}">
+                          [value]="state">
                           {{state}}</mat-option>
             </mat-select>
         </mat-form-field>

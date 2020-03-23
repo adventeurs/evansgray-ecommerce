@@ -32,10 +32,10 @@
                         *ngIf='user.photoURL'>
                 </div>
                 <button mat-menu-item
-                        >
+                        routerlink="/checkout">
                         View Cart</button>
                 <button mat-menu-item
-                        >
+                        [routerLink]="['/account', user.displayName]">
                         Order History</button>
                 <button mat-menu-item
                         (click)="auth.signOut()">

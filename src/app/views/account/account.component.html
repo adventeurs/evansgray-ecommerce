@@ -1,1 +1,28 @@
-<p>account works!</p>
+<div *ngIf="auth.user$ | async as user">
+    <div class="account-info">
+        <div>
+            <p>Account name: {{user.displayName}}</p>
+            <p>Account email: {{user.email}}</p>
+            <a href="">Update info</a>
+        </div>
+        <mat-accordion multi="true" displayMode="flat">
+                <mat-expansion-panel expanded="false" >
+                    <mat-expansion-panel-header> 
+                            Order History
+                    </mat-expansion-panel-header>
+                        <div *ngFor="let order of user.orders">
+                            <mat-expansion-panel>
+                                <mat-expansion-panel-header>
+                                    {{ order.date.toDate() | date}}
+                                </mat-expansion-panel-header>
+                                <div>Order ID: {{order.order.id}}</div>
+                                <ul *ngFor="let product of order.order.items">
+                                    <li>{{product.description}} - {{product.quantity}} : {{product.amount | dollars}}</li>
+                                </ul>
+                            </mat-expansion-panel>
+                        </div>
+                </mat-expansion-panel>
+        </mat-accordion>
+        <button>Delete Account</button>
+    </div>
+</div>

@@ -111,14 +111,13 @@ export class AuthService {
   }
 
   async orderSuccess({ paymentIntent, order }: { paymentIntent; order; }){
-    let time = new Date()
     
     this.fireAuth.user.subscribe( user => {
-                console.log(user)
                 this.db.collection('users').doc(user.uid).update({
                   orders: firestore.FieldValue.arrayUnion({
                       paymentIntent: paymentIntent,
-                      order: order
+                      order: order,
+                      date: new Date()
                       })
                 }).catch( err =>{
                   console.log(err);

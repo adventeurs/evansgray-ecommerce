@@ -16,6 +16,7 @@ export class MakePaymentComponent implements OnInit {
   @ViewChild('cardElement', {static: false}) cardElement: ElementRef;
   @Input() orderData: OrderData ;
   @Output() closeEvent = new EventEmitter<boolean>();
+  loading: boolean = false;
   stripe: any;
   handler: any;
   card;
@@ -53,17 +54,22 @@ export class MakePaymentComponent implements OnInit {
       this.card = elements.create('card', { style: style });
       this.card.mount('#card-element');
       this.card.addEventListener( 'submit', ()=>{
+        this.loading = true;
         this.stripePayment.pay( stripe, this.card, this.orderData);
       })
+  }
+
+  ngOnDestroy(){
+    this.loading = false
   }
 
   returnToShipping(){
     this.closeEvent.emit(false)
   }
 
- pay(){
-     this.stripePayment.pay( stripe, this.card, this.orderData );
-  }
+//  pay(){
+//      this.stripePayment.pay( stripe, this.card, this.orderData );
+//   }
 
 }
 
