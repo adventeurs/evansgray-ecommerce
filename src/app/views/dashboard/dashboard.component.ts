@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { ProductService } from 'src/app/services/product.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,7 @@ export class DashboardComponent implements OnInit {
     sku: new FormControl( '', []),
     type: new FormControl( '', []),
     category: new FormControl( '', []),
-    categories: new FormControl( '', []),
+    searchable: new FormControl( '', []),
     colors: new FormControl( '', []),
     material: new FormControl( '', []),
     title: new FormControl( '', []),
@@ -36,7 +37,8 @@ export class DashboardComponent implements OnInit {
 
   constructor( 
     private db: AngularFirestore,
-    private productService: ProductService
+    private productService: ProductService,
+    private http: HttpClient
     ) { 
     }
 
@@ -48,7 +50,7 @@ export class DashboardComponent implements OnInit {
                                                      })
     }
 
-  addProduct( product ){
+  async addProduct( product ){
     let productForm = {
         inventory: product.inventory,
         main: product.main,
@@ -67,7 +69,7 @@ export class DashboardComponent implements OnInit {
         images: product.imgs.split(',')
     }
 
-    console.log(productForm)
+    let p = await this.http.post('http://localhost:3000/products', productForm )
     this.db.collection('products').doc(product.title).set( productForm ).catch( err => console.log(err))
     this.productInput.reset()
   }

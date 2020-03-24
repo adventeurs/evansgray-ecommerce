@@ -16,14 +16,17 @@ export class CartService {
   private cartSize = new ReplaySubject<Number>(1);
   private cart = new ReplaySubject<Product[]>(1);
 
+  // Retrieve The Total Price of Cart
   get total(){
     return this.cartTotal;
   }
 
+  // Retrieve The Total Number Of Items In The Cart
   get size(){
     return this.cartSize;
   }
 
+  // Retrieve Cart As An Iterable Array
   get cartArray(){
     return this.cart;
   }
@@ -35,8 +38,11 @@ export class CartService {
   ) { 
     this.fireAuth.authState.pipe(
        switchMap( user => {
+        //  If User Is Logged In
         if ( user ){
+          // Reference To Firestore Cart
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
+          // Return Users Cart And Perform Details Logic
           return this.cartRef.valueChanges()
                       .pipe(
                         tap( cart => this.nextSize(cart) ),
@@ -50,7 +56,7 @@ export class CartService {
        
   }
 
-
+  // Take Inventory Amount And Create Array To Display
   createInventoryArray( inventory ): Number[]{
     let inventoryArray: Number[]= [];
 
@@ -60,6 +66,7 @@ export class CartService {
     return inventoryArray;
   }
 
+  // Add Product To Cart With Only Essential Information
   addToCart( product: Product, quantity: number){
     let productToAdd = {
       [product.sku] : {
@@ -80,8 +87,8 @@ export class CartService {
     });
   }
 
+  // Remove Item From Cart
   async removeCartItem( product ){
-    //  find sku and remove
     this.cartRef.update({
       [product.sku] : firestore.FieldValue.delete()
     });
@@ -91,30 +98,34 @@ export class CartService {
 
   // Calculation methods 
 
-  private sumPrices( product ){
-    return Object.keys(product).map( key => product[key].price * product[key].quantity );
-  }
-
   private sumQuantity( product ){
+    if(product)
     return Object.keys(product).map( key => product[key].quantity );
   }
 
   private reduce( totals ){
+    if(totals)
     return totals.reduce( ( a , b) => a + b, 0);
   }
 
+  // Find Total Price Of Items In Cart
   private nextTotal( product ){
+    if(product){
     let totals =  Object.keys(product).map( key => product[key].price * product[key].quantity );
     let finalTotal = totals.reduce( ( a , b) => a + b, 0);
 
     this.cartTotal.next(finalTotal)
+    }
   }
   
+  // Find Total Quantity Of Items In Cart
   private nextSize( cart ){
+    if(cart){
     let items = this.sumQuantity(cart);
     let quantity = this.reduce(items);
 
     this.cartSize.next(quantity)
+    }
   }
   }
   

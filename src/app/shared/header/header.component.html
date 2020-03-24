@@ -2,21 +2,24 @@
 <div class="nav-bar" >
     <ul class="nav-links">
         <li routerLink="/shop">Shop</li>
+        <li routerLink="/about">About</li>
+        <li routerLink="/contact">Contact</li>
     </ul>
-    <i  *ngIf='auth.user$ | async' 
-        class="material-icons basket" 
+    <div class="loaded">
+
+    <i  class="material-icons basket" 
         [matBadge]="size | async " 
         [matBadgeHidden]="!(size | async)"
         routerLink="/checkout"> 
         shopping_basket</i>
     <div class="auth">
     <div *ngIf='!(auth.user$ | async )'>
-        <button 
+        <a
             class="login"
             (click)="openModal()"
             > 
             Login
-        </button>
+        </a>
     </div>
     <div *ngIf='auth.user$ | async as user'>
         <button mat-button [matMenuTriggerFor]='userMenu'>
@@ -25,7 +28,7 @@
                         expand_more
                         </i>
         </button>
-            <mat-menu #userMenu='matMenu'>
+            <mat-menu #userMenu='matMenu' xPosition="before">
                 <div class='profile-wrapper'>
                         <img [src]='user.photoURL' 
                         class='profile'
@@ -38,9 +41,14 @@
                         [routerLink]="['/account', user.displayName]">
                         Order History</button>
                 <button mat-menu-item
+                        *ngIf="user.admin"
+                        routerLink="/dashboard">
+                        Dashboard</button>
+                <button mat-menu-item
                         (click)="auth.signOut()">
                         Log out</button>
             </mat-menu>
+    </div>
     </div>
 </div>
 </div>

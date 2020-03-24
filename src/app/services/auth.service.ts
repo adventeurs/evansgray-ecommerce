@@ -15,10 +15,12 @@ import { AnimationDurations } from '@angular/material';
   providedIn: 'root'
 })
 export class AuthService {
+  // Currently Logged In User
   private loggedInUser = new ReplaySubject<firebase.User>(1)
 
+  // Access Currently Logged In User
   get user$(): Observable<firebase.User> {
-     return this.loggedInUser.asObservable()
+     return this.loggedInUser
   }
   
   
@@ -31,19 +33,21 @@ export class AuthService {
       ) { 
     fireAuth.authState.pipe(
         switchMap( user => {
+          // If User Is Logged In
           if ( user ){
             return this.db.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
+          // If User Is Logged Out
             return of(null)
           }
         })
       ).subscribe( user => {
+        // Update User Replay Subject
         this.loggedInUser.next(user);
       })
     }
 
-  
-
+  // Sign-In / Sign-Up User Through GoogleAuthProvider
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.fireAuth.auth.signInWithPopup(provider);
@@ -52,6 +56,7 @@ export class AuthService {
 
   }
 
+  // Sign-up User With Email And Password
   async emailSignUp( email: string, password: string, name?: string ){
     return this.fireAuth.auth.createUserWithEmailAndPassword( email , password )
         .then( async res => {
@@ -64,6 +69,7 @@ export class AuthService {
 
   }
 
+  // Login With Email And Password
   async emailLogin( email: string, password: string){
     return this.fireAuth.auth.signInWithEmailAndPassword( email , password )
         .catch( ( err ) => {
@@ -73,8 +79,8 @@ export class AuthService {
 
   }
 
+  // Update Firestore User Information
   private async updateUserData( user: User , name?: string) {
-    // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
               
     const data = { 
@@ -88,12 +94,14 @@ export class AuthService {
 
   }
 
+  // Sign Out Currently Logged In User
   async signOut() {
     await this.fireAuth.auth.signOut();
     this.router.navigate(['/']);
 
   }
 
+  // Create A Stripe Customer With The StripeAPI
   async createStripeCustomer( name$, email$, customer ){
     let data = {
       'name': name$,
@@ -110,6 +118,7 @@ export class AuthService {
                         })).toPromise()
   }
 
+// Update The Users Order History
   async orderSuccess({ paymentIntent, order }: { paymentIntent; order; }){
     
     this.fireAuth.user.subscribe( user => {

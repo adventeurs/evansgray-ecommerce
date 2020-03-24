@@ -113,8 +113,33 @@ const generateResponse = ( intent ) => {
     }
 }
 
+app.post('/products', async ( req, res ) => {
 
+    try{
+        let stripeProduct = await stripe.products.create(
+            {
+                active: true,
+                name: req.body.title,
+                type: "good",
+                shippable: true
+            }
+        )
 
+        await stripe.skus.create(
+            {
+                id: req.body.sku,
+                price: req.body.price,
+                currency: 'usd',
+                inventory: { type: 'infinite' },
+                product: stripeProduct.id
+            }
+        )
+
+        res.send('product created')
+    } catch( err ){
+        console.error(err)
+    }
+})
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));

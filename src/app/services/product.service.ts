@@ -14,12 +14,12 @@ export class ProductService {
   }
 
   getProducts(){
-   return this.db.collection('products').doc('categories').collection('ribbon')
+   return this.db.collection('products')
               .valueChanges()
   }   
 
   getProductBySku( sku ){
-    return this.db.collection('products').doc('categories').collection('ribbon',
+    return this.db.collection('products',
                 ref => ref.where( 'sku', '==', sku ).limit(1) )
   }
 

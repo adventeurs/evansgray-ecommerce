@@ -7,4 +7,5 @@ export interface User {
     photoURL?: string;
     stripeCustomerId?: string;
     orders?: Product[];
+    admin?: boolean;
 }

@@ -36,7 +36,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
         .subscribe( param => {
             this.productSubscription = this.productService.getProductBySku(param.get('sku'))
                 .valueChanges()
-                .subscribe( info => {
+                .subscribe( ( info: Product[] ) => {
                   this.product$ = info[0];
                   this.inventory = this.cart.createInventoryArray(info[0].inventory);
                 });

@@ -35,6 +35,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ShippingInfoComponent } from './shared/shipping-info/shipping-info.component';
 import { RefundInfoComponent } from './shared/refund-info/refund-info.component';
 import { SuccessComponent } from './views/payments-module/checkout/success/success.component'
+import { AdminAuthGaurd } from './services/adminauthgaurd.service';
+import { StatesService } from './services/states.service';
+import { AuthService } from './services/auth.service';
 
 
 
@@ -102,7 +105,8 @@ import { SuccessComponent } from './views/payments-module/checkout/success/succe
         path: 'account/:uid', component: AccountComponent 
       },
       { 
-        path: 'dashboard', component: DashboardComponent 
+        path: 'dashboard', component: DashboardComponent,
+        canActivate: [ AdminAuthGaurd ]
       },
       // { 
       //   path: 'category/:category', component: CategoryComponent 
@@ -112,7 +116,11 @@ import { SuccessComponent } from './views/payments-module/checkout/success/succe
   ],
   providers: [ 
     ProductService,
-    PaymentService 
+    PaymentService,
+    AdminAuthGaurd,
+    StatesService,
+    AuthService,
+
   ],
   bootstrap: [ AppComponent ]
 })
