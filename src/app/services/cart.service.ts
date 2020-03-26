@@ -50,6 +50,8 @@ export class CartService {
                         tap( cart => this.nextTotal(cart) )
                         )
         } else {
+          console.log('hello')
+          this.cartSize.next(0)
           return of(null)
         }
        })).subscribe()

@@ -13,9 +13,13 @@
 .nav-bar{
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 1em;
     align-items: center;
+
+    img{
+        width: 250px;
+    }
 
     .loaded{
         display: flex;
@@ -46,4 +50,8 @@
 
 .basket{
     margin: .5em 1em;
+}
+
+.header-right{
+    display: flex;
 }

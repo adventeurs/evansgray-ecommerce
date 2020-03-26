@@ -28,9 +28,11 @@ export class ShippingComponent implements OnInit, OnDestroy {
   subscription: SubscriptionCollection = {};
 
   orderForm = new FormGroup({
-    email: new FormControl('', []),
+    email: new FormControl('', [
+      Validators.required
+    ]),
     name: new FormControl( '', [
-
+      Validators.required
     ]),
     line1: new FormControl( '' , [
       Validators.required

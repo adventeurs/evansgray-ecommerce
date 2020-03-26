@@ -1,5 +1,7 @@
 
 <div class="nav-bar" >
+    <img src="/assets/evansgray-full.png" alt="">
+    <div class="header-right">
     <ul class="nav-links">
         <li routerLink="/shop">Shop</li>
         <li routerLink="/about">About</li>
@@ -10,6 +12,7 @@
     <i  class="material-icons basket" 
         [matBadge]="size | async " 
         [matBadgeHidden]="!(size | async)"
+        matTooltip="See Cart"
         routerLink="/checkout"> 
         shopping_basket</i>
     <div class="auth">
@@ -48,6 +51,7 @@
                         (click)="auth.signOut()">
                         Log out</button>
             </mat-menu>
+        </div>
     </div>
     </div>
 </div>
