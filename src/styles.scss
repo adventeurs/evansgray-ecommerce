@@ -1,4 +1,42 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,600&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap');
+
+@import './variables';
+
+@import '~@angular/material/theming';
+@include mat-core();
+
+$app-primary: mat-pallete(mat-indigo);
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0;  }
+
+h1, h2, h3{
+    font-family: 'Playfair Display', serif;
+}
+
+h1{
+    font-size: 60px;
+    font-weight: 600;
+    margin: 0;
+}
+
+h3{
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+}
+
+h4{
+    font-size: 22px;
+    font-weight: 300;
+    font-family: 'Open Sans';
+}
+
+p{
+    font-family: 'Open Sans', sans-serif;
+}
+
+.white-btn{
+    @include white-btn;
+}

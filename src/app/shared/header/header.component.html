@@ -3,9 +3,9 @@
     <img src="/assets/evansgray-full.png" alt="">
     <div class="header-right">
     <ul class="nav-links">
-        <li routerLink="/shop">Shop</li>
-        <li routerLink="/about">About</li>
-        <li routerLink="/contact">Contact</li>
+        <li routerLink="/shop"><h3>Shop</h3></li>
+        <li routerLink="/about"><h3>About</h3></li>
+        <li routerLink="/contact"><h3>Contact</h3></li>
     </ul>
     <div class="loaded">
 
@@ -21,7 +21,7 @@
             class="login"
             (click)="openModal()"
             > 
-            Login
+            <h3>Login</h3>
         </a>
     </div>
     <div *ngIf='auth.user$ | async as user'>

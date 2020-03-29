@@ -1,7 +1,7 @@
 // Primary colors
 $blue: #79AAC4;
 $teal: #C4DDFF;
-$pink: #FFC4C4;
+$pink: #ffa7a7;
 $light-pink: #FFEAEA;
 $gray: #7E7E7E;
 
@@ -11,8 +11,12 @@ $error-text: white;
 $snackbar: #83BFDB;
 $snackbar-text: white;
 
-@mixin round-white-btn{
-
+@mixin white-btn{
+    font-family: 'Open Sans';
+    font-weight: 300;
+    font-size: 22px;
+    background-color: white;
+    color: $pink;
 }
 
 @mixin nav-btn {

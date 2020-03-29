@@ -58,7 +58,7 @@ export class DashboardComponent implements OnInit {
         type: 'sku',
         sku: product.sku,
         category: product.category,
-        searchable: product.searchable.split(','),
+        searchable: product.searchable.split(',').map( item => item.trim()),
         title: product.title,
         description: product.description,
         snippet: product.snippet,

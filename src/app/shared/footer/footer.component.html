@@ -1,6 +1,16 @@
 <div class="footer">
-    <div class="sitemap">
-
+    <div class="left">
+        <div class="sitemap">
+            <h3>Lorem Ipsum</h3>
+            <span class="bar"></span>
+            <ul>
+                <li [routerLink]="['/shop', {filter: 'ribbon'}]">Ribbon</li>
+                <li>Aprons</li>
+                <li>Napkins</li>
+                <li>Table Runners</li>
+                <li>Notions</li>
+            </ul>
+        </div>
     </div>
     <div class="logo-social">
         <img src="/assets/EvansgrayLogo.png" alt="">
@@ -13,8 +23,10 @@
                  matTooltip="Email Me">
         </div>
     </div>
-    <div class="categories">
+    <div class="right">
+        <div class="categories">
         <h3>Evansgray Handmade</h3>
+        <span class="bar"></span>
         <ul>
             <li [routerLink]="['/shop', {filter: 'ribbon'}]">Ribbon</li>
             <li>Aprons</li>
@@ -22,5 +34,6 @@
             <li>Table Runners</li>
             <li>Notions</li>
         </ul>
+    </div>
     </div>
 </div>
