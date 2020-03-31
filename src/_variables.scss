@@ -3,7 +3,7 @@ $blue: #79AAC4;
 $teal: #C4DDFF;
 $pink: #ffa7a7;
 $light-pink: #FFEAEA;
-$gray: #7E7E7E;
+$gray: #888888;
 
 // Alert
 $error: #FF9793;
@@ -11,14 +11,30 @@ $error-text: white;
 $snackbar: #83BFDB;
 $snackbar-text: white;
 
+@mixin shadow {
+    box-shadow: 0px 3px 4px #5a27271f;
+}
+
 @mixin white-btn{
+    @include shadow;
     font-family: 'Open Sans';
     font-weight: 300;
     font-size: 22px;
     background-color: white;
     color: $pink;
+    border: none;
+    width: fit-content;
+    padding: 4px 20px;
 }
 
-@mixin nav-btn {
-    
+@mixin pink-btn {
+    @include shadow;
+    font-family: 'Open Sans';
+    font-weight: 300;
+    font-size: 18px;
+    background-color: $pink;
+    color: white;
+    border: none;
+    width: fit-content;
+    padding: 4px 20px;
 }

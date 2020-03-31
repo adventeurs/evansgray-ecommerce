@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 1em;
+    padding: 1em 10%;
     align-items: center;
 
     img{
@@ -50,6 +50,8 @@
     li{
         padding: 5px 30px;
         color: white;
+        outline: none;
+        cursor: pointer;
     }
 }
 
