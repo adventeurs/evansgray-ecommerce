@@ -7,9 +7,14 @@
                 <app-search-filter [filter]='filter'></app-search-filter>
              </div>
         <div class="search-results">
+            <div class="spin" *ngIf="loading">
+                <mat-spinner></mat-spinner>
+            </div>
             <cdk-virtual-scroll-viewport itemSize="100">
-                <div *cdkVirtualFor="let product of productListing ">
-                    <product-card [product]="product"></product-card>
+                    <div class="results">
+                        <div class="results" *cdkVirtualFor="let product of productListing ">
+                        <product-card [product]="product"></product-card>
+                    </div>
                 </div>
             </cdk-virtual-scroll-viewport>
         </div>

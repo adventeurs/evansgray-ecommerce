@@ -1,3 +1,4 @@
+@import '../../../../variables';
 
 .modal-open{
     background: rgba(0, 0, 0, 0.26);
@@ -10,13 +11,48 @@
 }
 
 .modal{
-        background: white; 
-        height: 50%;
-        width: 50%;
+        @include shadow;
+        background-image: url('../../../../assets/modal-wave.svg');
+        background-size: cover;
+        height: 475px;
+        width: 300px;
         z-index: 11;
         position: absolute;
-        left: 50%;
+        left: 60%;
         margin-left: -25%;
         padding: 2em;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+
+        .login-form{
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        .password{
+            display: flex;
+            flex-direction: column;
+
+            a{
+                text-align: center;
+                padding: 5px;
+            }
+        }
 }
 
+.logo{
+    border-radius: 100%;
+    background: white;
+    width: 6em;
+    height: 6em;
+    display: block;
+    text-align: center;
+
+    img{
+        width: 4em;
+        padding-top: 9px;
+        margin-left: -4px;
+    }
+}

@@ -1,68 +1,81 @@
+@import '../../../variables';
+
 .card{
+    @include shadow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     max-width: 260px;
     margin: 2em;
-    border-radius: 0 20px 20px 20px;
-    box-shadow: 2px 3px 6px #30303045;
-    padding-bottom: 1em;
+    height: 90%;
 }
 
 .product-img{
-    max-height: 230px;
-    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    max-height: 200px;
     overflow: hidden;
+
+    img{
+        width: 100%
+    }
+
+    h4{
+        color: $gray;
+        margin-left: -39px;
+        padding: 2px;
+        margin-bottom: 2px;
+        position: relative;
+        background: white;
+    }
 }
 
-.product-img img{
-    width: 100%;
-    border-radius: 0 20px 0 0;
-}
 
 .product-title{
-    width: 80%;
+    color: $gray;
     background: white;
-    font-size: 12px;
     text-align: center;
     margin: auto;
-    margin-top: -25px;
-    padding: 1px;
+    padding: 5px;
     position: relative;
-    margin-bottom: 1.5em;
+    margin: 5px;
+
+    h4{
+        font-size: 20px;
+        margin: 0;
+    }
 
 }
 
-.info{
-    display: flex;
-    justify-content: space-around;
-    background: pink;
-    margin: auto;
-    border-radius: 10px;
-    width: 50%;
-    color: white;
-    padding: 10px;
-    box-shadow: 2px 3px 6px #3030302e;
-}
-
-.info span{
-    height: 20px;
-    width: 3px;
-    background: white;
-    box-shadow: 2px 2px 4px #30303045;
-}
-
-.info a{
-    margin: auto;
-    text-decoration: none;
-    color: white;
-}
 
 .info h4{
     margin: auto;
 }
 
-.card::after{
-    background: rgb(222,241,255);
-    background: -moz-linear-gradient(165deg, rgba(222,241,255,1) 1%, rgba(255,222,222,1) 100%);
-    background: -webkit-linear-gradient(165deg, rgba(222,241,255,1) 1%, rgba(255,222,222,1) 100%);
-    background: linear-gradient(165deg, rgba(222,241,255,1) 1%, rgba(255,222,222,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#def1ff",endColorstr="#ffdede",GradientType=1);
+.pink-btn{
+    font-family: "Playfair Display";
+    font-size: 20px;
+    outline: none;
+    cursor: pointer;
+}
+
+.info{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    padding-bottom: 15px;
+
+    button{
+        flex: 1;
+    }
+
+    h4{
+        border: 2px solid $pink;
+        font-size: 25px;
+        color: $gray;
+        flex: 1;
+        text-align: center;
+    }
 }

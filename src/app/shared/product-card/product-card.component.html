@@ -1,14 +1,18 @@
 <div class="card">
+    <div>
     <div class="product-img">
         <img src="/assets/products/{{product.main}}.jpg" alt="">
     </div>
     <div class="product-title">
-            <h3> {{product.title}}</h3>
+            <h4>{{product.title}}</h4>
+    </div>
     </div>
     <div class="info">
         <h4 *ngIf="product.inventory == 0">Sold Out</h4>
         <h4 *ngIf="product.inventory > 0">{{product.price | dollars}}</h4>
-        <span *ngIf="product.inventory > 0" class="spacer"></span>
-        <a  *ngIf="product.inventory > 0" [routerLink]="['/product', product.sku]">info</a>
+        <button class="pink-btn" 
+                *ngIf="product.inventory > 0" 
+                [routerLink]="['/product', product.sku]">View</button>
     </div>
+
 </div>

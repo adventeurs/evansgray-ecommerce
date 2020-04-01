@@ -2,15 +2,16 @@
 cdk-virtual-scroll-viewport{
     height: 100%;
     width: 100%;
+}
 
-     .cdk-virtual-scroll-content-wrapper{
-        display: flex;
-        flex-wrap: wrap;
-    }
-
+cdk-virtual-scroll-content-wrapper{
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .display-products{
+    padding: 15px;
+    margin-top: 10em;
     display: flex;
     flex-direction: row;
 }
@@ -20,7 +21,22 @@ cdk-virtual-scroll-viewport{
 }
 
 .search-results{
+    display: flex;
+    justify-content: center;
+    text-align: center;
     flex: 3;
     height: 800px;
 }
 
+.results{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.spin{
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}

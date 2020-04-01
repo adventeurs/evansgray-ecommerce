@@ -6,7 +6,11 @@
 </div>
 <div *ngIf="toggleModal"
      class="modal">
-        <form [formGroup]="form" >
+        <div class="logo">
+            <img src="/assets/EvansgrayLogo.png" alt="">
+        </div>
+        <div class="stationary">
+        <form [formGroup]="form"  class="login-form">
             <div class="form-group" *ngIf="!toggleLoginForm">
                 <mat-form-field >
                     <mat-label>Name</mat-label>
@@ -28,7 +32,7 @@
                     type="text">
                 </mat-form-field>
             </div>
-            <div class="form-group">
+            <div class="form-group" class="password">
                 <mat-form-field >
                     <mat-label>Password</mat-label>
                     <input
@@ -37,23 +41,25 @@
                     id="password"
                     type="password">
                 </mat-form-field>
-            <button *ngIf="!toggleLoginForm"
+            <button *ngIf="toggleLoginForm"
                     mat-flat-button 
                     color="accent" 
                     (click)="emailRegister()"
                     >Register</button>
-            <button *ngIf="toggleLoginForm"
+            <button *ngIf="!toggleLoginForm"
                     mat-flat-button 
                     color="accent" 
                     (click)="emailLogin()"
                     >Log In</button>
-                    <a (click)="loginForm()" *ngIf="!toggleLoginForm">Login</a>
-                    <a (click)="loginForm()" *ngIf="toggleLoginForm">Back</a>
+            <a (click)="loginForm()" *ngIf="toggleLoginForm">Login</a>
+            <a (click)="loginForm()" *ngIf="!toggleLoginForm">Back</a>
             </div>
         </form>
+        <mat-divider></mat-divider>
         <button (click)="googleSignIn()"
                 mat-flat-button
                 color="primary">
             Google sign in
         </button>
+        </div>
 </div>

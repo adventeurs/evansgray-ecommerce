@@ -18,6 +18,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   products: Product[] ;
   productSubscription: Subscription;
   filter;
+  loading = true;
 
   constructor(
       private productService: ProductService,
@@ -31,6 +32,7 @@ export class ShopComponent implements OnInit, OnDestroy {
           .pipe(
             switchMap( ( products : Product[] ) => {
               this.products = products;
+              this.loading = false;
               return this.route.queryParamMap
             }))
             .subscribe( params => {
