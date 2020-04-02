@@ -7,7 +7,9 @@
             <h1>Thoughtful</h1>
             <h1 class="handmade">Handmade</h1>
             <h4>High-quality, naturally dyed wares for your home, self, and studio</h4>
-            <button class="white-btn">Shop All</button>
+            <button class="white-btn"
+                    routerLink="/shop">
+                    Shop All</button>
         </div>
     </div>
 </div> 
@@ -20,28 +22,40 @@
                 <img src="../../../assets/ribbon_classic_seaside_6.jpg" alt="">
             </div>
             <h4>Ribbon</h4>
-            <button class="pink-btn">View</button>
+            <button class="pink-btn"
+                    [routerLink]="['/shop']"
+                    [queryParams]="{ filter: 'ribbon' }">
+                    View</button>
         </div>
         <div class="cat" >
             <div class="preview">
                 <img src="../../../assets/apron_taupe_blue_front.jpg" alt="">              
             </div>
             <h4>For Body</h4>
-            <button class="pink-btn">View</button>
+            <button class="pink-btn"
+                    [routerLink]="['/shop']"
+                    [queryParams]="{ filter: 'aprons' }">
+                    View</button>
         </div>
         <div class="cat" >
             <div class="preview">
                 <img src="../../../assets/napkin_runner_sky_blue_1.jpg" alt="">     
             </div>
             <h4>For Home</h4>
-            <button class="pink-btn">View</button>
+            <button class="pink-btn"
+                    [routerLink]="['/shop']"
+                    [queryParams]="{ filter: 'table-runners,napkins' }">
+                    View</button>
         </div>
         <div class="cat" >
             <div class="preview">
                 <img src="../../../assets/pincushion_bliss_no5.jpg" alt="">    
             </div>
             <h4>Notions</h4>
-            <button class="pink-btn">View</button>
+            <button class="pink-btn"
+                    [routerLink]="['/shop']"
+                    [queryParams]="{ filter: 'notions' }">
+                    View</button>
         </div>
     </div>
 </div>

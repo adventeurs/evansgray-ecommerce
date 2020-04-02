@@ -10,7 +10,6 @@ import { StatesService } from 'src/app/services/states.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { StripeOrderObject } from 'src/app/models/stripeOrderObject';
 import { User } from 'src/app/models/user';
-import { resolve } from 'q';
 
 @Component({
   selector: 'app-shipping',

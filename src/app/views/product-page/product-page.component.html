@@ -1,32 +1,49 @@
-<div *ngIf="product$">
-        <h1>{{product$.title}}</h1>
-        <h1>{{product$.amount}}</h1>
-        <div class="product-selection">
-                <mat-form-field>
-                <mat-label>Quantity</mat-label>
-                <mat-select matNativeControl 
-                                required 
-                                [(value)]="quantity">
-                        <mat-option *ngFor="let number of inventory" 
-                                value="{{number}}">
-                                {{number}}</mat-option>
-                </mat-select>
-                </mat-form-field>
-                <div *ngIf="!(auth.user$ | async)">
-                        <button>
-                        Please login</button>
-                </div>
-                <div *ngIf="auth.user$ | async">
-                <button *ngIf="!inCart" 
-                        [hidden]='remove'
-                        (click)='addToCart(product$, quantity, auth.user$)'>
-                        Add to Cart</button>
-                <button *ngIf="inCart" 
-                        (click)='addToCart(product$, quantity)'>
-                        Change Quantity</button>
-                <button [hidden]='!remove'
-                        (click)='removeCartItem(product$)'>
-                        Remove from Cart</button>
+<div *ngIf="product$" class="product-display">
+        <div class="product-img">
+                <img src="/assets/products/{{product$.main}}.jpg" alt="">
+                <div *ngFor="let photo of product$.photos" class="thumbnails">
+                        <img src="/assets/products/{{photo}}.jpg" alt="">
                 </div>
         </div>
+        <div class="product-info">
+        <div class="product-top">
+                <h2>{{product$.title}}</h2>
+                <mat-tab-group>
+                        <mat-tab label="Description"> Description </mat-tab>
+                        <mat-tab label="Style"> Style </mat-tab>
+                        <mat-tab label="Care"> Care </mat-tab>
+                </mat-tab-group>       
+        </div>
+        <div class="product-bottom">
+                <h3>{{product$.price | dollars}}</h3>
+                <div class="product-selection">
+                        <mat-form-field>
+                        <mat-label>Quantity</mat-label>
+                        <mat-select matNativeControl 
+                                        required 
+                                        [(value)]="quantity">
+                                <mat-option *ngFor="let number of inventory" 
+                                        value="{{number}}">
+                                        {{number}}</mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                        <div *ngIf="!(auth.user$ | async)">
+                                <button class="ytytttttw">
+                                Please login or register</button>
+                        </div>
+                        <div *ngIf="auth.user$ | async">
+                        <button *ngIf="!inCart" 
+                                [hidden]='remove'
+                                (click)='addToCart(product$, quantity, auth.user$)'>
+                                Add to Cart</button>
+                        <button *ngIf="inCart" 
+                                (click)='addToCart(product$, quantity)'>
+                                Change Quantity</button>
+                        <button [hidden]='!remove'
+                                (click)='removeCartItem(product$)'>
+                                Remove from Cart</button>
+                        </div>
+                </div>
+        </div>
+        
     </div>

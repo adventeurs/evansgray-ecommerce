@@ -1,3 +1,33 @@
+.hero{
+   height: 400px;
+   position: relative;
+   display: flex;
+}
+
+.hero::before{
+    content: "";
+    background-image: url('../../../assets/hero-wave.svg');
+    height: 1000px;
+    transform: rotate(0deg) translate(2%, -20%);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.wave-1{
+    background-image: url('../../../assets/wave-1.svg');
+    padding: 0 10%;
+    height: 150%;
+    background-size: cover;
+    overflow: visible;
+    margin-top: -27em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
 cdk-virtual-scroll-viewport{
     height: 100%;
@@ -21,6 +51,7 @@ cdk-virtual-scroll-content-wrapper{
 }
 
 .search-results{
+    background: white;
     display: flex;
     justify-content: center;
     text-align: center;

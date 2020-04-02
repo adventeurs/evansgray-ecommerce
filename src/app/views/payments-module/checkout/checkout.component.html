@@ -1,7 +1,11 @@
 <div class="checkout" *ngIf="!_router.url.includes('success')">
        <div class="payment-info">
             <div  class="checkout-header">
-                    <button (click)="previous()">Back</button>
+                    <button class="pink-btn" (click)="previous()">
+                            <span class="material-icons" style="fill: white; padding-right: 5px;">
+                                    keyboard_backspace
+                            </span>
+                            Return</button>
                 </div>
         <app-shipping *ngIf="!close" 
                       [close]='close'

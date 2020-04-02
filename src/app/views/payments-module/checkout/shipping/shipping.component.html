@@ -1,6 +1,9 @@
 <div class='shipping-form' style="font-size: 12px;">
 
-    <div *ngIf="!(auth.user$ | async)">NOOPE</div>
+    <div *ngIf="!(auth.user$ | async)" class="register">
+      <img src="/assets/evansgray-full.png" alt="">
+      <h4>Please register to proceed with checkout</h4>
+    </div>
 
     <form [formGroup]='orderForm' *ngIf="(auth.user$ | async) as user">
       <!-- user account: name and contact info ? chagne -->

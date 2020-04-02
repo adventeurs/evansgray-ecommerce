@@ -2,7 +2,7 @@
 
 .hero{
     // background-image: url('../../../assets/hero-subtraction.svg');
-    height: 800px;
+   height: 800px;
    position: relative;
    display: flex;
 
@@ -35,9 +35,9 @@
 
 .hero::before{
     content: "";
-    background-image: url('../../../assets/hero-subtraction.svg');
+    background-image: url('../../../assets/hero-wave.svg');
     height: 1000px;
-    transform: rotate(0deg) translate(0%, -13%);
+    transform: rotate(0deg) translate(2%, -20%);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;

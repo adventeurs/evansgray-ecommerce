@@ -11,7 +11,7 @@
         </div>
         <div class="stationary">
         <form [formGroup]="form"  class="login-form">
-            <div class="form-group" *ngIf="!toggleLoginForm">
+            <div class="form-group" *ngIf="toggleLoginForm">
                 <mat-form-field >
                     <mat-label>Name</mat-label>
                     <input
@@ -42,24 +42,24 @@
                     type="password">
                 </mat-form-field>
             <button *ngIf="toggleLoginForm"
-                    mat-flat-button 
+                    class="white-btn" 
                     color="accent" 
                     (click)="emailRegister()"
                     >Register</button>
             <button *ngIf="!toggleLoginForm"
-                    mat-flat-button 
+                    class="white-btn"
                     color="accent" 
                     (click)="emailLogin()"
                     >Log In</button>
+            <a (click)="loginForm()" *ngIf="!toggleLoginForm">Register</a>
             <a (click)="loginForm()" *ngIf="toggleLoginForm">Login</a>
-            <a (click)="loginForm()" *ngIf="!toggleLoginForm">Back</a>
             </div>
         </form>
         <mat-divider></mat-divider>
         <button (click)="googleSignIn()"
-                mat-flat-button
-                color="primary">
-            Google sign in
+                color="primary"
+                class="google white-btn">
+            Google Login
         </button>
         </div>
 </div>
