@@ -2,8 +2,12 @@
 $blue: #5B88A3;
 $teal: #C4DDFF;
 $pink: #ffa7a7;
-$light-pink: #FFEAEA;
-$gray: #888888;
+$light-pink: #fcc7ca;
+$gray: #585353;
+
+// #FFB1B2
+// #FFBABA
+// #ffa7a7
 
 // Alert
 $error: #FF9793;
@@ -39,5 +43,6 @@ $snackbar-text: white;
     width: fit-content;
     padding: 4px 20px;
     display: flex;
+    justify-content: center;
     outline: none;
 }

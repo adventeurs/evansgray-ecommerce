@@ -8,7 +8,6 @@ import { switchMap, tap } from 'rxjs/operators'
 import { auth, firestore } from 'firebase/app';
 import { NotificationService } from './notification.service';
 import { HttpClient } from '@angular/common/http';
-import { AnimationDurations } from '@angular/material';
 
 
 @Injectable({ 

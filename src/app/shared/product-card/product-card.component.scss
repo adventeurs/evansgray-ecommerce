@@ -1,13 +1,12 @@
 @import '../../../variables';
 
 .card{
-    @include shadow;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    max-width: 260px;
-    margin: 2em;
+    max-width: 200px;
+    margin: 1em;
     height: 90%;
 }
 
@@ -15,7 +14,7 @@
     display: flex;
     flex-direction: row;
     align-items: baseline;
-    max-height: 200px;
+    max-height: 160px;
     overflow: hidden;
 
     img{
@@ -43,7 +42,7 @@
     margin: 5px;
 
     h4{
-        font-size: 20px;
+        font-size: 16px;
         margin: 0;
     }
 
@@ -52,13 +51,6 @@
 
 .info h4{
     margin: auto;
-}
-
-.pink-btn{
-    font-family: "Playfair Display";
-    font-size: 20px;
-    outline: none;
-    cursor: pointer;
 }
 
 .info{
@@ -72,8 +64,7 @@
     }
 
     h4{
-        border: 2px solid $pink;
-        font-size: 25px;
+        font-size: 20px;
         color: $gray;
         flex: 1;
         text-align: center;

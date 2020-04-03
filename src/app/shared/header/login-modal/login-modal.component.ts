@@ -11,6 +11,7 @@ export class LoginModalComponent{
   @Output() toggleEvent = new EventEmitter<boolean>();
   @Input() toggleModal: boolean;
   toggleLoginForm: boolean;
+  signUp = false;
 
   form = new FormGroup({
     email: new FormControl('', [

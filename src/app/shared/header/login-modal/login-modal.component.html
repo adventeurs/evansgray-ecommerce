@@ -9,9 +9,20 @@
         <div class="logo">
             <img src="/assets/EvansgrayLogo.png" alt="">
         </div>
+        <h4 *ngIf="!signUp" class="notice">Login or register with one of the option below</h4>
         <div class="stationary">
-        <form [formGroup]="form"  class="login-form">
-            <div class="form-group" *ngIf="toggleLoginForm">
+            <button *ngIf="!signUp"
+                    class="email white-btn"
+                    (click)="signUp = true">
+                        <span class="material-icons">
+                                email
+                        </span>
+                    Email 
+            </button>
+        <form [formGroup]="form"  
+              class="login-form"
+              *ngIf="signUp">
+            <div class="form-group" *ngIf="!toggleLoginForm">
                 <mat-form-field >
                     <mat-label>Name</mat-label>
                     <input
@@ -41,25 +52,28 @@
                     id="password"
                     type="password">
                 </mat-form-field>
-            <button *ngIf="toggleLoginForm"
+            <button *ngIf="!toggleLoginForm"
                     class="white-btn" 
                     color="accent" 
                     (click)="emailRegister()"
                     >Register</button>
-            <button *ngIf="!toggleLoginForm"
+            <button *ngIf="toggleLoginForm"
                     class="white-btn"
                     color="accent" 
                     (click)="emailLogin()"
                     >Log In</button>
-            <a (click)="loginForm()" *ngIf="!toggleLoginForm">Register</a>
-            <a (click)="loginForm()" *ngIf="toggleLoginForm">Login</a>
+            <a (click)="loginForm()" *ngIf="toggleLoginForm">Register</a>
+            <a (click)="loginForm()" *ngIf="!toggleLoginForm">Login</a>
             </div>
         </form>
-        <mat-divider></mat-divider>
-        <button (click)="googleSignIn()"
+       
+        <mat-divider *ngIf="!signUp" > </mat-divider>
+        <button *ngIf="!signUp"
+                (click)="googleSignIn()"
                 color="primary"
                 class="google white-btn">
-            Google Login
+                <img src="/assets/256px-Google__G__Logo.png" alt="">
+            Google 
         </button>
         </div>
 </div>

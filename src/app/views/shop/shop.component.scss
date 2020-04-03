@@ -1,5 +1,6 @@
+@import '../../../variables';
+
 .hero{
-   height: 400px;
    position: relative;
    display: flex;
 }
@@ -7,26 +8,38 @@
 .hero::before{
     content: "";
     background-image: url('../../../assets/hero-wave.svg');
-    height: 1000px;
-    transform: rotate(0deg) translate(2%, -20%);
+    height: 600px;
+    transform: rotate(-3deg) translate(2%, -22%);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 100%;
+    width: 106%;
     position: absolute;
     z-index: -1;
 }
 
 .wave-1{
-    background-image: url('../../../assets/wave-1.svg');
-    padding: 0 10%;
-    height: 150%;
-    background-size: cover;
-    overflow: visible;
-    margin-top: -27em;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: flex-end;
+    flex-direction: row;
+    background-image: url('../../../assets/wave-1.svg');
+    background-size: cover;
+    padding: 10%;
+
+    img{
+        @include shadow;
+        width: 600px;
+    }
+
+    h4{
+        @include shadow;
+        width: 600px;
+        color: $gray;
+        background: white;
+        padding: 15px;
+        margin-left: -100px;
+        font-size: 20px;
+    }
 }
 
 cdk-virtual-scroll-viewport{
@@ -40,14 +53,17 @@ cdk-virtual-scroll-content-wrapper{
 }
 
 .display-products{
-    padding: 15px;
-    margin-top: 10em;
+    padding: 40px 10%;
     display: flex;
     flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: -5em;
+    padding-bottom: 10em;
 }
 
 .filters{
     flex: 1;
+    margin-top: 14px;
 }
 
 .search-results{
@@ -57,6 +73,7 @@ cdk-virtual-scroll-content-wrapper{
     text-align: center;
     flex: 3;
     height: 800px;
+    margin: 15px;
 }
 
 .results{
@@ -70,4 +87,14 @@ cdk-virtual-scroll-content-wrapper{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
+}
+
+.shop{
+    text-align: center;
+    padding: 1em;
+
+    h4{
+        color: $pink;
+        font-family: "Playfair Display";
+    }
 }

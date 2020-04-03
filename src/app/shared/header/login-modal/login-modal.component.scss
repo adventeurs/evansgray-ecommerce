@@ -60,12 +60,37 @@
         }
 
         .google{
-            margin: 15px;
-            color: white;
-            background: #5565ff;
+            margin: 19px;
+            color: #4086f4;
+            background: white;
             font-family: "Playfair Display";
             font-size: 16px;
+            display: flex;
+            align-items: center;
+            padding: 4px 17px;
+            
+            img{
+               width: 25px; 
+               padding: 5px;
+               margin-right: 5px;
+            }
         }
+}
+
+.email{
+    margin: 20px;
+    cursor: pointer;
+    font-family: "playfair display";
+    background: $blue;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+
+    span{
+        margin-right: 5px;
+        padding: 5px;
+    }
 }
 
 .logo{
@@ -81,4 +106,9 @@
         padding-top: 9px;
         margin-left: -4px;
     }
+}
+
+.notice{
+    color: white;
+    font-family: "Playfair Display";
 }

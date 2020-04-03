@@ -9,5 +9,5 @@ export interface Product {
     type: string;
     inventory: number;
     main: string;
-    categories: string[];
+    searchable: string[];
   }

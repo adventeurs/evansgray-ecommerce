@@ -1,17 +1,25 @@
+@import '../../../variables';
+
 .product-display{
+    @include shadow;
     display: flex;
     flex-direction: row;
-    margin: 1em;
+    margin: 2em;
 
     .product-img{
         flex: 1;
+        overflow: hidden;
+
+        img{
+            width: 105%;
+        }
     }
 
     .product-info{
         flex: 1;
         display: flex;
         flex-direction: column;
-
+        justify-content: space-between;
     }
 }
 
@@ -26,5 +34,12 @@
         display: flex;
         flex-direction: row;
         align-items: center;
+    }
+}
+
+.product-top{
+
+    h2{
+        text-align: center;
     }
 }

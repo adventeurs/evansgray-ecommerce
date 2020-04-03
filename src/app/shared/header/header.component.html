@@ -10,7 +10,8 @@
     </ul>
     <div class="loaded">
 
-    <i  class="material-icons basket" 
+    <i  class="material-icons basket"
+        style="color: #5B88A3; outline: none; font-size: 30px;"
         [matBadge]="size | async " 
         [matBadgeHidden]="!(size | async)"
         matTooltip="See Cart"
@@ -26,18 +27,25 @@
         </a>
     </div>
     <div *ngIf='auth.user$ | async as user'>
-        <button mat-button [matMenuTriggerFor]='userMenu'>
-                Welcome, {{ firstName( user.displayName) }}! 
-                <i class="material-icons">
-                        expand_more
-                        </i>
-        </button>
-            <mat-menu #userMenu='matMenu' xPosition="before">
-                <div class='profile-wrapper'>
+            <div [matMenuTriggerFor]='userMenu'>
+                    <img [src]='user.photoURL' 
+                         class='profile'
+                         *ngIf='user.photoURL'>
+                    <button *ngIf="!user.photoURL"
+                            mat-button 
+                            style="font-family: 'Playfair Display';">
+                    Welcome, {{ firstName( user.displayName) }}! 
+                    </button>
+                    <i class="material-icons" style="color: white; cursor: pointer;">
+                            expand_more
+                            </i>
+            </div>
+            <mat-menu #userMenu='matMenu' xPosition="before" >
+                <!-- <div class='profile-wrapper'>
                         <img [src]='user.photoURL' 
                         class='profile'
                         *ngIf='user.photoURL'>
-                </div>
+                </div> -->
                 <button mat-menu-item
                         routerlink="/checkout">
                         View Cart</button>

@@ -20,15 +20,15 @@
                         <mat-form-field>
                         <mat-label>Quantity</mat-label>
                         <mat-select matNativeControl 
-                                        required 
-                                        [(value)]="quantity">
+                                    required 
+                                    [(value)]="quantity">
                                 <mat-option *ngFor="let number of inventory" 
                                         value="{{number}}">
                                         {{number}}</mat-option>
                         </mat-select>
                         </mat-form-field>
                         <div *ngIf="!(auth.user$ | async)">
-                                <button class="ytytttttw">
+                                <button class="white-btn">
                                 Please login or register</button>
                         </div>
                         <div *ngIf="auth.user$ | async">
