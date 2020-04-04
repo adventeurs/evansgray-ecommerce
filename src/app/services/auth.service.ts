@@ -15,11 +15,11 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
   // Currently Logged In User
-  private loggedInUser = new ReplaySubject<firebase.User>(1)
+  private loggedInUser = new ReplaySubject<firebase.User>(1);
 
   // Access Currently Logged In User
   get user$(): Observable<firebase.User> {
-     return this.loggedInUser
+     return this.loggedInUser; 
   }
   
   

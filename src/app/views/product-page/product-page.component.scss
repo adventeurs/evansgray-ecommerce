@@ -1,7 +1,27 @@
 @import '../../../variables';
 
+
+.hero{
+    position: relative;
+    display: flex;
+ }
+ 
+ .hero::before{
+     content: "";
+     background-image: url('../../../assets/hero-wave.svg');
+     height: 600px;
+     transform: rotate(-3deg) translate(2%, -22%);
+     background-position: center;
+     background-size: cover;
+     background-repeat: no-repeat;
+     width: 100vw;
+     position: absolute;
+     z-index: -1;
+ }
+
 .product-display{
     @include shadow;
+    background: white;
     display: flex;
     flex-direction: row;
     margin: 2em;
@@ -37,6 +57,11 @@
     }
 }
 
+.cart{
+    display: flex;
+    flex-direction: row;
+    
+}
 .product-top{
 
     h2{

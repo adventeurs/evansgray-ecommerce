@@ -1,17 +1,43 @@
+<div class="hero"></div>
 <div *ngIf="product$" class="product-display">
         <div class="product-img">
                 <img src="/assets/products/{{product$.main}}.jpg" alt="">
-                <div *ngFor="let photo of product$.photos" class="thumbnails">
+                <!-- <div *ngFor="let photo of product$.images" class="thumbnails">
                         <img src="/assets/products/{{photo}}.jpg" alt="">
-                </div>
+                </div> -->
         </div>
         <div class="product-info">
         <div class="product-top">
                 <h2>{{product$.title}}</h2>
-                <mat-tab-group>
-                        <mat-tab label="Description"> Description </mat-tab>
-                        <mat-tab label="Style"> Style </mat-tab>
-                        <mat-tab label="Care"> Care </mat-tab>
+                <mat-tab-group mat-stretch-tabs>
+                        <mat-tab> 
+                                <ng-template mat-tab-label>
+                                        <span class="material-icons">
+                                        notes
+                                        </span>
+                                        Discription
+                                </ng-template>
+                                {{product$.description}}
+                                <mat-divider></mat-divider>
+                        </mat-tab>
+                        <mat-tab label="Style">
+                                <ng-template mat-tab-label>
+                                        <span class="material-icons">
+                                        style
+                                        </span>
+                                        Style
+                                </ng-template> 
+                                {{product$.styling}}
+                        </mat-tab>
+                        <mat-tab label="Care"> 
+                                <ng-template mat-tab-label>
+                                        <span class="material-icons">
+                                        local_laundry_service
+                                        </span>
+                                        Care
+                                </ng-template>
+                                {{product$.care}}
+                        </mat-tab>
                 </mat-tab-group>       
         </div>
         <div class="product-bottom">
@@ -28,21 +54,29 @@
                         </mat-select>
                         </mat-form-field>
                         <div *ngIf="!(auth.user$ | async)">
-                                <button class="white-btn">
+                                <button class="pink-btn">
                                 Please login or register</button>
                         </div>
-                        <div *ngIf="auth.user$ | async">
+                        <div *ngIf="auth.user$ | async"
+                             class="cart">
                         <button *ngIf="!inCart" 
                                 [hidden]='remove'
+                                class="pink-btn"
                                 (click)='addToCart(product$, quantity, auth.user$)'>
                                 Add to Cart</button>
                         <button *ngIf="inCart" 
+                                class="pink-btn"
                                 (click)='addToCart(product$, quantity)'>
                                 Change Quantity</button>
-                        <button [hidden]='!remove'
-                                (click)='removeCartItem(product$)'>
-                                Remove from Cart</button>
-                        </div>
+
+                        <i class="material-icons"
+                           matTooltip="Remove from cart"
+                           style="font-size: 20px;"
+                           [hidden]='inCart'
+                           (click)='removeCartItem(product$)'>
+                                remove_circle
+                        </i>        
+
                 </div>
         </div>
         
