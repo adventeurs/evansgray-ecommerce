@@ -20,7 +20,6 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   inventory: Number[];
   quantity: number = 1;
   inCart: boolean = false;
-  remove: boolean = false;
   
   constructor(
     private productService: ProductService,
@@ -41,6 +40,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
                   this.inventory = this.cart.createInventoryArray(info[0].inventory);
                 });
           });
+
     this.cartSubscription = 
           this.cart.cartArray.subscribe( (cart: Product[]) =>
             cart.filter( product => {
@@ -58,18 +58,16 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   }
 
   addToCart( product , _amount){
+    console.log(_amount)
     let amount = parseInt(_amount)
     this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
-    if(!this.inCart)
-      this.remove = !this.remove
 
   }
 
   removeCartItem( product ){
     this.cart.removeCartItem( product )
-    this.remove = !this.remove
-    this.inCart = !this.inCart
+    this.inCart = false;
   }
 
 }

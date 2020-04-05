@@ -49,8 +49,9 @@
                                     required 
                                     [(value)]="quantity">
                                 <mat-option *ngFor="let number of inventory" 
-                                        value="{{number}}">
-                                        {{number}}</mat-option>
+                                            #quantity
+                                            value="{{number}}">
+                                            {{number}}</mat-option>
                         </mat-select>
                         </mat-form-field>
                         <div *ngIf="!(auth.user$ | async)">
@@ -72,7 +73,7 @@
                         <i class="material-icons"
                            matTooltip="Remove from cart"
                            style="font-size: 20px;"
-                           [hidden]='inCart'
+                           *ngIf='!inCart'
                            (click)='removeCartItem(product$)'>
                                 remove_circle
                         </i>        
