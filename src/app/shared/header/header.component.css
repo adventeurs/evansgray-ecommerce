@@ -1,0 +1,83 @@
+.profile {
+  width: 50px !important;
+  border-radius: 50%;
+}
+
+.profile-wrapper {
+  background: #ffe0e6cc;
+  text-align: center;
+  padding: 5px;
+  margin-top: -8px;
+}
+
+.nav-bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 15px 5%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.nav-bar img {
+  width: 75px;
+}
+
+.nav-bar .loaded {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  min-width: 240px;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.nav-bar .loaded .login h3 {
+  background-color: white;
+  color: #ffa7a7;
+  padding: 5px 20px;
+  -webkit-box-shadow: 0px 3px 4px #5a27271f;
+          box-shadow: 0px 3px 4px #5a27271f;
+}
+
+.nav-links {
+  background: #ffa7a7;
+  text-decoration: none;
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+  -webkit-box-shadow: 0px 3px 4px #5a27271f;
+          box-shadow: 0px 3px 4px #5a27271f;
+}
+
+.nav-links li {
+  padding: 5px 30px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+.basket {
+  margin: .5em 1em;
+}
+
+.header-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+/*# sourceMappingURL=header.component.css.map */

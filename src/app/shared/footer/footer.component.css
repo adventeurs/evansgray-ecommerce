@@ -1,0 +1,120 @@
+.footer {
+  background-image: url("../../../assets/footer-bck.svg");
+  background-size: cover;
+  width: 100%;
+  bottom: 0;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-repeat: no-repeat;
+  padding-top: 2em;
+}
+
+.footer .logo-social {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 2em;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+}
+
+.footer .logo-social img {
+  width: 85px;
+  padding: 5px;
+}
+
+.footer .logo-social .social img {
+  width: 40px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.categories {
+  color: #5B88A3;
+  background: #FFDBDB;
+  border-radius: 10px;
+  margin: 2em;
+  padding: 1em;
+  text-align: end;
+  width: 50%;
+  -webkit-box-shadow: 0 3px 6px #fdc4c4;
+          box-shadow: 0 3px 6px #fdc4c4;
+}
+
+.categories ul {
+  list-style-type: none;
+  margin: 5px;
+}
+
+.categories h3 {
+  margin: 5px;
+}
+
+.bar {
+  height: 3px;
+  background-color: white;
+  display: block;
+}
+
+.sitemap {
+  color: #5B88A3;
+  background: #FFDBDB;
+  border-radius: 10px;
+  margin: 2em;
+  padding: 1em;
+  text-align: start;
+  width: 50%;
+  -webkit-box-shadow: 0 3px 6px #fdc4c4;
+          box-shadow: 0 3px 6px #fdc4c4;
+}
+
+.sitemap ul {
+  list-style-type: none;
+  margin: 5px;
+  padding: 0;
+}
+
+.sitemap h3 {
+  margin: 5px;
+}
+
+.left {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+
+.right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-flex: 2;
+      -ms-flex: 2;
+          flex: 2;
+}
+/*# sourceMappingURL=footer.component.css.map */

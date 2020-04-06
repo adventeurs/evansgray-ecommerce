@@ -1,8 +1,7 @@
 <div class="hero"></div>
 <div *ngIf="product$ | async as product" class="product-display">
-        {{ product.price}}
         <div class="product-img">
-                <img src="/assets/products/{{product$.main}}.jpg" alt="">
+                <img src="/assets/products/{{product.main}}.jpg" alt="">
                 <!-- <div *ngFor="let photo of product$.images" class="thumbnails">
                         <img src="/assets/products/{{photo}}.jpg" alt="">
                 </div> -->
@@ -13,39 +12,54 @@
                 <mat-tab-group mat-stretch-tabs>
                         <mat-tab> 
                                 <ng-template mat-tab-label>
-                                        <span class="material-icons">
+                                        <span class="material-icons" 
+                                              style="padding-right: 10px; color: #5B88A3;">
                                         notes
                                         </span>
-                                        Discription
+                                        <h4>Description</h4>
                                 </ng-template>
-                                {{product.description}}
-                                <mat-divider></mat-divider>
+                                <div class="tab">
+                                        <p>{{product.description}}</p>
+                                        <div style="display: flex; align-items: center;">
+                                                <span class="material-icons">
+                                                color_lens
+                                                </span>  
+                                                <p style="margin-left: 15px;">Color</p>
+                                        </div>
+                                        
+                                        <mat-divider></mat-divider> 
+                                        <p>{{product.color}}</p>
+                                </div>
                         </mat-tab>
                         <mat-tab label="Style">
                                 <ng-template mat-tab-label>
-                                        <span class="material-icons">
+                                        <span class="material-icons" style="padding-right: 10px; color: #5B88A3;">
                                         style
                                         </span>
-                                        Style
+                                        <h4>Style</h4>
                                 </ng-template> 
-                                {{product.styling}}
+                                <div class="tab">
+                                        <p>{{product.styling}}</p>
+                                </div>
                         </mat-tab>
                         <mat-tab label="Care"> 
                                 <ng-template mat-tab-label>
-                                        <span class="material-icons">
+                                        <span class="material-icons" style="padding-right: 10px; color: #5B88A3;">
                                         local_laundry_service
                                         </span>
-                                        Care
+                                        <h4>Care</h4>
                                 </ng-template>
-                                {{product.care}}
+                                <div class="tab">
+                                        <p>{{product.care}}</p> 
+                                </div>
                         </mat-tab>
                 </mat-tab-group>       
         </div>
         <div class="product-bottom">
-                <h3>{{product.price | dollars}}</h3>
+                <h4>Price: {{product.price | dollars }}</h4>
                 <div class="product-selection">
-                        <mat-form-field>
-                        <mat-label>Quantity</mat-label>
+                        <mat-form-field style="width: 55px; padding: 15px;">
+                        <mat-label>Qty</mat-label>
                         <mat-select matNativeControl 
                                     required 
                                     [(value)]="quantity">
@@ -56,7 +70,7 @@
                         </mat-select>
                         </mat-form-field>
                         <div *ngIf="!(auth.user$ | async)">
-                                <button class="pink-btn">
+                                <button class="pink-btn" style="margin: 15px;">
                                 Please login or register</button>
                         </div>
                         <div *ngIf="auth.user$ | async"
@@ -73,12 +87,12 @@
 
                         <i class="material-icons"
                            matTooltip="Remove from cart"
-                           style="font-size: 20px;"
+                           style="font-size: 24px; color: #5B88A3; margin: 15px;"
                            *ngIf='skus.includes(product.sku)'
                            (click)='removeCartItem(product)'>
                                 remove_circle
-                        </i>        
-                </div>
+                        </i>  
+                        </div>
                 </div>
         </div>
         

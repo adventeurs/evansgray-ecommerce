@@ -12,7 +12,7 @@
         <h4 *ngIf="product.inventory > 0">{{product.price | dollars}}</h4>
         <button class="pink-btn" 
                 *ngIf="product.inventory > 0" 
-                [routerLink]="['/product', product.sku]">View</button>
+                [routerLink]="['/product', product.title ]">View</button>
     </div>
 
 </div>
