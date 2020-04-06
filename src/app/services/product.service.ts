@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore} from 'angularfire2/firestore';
+import { AngularFirestore, DocumentSnapshot} from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -19,8 +20,8 @@ export class ProductService {
   }   
 
   getProductBySku( sku ){
-    return this.db.collection('products',
-                ref => ref.where( 'sku', '==', sku ).limit(1) )
+    return this.db.collection('products').doc(sku).get()
+  
   }
 
   retrieveFilters(){

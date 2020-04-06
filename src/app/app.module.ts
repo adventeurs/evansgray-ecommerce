@@ -38,6 +38,7 @@ import { SuccessComponent } from './views/payments-module/checkout/success/succe
 import { AdminAuthGaurd } from './services/adminauthgaurd.service';
 import { StatesService } from './services/states.service';
 import { AuthService } from './services/auth.service';
+import { InventoryPipe } from './shared/pipes/inventory.pipe';
 
 
 
@@ -63,7 +64,8 @@ import { AuthService } from './services/auth.service';
     DashboardComponent,
     ShippingInfoComponent,
     RefundInfoComponent,
-    SuccessComponent
+    SuccessComponent,
+    InventoryPipe
   ],
   entryComponents: [
     ShippingInfoComponent,
@@ -94,8 +96,8 @@ import { AuthService } from './services/auth.service';
       },
       { 
         path: 'checkout', component: CheckoutComponent,
-        children: [
-          { path: 'success/:email/:amount', component: SuccessComponent}
+        children: [ 
+          { path: 'success/:email/:amount', component: SuccessComponent }
         ] 
       },
       { 

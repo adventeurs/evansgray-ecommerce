@@ -28,7 +28,8 @@
                                         matNativeControl 
                                         [value]="quantity" 
                                         >
-                                <mat-option *ngFor="let number of inventory(product)" value="{{number}}">
+                                <mat-option *ngFor="let number of product.inventory | inventory" 
+                                            value="{{number}}">
                                     {{number}}
                                 </mat-option>
                             </mat-select>

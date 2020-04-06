@@ -1,25 +1,25 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { CartService } from 'src/app/services/cart.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Product } from 'src/app/models/product';
-import { Subscription } from 'rxjs';
-import { DocumentData } from 'angularfire2/firestore';
+import { Subscription, Observable, of } from 'rxjs';
+import { DocumentData, DocumentSnapshot } from 'angularfire2/firestore';
 import { AuthService } from 'src/app/services/auth.service';
+import { switchMap, flatMap, tap, map, filter, pluck, mergeMap, toArray } from 'rxjs/operators';
+import { firestore } from 'firebase';
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss']
 })
-export class ProductPageComponent implements OnInit, OnDestroy {
-  cartSubscription: Subscription;
-  productSubscription: Subscription;
-  product$: DocumentData;
-  inventory: Number[];
+export class ProductPageComponent implements OnInit {
+  cart$;
+  product$;
+  // inventory: Number[];
   quantity: number = 1;
-  inCart: boolean = false;
   
   constructor(
     private productService: ProductService,
@@ -31,34 +31,23 @@ export class ProductPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.router.paramMap
-        .subscribe( param => {
-            this.productSubscription = this.productService.getProductBySku(param.get('sku'))
-                .valueChanges()
-                .subscribe( ( info: Product[] ) => {
-                  this.product$ = info[0];
-                  this.inventory = this.cart.createInventoryArray(info[0].inventory);
-                });
-          });
+      this.product$ = this.router.paramMap.pipe(
+          switchMap( ( param: ParamMap ) => this.getProductBySku(param.get('sku'))),
+          switchMap( ( doc: firestore.DocumentSnapshot ) => of(doc.data()) )
+          )
 
-    this.cartSubscription = 
-          this.cart.cartArray.subscribe( (cart: Product[]) =>
-            cart.filter( product => {
-              if(product){
-              if(product.sku === this.product$.sku)
-                this.inCart = true
-              }
-            }));
+      this.cart$ = this.cart.cartArray.pipe(
+                        map( cart => cart.map( product => product.sku))
+                      )
+
   }
 
 
-  ngOnDestroy(){
-    this.productSubscription.unsubscribe();
-    this.cartSubscription.unsubscribe();
+  getProductBySku( sku ): Observable<any>{
+    return this.productService.getProductBySku( sku )
   }
 
   addToCart( product , _amount){
-    console.log(_amount)
     let amount = parseInt(_amount)
     this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
@@ -67,7 +56,7 @@ export class ProductPageComponent implements OnInit, OnDestroy {
 
   removeCartItem( product ){
     this.cart.removeCartItem( product )
-    this.inCart = false;
+
   }
 
 }

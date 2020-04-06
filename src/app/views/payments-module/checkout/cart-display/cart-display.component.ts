@@ -34,11 +34,6 @@ export class CartDisplayComponent implements OnInit {
     this.cart.removeCartItem( product )
   }
 
-  inventory( product ): Number[] {
-    let inventory = this.cart.createInventoryArray(product.inventory)
-    return inventory
-  }
-
   addToCart( product, _quantity){
     let quantity = parseInt(_quantity)
     this.cart.addToCart( product, quantity)

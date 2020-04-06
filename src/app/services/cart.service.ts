@@ -57,16 +57,6 @@ export class CartService {
        
   }
 
-  // Take Inventory Amount And Create Array To Display
-  createInventoryArray( inventory ): Number[]{
-    let inventoryArray: Number[]= [];
-
-    for(let i = 1; i < inventory + 1; i++){
-      inventoryArray.push(i);
-    }
-    return inventoryArray;
-  }
-
   // Add Product To Cart With Only Essential Information
   addToCart( product: Product, quantity: number){
     let productToAdd = {

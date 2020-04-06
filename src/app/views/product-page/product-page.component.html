@@ -1,5 +1,6 @@
 <div class="hero"></div>
-<div *ngIf="product$" class="product-display">
+<div *ngIf="product$ | async as product" class="product-display">
+        {{ product.price}}
         <div class="product-img">
                 <img src="/assets/products/{{product$.main}}.jpg" alt="">
                 <!-- <div *ngFor="let photo of product$.images" class="thumbnails">
@@ -8,7 +9,7 @@
         </div>
         <div class="product-info">
         <div class="product-top">
-                <h2>{{product$.title}}</h2>
+                <h2>{{product.title}}</h2>
                 <mat-tab-group mat-stretch-tabs>
                         <mat-tab> 
                                 <ng-template mat-tab-label>
@@ -17,7 +18,7 @@
                                         </span>
                                         Discription
                                 </ng-template>
-                                {{product$.description}}
+                                {{product.description}}
                                 <mat-divider></mat-divider>
                         </mat-tab>
                         <mat-tab label="Style">
@@ -27,7 +28,7 @@
                                         </span>
                                         Style
                                 </ng-template> 
-                                {{product$.styling}}
+                                {{product.styling}}
                         </mat-tab>
                         <mat-tab label="Care"> 
                                 <ng-template mat-tab-label>
@@ -36,19 +37,19 @@
                                         </span>
                                         Care
                                 </ng-template>
-                                {{product$.care}}
+                                {{product.care}}
                         </mat-tab>
                 </mat-tab-group>       
         </div>
         <div class="product-bottom">
-                <h3>{{product$.price | dollars}}</h3>
+                <h3>{{product.price | dollars}}</h3>
                 <div class="product-selection">
                         <mat-form-field>
                         <mat-label>Quantity</mat-label>
                         <mat-select matNativeControl 
                                     required 
                                     [(value)]="quantity">
-                                <mat-option *ngFor="let number of inventory" 
+                                <mat-option *ngFor="let number of product.inventory | inventory" 
                                             #quantity
                                             value="{{number}}">
                                             {{number}}</mat-option>
@@ -60,24 +61,24 @@
                         </div>
                         <div *ngIf="auth.user$ | async"
                              class="cart">
-                        <button *ngIf="!inCart" 
-                                [hidden]='remove'
+                        <div *ngIf="cart$ | async as skus">
+                        <button *ngIf="!skus.includes(product.sku)" 
                                 class="pink-btn"
-                                (click)='addToCart(product$, quantity, auth.user$)'>
+                                (click)='addToCart(product, quantity, auth.user$)'>
                                 Add to Cart</button>
-                        <button *ngIf="inCart" 
+                        <button *ngIf='skus.includes(product.sku)'
                                 class="pink-btn"
-                                (click)='addToCart(product$, quantity)'>
+                                (click)='addToCart(product, quantity)'>
                                 Change Quantity</button>
 
                         <i class="material-icons"
                            matTooltip="Remove from cart"
                            style="font-size: 20px;"
-                           *ngIf='!inCart'
-                           (click)='removeCartItem(product$)'>
+                           *ngIf='skus.includes(product.sku)'
+                           (click)='removeCartItem(product)'>
                                 remove_circle
                         </i>        
-
+                </div>
                 </div>
         </div>
         
