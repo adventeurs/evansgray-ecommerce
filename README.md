@@ -35,7 +35,7 @@ A users shopping cart is assigned as a document in the carts collection under th
 
   Firestore\
         - carts/uid \
-                 --+ sku { product info }
+                 --+ sku : { product info }
 
 Stripe Integration 
 To integrate with Stripe multiple api calls are required. A stripe customer must be created in order to store order history, shipping information and card details (optionally). The stripe customer id is then required to create a Stripe order, when an order is created Stripe returns an order total based on the skus provided within the order. This means every product in the Firestore database is accompanied with a Stripe product. A Stripe product must first be created, a product id is returned which is then used to create a sku with a price model. Finally, a stripe card is mounted on checkout and a payment intent is passed to the server and processed with Stripe.
