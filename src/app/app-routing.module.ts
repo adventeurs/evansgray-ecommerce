@@ -10,35 +10,45 @@ import { AccountComponent } from './views/account/account.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AdminAuthGaurd } from './services/adminauthgaurd.service';
 import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
-import { MakePaymentComponent } from './payments-module/checkout/make-payment/make-payment.component';
+import { MakePaymentComponent } from './payments-module/checkout/cart-display/make-payment/make-payment.component';
 import { CartDisplayComponent } from './payments-module/checkout/cart-display/cart-display.component';
 
 
-const routes: Routes = [{ 
-  path: '', component: HomeComponent 
-},
-{ 
-  path: 'shop', component: ShopComponent 
-},
-{ 
-  path: 'product/:sku', component: ProductPageComponent 
-},
-{ 
-  path: 'checkout', component: CheckoutComponent,
-  children: [ 
-    { path: 'success/:email/:amount', component: SuccessComponent }
-  ] 
-},
-{ 
-  path: 'about', component: AboutComponent 
-},
-{ 
-  path: 'account/:uid', component: AccountComponent 
-},
-{ 
-  path: 'dashboard', component: DashboardComponent,
-  canActivate: [ AdminAuthGaurd ]
-},
+const routes: Routes = [
+  { path: '', 
+    component: HomeComponent 
+  },
+  { path: 'home', 
+    component: HomeComponent,
+    data: { animation: 'HomePage'}
+  },
+  { path: 'shop', 
+    component: ShopComponent,
+    data: { animation: 'Shop'}
+  },
+  { path: 'product/:sku', 
+    component: ProductPageComponent,
+    data: { animation: 'Product'}
+  },
+  { path: 'checkout', 
+    component: CheckoutComponent,
+      children: [{
+        path: 'success/:email/:amount', 
+        component: SuccessComponent 
+        }],
+      data: { animation: 'Checkout'}
+  },
+  { path: 'about', 
+    component: AboutComponent,
+    data: { animation: 'About'}
+  },
+  { path: 'account/:uid', 
+    component: AccountComponent
+  },
+  { path: 'dashboard', 
+    component: DashboardComponent,
+    canActivate: [ AdminAuthGaurd ]
+  },
 // { 
 //   path: 'category/:category', component: CategoryComponent 
 // },

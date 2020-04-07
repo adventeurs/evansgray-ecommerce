@@ -101,7 +101,7 @@ export class AuthService {
   }
 
   // Create A Stripe Customer With The StripeAPI
-  async createStripeCustomer( name$, email$, customer ){
+  async createStripeCustomer( name$, email$, customer ): Promise<any> {
     let data = {
       'name': name$,
       'email': email$
@@ -115,6 +115,7 @@ export class AuthService {
                             }, { merge: true } 
                           )
                         })).toPromise()
+                        .catch( error => this.notification.snackbarAlert(error))
   }
 
 // Update The Users Order History
@@ -127,10 +128,7 @@ export class AuthService {
                       order: order,
                       date: new Date()
                       })
-                }).catch( err =>{
-                  console.log(err);
-                  this.notification.snackbarAlert(err);
-                });
+                }).catch( err => this.notification.snackbarAlert(err));
               })
 
   }

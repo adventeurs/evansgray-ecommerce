@@ -27,7 +27,6 @@ import { AdminAuthGaurd } from './services/adminauthgaurd.service';
 import { StatesService } from './services/states.service';
 import { AuthService } from './services/auth.service';
 import { InventoryPipe } from './shared/pipes/inventory.pipe';
-import { PaymentModule } from './payments-module/payment.module';
 import { PaymentService } from './payments-module/services/payment.service';
 
 
@@ -61,7 +60,6 @@ import { PaymentService } from './payments-module/services/payment.service';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     BrowserAnimationsModule,
     MdComponentsModule,
     ScrollingModule,

@@ -50,13 +50,14 @@
 .wave-1{
     background-image: url('../../../assets/wave-1.svg');
     padding: 0 10%;
-    height: 150%;
+    height: 1000px;
     background-size: cover;
     overflow: visible;
     margin-top: -30em;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    padding-top: 4em;
 
     .call{
         text-align: right;
@@ -123,11 +124,12 @@
     height: 1700px;
     background-size: cover;
     overflow: visible;
-    margin-top: -25em;
+    margin-top: -21em;
     display: flex;
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    padding-top: 6em;
 }
 
 .wave-3{

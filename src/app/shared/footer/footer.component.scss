@@ -1,5 +1,7 @@
+@import '../../../styles/variables';
+
 .footer{
-    background-image: url('../../../assets/footer-bck.svg');
+    background-image: url('/assets/footer-wave.svg');
     background-size: cover;
     width: 100%;
     bottom: 0;
@@ -7,7 +9,7 @@
     display: flex;
     justify-content: center;
     background-repeat: no-repeat;
-    padding-top: 2em;
+    padding-top: 6em;
 
     .logo-social{
         display: flex;
@@ -20,25 +22,25 @@
         img{
             width: 85px;
             padding: 5px;
+            background: white;
         }
 
         .social img{
             width: 40px;
             margin: 10px;
             cursor: pointer; 
+            background: none;
         }
     }
 }
 
 .categories{
-    color: #5B88A3;
-    background: #FFDBDB;
+    color: white;
     border-radius: 10px;
     margin: 2em;
     padding: 1em;
     text-align: end;
     width: 50%;
-    box-shadow: 0 3px 6px #fdc4c4;
 
         ul{
             list-style-type: none;
@@ -51,20 +53,19 @@
 }
 
 .bar{
-    height: 3px;
+    height: 1px;
     background-color: white;
     display: block;
 }
 
 .sitemap{
-    color: #5B88A3;
-    background: #FFDBDB;
+    color: white;
     border-radius: 10px;
     margin: 2em;
     padding: 1em;
     text-align: start;
     width: 50%;
-    box-shadow: 0 3px 6px #fdc4c4;
+
      
         ul{
             list-style-type: none;

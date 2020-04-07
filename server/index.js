@@ -37,6 +37,7 @@ app.get('/', function (req, res) {
 app.post('/customer', async ( req, res ) => {
     const { name, email } = req.body
 
+try{
    let customer = await stripe.customers.create(
         {
             name: name,
@@ -47,6 +48,10 @@ app.post('/customer', async ( req, res ) => {
         id: customer.id
     }
        res.send(stripeId)
+       
+    } catch(e){
+        res.send({ error: e.message })
+    }
     
 })
 

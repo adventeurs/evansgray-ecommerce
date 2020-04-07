@@ -77,7 +77,6 @@ export class ShippingComponent implements OnInit, OnDestroy {
   }
 
   async proceedToPayment( value , user: User ){
-    console.log(user)
     let orderObject;
     try{
       if(!user.stripeCustomerId){

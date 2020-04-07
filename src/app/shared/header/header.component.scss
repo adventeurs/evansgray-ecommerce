@@ -18,6 +18,8 @@
     justify-content: space-between;
     padding: 15px 5%;
     align-items: center;
+    z-index: 100;
+    position: relative;
 
     img{
         width: 75px;
