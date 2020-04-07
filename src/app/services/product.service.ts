@@ -30,6 +30,7 @@ export class ProductService {
   }
 
   filter(  product, filter: String[]){
+    console.log(product, filter)
     if(filter.length == 0)
       return true
 

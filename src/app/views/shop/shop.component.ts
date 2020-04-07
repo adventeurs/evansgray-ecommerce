@@ -32,6 +32,7 @@ export class ShopComponent implements OnInit, OnDestroy {
           .pipe(
             switchMap( ( products : Product[] ) => {
               this.products = products;
+              console.log(products)
               this.loading = false;
               return this.route.queryParamMap
             }))

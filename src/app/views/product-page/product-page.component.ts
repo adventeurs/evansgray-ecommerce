@@ -48,7 +48,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   addToCart( product , _amount){
-    console.log(product)
     let amount = parseInt(_amount)
     this.cart.addToCart( product , amount )
     this.notification.snackbarProduct(product)
