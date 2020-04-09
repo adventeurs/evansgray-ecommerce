@@ -8,12 +8,9 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./search-filter.component.scss']
 })
 export class SearchFilterComponent implements OnInit {
- 
-  categories;
-  colors;
-  materials;
   @Input() filter;
-  filterSubscription: any;
+  product$: any;
+  filter$: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,12 +19,8 @@ export class SearchFilterComponent implements OnInit {
   ) { }
 
   ngOnInit(){
-    this.filterSubscription = this.productService.retrieveFilters()
-                                                 .subscribe( ( filters: any ) => {
-                                                   this.categories = filters.category
-                                                   this.colors = filters.color
-                                                   this.materials = filters.material
-                                                 })
+    this.filter$ = this.productService.retrieveFilters()
+    console.log(this.filter)
   }
 
   

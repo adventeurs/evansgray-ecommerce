@@ -1,11 +1,8 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData';
-import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
-import { SubscriptionCollection } from 'src/app/models/subscriptionCollection';
-import { unsubscriber } from 'src/app/services/utility'
 import { StatesService } from 'src/app/services/states.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { StripeOrderObject } from 'src/app/models/stripeOrderObject';
@@ -16,15 +13,13 @@ import { User } from 'src/app/models/user';
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
-export class ShippingComponent implements OnInit, OnDestroy {
-  cartTotal: Number;
-  items: Product[];
-  orderData: OrderData;
+export class ShippingComponent {
+  @Input() cartTotal: Number;
+  @Input() items: Product[];
   @Output() orderEvent = new EventEmitter<OrderData>()
   @Output() closeEvent = new EventEmitter<boolean>();
   @Input() close: boolean;
-  customer$;
-  subscription: SubscriptionCollection = {};
+  orderData: OrderData;
 
   orderForm = new FormGroup({
     email: new FormControl('', [
@@ -53,27 +48,9 @@ export class ShippingComponent implements OnInit, OnDestroy {
 
   constructor(
     public auth: AuthService,
-    private cart: CartService,
     private stateService: StatesService,
     private notification: NotificationService
   ) { 
-  }
-
-  ngOnInit() {
-    this.subscription['cart'] = 
-                    this.cart.total.subscribe( total => {
-                      this.cartTotal = total;
-                    });
-
-    this.subscription['cartDisplay'] = 
-                    this.cart.cartArray.subscribe( (cart: Product[]) =>
-                      this.items = cart 
-                      );
-  
-  }
-
-  ngOnDestroy(){
-    unsubscriber( ...Object.values(this.subscription) )
   }
 
   async proceedToPayment( value , user: User ){
@@ -88,12 +65,14 @@ export class ShippingComponent implements OnInit, OnDestroy {
         orderObject = this.createOrderObject( value, user.stripeCustomerId )
 
       }
+
+      this.orderEvent.emit(orderObject)
+      this.closeEvent.emit(true)
+
     } catch( err ){
       this.notification.snackbarAlert( err )
     }
 
-    this.orderEvent.emit(orderObject)
-    this.closeEvent.emit(true)
   }
 
 

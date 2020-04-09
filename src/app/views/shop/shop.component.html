@@ -21,7 +21,7 @@
             </div>
             <cdk-virtual-scroll-viewport itemSize="50">
                     <div class="results">
-                        <div class="results animate fadeIn" *cdkVirtualFor="let product of productListing">
+                        <div class="results animate fadeIn" *cdkVirtualFor="let product of (product$ | async)">
                         <product-card [product]="product"></product-card>
                         </div>
                     </div>

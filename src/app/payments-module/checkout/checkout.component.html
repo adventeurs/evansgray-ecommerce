@@ -9,6 +9,8 @@
                 </div>
         <app-shipping *ngIf="!close" 
                       [close]='close'
+                      [items]="cart$ | async"
+                      [cartTotal]="cartTotal$ | async"
                       (orderEvent)="receiveOrder( $event )"
                       (closeEvent)="receiveClose( $event )"></app-shipping>
         <app-make-payment *ngIf="orderData && close" 

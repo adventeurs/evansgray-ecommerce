@@ -57,8 +57,5 @@ export class PaymentService {
       }
   }
 
-  // Create method to display order confirmation
-  // Email customer order information and confirmation
-
   
 }

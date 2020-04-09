@@ -16,7 +16,6 @@ import { firestore } from 'firebase';
 export class ProductPageComponent implements OnInit {
   cart$;
   product$;
-  // inventory: Number[];
   quantity: number = 1;
   
   constructor(

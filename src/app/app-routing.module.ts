@@ -10,7 +10,7 @@ import { AccountComponent } from './views/account/account.component';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { AdminAuthGaurd } from './services/adminauthgaurd.service';
 import { ShippingComponent } from './payments-module/checkout/shipping/shipping.component';
-import { MakePaymentComponent } from './payments-module/checkout/cart-display/make-payment/make-payment.component';
+import { MakePaymentComponent } from './payments-module/checkout/make-payment/make-payment.component';
 import { CartDisplayComponent } from './payments-module/checkout/cart-display/cart-display.component';
 
 

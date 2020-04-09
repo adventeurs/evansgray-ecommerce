@@ -1,4 +1,4 @@
-<div class='shipping-form' style="font-size: 12px;">
+<div class='shipping-form' style="font-size: 12px;" *ngIf="!loading">
 
     <div *ngIf="!(auth.user$ | async)" class="register">
       <img src="/assets/evansgray-full.png" alt="">
@@ -6,7 +6,6 @@
     </div>
 
     <form [formGroup]='orderForm' *ngIf="(auth.user$ | async) as user">
-      <!-- user account: name and contact info ? chagne -->
       <div class="shipping-title" >
           <h2>Contact</h2>
         </div>
