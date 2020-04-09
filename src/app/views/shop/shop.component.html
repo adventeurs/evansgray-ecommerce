@@ -19,12 +19,12 @@
             <div class="spin" *ngIf="loading">
                 <mat-spinner></mat-spinner>
             </div>
-            <cdk-virtual-scroll-viewport itemSize="100">
+            <cdk-virtual-scroll-viewport itemSize="50">
                     <div class="results">
-                        <div class="results" *cdkVirtualFor="let product of productListing ">
+                        <div class="results animate fadeIn" *cdkVirtualFor="let product of productListing">
                         <product-card [product]="product"></product-card>
+                        </div>
                     </div>
-                </div>
             </cdk-virtual-scroll-viewport>
         </div>
 </div>

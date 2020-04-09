@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { Subscription } from 'rxjs';
-import { switchMap} from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { Subscription, of, merge, combineLatest, zip, Observable } from 'rxjs';
+import { switchMap, withLatestFrom} from 'rxjs/operators';
+import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from 'src/app/models/product';
 
 
@@ -19,6 +19,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   productSubscription: Subscription;
   filter;
   loading = true;
+  product$;
 
   constructor(
       private productService: ProductService,
@@ -27,12 +28,35 @@ export class ShopComponent implements OnInit, OnDestroy {
        }
 
   ngOnInit() {
+  // const params = this.route.paramMap
+  
+  // this.product$ = 
+  //       this.productService.getProducts().pipe(
+  //                           withLatestFrom(params),
+  //                           switchMap( ([ products, params ]: [ Product[], ParamMap ]) => {
+  //                             this.filter = params.getAll('filter').toString()
+
+  //                             let filtered = this.filter 
+  //                                     ? products.filter( product =>
+  //                                         this.productService.filter( product, this.filter.split(',') )) 
+  //                                     : products
+  //                             this.loading = false;
+                              
+  //                             return of(filtered)
+  //                           })
+  //                         )
+
+  // combineLatest( 
+  //     this.route.paramMap,
+  //     this.productService.getProducts()
+  //   ).subscribe( ([params, products]) => console.log('params', params ))
+
+  
   this.productSubscription =                                                         
     this.productService.getProducts()
           .pipe(
             switchMap( ( products : Product[] ) => {
               this.products = products;
-              console.log(products)
               this.loading = false;
               return this.route.queryParamMap
             }))

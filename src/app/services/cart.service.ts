@@ -2,7 +2,6 @@ import { Injectable} from '@angular/core';
 import { Product } from '../models/product';
 import { ReplaySubject, of } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { AuthService } from './auth.service';
 import {  switchMap, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase/app'
@@ -33,7 +32,6 @@ export class CartService {
 
   constructor(
     private db: AngularFirestore,
-    private auth: AuthService,
     private fireAuth: AngularFireAuth
   ) { 
     this.fireAuth.authState.pipe(

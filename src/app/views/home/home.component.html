@@ -17,12 +17,14 @@
     <h4 class="call">Supplies, wearables, and home additions to 
             accent your lifestyle.</h4>
     <div class="cat-cards">
-        <div class="cat">
+        <div class="cat"
+            (click)="animate"
+            [ngClass]="animate ? 'animate pulse' : ''">
             <div class="preview">
                 <img src="../../../assets/ribbon_classic_seaside_6.jpg" alt="">
             </div>
             <h4>Ribbon</h4>
-            <button class="pink-btn"
+            <button class="pink-btn animate"
                     [routerLink]="['/shop']"
                     [queryParams]="{ filter: 'ribbon' }">
                     View</button>

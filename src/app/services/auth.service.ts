@@ -115,7 +115,7 @@ export class AuthService {
                             }, { merge: true } 
                           )
                         })).toPromise()
-                        .catch( error => this.notification.snackbarAlert(error))
+                        
   }
 
 // Update The Users Order History

@@ -22,9 +22,10 @@ export class NotificationService {
   }
 
   public snackbarProduct( product){
-    let category = product.category;
-    this.snackBar.open( `${category} added to cart!`, "close" , {
+    let title = product.title;
+    this.snackBar.open( `${title} added to cart!`, "close" , {
       duration: 3000
     })
+
   }
 }

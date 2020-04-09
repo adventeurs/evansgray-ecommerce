@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" >
     <div>
     <div class="product-img">
         <img src="/assets/products/{{product.main}}.jpg" alt="">
@@ -10,7 +10,7 @@
     <div class="info">
         <h4 *ngIf="product.inventory == 0">Sold Out</h4>
         <h4 *ngIf="product.inventory > 0">{{product.price | dollars}}</h4>
-        <button class="pink-btn" 
+        <button class="white-btn" 
                 *ngIf="product.inventory > 0" 
                 [routerLink]="['/product', product.title ]">View</button>
     </div>

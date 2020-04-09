@@ -81,7 +81,8 @@ export class ShippingComponent implements OnInit, OnDestroy {
     try{
       if(!user.stripeCustomerId){
         let customer = await this.auth.createStripeCustomer( value.name, value.email, user )
-                                  .then( ( res: any ) => { return res.id } )   
+                                  .then( ( res: any ) => { return res.id } )  
+                                  .catch( error => this.notification.snackbarAlert(error)) 
         orderObject = this.createOrderObject( value, customer )
       } else{
         orderObject = this.createOrderObject( value, user.stripeCustomerId )
@@ -97,11 +98,13 @@ export class ShippingComponent implements OnInit, OnDestroy {
 
 
   createOrderObject( 
-    { city, line1, line2, postal_code, state, name, email }: 
+    { city, line1, line2, postal_code, state, name, email 
+    }: 
     { city: string, line1: string, line2: string, postal_code: number, 
-      state: string, name: string, email: string }, 
-    customer: string )
-    : OrderData {
+      state: string, name: string, email: string 
+    }, 
+      customer: string 
+    ) : OrderData {
 
     let items = this.createStripeObject(this.items)
 

@@ -8,8 +8,4 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductCardComponent{
   @Input() product: Product;
-
-  constructor() { }
-
-
 }

@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
-import {  fader } from './shared/animations/animations';
+import {   fadeFrames, moveFromRightFade } from './shared/animations/animations';
+import { trigger, transition, useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
-  animations: [ fader ]
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'evansgray';

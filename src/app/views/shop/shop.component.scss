@@ -9,11 +9,11 @@
     content: "";
     background-image: url('../../../assets/hero-wave.svg');
     height: 600px;
-    transform: rotate(-3deg) translate(2%, -22%);
+    transform:  translate(0%, -22%);
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 106%;
+    width: 100%;
     position: absolute;
     z-index: -1;
 }
