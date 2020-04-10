@@ -43,6 +43,19 @@ p{
     @include white-btn;
 }
 
+.white-btn:hover{
+    transform: scale(1.1);
+}
+
 .pink-btn{
     @include pink-btn;
+}
+
+.pink-btn:hover{
+    transform: scale(1.1);
+}
+
+.disabled{
+    opacity: .7;
+    cursor: default !important;
 }

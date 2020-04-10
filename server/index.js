@@ -4,17 +4,22 @@ const env = require("dotenv").config();
 app.use(express.json())
 
 const stripe = require('stripe')(process.env.STRIPE_KEY);
-// const db = admin.firestore();
-// const sgMail = require('@sendgrid/mail');
-// const msg = {
-//   to: 'test@example.com',
-//   from: 'test@example.com',
-//   subject: 'Sending with Twilio SendGrid is Fun',
-//   text: 'and easy to do anywhere, even with Node.js',
-//   html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-// };
-// console.log(msg)
-// sgMail.send(msg);
+
+const sgMail = require('@sendgrid/mail');
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+console.log(process.env.STRIPE_KEY)
+const msg = {
+  to: 'test@example.com',
+  from: 'test@example.com',
+  subject: 'Sending with Twilio SendGrid is Fun',
+  text: 'and easy to do anywhere, even with Node.js',
+  html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+};
+try{
+    sgMail.send(msg);
+}catch(e){
+    console.log(e)
+}
 
 app.use( ( req, res, next ) => {
     res.header('Access-Control-Allow-Origin', '*');

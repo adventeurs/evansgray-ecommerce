@@ -74,6 +74,10 @@
         flex-direction: row;
         width: 100%;
 
+        .cat{
+            transition: 1s;
+        }
+
         .cat:nth-of-type(2){
             margin-top: 4em;
         }
@@ -85,6 +89,10 @@
         }
         
     }
+}
+
+.cat:hover{
+    transform: translateY(-10px);
 }
 
 .cat{
@@ -284,6 +292,7 @@
             align-items: center;
             justify-content: flex-start;
             padding: 15px;
+            transition: 1s;
 
             h4{
                 margin: 15px;
@@ -296,6 +305,10 @@
             }
         }
     }
+}
+
+.favorite:hover{
+    transform: translateY(-10px);
 }
 
 .big{
@@ -339,3 +352,4 @@
 
     }
 }
+

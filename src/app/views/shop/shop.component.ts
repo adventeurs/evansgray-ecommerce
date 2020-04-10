@@ -38,7 +38,6 @@ export class ShopComponent implements OnInit {
                         return of(filteredProducts)
                       })
                     )
-
     }
 
   filterProducts( products ): Product[]{

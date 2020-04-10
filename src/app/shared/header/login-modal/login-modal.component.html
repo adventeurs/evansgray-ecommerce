@@ -9,7 +9,7 @@
         <div class="logo">
             <img src="/assets/EvansgrayLogo.png" alt="">
         </div>
-        <h4 *ngIf="!signUp" class="notice">Login or register with one of the option below</h4>
+        <h4 *ngIf="!signUp" class="notice">Login or register with one of the options below</h4>
         <div class="stationary">
             <button *ngIf="!signUp"
                     class="email white-btn"
@@ -19,7 +19,8 @@
                         </span>
                     Email 
             </button>
-        <form [formGroup]="form"  
+<!-- Register form -->
+        <form [formGroup]="register"  
               class="login-form"
               *ngIf="signUp">
             <div class="form-group" *ngIf="!toggleLoginForm">
@@ -31,9 +32,10 @@
                     matInput required
                     id="name"
                     type="text">
+                    <mat-error *ngIf="name.hasError('required')">
+                        Full name is required
+                    </mat-error>
                 </mat-form-field>
-                </div>
-            <div class="form-group">
                 <mat-form-field >
                     <mat-label>Email</mat-label>
                     <input
@@ -41,31 +43,91 @@
                     matInput required
                     id="email"
                     type="text">
+                    <mat-error *ngIf="rEmail.hasError('required')">
+                            Email is required
+                        </mat-error>
                 </mat-form-field>
-            </div>
-            <div class="form-group" class="password">
                 <mat-form-field >
-                    <mat-label>Password</mat-label>
+                        <mat-label>Password</mat-label>
+                        <input
+                        formControlName="password"
+                        matInput required
+                        id="password"
+                        type="password">
+                        <mat-error *ngIf="rPassword.hasError('required')">
+                                Password is required
+                        </mat-error>
+                        <mat-error *ngIf="rPassword.hasError('minlength')">
+                                Password must be at least 7 characters
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field>
+                        <mat-label>Confirm Password</mat-label>
+                        <input
+                        formControlName="confirmPassword"
+                        matInput required
+                        id="confirmPassword"
+                        type="password">
+                        <mat-error *ngIf="rConfirm.hasError('required')">
+                                Please confirm password
+                        </mat-error>
+                        <mat-error *ngIf="rConfirm.errors?.Error">
+                                Passwords do not match
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </form>
+            <div class="form-group" *ngIf='toggleLoginForm'>
+<!-- Login form -->
+            <form [formGroup]="form"
+                  class="login-form"
+                  >
+                <mat-form-field >
+                    <mat-label>Email</mat-label>
                     <input
-                    formControlName="password"
+                    formControlName="email"
                     matInput required
-                    id="password"
-                    type="password">
+                    id="email"
+                    type="text">
+                    <mat-error *ngIf="fEmail.hasError('required')">
+                            Please confirm password
+                    </mat-error>
                 </mat-form-field>
+                <mat-form-field >
+                        <mat-label>Password</mat-label>
+                        <input
+                        formControlName="password"
+                        matInput required
+                        id="password"
+                        type="password">
+                        <mat-error *ngIf="fPassword.hasError('required')">
+                                Please confirm password
+                        </mat-error>
+                        <mat-error *ngIf="fPassword.errors?.minlength">
+                                Password must be at least 7 characters
+                        </mat-error>
+                    </mat-form-field>
+            </form>
+            </div>
+<!-- Submit form -->
+            <div class="form-group" class="password" *ngIf="signUp"> 
             <button *ngIf="!toggleLoginForm"
                     class="white-btn" 
                     color="accent" 
                     (click)="emailRegister()"
+                    [ngClass]="!register.valid ? 'disabled' : ''"
+                    [disabled]="!form.valid"
                     >Register</button>
             <button *ngIf="toggleLoginForm"
                     class="white-btn"
                     color="accent" 
                     (click)="emailLogin()"
+                    [ngClass]="!form.valid ? 'disabled' : ''"
+                    [disabled]="!form.valid"
                     >Log In</button>
             <a (click)="loginForm()" *ngIf="toggleLoginForm">Register</a>
             <a (click)="loginForm()" *ngIf="!toggleLoginForm">Login</a>
             </div>
-        </form>
        
         <mat-divider *ngIf="!signUp" > </mat-divider>
         <button *ngIf="!signUp"

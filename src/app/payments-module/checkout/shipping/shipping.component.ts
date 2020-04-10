@@ -19,7 +19,7 @@ export class ShippingComponent {
   @Output() orderEvent = new EventEmitter<OrderData>()
   @Output() closeEvent = new EventEmitter<boolean>();
   @Input() close: boolean;
-  orderData: OrderData;
+  // orderData: OrderData;
 
   orderForm = new FormGroup({
     email: new FormControl('', [
@@ -54,7 +54,7 @@ export class ShippingComponent {
   }
 
   async proceedToPayment( value , user: User ){
-    let orderObject;
+    let orderObject: OrderData;
     try{
       if(!user.stripeCustomerId){
         let customer = await this.auth.createStripeCustomer( value.name, value.email, user )
@@ -77,8 +77,7 @@ export class ShippingComponent {
 
 
   createOrderObject( 
-    { city, line1, line2, postal_code, state, name, email 
-    }: 
+    { city, line1, line2, postal_code, state, name, email }: 
     { city: string, line1: string, line2: string, postal_code: number, 
       state: string, name: string, email: string 
     }, 
@@ -87,7 +86,7 @@ export class ShippingComponent {
 
     let items = this.createStripeObject(this.items)
 
-    return this.orderData = {
+    return {
       email,
       customer,
       currency: 'usd',

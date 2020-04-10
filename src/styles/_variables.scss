@@ -30,7 +30,10 @@ $snackbar-text: white;
     width: fit-content;
     padding: 4px 20px;
     outline: none;
+    cursor: pointer;
+    transition: 1s;
 }
+
 
 @mixin pink-btn {
     @include shadow;
@@ -45,4 +48,6 @@ $snackbar-text: white;
     display: flex;
     justify-content: center;
     outline: none;
+    cursor: pointer;
+    transition: 1s;
 }
