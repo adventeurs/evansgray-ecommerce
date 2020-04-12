@@ -2,22 +2,11 @@
 
 
 .hero{
-    position: relative;
     display: flex;
+    height: 1000px;
+    align-items: center;
  }
- 
- .hero::before{
-     content: "";
-     background-image: url('../../../assets/hero-wave.svg');
-     height: 600px;
-     transform: rotate(-3deg) translate(2%, -22%);
-     background-position: center;
-     background-size: cover;
-     background-repeat: no-repeat;
-     width: 100vw;
-     position: absolute;
-     z-index: -1;
- }
+
 
 .product-display{
     @include shadow;
@@ -25,12 +14,17 @@
     display: flex;
     flex-direction: row;
     margin: 2em;
+    flex-wrap: wrap;
     overflow: hidden;
+    min-width: 600px;
 
     .product-img{
         flex: 1;
         overflow: hidden;
         margin-bottom: -5px;
+        max-height: 500px;
+        min-width: 400px;
+        max-width: 600px;
     }
 
     .product-info{
@@ -38,6 +32,7 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        max-width: 600px;
     }
 }
 
@@ -85,4 +80,21 @@
     margin: auto;
     padding: 15px;
     overflow: scroll;
+}
+
+.thumbnails{
+    position: absolute;
+
+    .thumbnail{
+        @include shadow;
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        margin: 15px;
+
+        img{
+            width: 100%;
+
+        }
+    }
 }

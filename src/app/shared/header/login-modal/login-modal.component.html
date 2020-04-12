@@ -118,7 +118,7 @@
                     color="accent" 
                     (click)="emailRegister()"
                     [ngClass]="!register.valid ? 'disabled' : ''"
-                    [disabled]="!form.valid"
+                    [disabled]="!register.valid"
                     >Register</button>
             <button *ngIf="toggleLoginForm"
                     class="white-btn"

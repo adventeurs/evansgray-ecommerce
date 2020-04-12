@@ -17,6 +17,7 @@ export class ProductPageComponent implements OnInit {
   cart$;
   product$;
   quantity: number = 1;
+  hovered;
   
   constructor(
     private productService: ProductService,

@@ -4,6 +4,7 @@
     max-width: 300px;
     max-height: 250px;
     margin: auto;
+
 }
 
 .categories{
@@ -15,7 +16,7 @@
 .color-selection{
     display: flex;
     flex-wrap: wrap;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .color-selection div{
@@ -24,4 +25,8 @@
 
 .material{
     flex: 1;
+}
+
+.card{
+    margin: 15px;
 }

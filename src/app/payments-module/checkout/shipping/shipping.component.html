@@ -99,11 +99,16 @@
               State required
             </mat-error>
         </mat-form-field>
-        <div class="button">
-            <h3 (click)="proceedToPayment(orderForm.value, user)">Proceed to payment <span class="material-icons">
+        <button [disabled]="!orderForm.valid"
+                style="margin-left: 45%;"
+                class="pink-btn"
+                (click)="proceedToPayment(orderForm.value, user)">
+                Proceed to payment 
+                <span class="material-icons"
+                      style="padding-left: 15px;">
                 payment
-                </span></h3>
-        </div>
+                </span>
+              </button>
     </form>
 </div>
 

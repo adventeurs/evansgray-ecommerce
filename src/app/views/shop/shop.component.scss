@@ -1,24 +1,5 @@
 @import '../../../styles/variables';
 
-.hero{
-   position: relative;
-   display: flex;
-   height: 50vh;
-}
-
-.hero::before{
-    content: "";
-    background-image: url('../../../assets/evansgray-arm.png');
-    height: 100vh;
-    transform:  translate(0%, -22%);
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-
-}
 
 
 cdk-virtual-scroll-viewport{
@@ -46,20 +27,24 @@ cdk-virtual-scroll-content-wrapper{
 
 
 .display-products{
-    background-image: url('../../../assets/product-wave.svg');
     padding: 40px 5%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    margin-bottom: -5em;
+    margin-bottom: 5em;
     padding-bottom: 10em;
     background-size: cover;
-    padding-top: 300px;
-}
+    padding-top: 100px;
+    padding-right: 0;
+} 
 
 .filters{
     flex: 1;
     margin-top: 14px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 230px;
 }
 
 .search-results{
@@ -69,12 +54,13 @@ cdk-virtual-scroll-content-wrapper{
     flex: 3;
     height: 800px;
     margin: 15px;
+    width: 100%;
 }
 
 .results{
     display: flex;
     flex-wrap: wrap;
-    background: #ffd4d7;
+    justify-content: center;
 }
 
 .spin{

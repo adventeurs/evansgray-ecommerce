@@ -1,5 +1,5 @@
 <div class="filters" *ngIf="(filter$ | async) as f">
-    <mat-card>
+    <mat-card class="card">
             <mat-card-title style="font-family: 'Open Sans'; color: #585353;"> 
                     Categories
             </mat-card-title>
@@ -11,7 +11,7 @@
                                   {{cat}}</mat-checkbox>
                 </div>
     </mat-card>
-    <mat-card>
+    <mat-card class="card">
             <mat-card-title style="font-family: 'Open Sans'; color: #585353;">
                     Colors
             </mat-card-title>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
         </mat-card>
-        <mat-card>
+        <mat-card class="card">
             <mat-card-title style="font-family: 'Open Sans'; color: #585353;">
                     Material
             </mat-card-title>

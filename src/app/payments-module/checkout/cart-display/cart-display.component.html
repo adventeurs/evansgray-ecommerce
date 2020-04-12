@@ -3,8 +3,8 @@
     <div class="checkout-card" *ngFor="let product of displayCart | async">
         <div class="checkout-img"
              [matBadge]="product.quantity">
-             <div class="img-container">
-                    <img src="/assets/products/{{product.main}}.jpg" alt="">
+             <div [style.background-image]="'url(assets/products/' + product.main + '.jpg)'"
+                 class="img-container">
              </div>
         </div>
         <div class="checkout-info">
