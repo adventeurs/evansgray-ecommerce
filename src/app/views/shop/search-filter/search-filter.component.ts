@@ -20,7 +20,6 @@ export class SearchFilterComponent implements OnInit {
 
   ngOnInit(){
     this.filter$ = this.productService.retrieveFilters()
-    console.log(this.filter)
   }
 
   

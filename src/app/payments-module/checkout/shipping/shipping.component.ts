@@ -45,6 +45,29 @@ export class ShippingComponent {
     ])
   }) 
   
+    get email(){
+      return this.orderForm.get('email')
+    }
+
+    get name(){
+      return this.orderForm.get('name')
+    }
+
+    get line1(){
+      return this.orderForm.get('line1')
+    }
+
+    get city(){
+      return this.orderForm.get('city')
+    }
+
+    get postalCode(){
+      return this.orderForm.get('postal_code')
+    }
+
+    get state(){
+      return this.orderForm.get('state')
+    }
 
   constructor(
     public auth: AuthService,

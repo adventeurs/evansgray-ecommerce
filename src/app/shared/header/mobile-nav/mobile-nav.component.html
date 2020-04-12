@@ -1,0 +1,11 @@
+<mat-sidenav-container class="nav" autosize>
+    <mat-sidenav #sidenav class="side-nav" mode="side">
+            <ul>
+                <li routerLink="/"><h3>Home</h3></li>
+                <li routerLink="/shop"><h3>Shop</h3></li>
+                <li routerLink="/about"><h3>About</h3></li>
+                <li routerLink="/contact"><h3>Contact</h3></li>
+            </ul>
+    </mat-sidenav>
+    <a class="menu" (click)="sidenav.toggle()"><span></span></a>
+</mat-sidenav-container>

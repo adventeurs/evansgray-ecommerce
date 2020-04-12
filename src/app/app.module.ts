@@ -28,6 +28,7 @@ import { StatesService } from './services/states.service';
 import { AuthService } from './services/auth.service';
 import { InventoryPipe } from './shared/pipes/inventory.pipe';
 import { PaymentService } from './payments-module/services/payment.service';
+import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.component';
 
 
 
@@ -45,7 +46,8 @@ import { PaymentService } from './payments-module/services/payment.service';
     RefundInfoComponent,
     InventoryPipe,
     routingComponents,
-    SearchFilterComponent
+    SearchFilterComponent,
+    MobileNavComponent
   ],
   entryComponents: [
     ShippingInfoComponent,

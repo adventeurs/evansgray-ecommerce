@@ -11,8 +11,6 @@
 
        .ribbon{
         padding-top: 5em;
-        transform: translateX(3em);
-        width: 93%;
        }
    }
 
@@ -45,6 +43,7 @@
     width: 100%;
     position: absolute;
     z-index: -1;
+    background-color: #ffc8c880;
 }
 
 
@@ -92,6 +91,7 @@
 }
 
 .cat:hover{
+    @include hoverShadow;
     transform: translateY(-10px);
 }
 
@@ -353,3 +353,30 @@
     }
 }
 
+@media only screen and (max-width: 680px){
+    .hero{
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .cat-cards{
+        flex-wrap: wrap;
+    }
+
+    .promo{
+        flex-wrap: wrap;
+
+    }
+
+    .perks{
+        flex-wrap: wrap;
+
+    }
+
+    .time-img{}
+
+    .favorite-cards{
+        flex-wrap: wrap;
+
+    }
+}

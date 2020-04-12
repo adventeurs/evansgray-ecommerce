@@ -1,13 +1,18 @@
 import { Component } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
-import {   fadeFrames, moveFromRightFade } from './shared/animations/animations';
+import { fadeAnimation } from './shared/animations/animations';
 import { trigger, transition, useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [
+    trigger('routeAnimation', [
+      transition('* => *', 
+        useAnimation(fadeAnimation))])]
 })
+
 export class AppComponent {
   title = 'evansgray';
   show = false;
@@ -26,7 +31,7 @@ export class AppComponent {
   }
 
   prepareRoute(outlet: RouterOutlet){
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.routeAnimation;
   }
 
 }

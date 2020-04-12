@@ -1,5 +1,7 @@
 <div 
-    [ngClass]="{ 'modal-open' : toggleModal }"
+    [ngClass]="{ 
+            'modal-open' : toggleModal
+        }"
     *ngIf="toggleModal"
     (click)="closeModal()"
     >
@@ -54,7 +56,7 @@
                         matInput required
                         id="password"
                         type="password">
-                        <mat-error *ngIf="rPassword.hasError('required')">
+                        <mat-error *ngIf="rPassword.hasError('required') && !rPassword.hasError('minlength')">
                                 Password is required
                         </mat-error>
                         <mat-error *ngIf="rPassword.hasError('minlength')">

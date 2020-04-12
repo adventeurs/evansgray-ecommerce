@@ -7,7 +7,7 @@ const stripe = require('stripe')(process.env.STRIPE_KEY);
 
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-console.log(process.env.STRIPE_KEY)
+
 const msg = {
   to: 'test@example.com',
   from: 'test@example.com',

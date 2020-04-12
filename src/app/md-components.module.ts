@@ -3,7 +3,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatBadgeModule} from '@angular/material/badge';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule, MatSidenavModule } from '@angular/material';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -12,7 +12,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTabsModule } from '@angular/material/tabs';
-
+import {MatCardModule} from '@angular/material/card';
 
 
 
@@ -30,7 +30,9 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatDividerModule,
     MatDialogModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatSidenavModule,
+    MatCardModule
   ]
 })
 export class MdComponentsModule { }

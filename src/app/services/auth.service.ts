@@ -101,7 +101,7 @@ export class AuthService {
   }
 
   // Create A Stripe Customer With The StripeAPI
-  async createStripeCustomer( name$, email$, customer ): Promise<any> {
+  async createStripeCustomer( name$, email$, customer ): Promise<string> {
     let data = {
       'name': name$,
       'email': email$

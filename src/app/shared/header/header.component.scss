@@ -57,3 +57,19 @@
 .header-right{
     display: flex;
 }
+
+.mobile-nav{
+    display: none;
+}
+
+@media only screen and (max-width: 680px) {
+    .header-right{
+        display: none;
+    }
+
+    .mobile-nav{
+        display: flex;
+    }
+
+   
+}

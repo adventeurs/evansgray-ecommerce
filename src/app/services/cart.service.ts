@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firest
 import {  switchMap, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase/app'
+import { NotificationService } from './notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,23 +17,24 @@ export class CartService {
   private cart = new ReplaySubject<Product[]>(1);
 
   // Retrieve The Total Price of Cart
-  get total(){
+  get total(): ReplaySubject<Number>{
     return this.cartTotal;
   }
 
   // Retrieve The Total Number Of Items In The Cart
-  get size(){
+  get size(): ReplaySubject<Number>{
     return this.cartSize;
   }
 
   // Retrieve Cart As An Iterable Array
-  get cartArray(){
+  get cartArray(): ReplaySubject<Product[]>{
     return this.cart;
   }
 
   constructor(
     private db: AngularFirestore,
-    private fireAuth: AngularFireAuth
+    private fireAuth: AngularFireAuth,
+    private notification: NotificationService
   ) { 
     this.fireAuth.authState.pipe(
        switchMap( user => {
@@ -72,7 +74,7 @@ export class CartService {
 
     this.cartRef.set( productToAdd, { merge: true } )
       .catch( err => {
-      console.log(err);
+      this.notification.snackbarAlert(err)
     });
   }
 

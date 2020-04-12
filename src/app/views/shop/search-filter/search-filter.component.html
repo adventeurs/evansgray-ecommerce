@@ -1,9 +1,8 @@
-<div class="filters" >
-    <mat-accordion multi="true" *ngIf="(filter$ | async) as f">
-        <mat-expansion-panel expanded="true" class="mat-elevation-z0" >
-            <mat-expansion-panel-header style="font-family: 'Open Sans'; color: #585353;"> 
+<div class="filters" *ngIf="(filter$ | async) as f">
+    <mat-card>
+            <mat-card-title style="font-family: 'Open Sans'; color: #585353;"> 
                     Categories
-            </mat-expansion-panel-header>
+            </mat-card-title>
                 <div *ngFor="let cat of f.category">
                     <mat-checkbox value='{{cat}}'
                                   style="font-family: 'Open Sans'; color: #585353;"
@@ -11,11 +10,11 @@
                                   [checked]='filter ? filter.includes(cat) : false'>
                                   {{cat}}</mat-checkbox>
                 </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel expanded="true" class="mat-elevation-z0">
-            <mat-expansion-panel-header style="font-family: 'Open Sans'; color: #585353;">
+    </mat-card>
+    <mat-card>
+            <mat-card-title style="font-family: 'Open Sans'; color: #585353;">
                     Colors
-            </mat-expansion-panel-header>
+            </mat-card-title>
                 <div class="color-selection">
                     <div *ngFor="let color of f.color">
                         <mat-checkbox value='{{color}}'
@@ -25,11 +24,11 @@
                                       {{color}}</mat-checkbox>
                     </div>
                 </div>
-        </mat-expansion-panel>
-        <mat-expansion-panel expanded="true" class="mat-elevation-z0">
-            <mat-expansion-panel-header style="font-family: 'Open Sans'; color: #585353;">
+        </mat-card>
+        <mat-card>
+            <mat-card-title style="font-family: 'Open Sans'; color: #585353;">
                     Material
-            </mat-expansion-panel-header>
+            </mat-card-title>
                     <div *ngFor="let mat of f.material">
                         <mat-checkbox value='{{mat}}'
                                       style="font-family: 'Open Sans'; color: #585353;"
@@ -37,6 +36,5 @@
                                       [checked]='filter ? filter.includes(mat) : false'>
                                       {{mat}}</mat-checkbox>
                     </div>
-        </mat-expansion-panel>        
-    </mat-accordion>
+        </mat-card>        
 </div>

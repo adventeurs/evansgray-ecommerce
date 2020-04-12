@@ -18,6 +18,9 @@
               id="email"
               type="text">
           </mat-form-field>
+          <mat-error *ngIf="email.touched && email.errors?.required">
+            Please enter a contact email
+          </mat-error>
         </div>
         <div class="shipping-title" >
           <h2>Shipping Information</h2>
@@ -31,6 +34,9 @@
             matInput required
             id="name"
             type="text">
+            <mat-error *ngIf="name.errors?.required">
+              Name required
+            </mat-error>
         </mat-form-field>
         </div>
         <div class="form-group line1" >
@@ -41,6 +47,9 @@
               matInput required
               id="h"
               type="text">
+              <mat-error *ngIf='line1.errors?.required'>
+                Address required
+              </mat-error>
           </mat-form-field>
         </div>
         <div class="form-group line2" >
@@ -61,6 +70,9 @@
               matInput required
               id="city"
               type="text">
+              <mat-error *ngIf="city.errors?.required">
+                City is required
+              </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline">
               <mat-label>Postal Code </mat-label>
@@ -69,6 +81,9 @@
               matInput required
               id="postal-code"
               type="text">
+              <mat-error *ngIf='postalCode.errors?.required'>
+                Postal code is required
+              </mat-error>
           </mat-form-field>
         </div>
         <mat-form-field class="form-group states" style="width: 100px;">
@@ -80,6 +95,9 @@
                           [value]="state">
                           {{state}}</mat-option>
             </mat-select>
+            <mat-error *ngIf='state.errors?.required'>
+              State required
+            </mat-error>
         </mat-form-field>
         <div class="button">
             <h3 (click)="proceedToPayment(orderForm.value, user)">Proceed to payment <span class="material-icons">

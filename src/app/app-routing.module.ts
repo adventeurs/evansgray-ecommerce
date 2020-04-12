@@ -20,11 +20,11 @@ const routes: Routes = [
   },
   { path: 'home', 
     component: HomeComponent,
-    data: { animation: 'HomePage'}
+    data: {routeAnimation: 1 }
   },
   { path: 'shop', 
     component: ShopComponent,
-    data: { animation: 'Shop'}
+    data: {routeAnimation: 2 }
   },
   { path: 'product/:sku', 
     component: ProductPageComponent,
