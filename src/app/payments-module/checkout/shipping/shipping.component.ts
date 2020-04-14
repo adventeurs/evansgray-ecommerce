@@ -7,6 +7,8 @@ import { StatesService } from 'src/app/services/states.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { StripeOrderObject } from 'src/app/models/stripeOrderObject';
 import { User } from 'src/app/models/user';
+import { httpify } from 'caseless';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-shipping',
@@ -72,7 +74,8 @@ export class ShippingComponent {
   constructor(
     public auth: AuthService,
     private stateService: StatesService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private http: HttpClient
   ) { 
   }
 
@@ -86,8 +89,7 @@ export class ShippingComponent {
         orderObject = this.createOrderObject( value, customer )
       } else{
         orderObject = this.createOrderObject( value, user.stripeCustomerId )
-
-      }
+       }
 
       this.orderEvent.emit(orderObject)
       this.closeEvent.emit(true)
@@ -108,7 +110,7 @@ export class ShippingComponent {
     ) : OrderData {
 
     let items = this.createStripeObject(this.items)
-
+ 
     return {
       email,
       customer,

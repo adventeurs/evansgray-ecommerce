@@ -35,7 +35,7 @@
 
 .hero::before{
     content: "";
-    background-image: url('../../../assets/hero-wave.svg');
+    background-image: url('../../../assets/hero-wave1.svg');
     height: 1000px;
     transform: translate(0%, -20%);
     background-position: center;
@@ -44,7 +44,7 @@
     width: 100%;
     position: absolute;
     z-index: -1;
-    background-color: #ffc8c880;
+    background-color: #ff00000f;
 }
 
 
@@ -73,6 +73,7 @@
         display: flex;
         flex-direction: row;
         width: 100%;
+        justify-content: center;
 
         .cat{
             transition: 1s;

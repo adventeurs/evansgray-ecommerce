@@ -4,7 +4,7 @@
         <div class="checkout-img"
              [matBadge]="product.quantity">
              <div [style.background-image]="'url(assets/products/' + product.main + '.jpg)'"
-                 class="img-container">
+                 class="img">
              </div>
         </div>
         <div class="checkout-info">
@@ -50,8 +50,16 @@
             <div><h5>Free!</h5></div>
         </div>
         <div class="column">
-            <div><h5>Tax</h5></div>
-            <div><h5>calculated before payment</h5></div>
+            <form [formGroup]="discount">
+                <mat-form-field>
+                    <mat-label>Discount</mat-label>
+                    <input formControlName="code"
+                           matInput
+                           type="text"
+                    >
+                    <button (click)="applyCoupon()">Enter</button>
+                </mat-form-field>
+            </form>
         </div>
         <mat-divider></mat-divider>
         <div class="column">

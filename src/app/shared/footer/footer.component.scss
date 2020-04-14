@@ -2,14 +2,16 @@
 
 .footer{
     background-image: url('/assets/footer-wave.svg');
-    background-size: cover;
-    width: 100%;
+    background-size: auto;
     bottom: 0;
     position: relative;
     display: flex;
     justify-content: center;
     background-repeat: no-repeat;
-    padding-top: 6em;
+    padding: 6em 10%;
+    padding-bottom: 0;
+    flex-direction: column;
+
 
     .logo-social{
         display: flex;
@@ -18,11 +20,12 @@
         align-items: center;
         padding: 2em;
         flex: 1;
+        padding-bottom: 0;
 
         img{
             width: 85px;
             padding: 5px;
-            background: white;
+            margin-left: -5px;
         }
 
         .social img{
@@ -80,7 +83,7 @@
 
 .left{
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     flex: 2;
 }
 
@@ -88,4 +91,19 @@
     display: flex;
     justify-content: flex-start;
     flex: 2;
+}
+
+.logo{
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    width: 7em;
+    justify-content: center;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

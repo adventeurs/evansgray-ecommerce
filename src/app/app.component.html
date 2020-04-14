@@ -1,7 +1,7 @@
 <div class="container">
     <app-header  *ngIf="!_router.url.includes('checkout')"></app-header>
 
-    <div [@routeAnimation]="prepareRoute(outlet)"  class="route-container content" >
+    <div [@fadeAnimation]="prepareRoute(outlet)"  class="route-container content" >
         <router-outlet #outlet="outlet"></router-outlet>
     </div>
     

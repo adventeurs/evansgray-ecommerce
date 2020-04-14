@@ -5,6 +5,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Observable } from 'rxjs';
 import { ShippingInfoComponent } from 'src/app/shared/shipping-info/shipping-info.component';
 import { MatDialog } from '@angular/material';
+import { FormGroup, FormControl } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart-display',
@@ -16,6 +18,12 @@ export class CartDisplayComponent implements OnInit {
   cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
+  coupon: string;
+  c;
+
+  discount = new FormGroup({
+    code: new FormControl([ '', ])
+  })
 
   constructor(
     private cart: CartService,
@@ -44,5 +52,7 @@ export class CartDisplayComponent implements OnInit {
       this.dialog.open(ShippingInfoComponent)
     }
 
-
+  applyCoupon(){
+    this.c = 10
+  }
 }

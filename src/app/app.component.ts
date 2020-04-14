@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
 import { fadeAnimation } from './shared/animations/animations';
 import { trigger, transition, useAnimation } from '@angular/animations';
@@ -8,12 +8,11 @@ import { trigger, transition, useAnimation } from '@angular/animations';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [
-    trigger('routeAnimation', [
-      transition('* => *', 
-        useAnimation(fadeAnimation))])]
+    fadeAnimation
+  ]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'evansgray';
   show = false;
 
@@ -30,8 +29,17 @@ export class AppComponent {
     })
   }
 
+  ngOnInit(){
+    this._router.events.subscribe( (event) => {
+      if(!(event instanceof NavigationEnd)){
+        return
+      }
+      window.scrollTo(0,0)
+    })
+  }
+
   prepareRoute(outlet: RouterOutlet){
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.routeAnimation;
+    return outlet.isActivated ? outlet.activatedRoute : ''
   }
 
 }

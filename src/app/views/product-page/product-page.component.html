@@ -1,16 +1,7 @@
 <div class="hero" *ngIf="product$ | async as product">
-        <div class="thumbnails">
-                <div *ngFor="let photo of product.images" 
-                     class="thumbnail"
-                     (mouseenter)="hovered = photo"
-                     (click)="hovered = photo">
-                        <img 
-                        src="/assets/products/{{photo}}.jpg">
-                </div>   
-        </div>
 <div  class="product-display">
-        <div class="product-img" *ngIf="hovered else init">
-                <img  src="/assets/products/{{hovered}}.jpg" alt="">
+        <div class="product-img" *ngIf="hovered else init" [style.background-image]="'url(assets/products/' + hovered + '.jpg)'">
+
         </div>
         <ng-template #init>
                 <div class="product-img"
@@ -109,5 +100,14 @@
         </div>
         </div>
 </div>
-       
+<div class="thumbnails">
+        <div *ngFor="let photo of product.images" 
+             class="thumbnail"
+             (mouseenter)="hovered = photo"
+             (click)="hovered = photo">               
+             <div class="thumbnail-img"
+             [style.background-image]="'url(assets/products/' + photo + '.jpg)'"
+             ></div>
+        </div>   
+</div>    
 </div>

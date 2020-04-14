@@ -1,11 +1,52 @@
-<mat-sidenav-container class="nav" autosize>
-    <mat-sidenav #sidenav class="side-nav" mode="side">
+<div class="slide-menu" 
+     [ngClass]="menuOpen ? 'open' : ''">
             <ul>
                 <li routerLink="/"><h3>Home</h3></li>
                 <li routerLink="/shop"><h3>Shop</h3></li>
                 <li routerLink="/about"><h3>About</h3></li>
                 <li routerLink="/contact"><h3>Contact</h3></li>
             </ul>
-    </mat-sidenav>
-    <a class="menu" (click)="sidenav.toggle()"><span></span></a>
-</mat-sidenav-container>
+            <button class="white-btn"
+            (click)="openModal()"
+            *ngIf='!(auth.user$ | async )'
+            style="font-size: 16px;">
+            <h3>Login</h3></button>
+    <div *ngIf='auth.user$ | async as user'>
+            <div [matMenuTriggerFor]='userMenu'>
+                    <img [src]='user.photoURL' 
+                         class='profile'
+                         *ngIf='user.photoURL'>
+                    <button *ngIf="!user.photoURL"
+                            mat-button 
+                            style="font-family: 'Playfair Display';">
+                    Welcome, {{ firstName( user.displayName) }}! 
+                    </button>
+                    <i class="material-icons" style="color: white; cursor: pointer;">
+                            expand_more
+                            </i>
+            </div>
+            <mat-menu #userMenu='matMenu' xPosition="before" >
+                <button mat-menu-item
+                        routerlink="/checkout">
+                        View Cart</button>
+                <button mat-menu-item
+                        [routerLink]="['/account', user.displayName]">
+                        Order History</button>
+                <button mat-menu-item
+                        *ngIf="user.admin"
+                        routerLink="/dashboard">
+                        Dashboard</button>
+                <button mat-menu-item
+                        (click)="auth.signOut()">
+                        Log out</button>
+            </mat-menu>
+        </div>
+</div>
+<div id="hamburger" 
+     class="hamburger ham"
+     (click)="menuOpen = !menuOpen"
+     [ngClass]="menuOpen ? 'color' : '' ">
+        <div id="rect1"></div>
+        <div id="rect2"></div>
+        <div id="rect3"></div>
+</div>

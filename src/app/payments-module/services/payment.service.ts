@@ -45,7 +45,7 @@ export class PaymentService {
           completeOrder( paymentData.intent.clientSecret, paymentData.order );
         }
       }));    
-
+454110
       // Display order confirmation
       let completeOrder = ( clientSecret, order ) => { 
         stripe.retrievePaymentIntent(clientSecret)

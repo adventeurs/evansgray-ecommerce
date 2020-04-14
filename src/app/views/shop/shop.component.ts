@@ -4,6 +4,7 @@ import { of, combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { Product } from 'src/app/models/product';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class ShopComponent implements OnInit {
   constructor(
       private productService: ProductService,
       private route: ActivatedRoute,
+      private http: HttpClient
       ) { 
        }
 
@@ -38,6 +40,8 @@ export class ShopComponent implements OnInit {
                         return of(filteredProducts)
                       })
                     )
+
+      
     }
 
   filterProducts( products ): Product[]{

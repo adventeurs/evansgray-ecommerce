@@ -38,6 +38,42 @@ app.get('/', function (req, res) {
     console.log('hello')
   });
 
+app.post('/discount', async( req, res ) => {
+    
+})
+
+app.post('/create', async ( req, res ) => {
+    let product = req.body
+
+    try{
+        let stripeProduct = await stripe.products.create(
+            {
+                active: true,
+                name: product.title,
+                type: "good",
+                shippable: true,
+                metadata: {
+                    tax_code: 454110 
+                }
+            }
+        )
+        
+        await stripe.skus.create(
+            {
+                id: product.sku,
+                price: product.price,
+                currency: 'usd',
+                inventory: { type: 'infinite' },
+                product: stripeProduct.id
+            }
+        )
+
+        res.send('product created')
+    } catch( err ){
+        res.send( err )
+    }
+})
+
 
 app.post('/customer', async ( req, res ) => {
     const { name, email } = req.body
@@ -59,6 +95,7 @@ try{
     }
     
 })
+
 
 app.post('/payment', async ( req, res ) => {
     const { paymentMethodId, 
@@ -97,7 +134,7 @@ app.post('/payment', async ( req, res ) => {
                    order: order
                 });
     } catch ( e ){
-        res.send({ error: e.message })
+        res.send( e )
     }
 })
 

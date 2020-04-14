@@ -102,7 +102,8 @@
         <button [disabled]="!orderForm.valid"
                 style="margin-left: 45%;"
                 class="pink-btn"
-                (click)="proceedToPayment(orderForm.value, user)">
+                (click)="proceedToPayment(orderForm.value, user)"
+                [ngClass]="!orderForm.valid ? 'disabled' : ''">
                 Proceed to payment 
                 <span class="material-icons"
                       style="padding-left: 15px;">
