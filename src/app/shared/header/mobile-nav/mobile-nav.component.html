@@ -1,10 +1,10 @@
 <div class="slide-menu" 
      [ngClass]="menuOpen ? 'open' : ''">
-            <ul>
-                <li routerLink="/"><h3>Home</h3></li>
-                <li routerLink="/shop"><h3>Shop</h3></li>
-                <li routerLink="/about"><h3>About</h3></li>
-                <li routerLink="/contact"><h3>Contact</h3></li>
+            <ul class='links'>
+                <li routerLink="/" (click)="menuOpen = !menuOpen"><h3>Home</h3></li>
+                <li routerLink="/shop" (click)="menuOpen = !menuOpen"><h3>Shop</h3></li>
+                <li routerLink="/about" (click)="menuOpen = !menuOpen"><h3>About</h3></li>
+                <li routerLink="/contact" (click)="menuOpen = !menuOpen"><h3>Contact</h3></li>
             </ul>
             <button class="white-btn"
             (click)="openModal()"
@@ -12,34 +12,22 @@
             style="font-size: 16px;">
             <h3>Login</h3></button>
     <div *ngIf='auth.user$ | async as user'>
-            <div [matMenuTriggerFor]='userMenu'>
-                    <img [src]='user.photoURL' 
-                         class='profile'
-                         *ngIf='user.photoURL'>
-                    <button *ngIf="!user.photoURL"
-                            mat-button 
-                            style="font-family: 'Playfair Display';">
-                    Welcome, {{ firstName( user.displayName) }}! 
-                    </button>
-                    <i class="material-icons" style="color: white; cursor: pointer;">
-                            expand_more
-                            </i>
-            </div>
-            <mat-menu #userMenu='matMenu' xPosition="before" >
-                <button mat-menu-item
-                        routerlink="/checkout">
-                        View Cart</button>
-                <button mat-menu-item
-                        [routerLink]="['/account', user.displayName]">
-                        Order History</button>
-                <button mat-menu-item
-                        *ngIf="user.admin"
-                        routerLink="/dashboard">
-                        Dashboard</button>
-                <button mat-menu-item
-                        (click)="auth.signOut()">
-                        Log out</button>
-            </mat-menu>
+           
+        <ul class='links'>
+                <li routerlink="/checkout"
+                    (click)="menuOpen = !menuOpen">
+                        <h3>View Cart</h3></li>
+                <li [routerLink]="['/account', user.displayName]"
+                    (click)="menuOpen = !menuOpen">
+                        <h3>Order History</h3></li>
+                <li (click)="auth.signOut()"
+                    (click)="menuOpen = !menuOpen">
+                        <h3>Log Out</h3></li>
+                <li *ngIf="user.admin"
+                    routerLink="/dashboard"
+                    (click)="menuOpen = !menuOpen">
+                        <h3>Dashboard</h3></li>
+        </ul>
         </div>
 </div>
 <div id="hamburger" 

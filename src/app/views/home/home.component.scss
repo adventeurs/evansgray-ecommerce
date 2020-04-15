@@ -359,26 +359,73 @@
     .hero{
         display: flex;
         flex-wrap: wrap;
+        flex-direction: column;
+        height: unset;
     }
 
+    .hero-cta{
+        padding-top: 0 !important;
+    }
+
+    .cta-container{
+        margin: auto;
+        padding-left: 4em;
+    }
+
+    .wave-1{
+        margin-top: 10em;
+    }
     .cat-cards{
         flex-wrap: wrap;
+
+        .cat{
+            margin-top: 2em !important;
+        }
+    }
+
+    .scrunchie{
+        flex-direction: column;
+
+        .scrunchie-img{
+            img{
+                margin-left: 0;
+                margin-bottom: -5px;
+            }
+        }
+
+        .scrunch-cta{
+            margin-left: 0;
+        }
+    }
+
+    .wave-2{
+        flex-direction: column;
+        margin-top: 0;
+    }
+
+    .wave-3{
+        margin-top: 0;
+    }
+
+    .time{
+        flex-direction: column;
     }
 
     .promo{
         flex-wrap: wrap;
-
+        align-items: center;
     }
 
     .perks{
         flex-wrap: wrap;
-
     }
 
-    .time-img{}
 
     .favorite-cards{
         flex-wrap: wrap;
+    }
 
+    .form-field{
+        width: 300px !important;
     }
 }

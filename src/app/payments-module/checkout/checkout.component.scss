@@ -46,3 +46,17 @@
 .payment{
     width: 100%;
 }
+
+@media only screen and (max-width: 680px){
+    .checkout{
+        flex-direction: column;
+    }
+
+    .shopping-cart{
+        width: 100%;
+    }
+
+    .payment-info{
+        width: 100%;
+    }
+}

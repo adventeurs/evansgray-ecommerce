@@ -17,11 +17,21 @@
     width: 100%;
 }
 
+.links li {
+    outline: none;
+
+    h3{
+    color: $blue;
+    outline: none;
+    cursor: pointer;
+    }
+}
 
 .slide-menu ul li{
     padding: 0em 1em;
     margin-left: -10px !important;
     margin: 35px 0;
+    list-style: none;
   }
 
 .hamburger{
@@ -32,8 +42,8 @@
 .ham{
     background: $pink;
     border-radius: 50%;
-    width: 4em;
-    height: 4em;
+    width: 3em;
+    height: 3em;
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -43,7 +53,7 @@
   }
 
 .ham div{
-    height: 6px;
+    height: 4px;
     margin: 4px -10px;
     width: 80%;
     background-color: white;
@@ -64,4 +74,9 @@
     align-items: center;
     min-width: 240px;
     justify-content: space-evenly;
+}
+
+.profile{
+    width: 60px !important;
+    border-radius: 50%;
 }
