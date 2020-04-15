@@ -1,19 +1,9 @@
 const express = require('express');
-const routes = require('express').Router();
 const app = express();
 const env = require("dotenv").config();
 app.use(express.json())
 
-const stripe = require('stripe')(process.env.STRIPE_KEY);
-
-const confirmation = require('./routes/email');
-const products = require('./routes/products');
-const customer = require('./routes/customer');
-const payment = require('./routes/payment');
-const create = require('./routes/create');
-
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const routes = require('./routes');
 
 app.use( ( req, res, next ) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -27,15 +17,8 @@ app.use( ( req, res, next ) => {
     }
 })
 
-routes.get('/', (req, res) => {
-    res.status(200).json({ message: 'Connected!' });
-  });
 
-app.post('/create', create );
-app.post('/customer', customer );
-app.post('/payment', payment );
-app.post('/products', products );
-app.post('/confirmation', confirmation );
+app.use('/', routes);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => console.log(`Listening on port ${port}...`));
