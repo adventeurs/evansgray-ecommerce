@@ -35,6 +35,7 @@ export class PaymentService {
       })
       .then( res => res
         .subscribe( paymentData => {
+          console.log(paymentData)
         if(paymentData.intent.requiresAction){
           this.notification.snackbarAlert('requires action');
         }
@@ -45,13 +46,13 @@ export class PaymentService {
           completeOrder( paymentData.intent.clientSecret, paymentData.order );
         }
       }));    
-454110
+
       // Display order confirmation
       let completeOrder = ( clientSecret, order ) => { 
         stripe.retrievePaymentIntent(clientSecret)
           .then( async res => {
             await this.auth.orderSuccess({ paymentIntent: res, order })
-
+            await this.http.post('/confirmation', order)
             this.router.navigate(['/','checkout','success', order.email, order.amount ])
           })
       }

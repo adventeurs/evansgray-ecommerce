@@ -1,40 +1,44 @@
 
-const calculateOrderTotal = ( order ) => {
-    let total = 0;
-
-    for( let i = 0; i < order.length; i++ ) 
-        total += order[i].price;
-
-    return total;
-};
-
-app.post('/payment', async ( req, res ) => {
+module.exports = async ( req, res ) => {
     const { paymentMethodId, 
-            items, 
             currency,
-            customer, 
-            shipping }       = req.body
-    // const orderTotal = calculateOrderTotal(items);
+            items,
+            shipping,
+            customer,
+            email  } = req.body
 
     try{
+        let order = await stripe.orders.create({
+                            currency,
+                            items,
+                            email,
+                            shipping,
+                            customer
+                        })
+
+
+    
         let paymentIntent;
         if( paymentMethodId ){
             paymentIntent = await stripe.paymentIntents.create({
                 // create stripe payment intent object
-                amount: 500,
+                amount: order.amount,
                 currency: currency,
                 payment_method: paymentMethodId,
                 confirmation_method: 'manual',
-                // includes shipping.address & shipping.name
-                // shipping: req.shipping,
+                customer: customer,
+                shipping: shipping,
                 confirm: true
             })
+
         }
-        res.send(generateResponse(paymentIntent));
+        res.send({ intent: generateResponse(paymentIntent),
+                   order: order
+                });
     } catch ( e ){
-        res.send({ error: e.message })
+        res.send( e )
     }
-})
+};
 
 
 const generateResponse = ( intent ) => {
@@ -56,4 +60,4 @@ const generateResponse = ( intent ) => {
                 clientSecret: intent.client_secret
             };
     }
-}
+};

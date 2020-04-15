@@ -34,7 +34,12 @@ export class AppComponent implements OnInit{
       if(!(event instanceof NavigationEnd)){
         return
       }
-      window.scrollTo(0,0)
+      if( event.url.includes('filter')){
+        window.scrollTo(0,200)
+      } else{
+        window.scrollTo(0,0)
+      }
+
     })
   }
 
