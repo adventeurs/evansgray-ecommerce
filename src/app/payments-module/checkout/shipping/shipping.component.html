@@ -99,7 +99,7 @@
               State required
             </mat-error>
         </mat-form-field>
-        <button [disabled]="!orderForm.valid"
+        <button [disabled]="!orderForm.valid || !cartTotal"
                 style="margin-left: 45%;"
                 class="pink-btn"
                 (click)="proceedToPayment(orderForm.value, user)"

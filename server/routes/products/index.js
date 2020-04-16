@@ -1,6 +1,6 @@
 const products = require('express').Router();
-const products = require('./products');
+const product = require('./products');
 
-products.post('/', products)
+products.post('/', product)
 
 module.exports = products;

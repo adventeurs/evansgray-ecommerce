@@ -1,22 +1,20 @@
 <div class="payment-info" >
     <div class="sr-root" >
         <div class="sr-main">
-          <form id="payment-form" class="sr-payment-form">
+          <mat-spinner *ngIf="loading" style="height: 100%;"></mat-spinner>
+          <form id="payment-form" class="sr-payment-form" [hidden]="loading">
             <div class="sr-combo-inputs-row">
               <div class="sr-input sr-card-element" id="card-element"></div>
             </div>
             <div class="sr-field-error" id="card-errors" role="alert"></div>
             <button id="submit">
-              <mat-spinner *ngIf="loading"></mat-spinner>
-              <span id="button-text" [hidden]="loading">Pay</span><span id="order-amount"></span>
+              <span id="button-text" >Pay</span><span id="order-amount"></span>
             </button>
   </form>
         </div>
     </div>
 </div>
 <div class="navigation" >
-    <h3 (click)="returnToShipping()">shipping</h3>
-    <img src="assets/Stripe-Payment-Logo.png" alt=""
-                    class='stripe-logo'>
+    <p (click)="returnToShipping()">return to shipping</p>
 </div>
 

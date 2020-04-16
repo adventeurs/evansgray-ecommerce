@@ -5,7 +5,7 @@
 }
 
 .payment-info{
-    width: 60%;
+    flex: 2;
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -14,7 +14,8 @@
 }
 
 .shopping-cart{
-    width: 40%;
+    flex: 1;
+    max-width: 450px;
     padding: 2em 0;
     background-color: #FDEAEA;
     box-shadow: inset 0px 0 7px 3px #ffd6d6;

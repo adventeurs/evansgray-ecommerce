@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
@@ -14,12 +14,13 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./cart-display.component.scss']
 })
 export class CartDisplayComponent implements OnInit {
+  @Input() close: boolean = false;
   displayCart: Observable<Product[]>;
   cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
   coupon: string;
-  c;
+
 
   discount = new FormGroup({
     code: new FormControl([ '', ])
@@ -52,7 +53,4 @@ export class CartDisplayComponent implements OnInit {
       this.dialog.open(ShippingInfoComponent)
     }
 
-  applyCoupon(){
-    this.c = 10
-  }
 }

@@ -638,10 +638,10 @@ pre {
 
 .navigation{
   display: flex;
+  margin: auto;
+  width: 70%;
 
-}
-
-.stripe-logo{
-  width: 6em;
-  margin-right: 5%;
+  p{
+    cursor: pointer;
+  }
 }

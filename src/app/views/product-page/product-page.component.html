@@ -77,11 +77,11 @@
                         </div>
                         <div *ngIf="auth.user$ | async"
                              class="cart">
+                        <button *ngIf="!cart$ || !(cart$ | async).includes(product.sku)" 
+                             class="pink-btn"
+                             (click)='addToCart(product, quantity, auth.user$)'>
+                             Add to Cart</button>
                         <div *ngIf="cart$ | async as skus">
-                        <button *ngIf="!skus.includes(product.sku)" 
-                                class="pink-btn"
-                                (click)='addToCart(product, quantity, auth.user$)'>
-                                Add to Cart</button>
                         <button *ngIf='skus.includes(product.sku)'
                                 class="pink-btn"
                                 (click)='addToCart(product, quantity)'>

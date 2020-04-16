@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
+import { CartService } from 'src/app/services/cart.service';
 
 @Injectable({
   providedIn: 'root' 
@@ -18,7 +19,8 @@ export class PaymentService {
     private auth: AuthService,
     private http: HttpClient,
     private notification: NotificationService,
-    private router: Router
+    private router: Router,
+    private cart: CartService
   ) { 
   }
 
@@ -53,6 +55,7 @@ export class PaymentService {
           .then( async res => {
             await this.auth.orderSuccess({ paymentIntent: res, order })
             await this.http.post('/confirmation', order)
+            this.cart.deleteCart()
             this.router.navigate(['/','checkout','success', order.email, order.amount ])
           })
       }

@@ -5,7 +5,7 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 import { NotificationService } from 'src/app/services/notification.service';
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { switchMap,  map } from 'rxjs/operators';
+import { switchMap,  map, tap } from 'rxjs/operators';
 import { firestore } from 'firebase';
 
 @Component({
@@ -33,9 +33,10 @@ export class ProductPageComponent implements OnInit {
           switchMap( ( param: ParamMap ) => this.getProductBySku(param.get('sku'))),
           switchMap( ( doc: firestore.DocumentSnapshot ) => of(doc.data()) )
           )
+        this.cart.cartArray.next([])
 
       this.cart$ = this.cart.cartArray.pipe(
-                        map( cart => cart.map( product => product.sku))
+                        map( cart => cart.map( product => product.sku)),
                       )
 
   }
@@ -55,6 +56,12 @@ export class ProductPageComponent implements OnInit {
   removeCartItem( product ){
     this.cart.removeCartItem( product )
 
+  }
+
+  skuIncluded(sku, product){
+    if(sku)
+      return sku.includes(product)
+    else true
   }
 
 }

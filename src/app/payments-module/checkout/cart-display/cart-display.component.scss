@@ -1,16 +1,20 @@
 .totals{
     display: flex;
     flex-direction: column;
+    width: 60%;
+    margin: auto;
+    overflow: scroll;
 }
 
 .cart{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
 .cart-holder{
     max-height: 80%;
+    min-height: 200px;
 }
 
 .column{

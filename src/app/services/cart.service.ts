@@ -1,7 +1,7 @@
 import { Injectable} from '@angular/core';
 import { Product } from '../models/product';
 import { ReplaySubject, of } from 'rxjs';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument, DocumentData } from '@angular/fire/firestore';
 import {  switchMap, tap } from 'rxjs/operators';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { firestore } from 'firebase/app'
@@ -44,16 +44,15 @@ export class CartService {
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
           // Return Users Cart And Perform Details Logic
           return this.cartRef.valueChanges()
-                      .pipe(
-                        tap( cart => this.nextSize(cart) ),
-                        tap( cart => this.cart.next( [...Object.values(cart)] ) ),
-                        tap( cart => this.nextTotal(cart) )
-                        )
         } else {
           this.cartSize.next(0)
           return of(null)
         }
-       })).subscribe()
+       }),
+        tap( cart => this.nextSize(cart) ),
+        tap( cart => this.toCartArray(cart)),
+        tap( cart => this.nextTotal(cart) )
+       ).subscribe()
        
   }
 
@@ -85,6 +84,13 @@ export class CartService {
     });
 
   }
+
+  async deleteCart( ){
+    this.cartRef.delete();
+    this.cartArray.next([]);
+    this.cartSize.next(0);
+    this.cartTotal.next(0);
+  }
   
 
   // Calculation methods 
@@ -107,17 +113,28 @@ export class CartService {
 
     this.cartTotal.next(finalTotal)
     }
+    return 0
   }
   
   // Find Total Quantity Of Items In Cart
   private nextSize( cart ){
+
     if(cart){
     let items = this.sumQuantity(cart);
     let quantity = this.reduce(items);
 
     this.cartSize.next(quantity)
     }
-  }
+
+    return 0
   }
   
 
+  private toCartArray( cart: DocumentData ){
+    if(cart)
+      return this.cart.next([...Object.values(cart)]);
+    else
+      return [];
+  }
+
+}

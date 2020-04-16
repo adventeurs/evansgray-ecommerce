@@ -14,12 +14,13 @@
             <div class="bottom">
                 <p>{{product.price | dollars}}</p>
                     <i class="material-icons"
-                        (click)="removeFromCart(product)"
-                        matTooltip="Remove from cart"
-                        style="font-size: 20px;">
+                        *ngIf="!close"
+                       (click)="removeFromCart(product)"
+                       matTooltip="Remove from cart"
+                       style="font-size: 20px;">
                             remove_circle
                     </i>
-                <div class="change-qty">
+                <div class="change-qty" *ngIf="!close">
                         <mat-form-field class="qty" style="width: 45px;">
                             <mat-label>
                                 qty.
@@ -37,6 +38,7 @@
             </div>
             </div>
         </div>
+    </div>
     </div>
     <div class="totals">
             <mat-divider></mat-divider>
