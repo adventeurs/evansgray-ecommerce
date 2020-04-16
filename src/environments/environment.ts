@@ -3,17 +3,17 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: true,
-  stripeKey: process.env.STRIPE_TEST_KEY,
+  production: false,
+  stripeKey: "pk_test_e2tsWERbw2LAQZDpvfaRsN",
   firebase: {
-    apiKey: process.env.FIREBASE_API,
-    authDomain: process.env.FIREBASE_AUTH_DOMAIN,
-    databaseURL: process.env.DATABASE_URL,
-    projectId: process.env.PROJECT_ID,
-    storageBucket: process.env.STORAGE_BUCKET,
-    messagingSenderId: process.env.SENDER_ID,
-    appId: process.env.APP_ID,
-    measurementId: process.env.MEASUREMENT_ID
+    apiKey: "AIzaSyAhVkuXB480h5R55Uo2o1thhZu1QKWSzD0",
+    authDomain: "evansgray-4a16f.firebaseapp.com",
+    databaseURL: "https://evansgray-4a16f.firebaseio.com",
+    projectId: "evansgray-4a16f",
+    storageBucket: "evansgray-4a16f.appspot.com",
+    messagingSenderId: "173558339427",
+    appId: "1:173558339427:web:42885e082e1c4567d16556",
+    measurementId: "G-MYLJP6QPY0"
   }
 };
 

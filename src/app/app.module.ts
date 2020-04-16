@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { environment } from '../environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { ProductService } from './services/product.service';
@@ -29,8 +28,11 @@ import { AuthService } from './services/auth.service';
 import { InventoryPipe } from './shared/pipes/inventory.pipe';
 import { PaymentService } from './payments-module/services/payment.service';
 import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.component';
+import { ConfigService } from './services/config.service'
 
-
+const appConfig = async ( config: ConfigService ) => {
+    return  await config.load()
+}
 
 @NgModule({
   declarations: [
@@ -56,7 +58,7 @@ import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp(environment.firebase, 'evansgray'),
+    AngularFireModule.initializeApp( appConfig(this.ConfigService) , 'evansgray'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
@@ -64,9 +66,10 @@ import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.compon
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MdComponentsModule,
-    ScrollingModule,
+    ScrollingModule
   ],
   providers: [ 
+    ConfigService,
     ProductService,
     PaymentService,
     AdminAuthGaurd,

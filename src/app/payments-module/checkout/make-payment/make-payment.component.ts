@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData'
 import {Location} from '@angular/common';
 import { CartService } from 'src/app/services/cart.service';
+import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-make-payment',
@@ -25,13 +26,15 @@ export class MakePaymentComponent implements OnInit {
       public auth: AuthService,
       public stripePayment: PaymentService,
       public location: Location,
-      private cart: CartService
+      private cart: CartService,
+      private config: ConfigService
       ) { 
         
       }
 
   ngOnInit(){
-      const stripe = Stripe(environment.stripeKey);
+      const config = this.config.stripeConfig()
+      const stripe = Stripe(config);
       const elements = stripe.elements();
 
       const style = {
