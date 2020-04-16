@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   stripeKey: process.env.STRIPE_TEST_KEY,
   firebase: {
     apiKey: process.env.FIREBASE_API,
