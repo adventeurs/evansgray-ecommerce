@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { PaymentService } from '../../services/payment.service';
-import { environment } from 'environments/environment';
+import { environment } from 'src/environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData'
 import {Location} from '@angular/common';
