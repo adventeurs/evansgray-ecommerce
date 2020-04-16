@@ -57,6 +57,11 @@ export class MakePaymentComponent implements OnInit {
         this.loading = true;
         this.stripePayment.pay( stripe, this.card, this.orderData);
       })
+
+     document.getElementById('submit').addEventListener('click', ()=>{
+        this.loading = true;
+        this.stripePayment.pay( stripe, this.card, this.orderData);
+      })
   }
 
   ngOnDestroy(){
@@ -66,10 +71,6 @@ export class MakePaymentComponent implements OnInit {
   returnToShipping(){
     this.closeEvent.emit(false)
   }
-
-//  pay(){
-//      this.stripePayment.pay( stripe, this.card, this.orderData );
-//   }
 
 }
 
