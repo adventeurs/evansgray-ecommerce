@@ -32,7 +32,7 @@ export class PaymentService {
         }
         else {
           orderData['paymentMethodId'] = res.paymentMethod.id;
-          return this.http.post('http://localhost:3000/payment', orderData )
+          return this.http.post('/api/payment', orderData )
         }
       })
       .then( res => res
@@ -54,7 +54,7 @@ export class PaymentService {
         stripe.retrievePaymentIntent(clientSecret)
           .then( async res => {
             await this.auth.orderSuccess({ paymentIntent: res, order })
-            await this.http.post('/confirmation', order)
+            await this.http.post('/api/confirmation', order)
             this.cart.deleteCart()
             this.router.navigate(['/','checkout','success', order.email, order.amount ])
           })

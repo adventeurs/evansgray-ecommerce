@@ -25,6 +25,7 @@
     "@sendgrid/mail": "^6.5.3",
     "angularfire2": "^5.4.0",
     "animate.css": "^3.7.2",
+    "express": "^4.17.1",
     "express-validator": "^6.4.0",
     "firebase": "^7.8.0",
     "hammerjs": "^2.0.8",

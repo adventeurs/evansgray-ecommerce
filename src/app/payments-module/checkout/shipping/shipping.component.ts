@@ -85,7 +85,7 @@ export class ShippingComponent {
       if(!user.stripeCustomerId){
         let customer = await this.auth.createStripeCustomer( value.name, value.email, user )
                                   .then( ( res: any ) => { return res.id } )  
-                                  .catch( error => this.notification.snackbarAlert(error)) 
+                                  .catch( error => console.log(error)) 
         orderObject = this.createOrderObject( value, customer )
       } else{
         orderObject = this.createOrderObject( value, user.stripeCustomerId )

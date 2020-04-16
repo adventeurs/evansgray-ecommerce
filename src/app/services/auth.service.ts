@@ -107,14 +107,16 @@ export class AuthService {
       'email': email$
     }
     
-    return this.http.post('http://localhost:3000/customer', data)
+    return this.http.post('/api/customer', data)
                       .pipe(
                         tap( ( res: any ) => {
+                          console.log(res)
                           this.db.doc(`users/${customer.uid}`).set({
                              stripeCustomerId : res.id 
                             }, { merge: true } 
                           )
                         })).toPromise()
+                        
                         
   }
 

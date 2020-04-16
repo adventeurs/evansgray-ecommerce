@@ -1,3 +1,5 @@
+const stripe = require('stripe')(process.env.STRIPE_KEY);
+
 module.exports = async ( req, res ) => {
 
     try{

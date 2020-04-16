@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
         images: product.imgs.split(',')
     }
 
-    let p = await this.http.post('http://localhost:3000/products', productForm )
+    let p = await this.http.post('/api/products', productForm )
     this.db.collection('products').doc(product.title).set( productForm ).catch( err => console.log(err))
     this.productInput.reset()
   }
