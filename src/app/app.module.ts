@@ -72,7 +72,6 @@ import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.compon
     AdminAuthGaurd,
     StatesService,
     AuthService,
-
   ],
   bootstrap: [ AppComponent ]
 })

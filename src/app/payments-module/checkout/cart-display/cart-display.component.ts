@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ShippingInfoComponent } from 'src/app/shared/shipping-info/shipping-info.component';
 import { MatDialog } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
-import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart-display',

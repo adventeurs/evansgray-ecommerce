@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterOutlet, NavigationEnd, NavigationStart } from '@angular/router';
 import { fadeAnimation } from './shared/animations/animations';
-import { trigger, transition, useAnimation } from '@angular/animations';
 
 @Component({
   selector: 'app-root',
