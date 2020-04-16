@@ -31,7 +31,7 @@ import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.compon
 import { ConfigService } from './services/config.service'
 
 const appConfig = async ( config: ConfigService ) => {
-    return  await config.load()
+    return async () => await config.load()
 }
 
 @NgModule({
@@ -58,7 +58,7 @@ const appConfig = async ( config: ConfigService ) => {
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AngularFireModule.initializeApp( appConfig(this.ConfigService) , 'evansgray'),
+    AngularFireModule.initializeApp( appConfig , 'evansgray'),
     AngularFirestoreModule,
     AngularFireAuthModule,
     FormsModule,
