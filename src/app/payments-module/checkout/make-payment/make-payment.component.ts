@@ -31,7 +31,6 @@ export class MakePaymentComponent implements OnInit {
       }
 
   ngOnInit(){
-      console.log(this.orderData)
       const stripe = Stripe(environment.stripeKey);
       const elements = stripe.elements();
 
