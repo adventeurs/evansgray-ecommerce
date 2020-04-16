@@ -30,7 +30,7 @@ import { PaymentService } from './payments-module/services/payment.service';
 import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.component';
 import { ConfigService } from './services/config.service'
 
-const appConfig = async ( config: ConfigService ) => {
+export function appConfig ( config: ConfigService ){
     return async () => await config.load()
 }
 
