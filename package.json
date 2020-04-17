@@ -37,7 +37,8 @@
     "tslib": "^1.10.0",
     "web-animations-js": "^2.3.2",
     "zone.js": "~0.9.1",
-    "@sendgrid/mail": "^6.5.3"
+    "@sendgrid/mail": "^6.5.3",
+    "stripe": "^8.43.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.24",
