@@ -24,7 +24,9 @@
   "devDependencies": {
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6"
+    "firebase-functions-test": "^0.1.6",
+    "stripe": "^8.14.0",
+    "@sendgrid/mail": "^6.5.3"
   },
   "private": true
 }
