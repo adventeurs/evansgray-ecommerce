@@ -27,7 +27,7 @@ export class CartDisplayComponent implements OnInit {
 
   constructor(
     private cart: CartService,
-    private auth: AuthService,
+    public auth: AuthService,
     private dialog: MatDialog
   ) { 
   }

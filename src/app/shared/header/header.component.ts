@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   clearImg: boolean = false;
   
   constructor( 
-        private auth: AuthService,
+        public auth: AuthService,
         private cartService: CartService,
         public router: Router,
         private fireAuth: AngularFireAuth
