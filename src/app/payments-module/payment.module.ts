@@ -29,6 +29,7 @@ const appRoutes: Routes = [
     ShippingComponent,
     MakePaymentComponent,
     CartDisplayComponent,
+    SuccessComponent
   ],
   entryComponents: [
     ShippingInfoComponent,
@@ -51,6 +52,7 @@ const appRoutes: Routes = [
     CartDisplayComponent,
     MakePaymentComponent,
     CheckoutComponent,
+    SuccessComponent
     ]
 })
 export class PaymentModule { }
