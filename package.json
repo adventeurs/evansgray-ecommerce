@@ -57,7 +57,9 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "typescript": "~3.5.3",
+    "stripe": "^8.14.0",
+    "@sendgrid/mail": "^6.5.3"
   },
   "engines": {
     "node": "10.16.3",
