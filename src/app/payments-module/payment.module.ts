@@ -61,7 +61,9 @@ const appRoutes: Routes = [
     CartDisplayComponent,
     MakePaymentComponent,
     CheckoutComponent,
-    SuccessComponent
+    SuccessComponent,
+    DollarsPipe,
+    InventoryPipe
     ]
 })
 export class PaymentModule { }
