@@ -11,6 +11,7 @@ import { ShippingInfoComponent } from '../shared/shipping-info/shipping-info.com
 import { RefundInfoComponent } from '../shared/refund-info/refund-info.component'
 import { SuccessComponent } from './checkout/success/success.component';
 import { Routes, RouterModule } from '@angular/router';
+import { MdComponentsModule } from '../md-components.module';
 
 const appRoutes: Routes = [
   
@@ -38,6 +39,7 @@ const appRoutes: Routes = [
   imports: [
     CommonModule,
     HttpClientModule,
+    MdComponentsModule,
     RouterModule.forRoot(
       appRoutes
     )
