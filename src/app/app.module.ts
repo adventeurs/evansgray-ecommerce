@@ -29,6 +29,7 @@ import { InventoryPipe } from './shared/pipes/inventory.pipe';
 import { PaymentService } from './payments-module/services/payment.service';
 import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.component';
 import { ConfigService } from './services/config.service'
+import { PaymentModule } from './payments-module/payment.module';
 
 export function appConfig ( config: ConfigService ){
     return async () => await config.load()
@@ -66,7 +67,8 @@ export function appConfig ( config: ConfigService ){
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MdComponentsModule,
-    ScrollingModule
+    ScrollingModule,
+    PaymentModule
   ],
   providers: [ 
     ConfigService,
