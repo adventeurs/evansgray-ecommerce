@@ -13,6 +13,8 @@ import { SuccessComponent } from './checkout/success/success.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MdComponentsModule } from '../md-components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DollarsPipe } from '../shared/pipes/dollars.pipe';
+import { InventoryPipe } from '../shared/pipes/inventory.pipe';
 
 const appRoutes: Routes = [
   
@@ -31,7 +33,9 @@ const appRoutes: Routes = [
     ShippingComponent,
     MakePaymentComponent,
     CartDisplayComponent,
-    SuccessComponent
+    SuccessComponent,
+    DollarsPipe,
+    InventoryPipe
   ],
   entryComponents: [
     ShippingInfoComponent,
@@ -49,7 +53,7 @@ const appRoutes: Routes = [
   ],
   providers: [
     PaymentService,
-    Location
+    Location,
   ],
   exports: [
     MakePaymentComponent,
