@@ -12,6 +12,7 @@ import { RefundInfoComponent } from '../shared/refund-info/refund-info.component
 import { SuccessComponent } from './checkout/success/success.component';
 import { Routes, RouterModule } from '@angular/router';
 import { MdComponentsModule } from '../md-components.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   
@@ -38,6 +39,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     MdComponentsModule,
     RouterModule.forRoot(
