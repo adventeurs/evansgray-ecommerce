@@ -11,8 +11,5 @@ routes.use('/customer', customer);
 routes.use('/product', product);
 routes.use('/config', config);
 
-routes.get('/', (req, res) => {
-    res.status(200).json({ message: 'Connected!' });
-  });
 
 module.exports = routes
