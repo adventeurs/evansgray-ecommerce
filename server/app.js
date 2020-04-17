@@ -16,7 +16,7 @@ app.use( ( req, res, next ) => {
     }
 })
 
-app.use(express.static(__dirname + '/dist'));
+
 app.use('/api/', routes);
 
 
