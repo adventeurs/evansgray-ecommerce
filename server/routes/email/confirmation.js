@@ -5,7 +5,7 @@ module.exports = ( req, res ) =>{
     const msg = {
         to: order.email,
         from: 'emily@shopevansgray.com',
-        templateId: 'd-d2bd9dc51a2c4b3db25f99d9f5d4daf8',
+        templateId: 'd-9229a28e33e948f7a4eb8b1833557825',
         dynamic_template_data: {
             items: order.items,
             total: order.total

@@ -92,7 +92,7 @@
                     id="email"
                     type="text">
                     <mat-error *ngIf="fEmail.hasError('required')">
-                            Please confirm password
+                            Please enter valid email
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field >
@@ -103,7 +103,7 @@
                         id="password"
                         type="password">
                         <mat-error *ngIf="fPassword.hasError('required')">
-                                Please confirm password
+                                Please enter password
                         </mat-error>
                         <mat-error *ngIf="fPassword.errors?.minlength">
                                 Password must be at least 7 characters

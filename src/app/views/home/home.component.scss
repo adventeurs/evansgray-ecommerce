@@ -403,10 +403,6 @@
         margin-top: 0;
     }
 
-    .wave-3{
-        margin-top: 0;
-    }
-
     .time{
         flex-direction: column;
     }
@@ -427,5 +423,33 @@
 
     .form-field{
         width: 300px !important;
+    }
+
+    .time-cta{
+        text-align: center;
+    }
+
+    .hero::before{
+        content: "";
+        background-image: url('~/assets/hero-wave-mobile.svg');
+        height: 1600px;
+        transform: translate(0, -8%);
+    }
+
+    .wave-2{
+        background-image: url('~/assets/wave-1-mobile.svg');
+        height: 1500px;
+        margin-top: -10em;
+    }
+
+    .wave-1{
+        background-image: url('~/assets/wave-2-mobile.svg');
+        height: unset;
+    }
+
+    .wave-3{
+        margin-top: -32em;
+        padding-top: 38em;
+        height: 1200px;
     }
 }

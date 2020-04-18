@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="376.752" height="1168.909" viewBox="0 0 376.752 1168.909">
+  <defs>
+    <style>
+      .cls-1 {
+        opacity: 0.631;
+        fill: url(#radial-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient);
+      }
+    </style>
+    <radialGradient id="radial-gradient" cx="0.083" cy="0.024" r="0.507" gradientTransform="matrix(0.996, 0.09, -0.097, 1.072, 0.013, -0.003)" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#fffcfc"/>
+      <stop offset="1" stop-color="#ffe5e6"/>
+    </radialGradient>
+    <linearGradient id="linear-gradient" x1="0.599" y1="0.212" x2="-0.264" y2="-0.212" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ffb1b3"/>
+      <stop offset="1" stop-color="snow"/>
+    </linearGradient>
+  </defs>
+  <g id="Group_47" data-name="Group 47" transform="translate(-135.099 21.948)">
+    <path id="Subtraction_3" data-name="Subtraction 3" class="cls-1" d="M383.349,394.329,108.613,303.276v-7.444l.13-.713a449.589,449.589,0,0,0,36.763-64.689,485.33,485.33,0,0,0,27.151-73.683A479.97,479.97,0,0,0,187.775,78.1a434.39,434.39,0,0,0,1.489-75.249l206.792,3.61L383.349,394.329Z" transform="translate(28.475 -24.801)"/>
+    <path id="Subtraction_2" data-name="Subtraction 2" class="cls-2" d="M0,1167.77,1.567,298.779a449.522,449.522,0,0,0,37.807-64.395,476.753,476.753,0,0,0,27.99-73.14,465.214,465.214,0,0,0,16.231-82.5A416.728,416.728,0,0,0,84.332.059C99.645.02,118.364,0,139.969,0c99.882,0,235.425.425,236.782.429V1160.274Z" transform="translate(135.099 -20.809)"/>
+  </g>
+</svg>
