@@ -28,15 +28,15 @@ export class PaymentService {
     stripe.createPaymentMethod( 'card', card )
       .then( res => {
         if ( res.error ) {
-          res.subscribe( err => console.log(err))
+          console.log(res.error)
         }
         else {
           orderData['paymentMethodId'] = res.paymentMethod.id;
           return this.http.post('/api/payment', orderData )
         }
       })
-      .then( res => res
-        .subscribe( paymentData => {
+      .then( res => res)
+      .subscribe( paymentData => {
           console.log(paymentData)
         if(paymentData.intent.requiresAction){
           this.notification.snackbarAlert('requires action');
@@ -47,7 +47,7 @@ export class PaymentService {
         else {
           completeOrder( paymentData.intent.clientSecret, paymentData.order );
         }
-      }));    
+      });    
 
       // Display order confirmation
       let completeOrder = ( clientSecret, order ) => { 
