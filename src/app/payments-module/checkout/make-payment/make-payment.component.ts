@@ -25,16 +25,13 @@ export class MakePaymentComponent implements OnInit {
   constructor(
       public auth: AuthService,
       public stripePayment: PaymentService,
-      public location: Location,
-      private cart: CartService,
-      private config: ConfigService
+      public location: Location
       ) { 
         
       }
 
   ngOnInit(){
-      const config = this.config.stripeConfig()
-      const stripe = Stripe(config);
+      const stripe = Stripe(environment.stripeKey);
       const elements = stripe.elements();
 
       const style = {

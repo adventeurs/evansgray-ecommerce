@@ -22,14 +22,4 @@ export class ConfigService {
     return stripe
   }
 
-  public async load(){
-   this.http.get('/api/config/firebase')
-          .toPromise()
-          .then( ( res: any ) => {
-            this.firebase = res.firebase
-          })
-
-    return this.firebase
-
-  }
 }

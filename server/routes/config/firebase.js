@@ -13,4 +13,3 @@ module.exports = (req, res) => {
             }
     })
 }
-stripeKey: process.env.STRIPE_TEST_KEY
