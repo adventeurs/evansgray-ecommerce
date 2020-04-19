@@ -56,9 +56,13 @@ export class PaymentService {
       let completeOrder = ( clientSecret, order ) => { 
         stripe.retrievePaymentIntent(clientSecret)
           .then( async res => {
+            try{
             await this.auth.orderSuccess({ paymentIntent: res, order })
             await this.http.post('/api/confirmation', order)
             this.cart.deleteCart()
+            } catch(e){
+              console.log(e)
+            }
             this.router.navigate(['/','checkout','success', order.email, order.amount ])
           })
       }
