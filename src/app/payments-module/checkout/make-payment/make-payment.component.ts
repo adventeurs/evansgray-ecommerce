@@ -4,8 +4,6 @@ import { environment } from '../../../../environments/environment';
 import { AuthService } from 'src/app/services/auth.service';
 import { OrderData } from 'src/app/models/orderData'
 import {Location} from '@angular/common';
-import { CartService } from 'src/app/services/cart.service';
-import { ConfigService } from 'src/app/services/config.service';
 
 @Component({
   selector: 'app-make-payment',

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
 import { Product } from 'src/app/models/product';
 import { AuthService } from 'src/app/services/auth.service';
@@ -12,10 +12,10 @@ import { FormGroup, FormControl } from '@angular/forms';
   templateUrl: './cart-display.component.html',
   styleUrls: ['./cart-display.component.scss']
 })
-export class CartDisplayComponent implements OnInit {
+export class CartDisplayComponent {
   @Input() close: boolean = false;
-  displayCart: Observable<Product[]>;
-  cartTotal: Observable<Number>;
+  @Input() displayCart: Product[];
+  @Input() cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
   coupon: string;
@@ -30,12 +30,6 @@ export class CartDisplayComponent implements OnInit {
     public auth: AuthService,
     private dialog: MatDialog
   ) { 
-  }
-
-  ngOnInit() {
-   this.cartTotal = this.cart.total
-   this.displayCart = this.cart.cartArray
-
   }
 
   removeFromCart( product ){

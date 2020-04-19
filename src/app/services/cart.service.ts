@@ -43,15 +43,16 @@ export class CartService {
           // Reference To Firestore Cart
           this.cartRef = db.doc<Product>(`carts/${user.uid}`);
           // Return Users Cart And Perform Details Logic
-          return this.cartRef.valueChanges()
+          return this.cartRef.valueChanges().pipe(
+                              tap( cart => this.nextSize(cart) ),
+                              tap( cart => this.toCartArray(cart)),
+                              tap( cart => this.nextTotal(cart) )
+                            )
         } else {
           this.cartSize.next(0)
           return of(null)
         }
-       }),
-        tap( cart => this.nextSize(cart) ),
-        tap( cart => this.toCartArray(cart)),
-        tap( cart => this.nextTotal(cart) )
+       })
        ).subscribe()
        
   }

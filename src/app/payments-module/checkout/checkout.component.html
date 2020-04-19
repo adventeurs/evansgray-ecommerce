@@ -27,7 +27,9 @@
     </div>
     
     <div class="shopping-cart">
-        <app-cart-display [close]='close'></app-cart-display>
+        <app-cart-display [close]='close'
+                          [displayCart]="cart$ | async"
+                          [cartTotal]="cartTotal$ | async "></app-cart-display>
     </div>  
 </div>
 <router-outlet></router-outlet>

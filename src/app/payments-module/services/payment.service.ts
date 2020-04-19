@@ -38,7 +38,6 @@ export class PaymentService {
         }
       })
       .then( res => res.subscribe( paymentData => {
-          console.log(paymentData)
         if(paymentData.intent.requiresAction){
           this.notification.snackbarAlert('requires action');
         }

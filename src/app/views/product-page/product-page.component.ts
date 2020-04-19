@@ -33,7 +33,6 @@ export class ProductPageComponent implements OnInit {
           switchMap( ( param: ParamMap ) => this.getProductBySku(param.get('sku'))),
           switchMap( ( doc: firestore.DocumentSnapshot ) => of(doc.data()) )
           )
-        this.cart.cartArray.next([])
 
       this.cart$ = this.cart.cartArray.pipe(
                         map( cart => cart.map( product => product.sku)),

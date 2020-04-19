@@ -1,6 +1,6 @@
 <div class="cart">
     <div *ngIf='auth.user$ | async ' class="cart-holder">
-    <div class="checkout-card" *ngFor="let product of displayCart | async">
+    <div class="checkout-card" *ngFor="let product of displayCart">
         <div class="checkout-img"
              [matBadge]="product.quantity">
              <div [style.background-image]="'url(assets/products/' + product.main + '.jpg)'"
@@ -54,7 +54,7 @@
         <mat-divider></mat-divider>
         <div class="column">
             <div><h5>Total</h5></div>
-            <div><h5>{{ cartTotal | async | dollars }}</h5></div>
+            <div><h5>{{ cartTotal | dollars }}</h5></div>
         </div>
     </div>
 </div>

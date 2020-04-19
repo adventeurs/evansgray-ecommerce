@@ -15,6 +15,8 @@ import { MdComponentsModule } from '../md-components.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DollarsPipe } from '../shared/pipes/dollars.pipe';
 import { InventoryPipe } from '../shared/pipes/inventory.pipe';
+import { AuthService } from '../services/auth.service';
+import { CartService } from '../services/cart.service';
 
 const appRoutes: Routes = [
   
@@ -54,6 +56,8 @@ const appRoutes: Routes = [
   providers: [
     PaymentService,
     Location,
+    AuthService,
+    CartService
   ],
   exports: [
     MakePaymentComponent,
