@@ -80,3 +80,14 @@ cdk-virtual-scroll-content-wrapper{
         font-family: "Playfair Display";
     }
 }
+
+@media only screen and (max-width: 680px){
+    .search-results{
+        margin: 0;
+    }
+
+    .filters{
+        max-width: unset;
+        display: block;
+    }
+}

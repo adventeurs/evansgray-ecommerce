@@ -2,8 +2,9 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = ( req, res ) =>{
-    let { items, total } = req.body
-
+    let { items, amount, id } = req.body
+    
+    let dollars = amount/100;
     try{
     const msg = {
         to: order.email,
@@ -11,7 +12,8 @@ module.exports = ( req, res ) =>{
         templateId: 'd-9229a28e33e948f7a4eb8b1833557825',
         dynamic_template_data: {
             items: items,
-            total: total
+            total: dollars,
+            oN: id
         }
     };
 

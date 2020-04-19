@@ -57,3 +57,9 @@ p{
     cursor: default !important;
 }
 
+@media only screen and (max-width: 680px){
+    h1{
+        font-size: 40px;
+    }
+}
+

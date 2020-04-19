@@ -365,11 +365,9 @@
 
     .hero-cta{
         padding-top: 0 !important;
-    }
-
-    .cta-container{
-        margin: auto;
-        padding-left: 4em;
+        width: 100%;
+        padding: 2em;
+        margin: 0;
     }
 
     .wave-1{
@@ -395,6 +393,8 @@
 
         .scrunch-cta{
             margin-left: 0;
+            width: unset;
+            padding: 15px;
         }
     }
 
@@ -422,7 +422,7 @@
     }
 
     .form-field{
-        width: 300px !important;
+        width: 100% !important;
     }
 
     .time-cta{
@@ -433,17 +433,18 @@
         content: "";
         background-image: url('~/assets/hero-wave-mobile.svg');
         height: 1600px;
-        transform: translate(0, -8%);
+        transform: translate(0, -20%);
+        background-size: contain;
     }
 
     .wave-2{
-        background-image: url('~/assets/wave-1-mobile.svg');
+        background-image: url('~/assets/wave-2-mobile.svg');
         height: 1500px;
         margin-top: -10em;
     }
 
     .wave-1{
-        background-image: url('~/assets/wave-2-mobile.svg');
+        background-image: url('~/assets/wave-1-mobile.svg');
         height: unset;
     }
 
@@ -451,5 +452,22 @@
         margin-top: -32em;
         padding-top: 38em;
         height: 1200px;
+        margin-bottom: 10em;
+    }
+
+    .time{
+        width: unset;
+    }
+
+    .time-cta{
+        margin-left: 0;
+        width: unset;
+    }
+
+    .time-img{
+
+        img{
+            margin-bottom: -10px;
+        }
     }
 }
