@@ -26,7 +26,6 @@ import { StatesService } from './services/states.service';
 import { AuthService } from './services/auth.service';
 import { PaymentService } from './payments-module/services/payment.service';
 import { MobileNavComponent } from './shared/header/mobile-nav/mobile-nav.component';
-import { ConfigService } from './services/config.service'
 import { PaymentModule } from './payments-module/payment.module';
 import { environment } from 'src/environments/environment.prod';
 
@@ -65,7 +64,6 @@ import { environment } from 'src/environments/environment.prod';
     PaymentModule
   ],
   providers: [ 
-    ConfigService,
     ProductService,
     PaymentService,
     AdminAuthGaurd,
