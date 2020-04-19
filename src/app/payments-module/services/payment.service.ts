@@ -57,7 +57,7 @@ export class PaymentService {
           .then( async res => {
             try{
             await this.auth.orderSuccess({ paymentIntent: res, order })
-            await this.http.post('/api/confirmation', order)
+            await this.http.post('/api/email/confirmation', order)
             this.cart.deleteCart()
             } catch(e){
               console.log(e)
