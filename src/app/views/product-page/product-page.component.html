@@ -82,7 +82,6 @@
                              (click)='addToCart(product, quantity, auth.user$)'>
                              Add to Cart</button>
                         <div *ngIf="cart$ | async as skus">
-                                {{skus}}
                         <button *ngIf='skus.includes(product.sku)'
                                 class="pink-btn"
                                 (click)='addToCart(product, quantity)'>
