@@ -1,7 +1,7 @@
 # Evansgray
   
 ### Viewing project
-This project is live at evansgray.herokuapp.com
+This project is live at <http://www.evansgray.herokuapp.com>
 
   - Create an account with the login button in the upper right. 
   - On the landing page select shop, or scroll down to select a category. 
