@@ -3,8 +3,8 @@
             <ul class='links'>
                 <li routerLink="/" (click)="menuOpen = !menuOpen"><h3>Home</h3></li>
                 <li routerLink="/shop" (click)="menuOpen = !menuOpen"><h3>Shop</h3></li>
-                <li routerLink="/about" (click)="menuOpen = !menuOpen"><h3>About</h3></li>
-                <li routerLink="/contact" (click)="menuOpen = !menuOpen"><h3>Contact</h3></li>
+                <li><h3>About</h3></li>
+                <li><h3>Contact</h3></li>
             </ul>
             <button class="white-btn"
             (click)="openModal()"
@@ -32,7 +32,7 @@
 </div>
 <div id="hamburger" 
      class="hamburger ham"
-     (click)="menuOpen = !menuOpen"
+     (click)="toggle()"
      [ngClass]="menuOpen ? 'color' : '' ">
         <div id="rect1"></div>
         <div id="rect2"></div>

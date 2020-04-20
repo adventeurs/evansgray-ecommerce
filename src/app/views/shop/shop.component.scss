@@ -90,4 +90,8 @@ cdk-virtual-scroll-content-wrapper{
         max-width: unset;
         display: block;
     }
+
+    .display-products{
+        flex-direction: column;
+    }
 }

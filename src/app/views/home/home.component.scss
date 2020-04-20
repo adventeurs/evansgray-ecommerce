@@ -361,17 +361,32 @@
         flex-wrap: wrap;
         flex-direction: column;
         height: unset;
+        width: 100%;
+    }
+
+    .hero-ribbon{
+        width: 100%;
+        overflow: hidden;
+
+        img{
+            width: 137%;
+        }
     }
 
     .hero-cta{
-        padding-top: 0 !important;
         width: 100%;
         padding: 2em;
         margin: 0;
     }
 
+    .cta-container{
+        width: 100%;
+        padding-top: 1em;
+        margin: auto;
+    }
+
     .wave-1{
-        margin-top: 10em;
+        margin-top: 0;
     }
     .cat-cards{
         flex-wrap: wrap;

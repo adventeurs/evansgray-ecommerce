@@ -6,7 +6,7 @@
     width: 0px;
     height: 100vh;
     background-color: white;
-    position: absolute;
+    position: fixed;
     overflow: hidden;
     transition: width .7s;
     transition-timing-function: cubic-bezier(0.86, 0, 0.07, 1);
@@ -84,3 +84,4 @@
 .white-btn{
     margin-left: 10%;
 }
+

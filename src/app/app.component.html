@@ -1,5 +1,6 @@
 <div class="container">
-    <app-header  *ngIf="!_router.url.includes('checkout')"></app-header>
+    <app-header  *ngIf="!_router.url.includes('checkout')"
+                 (overflowEvent)="receiveOverflow($event)"></app-header>
 
     <div [@fadeAnimation]="prepareRoute(outlet)"  class="route-container content" >
         <router-outlet #outlet="outlet"></router-outlet>

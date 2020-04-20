@@ -46,4 +46,13 @@ export class AppComponent implements OnInit{
     return outlet.isActivated ? outlet.activatedRoute : ''
   }
 
+  receiveOverflow( event: Event){
+    console.log(event)
+    if(event){
+      document.body.style.overflow = 'hidden';
+    }
+    document.body.style.overflow = 'visible';
+
+  }
+
 }
