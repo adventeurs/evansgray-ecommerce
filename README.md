@@ -1,7 +1,7 @@
 # Evansgray
   
 ### Viewing project
-This project is live at <https://evansgray.herokuapp.com/>
+MVP is live at <https://evansgray.herokuapp.com/>
 
   - Create an account with the login button in the upper right. 
   - On the landing page select shop, or scroll down to select a category. 
