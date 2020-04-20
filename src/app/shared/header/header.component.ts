@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
@@ -32,9 +32,20 @@ export class HeaderComponent implements OnInit {
       return name.length > 0 ? name[0] : displayName;
     }
 
+    openModal(){
+      this.toggleModal = !this.toggleModal
+    }
+
+    close(){
+      this.toggleModal = !this.toggleModal
+    }
 
     toggleImg(){
       this.clearImg = !this.clearImg;
+    }
+
+    recieveToggle( e ){
+      this.toggleModal = e
     }
 
 }
