@@ -1,4 +1,16 @@
 # Evansgray
+  
+### Viewing project
+This project is live at evansgray.herokuapp.com
+
+  - Create an account with the login button in the upper right. 
+  - On the landing page select shop, or scroll down to select a category. 
+  - Select an item from the shop. Use the checkboxes to filter search results.
+  - On the product page add the available quanity to your cart.
+  - Select the cart button in the upper right to checkout.
+  - Enter fake shipping info and proceed to payment.
+  - Enter 4242 repeating for the card information.
+  - Pay
 
 Evansgray is an e-commerce app built in Angular and implements the following :
   - Node.js in Express
@@ -11,6 +23,7 @@ Evansgray is an e-commerce app built in Angular and implements the following :
   - Angular Material
   - Typescript
   - NPM: nodemon, angularfire, concurrently, dotenv, express, rxjs
+
 
 
 # Breakdown
@@ -50,7 +63,7 @@ Create Stripe Customer
 
   })
 
-👍
+
 ```
 
 ### Product Service
@@ -112,7 +125,7 @@ Server
                     confirm: true
                 })
      ...  
-// retreive client secret, send back to front end with order and store order success 😅
+// retreive client secret, send back to front end with order and store order success 
        
 ```
 
@@ -121,7 +134,7 @@ Sendgrid is set up through Firebase cloud functions. When a particular document 
 
 ```js
 // Send welcome email to new customers
-// deploy function to cloud 👏
+// deploy function to cloud 
 exports.newCustomer = functions.auth.user().onCreate( user => {
 
     const msg = {
