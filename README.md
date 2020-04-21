@@ -19,7 +19,7 @@ Evansgray is an e-commerce app built in Angular and implements the following :
   - Firebase Cloud Functions
   - Sendgrid API
   - Stripe Payment API
-  - Sass
+  - Scss
   - Angular Material
   - Typescript
   - NPM: nodemon, angularfire, concurrently, dotenv, express, rxjs
