@@ -93,7 +93,7 @@ To integrate with Stripe multiple api calls are required. A stripe customer must
 
 Server
 ```js
-// deconstruct the body of our request 🦄
+// destructure the body of our request 🦄
   const { paymentMethodId, // stripe paymentMethodId created by stripe elements
               currency,     // usd
               items,        // array of products in order
