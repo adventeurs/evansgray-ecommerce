@@ -1,68 +1,72 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,600&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap');
-@import '../../node_modules/animate.css/animate.min';
+@import url("https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,600&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap");
 
-@import './variables';
+@import "./variables";
 
-@import '../../node_modules/@angular/material/prebuilt-themes/indigo-pink.css';
-
-html, body { height: 100%; }
-body { margin: 0;  }
-
-h1, h2, h3{
-    font-family: 'Playfair Display', serif;
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
 }
 
-h1{
-    font-size: 60px;
-    font-weight: 600;
-    margin: 0;
+h1,
+h2,
+h3 {
+  font-family: "Playfair Display", serif;
 }
 
-h3{
-    font-family: 'Playfair Display', serif;
-    margin: 0;
+h1 {
+  font-size: 60px;
+  font-weight: 600;
+  margin: 0;
 }
 
-h4{
-    font-size: 22px;
-    font-weight: 300;
-    font-family: 'Open Sans';
+h3 {
+  font-family: "Playfair Display", serif;
+  margin: 0;
 }
 
-p{
-    font-family: 'Open Sans', sans-serif;
-    color: $gray;
+h4 {
+  font-size: 22px;
+  font-weight: 300;
+  font-family: "Open Sans";
 }
 
-.white-btn{
-    @include white-btn;
+p {
+  font-family: "Open Sans", sans-serif;
+  color: $gray;
 }
 
-.white-btn:hover{
-    transform: scale(1.05);
+.white-btn {
+  @include white-btn;
 }
 
-.pink-btn{
-    @include pink-btn;
+.white-btn:hover {
+  transform: scale(1.05);
 }
 
-.pink-btn:hover{
-    transform: scale(1.1);
+.pink-btn {
+  @include pink-btn;
 }
 
-.disabled{
-    opacity: .4;
-    cursor: default !important;
+.pink-btn:hover {
+  transform: scale(1.1);
 }
 
-@media only screen and (max-width: 680px){
-    h1{
-        font-size: 40px;
-    }
+.disabled {
+  opacity: 0.4;
+  cursor: default !important;
 }
 
-.open{
-    overflow: hidden;
+@media only screen and (max-width: 680px) {
+  h1 {
+    font-size: 40px;
+  }
+}
+
+.open {
+  overflow: hidden;
 }
