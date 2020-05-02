@@ -24,10 +24,12 @@ import { RefundInfoComponent } from "./shared/refund-info/refund-info.component"
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
-import { PaymentService } from "./payments-module/services/payment.service";
+import { PaymentService } from "./services/payment.service";
 import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
-import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
+import { CartService } from "./services/cart.service";
+import { DollarsPipe } from "./shared/pipes/dollars.pipe";
+import { InventoryPipe } from "./shared/pipes/inventory.pipe";
 
 @NgModule({
   declarations: [
@@ -42,7 +44,9 @@ import { environment } from "src/environments/environment.prod";
     RefundInfoComponent,
     routingComponents,
     SearchFilterComponent,
-    MobileNavComponent
+    MobileNavComponent,
+    DollarsPipe,
+    InventoryPipe
   ],
   entryComponents: [ShippingInfoComponent, RefundInfoComponent],
   imports: [
@@ -56,15 +60,18 @@ import { environment } from "src/environments/environment.prod";
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MdComponentsModule,
-    ScrollingModule,
-    PaymentModule
+    ScrollingModule
   ],
   providers: [
     ProductService,
     PaymentService,
     AdminAuthGaurd,
     StatesService,
-    AuthService
+    AuthService,
+    Location,
+    CartService,
+    DollarsPipe,
+    InventoryPipe
   ],
   bootstrap: [AppComponent]
 })

@@ -6,7 +6,7 @@
     <div *ngFor="let cat of f.category">
       <mat-checkbox
         value="{{ cat }}"
-        style="font-family: 'Open Sans'; color: #585353;"
+        style="font-family: 'Open Sans'; color: white"
         (change)="setFilter($event, cat)"
         [checked]="filter ? filter.includes(cat) : false"
       >
