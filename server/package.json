@@ -1,8 +1,15 @@
 {
   "name": "functions",
-  "main": "app.js",
+  "main": "index.js",
   "description": "Cloud Functions for Firebase",
-  "scripts": {},
+  "scripts": {
+    "lint": "eslint .",
+    "serve": "node index.js",
+    "shell": "firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
   "engines": {
     "node": "8"
   },
@@ -11,13 +18,13 @@
     "dotenv": "^8.2.0",
     "express-validator": "^6.4.0",
     "firebase-admin": "^8.6.0",
-    "firebase-functions": "^3.3.0"
+    "firebase-functions": "^3.3.0",
+    "stripe": "^8.14.0"
   },
   "devDependencies": {
     "eslint": "^5.12.0",
     "eslint-plugin-promise": "^4.0.1",
-    "firebase-functions-test": "^0.1.6",
-    "stripe": "^8.14.0"
+    "firebase-functions-test": "^0.1.6"
   },
   "private": true
 }

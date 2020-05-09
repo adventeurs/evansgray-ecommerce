@@ -1,142 +1,106 @@
-import { Injectable } from "@angular/core";
-import { User } from "../models/user";
-import { AngularFireAuth } from "@angular/fire/auth";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument
-} from "@angular/fire/firestore";
-import { Router } from "@angular/router";
-import { Observable, of, ReplaySubject } from "rxjs";
-import { switchMap, tap } from "rxjs/operators";
-import { auth, firestore } from "firebase/app";
-import { NotificationService } from "./notification.service";
-import { HttpClient } from "@angular/common/http";
+import { Injectable, Input } from '@angular/core';
+import { User } from '../models/user';
 
-@Injectable({
-  providedIn: "root"
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
+
+import { Router } from '@angular/router';
+
+import { Observable, of, ReplaySubject } from 'rxjs';
+import { switchMap, map, take } from 'rxjs/operators'
+import { auth } from 'firebase/app';
+import { LoginModalService } from './login-modal.service';
+import { NotificationService } from './notification.service';
+import { CustomerService } from './customer.service';
+
+@Injectable({ 
+  providedIn: 'root'
 })
 export class AuthService {
-  // Currently Logged In User
-  private loggedInUser = new ReplaySubject<firebase.User>(1);
+  private loggedInUser = new ReplaySubject<firebase.User>(1)
 
-  // Access Currently Logged In User
   get user$(): Observable<firebase.User> {
-    return this.loggedInUser;
+    return this.loggedInUser.asObservable()
   }
-
+  
   constructor(
-    private db: AngularFirestore,
-    private fireAuth: AngularFireAuth,
-    private router: Router,
-    private notification: NotificationService,
-    private http: HttpClient
-  ) {
-    fireAuth.authState
-      .pipe(
-        switchMap(user => {
-          // If User Is Logged In
-          if (user) {
+      private db: AngularFirestore,
+      private fireAuth: AngularFireAuth,
+      private router: Router,
+      public loginModal: LoginModalService,
+      private notification: NotificationService,
+      private customerService: CustomerService,
+      ) { 
+      fireAuth.authState.pipe(
+        switchMap( user => {
+          if ( user ){
             return this.db.doc<User>(`users/${user.uid}`).valueChanges();
           } else {
-            // If User Is Logged Out
-            return of(null);
+            return of(null)
           }
         })
-      )
-      .subscribe(user => {
-        // Update User Replay Subject
+      ).subscribe( user => {
         this.loggedInUser.next(user);
-      });
-  }
+      })
+    }
 
-  // Sign-In / Sign-Up User Through GoogleAuthProvider
+  
+
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.fireAuth.auth.signInWithPopup(provider);
+    // Create Stripe customer with credential info
+    this.loginModal.toggleModal.emit(false)
 
-    this.updateUserData(credential.user);
+    return this.updateUserData(credential.user);
+
   }
 
-  // Sign-up User With Email And Password
-  async emailSignUp(email: string, password: string, name?: string) {
-    return this.fireAuth.auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(async res => {
-        this.updateUserData(res.user, name);
-      })
-      .catch(err => {
-        console.log(err);
-        this.notification.snackbarAlert(err);
-      });
+  async emailSignUp( email: string, password: string, name?: string ){
+    this.fireAuth.auth.createUserWithEmailAndPassword( email , password )
+        .then( async res => {
+          this.updateUserData(res.user, name)        
+        })
+        .then( () => this.loginModal.toggleModal.emit(false) )
+        .catch( ( err ) =>{
+          console.log(err);
+          this.notification.snackbarAlert( err )}
+        );
+
   }
 
-  // Login With Email And Password
-  async emailLogin(email: string, password: string) {
-    return this.fireAuth.auth
-      .signInWithEmailAndPassword(email, password)
-      .catch(err => {
-        this.notification.snackbarAlert(err);
-      });
+  async emailLogin( email: string, password: string){
+    this.fireAuth.auth.signInWithEmailAndPassword( email , password )
+        .then( () => this.loginModal.toggleModal.emit(false) )
+        .catch( ( err ) => {
+          this.notification.snackbarAlert( err )
+        });
+    
+
   }
 
-  // Update Firestore User Information
-  private async updateUserData(user: User, name?: string) {
-    const userRef: AngularFirestoreDocument<User> = this.db.doc(
-      `users/${user.uid}`
-    );
+  private async updateUserData( user: User , name?: string) {
+    // Sets user data to firestore on login
+    const userRef: AngularFirestoreDocument<User> = this.db.doc(`users/${user.uid}`);
+    // const customerId = await this.customerService.createStripeCustomer( name, user.email )
+    //                              .then( ( res: any ) => { return res.id } )   
+    //                              .catch( err => this.notification.snackbarAlert( err ))
+          
+    const data = { 
+      uid: user.uid, 
+      email: user.email, 
+      displayName: name ? name : user.displayName, 
+      photoURL: user.photoURL,
+      stripeCustomerId: 'sfg'
+    } 
 
-    const data = {
-      uid: user.uid,
-      email: user.email,
-      displayName: name ? name : user.displayName,
-      photoURL: user.photoURL
-    };
+    return userRef.set(data, { merge: true })
 
-    return userRef.set(data, { merge: true });
   }
 
-  // Sign Out Currently Logged In User
   async signOut() {
     await this.fireAuth.auth.signOut();
-    this.router.navigate(["/"]);
+    this.router.navigate(['/']);
   }
 
-  // Create A Stripe Customer With The StripeAPI
-  async createStripeCustomer(name$, email$, customer): Promise<string> {
-    let data = {
-      name: name$,
-      email: email$
-    };
-
-    return this.http
-      .post("/api/customer", data)
-      .pipe(
-        tap((res: any) => {
-          this.db.doc(`users/${customer.uid}`).set(
-            {
-              stripeCustomerId: res.id
-            },
-            { merge: true }
-          );
-        })
-      )
-      .toPromise();
-  }
-
-  // Update The Users Order History
-  async orderSuccess({ paymentIntent, order }: { paymentIntent; order }) {
-    this.fireAuth.user.subscribe(user => {
-      this.db
-        .collection("users")
-        .doc(user.uid)
-        .update({
-          orders: firestore.FieldValue.arrayUnion({
-            paymentIntent: paymentIntent,
-            order: order,
-            date: new Date()
-          })
-        })
-        .catch(err => this.notification.snackbarAlert(err));
-    });
-  }
 }

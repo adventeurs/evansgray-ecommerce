@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
 import { HttpClient } from '@angular/common/http';
 import { NotificationService } from 'src/app/services/notification.service';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import { CartService } from 'src/app/services/cart.service';
+import { User } from 'src/app/models/user';
+import { AuthService } from '../services/auth.service';
+import { take } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root' 
@@ -13,60 +15,69 @@ export class PaymentService {
   // TODO: create stripe user
   // TODO: create stripe order
   // TODO: process payment stripe
+   
+  customerId: any;
+  userId: string;
   stripe: any;
 
   constructor(
-    private auth: AuthService,
+    private db: AngularFirestore,
+    private fireAuth: AngularFireAuth,
+    // public auth: AuthService,
     private http: HttpClient,
-    private notification: NotificationService,
-    private router: Router,
-    private cart: CartService
+    private notification: NotificationService
   ) { 
-  }
+    this.fireAuth.authState  
+          .subscribe((auth) => {
+            if (auth) {
+              this.userId = auth.uid
+              }
+          });
 
-  pay( stripe, card, orderData ){
+      }
 
-    try{
+
+  async pay( stripe, card, orderData ){
     stripe.createPaymentMethod( 'card', card )
       .then( res => {
         if ( res.error ) {
-          console.log(res.error)
+          res.subscribe( err => console.log(err))
         }
         else {
           orderData['paymentMethodId'] = res.paymentMethod.id;
-          return this.http.post('/api/payment', orderData )
+          return this.http.post('http://localhost:3000/payment', orderData )
         }
       })
-      .then( res => res.subscribe( paymentData => {
-        if(paymentData.intent.requiresAction){
-          this.notification.snackbarAlert('requires action');
+      .then( res => res
+        .subscribe( paymentData => {
+        if(paymentData.requiresAction){
+          console.log('requires action');
         }
-        else if (paymentData.intent.error ){
+        else if (paymentData.error ){
+          console.log(paymentData.error)
           this.notification.snackbarAlert( paymentData.error)
         }
         else {
-          completeOrder( paymentData.intent.clientSecret, paymentData.order );
+          completeOrder( paymentData.clientSecret );
         }
-      }))    
-    } catch(e){
-      console.log(e)
-    }
+      }));    
+
       // Display order confirmation
-      let completeOrder = ( clientSecret, order ) => { 
+      let completeOrder = ( clientSecret ) => { 
         stripe.retrievePaymentIntent(clientSecret)
-          .then( async res => {
-            try{
-            await this.auth.orderSuccess({ paymentIntent: res, order })
-            this.http.post('/api/email/confirmation', order).toPromise()
-            this.cart.deleteCart()
-            this.cart.cartArray.next([])
-            } catch(e){
-              console.log(e)
-            }
-            this.router.navigate(['/','checkout','success', order.email, order.amount ])
+          .then( res => {
+            const paymentIntent = res.paymentIntent;
+            const paymentIntentJson = JSON.stringify( paymentIntent, null, 2 )
+           
+            // call display method here 
+            // console.log( paymentIntent )
           })
       }
   }
+
+  // Create method to display order confirmation
+
+  // Email customer order information and confirmation
 
   
 }

@@ -1,115 +1,22 @@
-@import '../../../../styles/variables';
 
 .modal-open{
-    background: rgba(255, 255, 255, 0.26);
+    background: rgba(0, 0, 0, 0.26);
     height: 100%;
     width: 100%;
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    z-index: 101;
+    z-index: 10;
 }
 
 .modal{
-        @include shadow;
-        background-image: url('../../../../assets/modal-wave.svg');
-        background-size: cover;
-        max-height: 475px;
-        max-width: 300px;
-        height: 75vh;
-        width: 25vw;
-        top: 5vh;
-        z-index: 102;
-        position: fixed;
-        left: 60%;
+        background: white; 
+        height: 50%;
+        width: 50%;
+        z-index: 11;
+        position: absolute;
+        left: 50%;
         margin-left: -25%;
         padding: 2em;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-        border: 4px solid white;
-        text-align: center;
-
-        .login-form{
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-        .password{
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-top: 5px;
-
-            button{
-                margin: 5px;
-                cursor: pointer;
-                font-family: "playfair display";
-                background: $blue;
-                color: white;
-                font-size: 16px;
-            }
-
-            a{
-                text-align: center;
-                padding: 5px;
-                margin: 5px;
-                cursor: pointer;
-                color: $blue;
-            }
-        }
-
-        .google{
-            margin: 19px;
-            color: #4086f4;
-            background: white;
-            font-family: "Playfair Display";
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            padding: 4px 17px;
-            
-            img{
-               width: 25px; 
-               padding: 5px;
-               margin-right: 5px;
-            }
-        }
 }
 
-.email{
-    margin: 20px;
-    cursor: pointer;
-    font-family: "playfair display";
-    background: $blue;
-    color: white;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-
-    span{
-        margin-right: 5px;
-        padding: 5px;
-    }
-}
-
-.logo{
-    border-radius: 100%;
-    background: white;
-    width: 6em;
-    height: 6em;
-    display: block;
-    text-align: center;
-
-    img{
-        width: 4em;
-        padding-top: 9px;
-        margin-left: -4px;
-    }
-}
-
-.notice{
-    color: white;
-    font-family: "Playfair Display";
-}

@@ -1,80 +1,12 @@
-@import '../../../styles/variables';
-
 .profile{
-    width: 40px !important;
+    width: 4em;
     border-radius: 50%;
 }
 
-.profile-wrapper{
-    background: #ffe0e6cc;
-    text-align: center;
-    padding: 5px;
-    margin-top: -8px;
-}
-
 .nav-bar{
+    height: 200px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 15px 5%;
-    align-items: center;
-    z-index: 100;
-    position: relative;
-
-    img{
-        width: 75px;
-    }
-
-    .loaded{
-        display: flex;
-        align-items: center;
-        min-width: 240px;
-        justify-content: space-evenly;
-    }
-
-}
-
-.nav-links{
-    background: $pink;
-    text-decoration: none;
-    list-style: none;
-    display: flex;
-    padding: 0;
-    box-shadow: 0px 3px 4px #5a27271f;
-
-    li{
-        padding: 5px 30px;
-        color: white;
-        outline: none;
-        cursor: pointer;
-    }
-}
-
-.basket{
-    margin: .5em 1em;
-}
-
-.header-right{
-    display: flex;
-}
-
-.mobile-nav{
-    display: none;
-}
-
-@media only screen and (max-width: 680px) {
-    .header-right{
-        display: none;
-    }
-
-    .mobile-nav{
-        display: flex;
-    }
-
-    .nav-bar{
-        img{
-           width: 60px;
-        }
-    }
-   
+    justify-content: flex-end;
+    padding: 1em;
 }

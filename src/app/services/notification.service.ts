@@ -5,27 +5,15 @@ import { MatSnackBar } from '@angular/material'
   providedIn: 'root'
 })
 export class NotificationService {
+  duration: number;
 
   constructor(
-      private snackBar: MatSnackBar
+      public snackBar: MatSnackBar
   ) { }
 
   public snackbarAlert( error ){
-    if(typeof error === 'string'){
-      this.snackBar.open( error, "close" , {
-        duration: 3000
-      })
-    }
     this.snackBar.open( error.message, "close" , {
-      duration: 3000
+      duration: 2000
     })
-  }
-
-  public snackbarProduct( product){
-    let title = product.title;
-    this.snackBar.open( `${title} added to cart!`, "close" , {
-      duration: 3000
-    })
-
   }
 }

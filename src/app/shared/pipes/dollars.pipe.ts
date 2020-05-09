@@ -5,7 +5,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class DollarsPipe implements PipeTransform {
     transform( value: any, args?: any ){
-        let price = Math.round( value / 100 ).toFixed(0)
+        let price = Math.round( value / 100 ).toFixed(2)
         return ` $${ price } `
     }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginModalService } from 'src/app/services/login-modal.service';
 import { CartService } from 'src/app/services/cart.service';
 import { Router } from '@angular/router';
-import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-header',
@@ -10,20 +10,23 @@ import { AngularFireAuth } from '@angular/fire/auth';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  toggleModal: boolean = false;
-  size;
+  @Input() toggleLoginFrom: boolean;
+  storage: any;
+  toggleModal: boolean;
   clearImg: boolean = false;
   
   constructor( 
-        public auth: AuthService,
+        private auth: AuthService,
+        public modal: LoginModalService,
         private cartService: CartService,
-        public router: Router,
-        private fireAuth: AngularFireAuth
+        public router: Router
         ) { 
+        this.storage = this.cartService.storage
       }
 
-  ngOnInit() { 
-    this.size = this.cartService.size
+  ngOnInit() {
+    this.modal.toggleModal.subscribe( bool => this.toggleModal = bool )
+    // setTimeout( function(){ console.log(this.auth.isLoggedIn()) }, 1000)
   }
 
    
@@ -33,19 +36,15 @@ export class HeaderComponent implements OnInit {
     }
 
     openModal(){
-      this.toggleModal = !this.toggleModal
+      this.modal.toggleModal.emit(true)
     }
 
     close(){
-      this.toggleModal = !this.toggleModal
+      this.modal.toggleModal.emit(false)
     }
 
     toggleImg(){
       this.clearImg = !this.clearImg;
-    }
-
-    recieveToggle( e ){
-      this.toggleModal = e
     }
 
 }

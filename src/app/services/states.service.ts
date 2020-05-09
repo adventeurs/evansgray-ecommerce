@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class StatesService {
-  private states: string[] = [ "AK", "AL",  "AR", "AS", "AZ", 
+  states: string[] = [ "AK", "AL",  "AR", "AS", "AZ", 
                       "CA", "CO", "CT", "DC", "DE", 
                       "FL", "GA", "GU", "HI", "IA", 
                       "ID", "IL", "IN", "KS", "KY", 

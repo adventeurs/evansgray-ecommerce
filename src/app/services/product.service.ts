@@ -1,42 +1,30 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { Product } from '../models/product';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ProductService {
-  searchFilter
+  productsCollection: AngularFirestoreCollection<Product>;
+  products: Observable<any[]>;
+  product: Observable<any>;
 
-  constructor( 
-    public db: AngularFirestore 
-    ){ 
+  constructor( public db: AngularFirestore ) { 
+      this.products = this.db.collection('products').doc('categories').collection('ribbon').snapshotChanges();
+             
   }
 
-  getProducts(){
-   return this.db.collection('products')
-              .valueChanges()
-  }   
-
-  getProductBySku( sku ){
-    return this.db.collection('products').doc(sku).get()
-  
+  getAllProducts(){
+   return this.db.collection('products').doc('categories').collection('ribbon')
   }
 
-  retrieveFilters(){
-    return this.db.collection('filters').doc('product-filters')
-               .valueChanges()
+  getProductByTitle( title ){
+    console.log(title)
+    return this.db.collection('products').doc('categories').collection('ribbon',
+                ref => ref.where( 'sku', '==', title ) )
   }
 
-  filter(  product, filter: String[]){
-    if(filter.length == 0)
-      return true
-
-    for(let i = 0; i < filter.length; i++){
-      if(product.searchable.includes(filter[i]))
-        return true
-    }
-
-  }
-  
 }

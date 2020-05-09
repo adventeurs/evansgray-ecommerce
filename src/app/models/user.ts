@@ -1,11 +1,11 @@
-import { Product } from './product';
-
 export interface User {
     uid: string;
     email: string;
+    firstName?: string;
+    lastName?: string;
     displayName: string;
     photoURL?: string;
     stripeCustomerId?: string;
-    orders?: Product[];
-    admin?: boolean;
+    // cart?: 
+    // orders:
 }

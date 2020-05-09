@@ -5,9 +5,6 @@ export interface Product {
     price: number;
     sku: string;
     parent: string;
-    quantity: number;
+    amount: string;
     type: string;
-    inventory: number;
-    main: string;
-    searchable: string[];
   }
