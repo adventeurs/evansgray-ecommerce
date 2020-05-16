@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import url("https://fonts.googleapis.com/css?family=Open+Sans|Playfair+Display:400,600&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap");
 
 @import "./variables";
 
@@ -12,21 +13,31 @@ body {
   margin: 0;
 }
 
+a {
+  padding: 5px;
+}
 h1,
-h2,
-h3 {
-  font-family: "Playfair Display", serif;
+h2 {
+  font-family: "Sacramento", serif;
+  color: $blue;
+  font-weight: 100;
 }
 
 h1 {
   font-size: 60px;
-  font-weight: 600;
+  font-weight: 300;
+  margin: 0;
+}
+
+h2 {
+  font-size: 48px;
   margin: 0;
 }
 
 h3 {
-  font-family: "Playfair Display", serif;
+  font-family: "open sans", serif;
   margin: 0;
+  font-size: 18px;
 }
 
 h4 {
@@ -38,10 +49,22 @@ h4 {
 p {
   font-family: "Open Sans", sans-serif;
   color: $gray;
+  font-size: 14px;
 }
 
 .white-btn {
   @include white-btn;
+}
+
+.green-btn {
+  @include green-btn;
+  transition: 0.7s;
+  border: 2px solid $blue;
+}
+
+.green-btn:hover {
+  background: white;
+  color: $blue;
 }
 
 .white-btn:hover {

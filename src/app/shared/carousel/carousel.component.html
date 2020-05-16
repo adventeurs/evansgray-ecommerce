@@ -1,0 +1,7 @@
+<section class="carousel-wrapper">
+  <ul class="carousel" #carousel>
+    <li *ngFor="let item of items" class="carousel-item">
+      <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+    </li>
+  </ul>
+</section>

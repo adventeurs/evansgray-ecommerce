@@ -1,6 +1,6 @@
 // Primary colors
-$blue: #5B88A3;
-$teal: #C4DDFF;
+$blue: #5b88a3;
+$teal: #e3ebee;
 $pink: #ffa7a7;
 $light-pink: #fcc7ca;
 $gray: #585353;
@@ -10,48 +10,63 @@ $gray: #585353;
 // #ffa7a7
 
 // Alert
-$error: #FF9793;
+$error: #ff9793;
 $error-text: white;
-$snackbar: #83BFDB;
+$snackbar: #83bfdb;
 $snackbar-text: white;
 
 @mixin shadow {
-    box-shadow: 0px 3px 4px #5a27271f;
+  box-shadow: 0px 7px 12px #54545447;
 }
 
-@mixin hoverShadow{
-    box-shadow: 10px 10px 6px #5a27271f;
+@mixin hoverShadow {
+  box-shadow: 10px 14px 15px #54545447;
 }
 
-@mixin white-btn{
-    @include shadow;
-    font-family: 'Open Sans';
-    font-weight: 300;
-    font-size: 22px;
-    background-color: white;
-    color: $pink;
-    border: none;
-    width: fit-content;
-    padding: 4px 20px;
-    outline: none;
-    cursor: pointer;
-    transition: .6s;
+@mixin white-btn {
+  @include shadow;
+  font-family: "Open Sans";
+  font-weight: 300;
+  font-size: 14px;
+  background-color: white;
+  color: $pink;
+  border: none;
+  width: fit-content;
+  padding: 4px 20px;
+  outline: none;
+  cursor: pointer;
+  transition: 0.6s;
 }
-
 
 @mixin pink-btn {
-    @include shadow;
-    font-family: 'Open Sans';
-    font-weight: 300;
-    font-size: 18px;
-    background-color: $pink;
-    color: white;
-    border: none;
-    width: fit-content;
-    padding: 4px 20px;
-    display: flex;
-    justify-content: center;
-    outline: none;
-    cursor: pointer;
-    transition: .6s;
+  @include shadow;
+  font-family: "Open Sans";
+  font-weight: 300;
+  font-size: 14px;
+  background-color: $pink;
+  color: white;
+  border: none;
+  width: fit-content;
+  padding: 4px 20px;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.6s;
+}
+
+@mixin green-btn {
+  font-family: "Open Sans";
+  font-weight: 300;
+  font-size: 18px;
+  background-color: $blue;
+  color: white;
+  border: none;
+  width: fit-content;
+  padding: 4px 20px;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.6s;
 }

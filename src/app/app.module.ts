@@ -28,6 +28,7 @@ import { PaymentService } from "./payments-module/services/payment.service";
 import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
 import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
+import { CarouselComponent } from "./shared/carousel/carousel.component";
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { environment } from "src/environments/environment.prod";
     RefundInfoComponent,
     routingComponents,
     SearchFilterComponent,
-    MobileNavComponent
+    MobileNavComponent,
+    CarouselComponent
   ],
   entryComponents: [ShippingInfoComponent, RefundInfoComponent],
   imports: [
