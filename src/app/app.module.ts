@@ -28,7 +28,12 @@ import { PaymentService } from "./payments-module/services/payment.service";
 import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
 import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
-import { CarouselComponent } from "./shared/carousel/carousel.component";
+import {
+  CarouselComponent,
+  CarouselItemElement
+} from "./shared/carousel/carousel.component";
+import { CarouselItemDirective } from "./shared/carousel-item.directive";
+import { HamComponent } from "./views/home/ham.component";
 
 @NgModule({
   declarations: [
@@ -44,9 +49,12 @@ import { CarouselComponent } from "./shared/carousel/carousel.component";
     routingComponents,
     SearchFilterComponent,
     MobileNavComponent,
-    CarouselComponent
+    CarouselComponent,
+    CarouselItemDirective,
+    CarouselItemElement,
+    HamComponent
   ],
-  entryComponents: [ShippingInfoComponent, RefundInfoComponent],
+  entryComponents: [ShippingInfoComponent, RefundInfoComponent, HamComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -177,3 +177,11 @@
     ></div>
   </div>
 </div>
+
+<carousel>
+  <ng-container *ngFor="let slide of slides">
+    <ng-container *carouselItem>
+      <ng-template [ngComponentOutlet]="slide.component"></ng-template>
+    </ng-container>
+  </ng-container>
+</carousel>
