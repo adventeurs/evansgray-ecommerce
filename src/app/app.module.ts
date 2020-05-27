@@ -9,31 +9,39 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { AppRoutingModule, routingComponents } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./shared/header/header.component";
-import { FooterComponent } from "./shared/footer/footer.component";
+import { HeaderComponent } from "./common/header/header.component";
+import { FooterComponent } from "./common/footer/footer.component";
 import { ProductPageComponent } from "./views/product-page/product-page.component";
 import { HttpClientModule } from "@angular/common/http";
-import { LoginModalComponent } from "./shared/header/login-modal/login-modal.component";
+import { LoginModalComponent } from "./common/header/login-modal/login-modal.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MdComponentsModule } from "./md-components.module";
 import { SearchFilterComponent } from "./views/shop/search-filter/search-filter.component";
-import { ProductCardComponent } from "./shared/product-card/product-card.component";
+import { ProductCardComponent } from "./common/product-card/product-card.component";
 import { ScrollingModule } from "@angular/cdk/scrolling";
-import { ShippingInfoComponent } from "./shared/shipping-info/shipping-info.component";
-import { RefundInfoComponent } from "./shared/refund-info/refund-info.component";
+import { ShippingInfoComponent } from "./common/shipping-info/shipping-info.component";
+import { RefundInfoComponent } from "./common/refund-info/refund-info.component";
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
 import { PaymentService } from "./payments-module/services/payment.service";
-import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
+import { MobileNavComponent } from "./common/header/mobile-nav/mobile-nav.component";
 import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
 import {
   CarouselComponent,
   CarouselItemElement
-} from "./shared/carousel/carousel.component";
-import { CarouselItemDirective } from "./shared/carousel-item.directive";
-import { HamComponent } from "./views/home/ham.component";
+} from "./common/carousel/carousel.component";
+import { CarouselItemDirective } from "./common/carousel-item.directive";
+import { ApronComponent } from "./views/home/slides/apron.component";
+import { ScrunchieComponent } from "./views/home/slides/scrunchie.component";
+import { RibbonComponent } from "./views/home/slides/ribbon.component";
+import { HeroHomeComponent } from "./views/home/components/hero-home.component";
+import { CatHomeComponent } from "./views/home/components/cat-home.component";
+import { TimelessComponent } from "./views/home/components/timeless.component";
+import { JoinComponent } from "./views/home/components/join.component";
+import { BespokeComponent } from "./views/home/components/bespoke.component";
+import { NaturalColorComponent } from "./views/home/components/natural-color.component";
 
 @NgModule({
   declarations: [
@@ -52,9 +60,23 @@ import { HamComponent } from "./views/home/ham.component";
     CarouselComponent,
     CarouselItemDirective,
     CarouselItemElement,
-    HamComponent
+    ApronComponent,
+    ScrunchieComponent,
+    RibbonComponent,
+    HeroHomeComponent,
+    CatHomeComponent,
+    TimelessComponent,
+    JoinComponent,
+    BespokeComponent,
+    NaturalColorComponent
   ],
-  entryComponents: [ShippingInfoComponent, RefundInfoComponent, HamComponent],
+  entryComponents: [
+    ShippingInfoComponent,
+    RefundInfoComponent,
+    ApronComponent,
+    ScrunchieComponent,
+    RibbonComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,

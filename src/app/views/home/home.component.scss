@@ -1,27 +1,176 @@
 @import "../../../styles/variables";
 
+// HERO HOME COMPONENT
 .hero {
   display: flex;
   flex-direction: row;
-  background: url("/assets/hero.png");
   height: 500px;
   justify-content: center;
   align-items: center;
+  margin: 7em 2em;
 }
 
 .cta {
   padding: 1em;
   text-align: end;
-  margin-right: 45px;
-}
+  margin-right: 90px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
-.hero-img {
-  img {
-    border: 20px solid white;
-    height: 300px;
+  h3 {
+    padding: 1em 0;
+  }
+  .thoughtful {
+    margin-right: 2.5em;
   }
 }
 
+.watercolor-10 {
+  background: url(../../../assets/watercolor-10.png);
+  mix-blend-mode: multiply;
+  opacity: 0.34;
+  width: 499px;
+  height: 534px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  position: absolute;
+  display: block;
+  transform: translate(149px, -434px);
+}
+
+.watercolor-18 {
+  background: url(../../../assets/watercolor-18.png);
+  mix-blend-mode: multiply;
+  opacity: 0.24;
+  width: 551px;
+  height: 534px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  position: absolute;
+  display: block;
+  transform: translate(-125px, -333px);
+}
+
+.hero-img {
+  flex: 1;
+
+  .hero-image-wrapper {
+    @include white-shadow;
+    width: 350px;
+    height: 437px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    background: white;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .hero-image-wrapper::after {
+    @include inner-shadow;
+    bottom: 0;
+    content: "";
+    bottom: 21px;
+    content: "";
+    display: block;
+    height: 437px;
+    position: absolute;
+    width: 350px;
+  }
+}
+
+// SLIDES
+
+.slide {
+  @include shadow;
+  display: flex;
+  flex-direction: row;
+  padding: 2em;
+  margin: 2em 3em;
+  width: 800px;
+}
+
+.slide-cta {
+  flex: 1;
+  padding: 2em 1em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+  button {
+    margin-left: 72%;
+  }
+}
+
+.slide-img {
+  flex: 1;
+
+  .slide-image-wrapper {
+    @include white-shadow;
+    width: 275px;
+    height: 343px;
+    overflow: hidden;
+    padding: 20px;
+    position: relative;
+    background: $light-pink;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .slide-image-wrapper::after {
+    @include inner-shadow;
+    bottom: 0;
+    content: "";
+    bottom: 21px;
+    content: "";
+    display: block;
+    height: 343px;
+    position: absolute;
+    width: 275px;
+  }
+}
+
+.watercolor-15 {
+  background: url(../../../assets/watercolor-15.png);
+  mix-blend-mode: multiply;
+  opacity: 0.34;
+  width: 398px;
+  height: 534px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  position: absolute;
+  display: block;
+  transform: translate(48px, -411px);
+}
+
+.watercolor-17 {
+  background: url(../../../assets/watercolor-17.png);
+  mix-blend-mode: color-dodge;
+  opacity: 0.44;
+  width: 259px;
+  height: 200px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: -1;
+  position: absolute;
+  display: block;
+  transform: translate(162px, -120px);
+}
+
+// CAT HOME
+// NATURAL COLOR
+// JOIN
+// TIMELESS
+// BESPOKE
 .selection {
   background: url("/assets/dotflowers.png");
 }

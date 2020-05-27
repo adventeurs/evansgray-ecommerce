@@ -1,0 +1,26 @@
+<section class="carousel-wrapper" [ngStyle]="carouselWrapperStyle">
+  <ul class="carousel-inner" #carousel>
+    <li *ngFor="let item of items" class="carousel-item">
+      <ng-container [ngTemplateOutlet]="item.tpl"></ng-container>
+    </li>
+  </ul>
+</section>
+
+<div *ngIf="showControls">
+  <div class="controls">
+    <span
+      class="material-icons"
+      (click)="prev()"
+      style="font-size: 35px; color: #5b88a3; cursor: pointer;"
+    >
+      arrow_back
+    </span>
+    <span
+      class="material-icons"
+      (click)="next()"
+      style="font-size: 35px; color: #5b88a3; cursor: pointer;"
+    >
+      arrow_forward
+    </span>
+  </div>
+</div>
