@@ -1,70 +1,115 @@
-@import '../../../styles/variables';
+@import "../../../styles/variables";
 
+.card:hover {
+  transform: translateY(-10px);
 
-.card:hover{
-    @include hoverShadow;
-    transform: translateY(-10px);
-
-    .title{
-        transform: translateY(-100px);
-    }
+  .price {
+    transform: translateY(-100px);
+  }
 }
 
-.card{
-    @include shadow;
-    padding: 10px;
-    min-width: 200px;
-    max-width: 230px;
-    background-color: white;
-    height: 260px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-evenly;
+.card {
+  @include shadow;
+  padding: 20px;
+  width: 200px;
+  background-color: white;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 15px;
+  transition: 0.7s;
+  flex: 1;
+
+  h4 {
+    color: $gray;
+    margin: 0;
+  }
+
+  button {
     margin: 15px;
-    transition: .7s;
-    flex: 1;
-
-     h4{
-         color: $gray;
-         margin: 0;
-     }
-
-     button{
-         margin: 15px;
-         margin-bottom: 5px;
-     }
+    margin-bottom: 5px;
+  }
 }
 
-.preview{
-    overflow: hidden;
-    background-size: cover;
-
-    img{
-        width: 100%;
-    }
+.preview {
+  @include inner-shadow;
+  overflow: hidden;
+  background-size: cover;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  background-position: center;
 }
 
-.flex-btn{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.flex-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .space {
-    width: 2px;
-    color: white;
-    background-color: white;
-    height: 25px;
-    margin: 0px 16px;
+  width: 2px;
+  color: white;
+  background-color: white;
+  height: 25px;
+  margin: 0px 16px;
 }
 
-.title{
-    height: 100%;
-    position: relative;
-    margin-top: 100%;
-    background: white;
-    padding: 1em;
-    transition: .8s;
+.price {
+  height: 100%;
+  position: relative;
+  margin-top: 128%;
+  background: white;
+  padding: 1em;
+  transition: 0.8s;
+  width: 20px;
+
+  p {
+    margin: 0;
+  }
+}
+
+.title {
+  float: left;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  display: inline-block;
+  padding-bottom: 5px;
+
+  p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.title:after {
+  content: "";
+  width: 60px;
+  height: 1px;
+  background: gray;
+  position: absolute;
+  transform: translateY(-5px);
+}
+
+.view {
+  width: 100%;
+  text-align: right;
+  transform: translateY(10px);
+  cursor: pointer;
+  border-radius: 50%;
+
+  span {
+    transition: 0.7s;
+  }
+}
+
+.view:hover {
+  span {
+    transform: scale(1.2);
+  }
 }

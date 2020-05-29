@@ -6,6 +6,12 @@ html,
 body {
   height: 100%;
 }
+
+.container {
+  background: $light-gray;
+  z-index: -3;
+}
+
 body {
   margin: 0;
 }
@@ -43,21 +49,18 @@ h5 {
 }
 
 h3 {
-  font-size: 20px;
+  font-size: 18px;
+  margin: 0;
 }
 
 h4 {
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 300;
 }
 
 p {
   color: $gray;
   font-size: 14px;
-}
-
-.white-btn {
-  @include white-btn;
 }
 
 .green-btn {
@@ -70,21 +73,13 @@ p {
   @include light-blue;
 }
 
+.light-blue-sm {
+  @include light-blue-sm;
+}
+
 .green-btn:hover {
   background: white;
   color: $blue;
-}
-
-.white-btn:hover {
-  transform: scale(1.05);
-}
-
-.pink-btn {
-  @include pink-btn;
-}
-
-.pink-btn:hover {
-  transform: scale(1.1);
 }
 
 .disabled {

@@ -4,6 +4,7 @@ $teal: #e3ebee;
 $pink: #ffa7a7;
 $light-pink: #ffd1d1;
 $gray: #585353;
+$light-gray: #f9f9f9;
 
 // #FFB1B2
 // #FFBABA
@@ -29,35 +30,16 @@ $snackbar-text: white;
     inset 0px 4px 4px rgba(0, 0, 0, 0.16), 9px -6px 16px #ffffff;
 }
 
-@mixin hoverShadow {
-  box-shadow: 10px 14px 15px #54545447;
-}
-
-@mixin white-btn {
-  @include shadow;
+@mixin green-btn-big {
   font-family: "Noto Serif JP", sans-serif;
-  font-weight: 300;
-  font-size: 14px;
-  background-color: white;
-  color: $pink;
-  border: none;
-  width: fit-content;
-  padding: 4px 20px;
-  outline: none;
-  cursor: pointer;
-  transition: 0.6s;
-}
-
-@mixin pink-btn {
-  @include shadow;
-  font-family: "Noto Serif JP", sans-serif;
-  font-weight: 00;
-  font-size: 14px;
-  background-color: $pink;
+  font-weight: 600;
+  font-size: 24px;
+  background-color: $blue;
   color: white;
   border: none;
   width: fit-content;
-  padding: 4px 20px;
+  width: 148px;
+  height: 43.24px;
   display: flex;
   justify-content: center;
   outline: none;
@@ -68,13 +50,13 @@ $snackbar-text: white;
 @mixin green-btn {
   font-family: "Noto Serif JP", sans-serif;
   font-weight: 600;
-  font-size: 24px;
+  font-size: 18px;
   background-color: $blue;
   color: white;
   border: none;
   width: fit-content;
-  width: 148px;
-  height: 43.24px;
+  width: 121px;
+  height: 33.24px;
   display: flex;
   justify-content: center;
   outline: none;
@@ -97,4 +79,22 @@ $snackbar-text: white;
   outline: none;
   cursor: pointer;
   transition: 0.6s;
+}
+
+@mixin light-blue-sm {
+  font-family: "Noto Serif JP", sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  background-color: $teal;
+  color: $blue;
+  border: none;
+  width: fit-content;
+  width: 100px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  outline: none;
+  cursor: pointer;
+  transition: 0.6s;
+  margin: 15px;
 }

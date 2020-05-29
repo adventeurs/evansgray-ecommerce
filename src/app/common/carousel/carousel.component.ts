@@ -37,8 +37,8 @@ export class CarouselItemElement {}
       }
 
       .carousel-wrapper {
-        overflow: hidden;
         margin: auto;
+        margin-top: -16em;
       }
 
       .carousel-inner {
@@ -72,6 +72,8 @@ export class CarouselComponent implements AfterViewInit {
     this.itemWidth = this.itemsElements.first.nativeElement.getBoundingClientRect().width;
     this.carouselWrapperStyle = {
       width: `${this.itemWidth}px`
+      // width: "100%",
+      // paddingLeft: "15%"
     };
   }
 
@@ -85,10 +87,11 @@ export class CarouselComponent implements AfterViewInit {
     // increment slide if positive
     if (value) this.currentSlide = (this.currentSlide + 1) % this.items.length;
     // decrement if false
-    else
+    else {
       this.currentSlide =
         (this.currentSlide - 1 + this.items.length) % this.items.length;
-
+    }
+    console.log(this.currentSlide);
     return this.currentSlide * this.itemWidth;
   }
 
@@ -105,7 +108,7 @@ export class CarouselComponent implements AfterViewInit {
   prev() {
     if (this.currentSlide === 0) this.currentSlide = this.items.length;
 
-    const offset = this.getOffset(-1);
+    const offset = this.getOffset(0);
 
     const myAnimation: AnimationFactory = this.slideAnimation(offset);
     this.player = myAnimation.create(this.carousel.nativeElement);
