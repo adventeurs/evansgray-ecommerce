@@ -12,9 +12,7 @@ MVP is live at <https://evansgray.herokuapp.com/>
   - Enter 4242 repeating for the card information.
   - Pay
 
-<<<<<<< HEAD
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.19.
-=======
+
 Evansgray is an e-commerce app built in Angular and implements the following :
   - Node.js in Express
   - Cloud Firestore 
@@ -26,56 +24,14 @@ Evansgray is an e-commerce app built in Angular and implements the following :
   - Angular Material
   - Typescript
   - NPM: nodemon, angularfire, concurrently, dotenv, express, rxjs
->>>>>>> 6e1298934864f33c2fc87826190d37f48d8ba598
-
-## Development server
-
-<<<<<<< HEAD
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-=======
-
-# Breakdown
->>>>>>> 6e1298934864f33c2fc87826190d37f48d8ba598
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-<<<<<<< HEAD
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-=======
-
-```
->>>>>>> 6e1298934864f33c2fc87826190d37f48d8ba598
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-<<<<<<< HEAD
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-=======
-Firestore Data Structure
-```js
-- carts/uid 
-       // One sku per item added. If a customer adds multiple products, multiple skus will be added.
-       -- sku : { product info }
-```
+  
 
 ### Stripe Integration 
 To integrate with Stripe multiple api calls are required. A stripe customer must be created in order to store order history, shipping information and card details (optionally). The stripe customer id is then required to create a Stripe order, when an order is created Stripe returns an order total based on the skus provided within the order. This means every product in the Firestore database is accompanied with a Stripe product. A Stripe product must first be created, a product id is returned which is then used to create a sku with a price model. Finally, a stripe card is mounted on checkout and a payment intent is passed to the server and processed with Stripe.
 
 Server
 ```js
-// destructure the body of our request 🦄
+// destructure request 
   const { paymentMethodId, // stripe paymentMethodId created by stripe elements
               currency,     // usd
               items,        // array of products in order
@@ -112,7 +68,7 @@ Server
 ```
 
 ### Sendgrid Integration
-Sendgrid is set up through Firebase cloud functions. When a particular document is created, Firebase with retrieve the document and insert the required data into our email template. Sendgrid then sends the email for us.
+Sendgrid is set up through Firebase cloud functions. Emails are sent on account creation, sign-up, abandoned cart, and ccheck-out.
 
 ```js
 // Send welcome email to new customers
@@ -135,4 +91,4 @@ exports.newCustomer = functions.auth.user().onCreate( user => {
 
 ### User Accounts & Management
 Every user has a basic dashboard to review order history, update information or delete their account.
->>>>>>> 6e1298934864f33c2fc87826190d37f48d8ba598
+
