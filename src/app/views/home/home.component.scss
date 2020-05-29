@@ -1,6 +1,9 @@
 @import "../../../styles/variables";
 
+//
 // HERO HOME COMPONENT
+//
+
 .hero {
   display: flex;
   flex-direction: row;
@@ -85,7 +88,53 @@
   }
 }
 
+@media only screen and (max-width: 1400px) {
+  .cta {
+    margin-right: 132px;
+  }
+
+  .watercolor-10 {
+    width: 392px;
+    height: 534px;
+    transform: translate(149px, -354px);
+  }
+
+  .watercolor-18 {
+    width: 482px;
+    transform: translate(-125px, -281px);
+  }
+
+  .hero-img {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+
+    .hero-image-wrapper {
+      width: 290px;
+      height: 365px;
+
+      img {
+        width: 100%;
+      }
+    }
+
+    .hero-image-wrapper::after {
+      @include inner-shadow;
+      bottom: 0;
+      content: "";
+      bottom: 22px;
+      content: "";
+      display: block;
+      height: 363px;
+      position: absolute;
+      width: 291px;
+    }
+  }
+}
+
+//
 // SLIDES
+//
 
 .slide {
   @include shadow;
@@ -94,6 +143,9 @@
   padding: 2em;
   margin: 2em 3em;
   width: 800px;
+  max-height: 383px;
+  // overflow: hidden;
+  background: white;
 }
 
 .slide-cta {
@@ -102,6 +154,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  z-index: 2;
 
   button {
     margin-left: 72%;
@@ -119,6 +172,7 @@
     padding: 20px;
     position: relative;
     background: $light-pink;
+    z-index: 2;
 
     img {
       width: 100%;
@@ -146,7 +200,7 @@
   height: 534px;
   background-repeat: no-repeat;
   background-size: contain;
-  z-index: -1;
+  z-index: 1;
   position: absolute;
   display: block;
   transform: translate(48px, -411px);
@@ -154,37 +208,107 @@
 
 .watercolor-17 {
   background: url(../../../assets/watercolor-17.png);
-  mix-blend-mode: color-dodge;
+  mix-blend-mode: normal;
   opacity: 0.44;
   width: 259px;
   height: 200px;
   background-repeat: no-repeat;
   background-size: contain;
-  z-index: -1;
+  z-index: 1;
   position: absolute;
   display: block;
   transform: translate(162px, -120px);
 }
 
+.scrunchie {
+  background: url(../../../assets/products/scrunchies_buns_gold_blush_detail_2.jpg);
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-position-x: -25px;
+}
+
+.ribbon {
+  background: url(../../../assets/products/ribbon_classic_antique_gold_6.jpg);
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+  background-position-x: -25px;
+}
+
+.square-cta {
+  margin-left: 2em;
+}
+
+.square-slide {
+  width: 355px !important;
+}
+
+.square-slide::after {
+  width: 355px !important;
+}
+
+.watercolor-ribbon-2 {
+  background: url(../../../assets/watercolor-17.png);
+  mix-blend-mode: normal;
+  opacity: 0.64;
+  width: 343px;
+  height: 129px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+  background-position-x: 20px;
+  display: block;
+  transform: translate(-73px, -97px);
+}
+
+.watercolor-scrunchie {
+  background: url(../../../assets/watercolor-17.png);
+  mix-blend-mode: normal;
+  opacity: 0.44;
+  width: 317px;
+  height: 153px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 1;
+  background-position-x: -47px;
+  background-position-y: bottom;
+  display: block;
+  transform: translate(-32px, -415px);
+}
+
 // CAT HOME
-// NATURAL COLOR
-// JOIN
-// TIMELESS
-// BESPOKE
+
+.blue-section {
+  background: $teal;
+  height: 500px;
+  margin-top: 15em;
+  padding-top: 18em;
+  padding-bottom: 15em;
+  overflow-x: hidden;
+}
+
 .selection {
-  background: url("/assets/dotflowers.png");
+  margin-top: -21.5em;
+
+  h2 {
+    margin: 2em !important;
+    margin: auto;
+    text-align: center;
+    color: $blue;
+  }
 }
 
 .category-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  padding-top: 100px;
 
   .category {
     @include shadow;
-    height: 369px;
-    width: 193px;
+    @include inner-shadow;
+    height: 305px;
+    width: 180px;
     overflow: hidden;
     margin: 1em;
     background-size: cover;
@@ -199,9 +323,11 @@
       right: 134%;
       width: 100%;
       transition: 0.8s;
+      z-index: 2;
     }
   }
 }
+
 .white-cover {
   height: 105%;
   width: 100%;
@@ -211,6 +337,165 @@
   left: 100%;
   transition: 0.6s;
   outline: none;
+}
+
+//
+// NATURAL COLOR
+//
+
+.natural-color {
+  display: flex;
+  flex-direction: row;
+  max-width: 900px;
+  margin: auto;
+  padding: 13em 0;
+
+  .natural-color-pink {
+    flex: 1;
+    padding: 1em;
+
+    img {
+      max-width: 400px;
+    }
+  }
+
+  .natural-color-cta {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1em;
+
+    h2 {
+      color: $blue;
+    }
+
+    p {
+      padding: 1em 0;
+    }
+  }
+}
+
+.row-reverse {
+  flex-direction: row-reverse !important;
+}
+
+.flex-end {
+  align-items: flex-end !important;
+}
+
+.vertical-divider {
+  width: 1px;
+  background: #e0e0e0;
+  height: 350px;
+  margin: 2em;
+}
+
+//
+// JOIN
+//
+
+.join {
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    margin: 0;
+  }
+
+  input {
+    height: 10px;
+    width: 300px;
+    padding: 14px;
+    color: $gray;
+    margin: 2em;
+    position: relative;
+    z-index: 1;
+  }
+
+  input:focus {
+    outline: $light-pink auto 1px;
+  }
+}
+
+.watercolor-16 {
+  height: 426px;
+  display: inline;
+  position: absolute;
+  transform: translate(-241px, -172px) rotate(269deg);
+  z-index: 0;
+}
+
+.bouquet {
+  width: 320px;
+  transform: translate(-16px, -146px);
+  position: absolute;
+}
+
+// TIMELESS
+
+//
+// BESPOKE
+//
+
+.bespoke {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 2em;
+  position: relative;
+  z-index: 2;
+}
+
+.bespoke-image {
+  @include white-shadow;
+  width: 350px;
+  overflow: hidden;
+  padding: 20px;
+  position: relative;
+  background: white;
+  flex: 2;
+  margin: 1em;
+
+  img {
+    width: 100%;
+  }
+}
+
+.bespoke-cta {
+  @include shadow;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 3em;
+  padding: 2em;
+  height: 200px;
+  background: white;
+
+  h2 {
+    padding-bottom: 20px;
+    color: $blue;
+  }
+
+  p {
+    padding-bottom: 20px;
+  }
+}
+
+.wc3 {
+  width: 100px;
+  position: absolute;
+  transform: translate(734px, -307px) scaleX(-1) rotate(-23deg);
+  z-index: 1;
+}
+
+.wc1 {
+  width: 413px;
+  position: absolute;
+  transform: translate(571px, -357px) rotate(91deg);
+  z-index: 0;
 }
 
 .email-input {
@@ -228,9 +513,6 @@
 }
 
 .category:hover {
-  @include hoverShadow;
-  transform: scale(1.05);
-
   .white-cover {
     transform: translateX(-100%);
     margin-top: -90px !important;

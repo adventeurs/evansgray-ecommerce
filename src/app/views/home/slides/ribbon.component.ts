@@ -1,18 +1,16 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "ribbon",
   template: `
     <div class="slide">
       <div class="slide-img">
-        <div class="slide-image-wrapper">
-          <img
-            src="../../../assets/products/ribbon_classic_antique_gold_6.jpg"
-            alt=""
-          />
+        <div class="slide-image-wrapper square-slide">
+          <div class="ribbon"></div>
         </div>
+        <div class="watercolor-ribbon-2"></div>
       </div>
-      <div class="slide-cta">
+      <div class="slide-cta square-cta">
         <h2>Classic Silk Ribbon</h2>
         <p>
           Developed with florists in mind, Evansgray Classic Silk Ribbon is the
@@ -26,8 +24,4 @@ import { Component, OnInit } from "@angular/core";
   `,
   styleUrls: ["../home.component.scss"]
 })
-export class RibbonComponent implements OnInit {
-  ngOnInit() {
-    console.log("hello");
-  }
-}
+export class RibbonComponent {}

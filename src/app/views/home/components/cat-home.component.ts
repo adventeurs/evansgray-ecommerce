@@ -4,6 +4,7 @@ import { Component } from "@angular/core";
   selector: "cat-home",
   template: `
     <div class="selection">
+      <h2>Categories</h2>
       <div class="category-container">
         <div
           class="category"
@@ -14,7 +15,7 @@ import { Component } from "@angular/core";
             'url(assets/products/napkin_copper_plate_setting_1.jpg)'
           "
         >
-          <h4>For Home</h4>
+          <h4>Home</h4>
           <div class="white-cover"></div>
         </div>
         <div

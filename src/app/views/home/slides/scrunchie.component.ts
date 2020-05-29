@@ -1,18 +1,17 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "scrunchie",
   template: `
     <div class="slide">
       <div class="slide-img">
-        <div class="slide-image-wrapper">
-          <img
-            src="../../../assets/products/schrunchies_buns_gold_blush_detail_2.jpg"
-            alt=""
-          />
+        <div class="slide-image-wrapper square-slide">
+          <div class="scrunchie"></div>
         </div>
+        <div class="watercolor-scrunchie"></div>
+        <div class="watercolor-scrunchie-2"></div>
       </div>
-      <div class="slide-cta">
+      <div class="slide-cta square-cta">
         <h2>The Scrap Scrunch</h2>
         <p>
           You’ll be rocking one on your wrist and one in your hair at all times,
@@ -27,8 +26,4 @@ import { Component, OnInit } from "@angular/core";
   `,
   styleUrls: ["../home.component.scss"]
 })
-export class ScrunchieComponent implements OnInit {
-  ngOnInit() {
-    console.log("hello");
-  }
-}
+export class ScrunchieComponent {}
