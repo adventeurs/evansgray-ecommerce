@@ -40,8 +40,13 @@ import { HeroHomeComponent } from "./views/home/components/hero-home.component";
 import { CatHomeComponent } from "./views/home/components/cat-home.component";
 import { TimelessComponent } from "./views/home/components/timeless.component";
 import { JoinComponent } from "./views/home/components/join.component";
+import { NotionsComponent } from "./views/shop/components/notions.component";
 import { BespokeComponent } from "./views/home/components/bespoke.component";
 import { NaturalColorComponent } from "./views/home/components/natural-color.component";
+import { ShopAllComponent } from "./views/shop/components/shop-all.component";
+import { ForBodyComponent } from "./views/shop/components/for-body.component";
+import { ForHomeComponent } from "./views/shop/components/for-home.component";
+import { RibbonFeatureComponent } from "./views/shop/components/ribbonFeature.component";
 
 @NgModule({
   declarations: [
@@ -68,14 +73,24 @@ import { NaturalColorComponent } from "./views/home/components/natural-color.com
     TimelessComponent,
     JoinComponent,
     BespokeComponent,
-    NaturalColorComponent
+    NaturalColorComponent,
+    ShopAllComponent,
+    NotionsComponent,
+    ForBodyComponent,
+    ForHomeComponent,
+    RibbonFeatureComponent
   ],
   entryComponents: [
     ShippingInfoComponent,
     RefundInfoComponent,
     ApronComponent,
     ScrunchieComponent,
-    RibbonComponent
+    RibbonComponent,
+    ShopAllComponent,
+    NotionsComponent,
+    ForBodyComponent,
+    ForHomeComponent,
+    RibbonFeatureComponent
   ],
   imports: [
     BrowserModule,

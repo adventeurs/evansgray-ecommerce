@@ -91,7 +91,6 @@ export class CarouselComponent implements AfterViewInit {
       this.currentSlide =
         (this.currentSlide - 1 + this.items.length) % this.items.length;
     }
-    console.log(this.currentSlide);
     return this.currentSlide * this.itemWidth;
   }
 

@@ -63,6 +63,10 @@ p {
   font-size: 14px;
 }
 
+.mat-checkbox-inner-container {
+  background: $pink;
+}
+
 .green-btn {
   @include green-btn;
   transition: 0.7s;

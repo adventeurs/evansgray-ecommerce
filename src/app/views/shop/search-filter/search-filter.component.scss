@@ -1,43 +1,40 @@
-.filters{
-    display: flex;
-    flex-direction: column;
-    max-width: 300px;
-    max-height: 250px;
-    margin: auto;
-
+.filters {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  max-height: 250px;
+  margin: auto;
 }
 
-.categories{
-    flex:1;
+.categories {
+  flex: 1;
 }
 
-
-
-.color-selection{
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
+.mat-checkbox-inner-container {
+  background: black;
 }
 
-.color-selection div{
-    width: 50%;
+.color-selection {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 }
 
-.material{
-    flex: 1;
+.color-selection div {
+  width: 50%;
 }
 
-.card{
-    margin: 15px;
+.material {
+  flex: 1;
 }
 
-@media only screen and (max-width: 680px){
-    .card{
-        margin: 0;
-        margin-bottom: 15px;
-    }
+@media only screen and (max-width: 680px) {
+  .card {
+    margin: 0;
+    margin-bottom: 15px;
+  }
 
-    .filter{
-        max-height: unset;
-    }
+  .filter {
+    max-height: unset;
+  }
 }

@@ -21,6 +21,10 @@ export class CartService {
   private cartSize = new ReplaySubject<Number>(1);
   private cart = new ReplaySubject<Product[]>(1);
 
+  private cartTotal$ = new ReplaySubject<Number>(1);
+  private cartSize$ = new ReplaySubject<Number>(1);
+  private cart$ = new ReplaySubject<Product[]>(1);
+
   // Retrieve The Total Price of Cart
   get total(): ReplaySubject<Number> {
     return this.cartTotal;
@@ -64,13 +68,16 @@ export class CartService {
       .subscribe();
   }
 
+  _cartSource() {
+    this.fireAuth.authState.pipe();
+  }
+
   abandonedCart() {
     const data = {
       abandonedCart: new Date()
     };
     try {
       this.userRef.update(data);
-      this.cartRef.update(data);
     } catch (e) {
       console.log(e);
     }

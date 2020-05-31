@@ -6,7 +6,7 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { Observable, of, ReplaySubject } from "rxjs";
+import { Observable, of, ReplaySubject, BehaviorSubject } from "rxjs";
 import { switchMap, tap } from "rxjs/operators";
 import { auth, firestore } from "firebase/app";
 import { NotificationService } from "./notification.service";
@@ -16,12 +16,16 @@ import { HttpClient } from "@angular/common/http";
   providedIn: "root"
 })
 export class AuthService {
-  // Currently Logged In User
-  private loggedInUser = new ReplaySubject<firebase.User>(1);
+  private userRef: Observable<any>;
+  private _currentUser$: BehaviorSubject<firebase.User>;
 
   // Access Currently Logged In User
-  get user$(): Observable<firebase.User> {
-    return this.loggedInUser;
+  public get user$(): Observable<User> {
+    return this.currentUser$.asObservable();
+  }
+
+  public getCurrentUser(): User {
+    return this._currentUser$.getValue();
   }
 
   constructor(
@@ -31,22 +35,26 @@ export class AuthService {
     private notification: NotificationService,
     private http: HttpClient
   ) {
-    fireAuth.authState
-      .pipe(
-        switchMap(user => {
-          // If User Is Logged In
-          if (user) {
-            return this.db.doc<User>(`users/${user.uid}`).valueChanges();
-          } else {
-            // If User Is Logged Out
-            return of(null);
-          }
-        })
-      )
-      .subscribe(user => {
-        // Update User Replay Subject
-        this.loggedInUser.next(user);
-      });
+    this.userRef = fireAuth.authState.pipe(
+      switchMap(user => {
+        // If User Is Logged In
+        if (user) {
+          return this.db.doc<User>(`users/${user.uid}`).valueChanges();
+        } else {
+          // If User Is Logged Out
+          return of(null);
+        }
+      })
+    );
+  }
+
+  private get currentUser$(): BehaviorSubject<User> {
+    if (!this._currentUser$) {
+      this._currentUser$ = new BehaviorSubject<firebase.User>(undefined);
+      this.userRef.subscribe(this._currentUser$);
+    }
+
+    return this._currentUser$;
   }
 
   // Sign-In / Sign-Up User Through GoogleAuthProvider

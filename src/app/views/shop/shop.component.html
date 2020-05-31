@@ -1,20 +1,24 @@
-
-<div class="display-products">
-        <div class="filters">
-                <app-search-filter [filter]='filter'></app-search-filter>
-             </div>
-        <div class="search-results">
-            <div class="spin" *ngIf="loading">
-                <mat-spinner></mat-spinner>
-            </div>
-            <cdk-virtual-scroll-viewport itemSize="50">
-                    <div class="results">
-                        <div class="results animate fadeIn" *cdkVirtualFor="let product of (product$ | async)">
-                        <product-card [product]="product"></product-card>
-                        </div>
-                    </div>
-            </cdk-virtual-scroll-viewport>
-        </div>
+<div class="feature-container">
+  <ng-template [ngComponentOutlet]="feature.component"></ng-template>
 </div>
 
-
+<div class="display-products">
+  <div class="filters">
+    <app-search-filter [filter]="filter"></app-search-filter>
+  </div>
+  <div class="search-results">
+    <div class="spin" *ngIf="loading">
+      <mat-spinner></mat-spinner>
+    </div>
+    <cdk-virtual-scroll-viewport itemSize="50">
+      <div class="results">
+        <div
+          class="results animate fadeIn"
+          *cdkVirtualFor="let product of product$ | async"
+        >
+          <product-card [product]="product"></product-card>
+        </div>
+      </div>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>

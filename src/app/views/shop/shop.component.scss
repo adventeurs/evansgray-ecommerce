@@ -30,7 +30,6 @@ cdk-virtual-scroll-content-wrapper {
   margin-bottom: 5em;
   padding-bottom: 10em;
   background-size: cover;
-  padding-top: 100px;
   padding-right: 0;
 }
 
@@ -91,3 +90,69 @@ cdk-virtual-scroll-content-wrapper {
     flex-direction: column;
   }
 }
+
+//
+// Components
+//
+
+.feature {
+  display: flex;
+  flex-direction: row;
+  padding: 2em 10%;
+  background: $teal;
+  height: 400px;
+}
+
+.feature-img {
+  @include inner-shadow;
+  flex: 1;
+  padding: 1em;
+  overflow: hidden;
+  background: white;
+
+  img {
+    width: 100%;
+  }
+}
+
+.feature-container {
+  background: $teal;
+  width: 100%;
+}
+
+.feature-cta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+
+  p {
+    max-width: 300px;
+  }
+}
+
+// .feature-cta::after {
+//   content: "";
+//   width: 2px;
+//   height: 200px;
+//   background: gray;
+//   position: absolute;
+//   left: 50%;
+// }
+
+.carousel-wrapper {
+  width: 100% !important;
+}
+
+// @keyframes slide-up {
+//   0% {
+//     opacity: 0;
+//     transform: translateX(-100%);
+//   }
+//   100% {
+//     opacity: 1;
+//     transform: translateX(0);
+//   }
+// }

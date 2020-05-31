@@ -1,49 +1,55 @@
 <div class="filters" *ngIf="filter$ | async as f">
-  <mat-card class="card" style="background: #ffa7a7;">
-    <mat-card-title style="font-family: 'Open Sans'; color: white;">
-      Categories
+  <mat-card class="card" style="box-shadow: none; background: none;">
+    <mat-card-title>
+      <h3>Categories</h3>
     </mat-card-title>
     <div *ngFor="let cat of f.category">
       <mat-checkbox
         value="{{ cat }}"
-        style="font-family: 'Open Sans'; color: #585353;"
+        style="color: #585353"
         (change)="setFilter($event, cat)"
         [checked]="filter ? filter.includes(cat) : false"
       >
-        {{ cat }}</mat-checkbox
+        <p style="margin: 0; font-family: 'Playfair Display', serif; ">
+          {{ cat }}
+        </p></mat-checkbox
       >
     </div>
   </mat-card>
-  <mat-card class="card" style="background: #ffa7a7;">
-    <mat-card-title style="font-family: 'Open Sans'; color: white;">
-      Colors
+  <mat-card class="card" style="box-shadow: none; background: none;">
+    <mat-card-title>
+      <h3>Colors</h3>
     </mat-card-title>
     <div class="color-selection">
       <div *ngFor="let color of f.color">
         <mat-checkbox
           value="{{ color }}"
-          style="font-family: 'Open Sans'; color:white;"
+          style="color:#585353;"
           (change)="setFilter($event, color)"
           [checked]="filter ? filter.includes(color) : false"
         >
-          {{ color }}</mat-checkbox
-        >
+          <p style="margin: 0; font-family: 'Playfair Display', serif; ">
+            {{ color }}
+          </p>
+        </mat-checkbox>
       </div>
     </div>
   </mat-card>
-  <mat-card class="card" style="background: #ffa7a7;">
-    <mat-card-title style="font-family: 'Open Sans'; color: white;">
-      Material
+  <mat-card class="card" style="box-shadow: none; background: none;">
+    <mat-card-title>
+      <h3>Material</h3>
     </mat-card-title>
     <div *ngFor="let mat of f.material">
       <mat-checkbox
         value="{{ mat }}"
-        style="font-family: 'Open Sans'; color: white;"
+        style="color:#585353;"
         (change)="setFilter($event, mat)"
         [checked]="filter ? filter.includes(mat) : false"
       >
-        {{ mat }}</mat-checkbox
-      >
+        <p style="margin: 0; font-family: 'Playfair Display', serif; ">
+          {{ mat }}
+        </p>
+      </mat-checkbox>
     </div>
   </mat-card>
 </div>
