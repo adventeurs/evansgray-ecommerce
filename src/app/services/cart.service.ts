@@ -1,75 +1,65 @@
 import { Injectable } from "@angular/core";
 import { Product } from "../models/product";
-import { ReplaySubject, of } from "rxjs";
-import {
-  AngularFirestore,
-  AngularFirestoreDocument,
-  DocumentData
-} from "@angular/fire/firestore";
-import { switchMap, tap } from "rxjs/operators";
+import { of, BehaviorSubject, Observable } from "rxjs";
+import { AngularFirestore, DocumentData } from "@angular/fire/firestore";
+import { switchMap } from "rxjs/operators";
 import { AngularFireAuth } from "@angular/fire/auth";
 import { firestore, User } from "firebase/app";
 import { NotificationService } from "./notification.service";
+import { AuthService } from "./auth.service";
 
 @Injectable({
   providedIn: "root"
 })
 export class CartService {
-  private cartRef: AngularFirestoreDocument;
-  private userRef: AngularFirestoreDocument;
-  private cartTotal = new ReplaySubject<Number>(1);
-  private cartSize = new ReplaySubject<Number>(1);
-  private cart = new ReplaySubject<Product[]>(1);
-
-  private cartTotal$ = new ReplaySubject<Number>(1);
-  private cartSize$ = new ReplaySubject<Number>(1);
-  private cart$ = new ReplaySubject<Product[]>(1);
+  private cartRef$: Observable<any>;
 
   // Retrieve The Total Price of Cart
-  get total(): ReplaySubject<Number> {
-    return this.cartTotal;
+  get total(): Observable<number> {
+    return this.currentCart.pipe(switchMap(this.nextTotal));
   }
 
   // Retrieve The Total Number Of Items In The Cart
-  get size(): ReplaySubject<Number> {
-    return this.cartSize;
+  get size(): Observable<number> {
+    return this.currentCart.pipe(switchMap(this.nextSize));
   }
 
   // Retrieve Cart As An Iterable Array
-  get cartArray(): ReplaySubject<Product[]> {
-    return this.cart;
+  get cartArray(): Observable<Product[]> {
+    return this.currentCart.pipe(switchMap(this.toCartArray));
   }
 
   constructor(
     private db: AngularFirestore,
     private fireAuth: AngularFireAuth,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private auth: AuthService
   ) {
-    this.fireAuth.authState
-      .pipe(
-        switchMap(user => {
-          //  If User Is Logged In
-          if (user) {
-            // Reference To Firestore Cart
-            this.userRef = db.doc<User>(`users/${user.uid}`);
-            this.cartRef = db.doc<Product>(`carts/${user.uid}`);
-            // Return Users Cart And Perform Details Logic
-            return this.cartRef.valueChanges().pipe(
-              tap(cart => this.nextSize(cart)),
-              tap(cart => this.toCartArray(cart)),
-              tap(cart => this.nextTotal(cart))
-            );
-          } else {
-            this.cartSize.next(0);
-            return of(null);
-          }
-        })
-      )
-      .subscribe();
+    this.cartRef$ = this.fireAuth.authState.pipe(
+      switchMap(user => {
+        //  If User Is Logged In
+        if (user) {
+          return this.cartRef.valueChanges();
+        } else {
+          return of(null);
+        }
+      })
+    );
   }
 
-  _cartSource() {
-    this.fireAuth.authState.pipe();
+  private _currentCart$: BehaviorSubject<Product[]>;
+  private get currentCart(): BehaviorSubject<Product[]> {
+    if (!this._currentCart$) {
+      this._currentCart$ = new BehaviorSubject<Product[]>(undefined);
+      this.cartRef$.subscribe(this._currentCart$);
+    }
+
+    return this._currentCart$;
+  }
+
+  private get cartRef() {
+    let uid = this.auth.getCurrentUser().uid;
+    return this.db.doc<Product>(`carts/${uid}`);
   }
 
   abandonedCart() {
@@ -77,7 +67,8 @@ export class CartService {
       abandonedCart: new Date()
     };
     try {
-      this.userRef.update(data);
+      const uid = this.auth.getCurrentUser().uid;
+      this.db.doc(`users/${uid}`).update(data);
     } catch (e) {
       console.log(e);
     }
@@ -85,20 +76,7 @@ export class CartService {
 
   // Add Product To Cart With Only Essential Information
   addToCart(product: Product, quantity: number) {
-    let productToAdd = {
-      [product.sku]: {
-        main: product.main,
-        sku: product.sku,
-        title: product.title,
-        type: product.type,
-        quantity: quantity,
-        parent: product.parent,
-        price: product.price,
-        inventory: product.inventory
-      }
-    };
-
-    this.cartRef.set(productToAdd, { merge: true }).catch(err => {
+    this.cartRef.set(product, { merge: true }).catch(err => {
       this.notification.snackbarAlert(err);
     });
   }
@@ -112,9 +90,36 @@ export class CartService {
 
   async deleteCart() {
     this.cartRef.delete();
-    this.cartArray.next([]);
-    this.cartSize.next(0);
-    this.cartTotal.next(0);
+  }
+
+  // Find Total Price Of Items In Cart
+  private nextTotal(product): Observable<number> {
+    if (product) {
+      let totals = Object.keys(product).map(
+        key => product[key].price * product[key].quantity
+      );
+      let finalTotal = totals.reduce((a, b) => a + b, 0);
+
+      of(finalTotal);
+    }
+    return of(0);
+  }
+
+  // Find Total Quantity Of Items In Cart
+  private nextSize(cart): Observable<number> {
+    if (cart) {
+      let items = this.sumQuantity(cart);
+      let quantity = this.reduce(items);
+
+      return of(quantity);
+    }
+
+    return of(0);
+  }
+
+  private toCartArray(cart: DocumentData): Observable<Product[]> {
+    if (cart) return of([...Object.values(cart)]);
+    else return of([]);
   }
 
   // Calculation methods
@@ -125,35 +130,5 @@ export class CartService {
 
   private reduce(totals) {
     if (totals) return totals.reduce((a, b) => a + b, 0);
-  }
-
-  // Find Total Price Of Items In Cart
-  private nextTotal(product) {
-    if (product) {
-      let totals = Object.keys(product).map(
-        key => product[key].price * product[key].quantity
-      );
-      let finalTotal = totals.reduce((a, b) => a + b, 0);
-
-      this.cartTotal.next(finalTotal);
-    }
-    return 0;
-  }
-
-  // Find Total Quantity Of Items In Cart
-  private nextSize(cart) {
-    if (cart) {
-      let items = this.sumQuantity(cart);
-      let quantity = this.reduce(items);
-
-      this.cartSize.next(quantity);
-    }
-
-    return 0;
-  }
-
-  private toCartArray(cart: DocumentData) {
-    if (cart) return this.cart.next([...Object.values(cart)]);
-    else return [];
   }
 }

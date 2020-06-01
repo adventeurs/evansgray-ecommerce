@@ -17,7 +17,6 @@ import { HttpClient } from "@angular/common/http";
 })
 export class AuthService {
   private userRef: Observable<any>;
-  private _currentUser$: BehaviorSubject<firebase.User>;
 
   // Access Currently Logged In User
   public get user$(): Observable<User> {
@@ -30,12 +29,12 @@ export class AuthService {
 
   constructor(
     private db: AngularFirestore,
-    private fireAuth: AngularFireAuth,
+    private auth: AngularFireAuth,
     private router: Router,
     private notification: NotificationService,
     private http: HttpClient
   ) {
-    this.userRef = fireAuth.authState.pipe(
+    this.userRef = auth.authState.pipe(
       switchMap(user => {
         // If User Is Logged In
         if (user) {
@@ -48,6 +47,7 @@ export class AuthService {
     );
   }
 
+  private _currentUser$: BehaviorSubject<firebase.User>;
   private get currentUser$(): BehaviorSubject<User> {
     if (!this._currentUser$) {
       this._currentUser$ = new BehaviorSubject<firebase.User>(undefined);
@@ -60,14 +60,14 @@ export class AuthService {
   // Sign-In / Sign-Up User Through GoogleAuthProvider
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
-    const credential = await this.fireAuth.auth.signInWithPopup(provider);
+    const credential = await this.auth.auth.signInWithPopup(provider);
 
     this.updateUserData(credential.user);
   }
 
   // Sign-up User With Email And Password
   async emailSignUp(email: string, password: string, name?: string) {
-    return this.fireAuth.auth
+    return this.auth.auth
       .createUserWithEmailAndPassword(email, password)
       .then(async res => {
         this.updateUserData(res.user, name);
@@ -80,7 +80,7 @@ export class AuthService {
 
   // Login With Email And Password
   async emailLogin(email: string, password: string) {
-    return this.fireAuth.auth
+    return this.auth.auth
       .signInWithEmailAndPassword(email, password)
       .catch(err => {
         this.notification.snackbarAlert(err);
@@ -105,7 +105,7 @@ export class AuthService {
 
   // Sign Out Currently Logged In User
   async signOut() {
-    await this.fireAuth.auth.signOut();
+    await this.auth.auth.signOut();
     this.router.navigate(["/"]);
   }
 
@@ -133,7 +133,7 @@ export class AuthService {
 
   // Update The Users Order History
   async orderSuccess({ paymentIntent, order }: { paymentIntent; order }) {
-    this.fireAuth.user.subscribe(user => {
+    this.auth.user.subscribe(user => {
       this.db
         .collection("users")
         .doc(user.uid)
