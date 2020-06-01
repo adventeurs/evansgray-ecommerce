@@ -17,8 +17,8 @@ import { Product } from "src/app/models/product";
 export class CheckoutComponent implements OnInit {
   orderData: OrderData;
   close: boolean = false;
-  cart$: ReplaySubject<Product[]>;
-  cartTotal$: ReplaySubject<Number>;
+  cart$: Observable<Product[]>;
+  cartTotal$: Observable<Number>;
 
   constructor(
     private _location: Location,
