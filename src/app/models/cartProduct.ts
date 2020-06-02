@@ -1,6 +1,10 @@
-export interface CartProduct{
-    parent: string;
-    type: string;
-    amount: string;
-    title: string;
+export interface CartProduct {
+  main;
+  sku;
+  title;
+  type;
+  quantity;
+  parent;
+  price;
+  inventory;
 }

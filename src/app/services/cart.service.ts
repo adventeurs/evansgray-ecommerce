@@ -4,7 +4,7 @@ import { of, BehaviorSubject, Observable } from "rxjs";
 import { AngularFirestore, DocumentData } from "@angular/fire/firestore";
 import { switchMap } from "rxjs/operators";
 import { AngularFireAuth } from "@angular/fire/auth";
-import { firestore, User } from "firebase/app";
+import { firestore } from "firebase/app";
 import { NotificationService } from "./notification.service";
 import { AuthService } from "./auth.service";
 
@@ -39,7 +39,7 @@ export class CartService {
       switchMap(user => {
         //  If User Is Logged In
         if (user) {
-          return this.cartRef.valueChanges();
+          return this.db.doc<Product>(`carts/${user.uid}`).valueChanges();
         } else {
           return of(null);
         }
@@ -58,8 +58,8 @@ export class CartService {
   }
 
   private get cartRef() {
-    let uid = this.auth.getCurrentUser().uid;
-    return this.db.doc<Product>(`carts/${uid}`);
+    const uid = this.auth.getCurrentUser().uid;
+    return this.db.doc<any>(`carts/${uid}`);
   }
 
   abandonedCart() {
@@ -76,7 +76,20 @@ export class CartService {
 
   // Add Product To Cart With Only Essential Information
   addToCart(product: Product, quantity: number) {
-    this.cartRef.set(product, { merge: true }).catch(err => {
+    const productToAdd = {
+      [product.sku]: {
+        main: product.main,
+        sku: product.sku,
+        title: product.title,
+        type: product.type,
+        quantity: quantity,
+        parent: product.parent,
+        price: product.price,
+        inventory: product.inventory
+      }
+    };
+
+    this.cartRef.set(productToAdd, { merge: true }).catch(err => {
       this.notification.snackbarAlert(err);
     });
   }
@@ -86,10 +99,6 @@ export class CartService {
     this.cartRef.update({
       [product.sku]: firestore.FieldValue.delete()
     });
-  }
-
-  async deleteCart() {
-    this.cartRef.delete();
   }
 
   // Find Total Price Of Items In Cart
@@ -108,8 +117,8 @@ export class CartService {
   // Find Total Quantity Of Items In Cart
   private nextSize(cart): Observable<number> {
     if (cart) {
-      let items = this.sumQuantity(cart);
-      let quantity = this.reduce(items);
+      const items = Object.keys(cart).map(key => cart[key].quantity);
+      const quantity = items.reduce((a, b) => a + b, 0);
 
       return of(quantity);
     }
@@ -124,11 +133,7 @@ export class CartService {
 
   // Calculation methods
 
-  private sumQuantity(product) {
-    if (product) return Object.keys(product).map(key => product[key].quantity);
-  }
-
-  private reduce(totals) {
-    if (totals) return totals.reduce((a, b) => a + b, 0);
+  async deleteCart() {
+    this.cartRef.delete();
   }
 }

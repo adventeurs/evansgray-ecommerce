@@ -1,15 +1,102 @@
 <div class="hero" *ngIf="product$ | async as product">
-<div  class="product-display">
-        <div class="product-img" *ngIf="hovered else init" [style.background-image]="'url(assets/products/' + hovered + '.jpg)'">
+  <div class="product-display">
+    <div class="thumbnails">
+      <div
+        *ngFor="let photo of product.images"
+        class="thumbnail"
+        (mouseenter)="hovered = photo"
+        (click)="hovered = photo"
+      >
+        <div
+          class="thumbnail-img"
+          [style.background-image]="'url(assets/products/' + photo + '.jpg)'"
+        ></div>
+      </div>
+    </div>
 
+    <div class="product-wrapper">
+      <div
+        class="product-img"
+        *ngIf="hovered; else init"
+        [style.background-image]="'url(assets/products/' + hovered + '.jpg)'"
+      ></div>
+      <ng-template #init>
+        <div
+          class="product-img"
+          [style.background-image]="
+            'url(assets/products/' + product.main + '.jpg)'
+          "
+        ></div>
+      </ng-template>
+    </div>
+
+    <div class="product-info"></div>
+    <div class="product-bottom">
+      <h4>Price: {{ product.price | dollars }}</h4>
+      <div class="product-selection">
+        <div class="select">
+          <select [(ngModel)]="quantity">
+            <option
+              *ngFor="let number of product.inventory | inventory"
+              #quantity
+              [ngValue]="number"
+              >{{ number }}</option
+            >
+          </select>
         </div>
-        <ng-template #init>
-                <div class="product-img"
-                [style.background-image]="'url(assets/products/' + product.main + '.jpg)'">
-                </div>
-        </ng-template>
-        <div class="product-info">
-        <div class="product-top">
+        <!-- <mat-form-field style="width: 55px; padding: 15px;">
+          <mat-label>Qty</mat-label>
+          <mat-select matNativeControl required [(value)]="quantity">
+            <mat-option
+              *ngFor="let number of product.inventory | inventory"
+              #quantity
+              value="{{ number }}"
+            >
+              {{ number }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field> -->
+        <div *ngIf="!(auth.user$ | async)">
+          <button class="pink-btn" style="margin: 15px;">
+            Please login or register
+          </button>
+        </div>
+        <div *ngIf="auth.user$ | async" class="cart">
+          <button
+            *ngIf="!cart$ || !(cart$ | async).includes(product.sku)"
+            class="green-btn"
+            (click)="addToCart(product, quantity, auth.user$)"
+          >
+            Add to Cart
+          </button>
+          <div *ngIf="cart$ | async as skus">
+            <button
+              *ngIf="skus.includes(product.sku)"
+              class="green-btn"
+              (click)="addToCart(product, quantity)"
+            >
+              Change
+            </button>
+
+            <i
+              class="material-icons"
+              matTooltip="Remove from cart"
+              style="font-size: 24px; color: #ffa7a7; margin: 15px;"
+              *ngIf="skus.includes(product.sku)"
+              (click)="removeCartItem(product)"
+            >
+              remove_circle
+            </i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- </div> -->
+
+<!-- <div class="product-top">
                 <h2>{{product.title}}</h2>
                 <mat-tab-group mat-stretch-tabs>
                         <mat-tab> 
@@ -55,59 +142,4 @@
                                         <p>{{product.care}}</p> 
                                 </div>
                         </mat-tab>
-                </mat-tab-group>       
-        </div>
-        <div class="product-bottom">
-                <h4>Price: {{product.price | dollars }}</h4>
-                <div class="product-selection">
-                        <mat-form-field style="width: 55px; padding: 15px;">
-                        <mat-label>Qty</mat-label>
-                        <mat-select matNativeControl 
-                                    required 
-                                    [(value)]="quantity">
-                                <mat-option *ngFor="let number of product.inventory | inventory" 
-                                            #quantity
-                                            value="{{number}}">
-                                            {{number}}</mat-option>
-                        </mat-select>
-                        </mat-form-field>
-                        <div *ngIf="!(auth.user$ | async)">
-                                <button class="pink-btn" style="margin: 15px;">
-                                Please login or register</button>
-                        </div>
-                        <div *ngIf="auth.user$ | async"
-                             class="cart">
-                        <button *ngIf="!cart$ || !(cart$ | async).includes(product.sku)" 
-                             class="pink-btn"
-                             (click)='addToCart(product, quantity, auth.user$)'>
-                             Add to Cart</button>
-                        <div *ngIf="cart$ | async as skus">
-                        <button *ngIf='skus.includes(product.sku)'
-                                class="pink-btn"
-                                (click)='addToCart(product, quantity)'>
-                                Change Quantity</button>
-
-                        <i class="material-icons"
-                           matTooltip="Remove from cart"
-                           style="font-size: 24px; color: #5B88A3; margin: 15px;"
-                           *ngIf='skus.includes(product.sku)'
-                           (click)='removeCartItem(product)'>
-                                remove_circle
-                        </i>  
-                        </div>
-                </div>
-        </div>
-        </div>
-        </div>
-</div>
-<div class="thumbnails">
-        <div *ngFor="let photo of product.images" 
-             class="thumbnail"
-             (mouseenter)="hovered = photo"
-             (click)="hovered = photo">               
-             <div class="thumbnail-img"
-             [style.background-image]="'url(assets/products/' + photo + '.jpg)'"
-             ></div>
-        </div>   
-</div>    
-</div>
+                </mat-tab-group>       -->

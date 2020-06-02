@@ -7,10 +7,11 @@ import {
 } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { Observable, of, ReplaySubject, BehaviorSubject } from "rxjs";
-import { switchMap, tap } from "rxjs/operators";
+import { switchMap, tap, mergeMap } from "rxjs/operators";
 import { auth, firestore } from "firebase/app";
 import { NotificationService } from "./notification.service";
 import { HttpClient } from "@angular/common/http";
+import { OrderData } from "../models/orderData";
 
 @Injectable({
   providedIn: "root"
@@ -23,6 +24,7 @@ export class AuthService {
     return this.currentUser$.asObservable();
   }
 
+  //  Access Currently Logged In User Details
   public getCurrentUser(): User {
     return this._currentUser$.getValue();
   }
@@ -47,10 +49,10 @@ export class AuthService {
     );
   }
 
-  private _currentUser$: BehaviorSubject<firebase.User>;
+  private _currentUser$: BehaviorSubject<User>;
   private get currentUser$(): BehaviorSubject<User> {
     if (!this._currentUser$) {
-      this._currentUser$ = new BehaviorSubject<firebase.User>(undefined);
+      this._currentUser$ = new BehaviorSubject<User>(undefined);
       this.userRef.subscribe(this._currentUser$);
     }
 
@@ -132,7 +134,13 @@ export class AuthService {
   }
 
   // Update The Users Order History
-  async orderSuccess({ paymentIntent, order }: { paymentIntent; order }) {
+  async orderSuccess({
+    paymentIntent,
+    order
+  }: {
+    paymentIntent;
+    order: OrderData;
+  }) {
     this.auth.user.subscribe(user => {
       this.db
         .collection("users")
