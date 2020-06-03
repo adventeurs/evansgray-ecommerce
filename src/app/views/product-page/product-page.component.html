@@ -1,50 +1,57 @@
 <div class="hero" *ngIf="product$ | async as product">
   <div class="product-display">
-    <div class="thumbnails">
-      <div
-        *ngFor="let photo of product.images"
-        class="thumbnail"
-        (mouseenter)="hovered = photo"
-        (click)="hovered = photo"
-      >
+    <div class="product">
+      <div class="thumbnails">
         <div
-          class="thumbnail-img"
-          [style.background-image]="'url(assets/products/' + photo + '.jpg)'"
-        ></div>
+          *ngFor="let photo of product.images"
+          class="thumbnail"
+          (mouseenter)="hovered = photo"
+          (click)="hovered = photo"
+        >
+          <div
+            class="thumbnail-img"
+            [style.background-image]="'url(assets/products/' + photo + '.jpg)'"
+          ></div>
+        </div>
       </div>
-    </div>
 
-    <div class="product-wrapper">
-      <div
-        class="product-img"
-        *ngIf="hovered; else init"
-        [style.background-image]="'url(assets/products/' + hovered + '.jpg)'"
-      ></div>
-      <ng-template #init>
+      <div class="product-wrapper">
         <div
           class="product-img"
-          [style.background-image]="
-            'url(assets/products/' + product.main + '.jpg)'
-          "
+          *ngIf="hovered; else init"
+          [style.background-image]="'url(assets/products/' + hovered + '.jpg)'"
         ></div>
-      </ng-template>
+        <ng-template #init>
+          <div
+            class="product-img"
+            [style.background-image]="
+              'url(assets/products/' + product.main + '.jpg)'
+            "
+          ></div>
+        </ng-template>
+      </div>
     </div>
-
-    <div class="product-info"></div>
-    <div class="product-bottom">
-      <h4>Price: {{ product.price | dollars }}</h4>
-      <div class="product-selection">
-        <div class="select">
-          <select [(ngModel)]="quantity">
-            <option
-              *ngFor="let number of product.inventory | inventory"
-              #quantity
-              [ngValue]="number"
-              >{{ number }}</option
-            >
-          </select>
-        </div>
-        <!-- <mat-form-field style="width: 55px; padding: 15px;">
+    <div class="product-info">
+      <div class="product-top">
+        <h4>{{ product.title }}</h4>
+        <p>
+          {{ product.description }}
+        </p>
+      </div>
+      <div class="product-bottom">
+        <h4>{{ product.price | dollars }}</h4>
+        <div class="product-selection">
+          <div class="select">
+            <select [(ngModel)]="quantity">
+              <option
+                *ngFor="let number of product.inventory | inventory"
+                #quantity
+                [ngValue]="number"
+                >{{ number }}</option
+              >
+            </select>
+          </div>
+          <!-- <mat-form-field style="width: 55px; padding: 15px;">
           <mat-label>Qty</mat-label>
           <mat-select matNativeControl required [(value)]="quantity">
             <mat-option
@@ -56,90 +63,72 @@
             >
           </mat-select>
         </mat-form-field> -->
-        <div *ngIf="!(auth.user$ | async)">
-          <button class="pink-btn" style="margin: 15px;">
-            Please login or register
-          </button>
-        </div>
-        <div *ngIf="auth.user$ | async" class="cart">
-          <button
-            *ngIf="!cart$ || !(cart$ | async).includes(product.sku)"
-            class="green-btn"
-            (click)="addToCart(product, quantity, auth.user$)"
-          >
-            Add to Cart
-          </button>
-          <div *ngIf="cart$ | async as skus">
-            <button
-              *ngIf="skus.includes(product.sku)"
-              class="green-btn"
-              (click)="addToCart(product, quantity)"
-            >
-              Change
+          <div *ngIf="!(auth.user$ | async)">
+            <button class="green-btn" style="margin: 15px; width: 100%">
+              Please login or register
             </button>
-
-            <i
-              class="material-icons"
-              matTooltip="Remove from cart"
-              style="font-size: 24px; color: #ffa7a7; margin: 15px;"
-              *ngIf="skus.includes(product.sku)"
-              (click)="removeCartItem(product)"
+          </div>
+          <div *ngIf="auth.user$ | async" class="cart">
+            <button
+              *ngIf="!cart$ || !(cart$ | async).includes(product.sku)"
+              class="orange-btn"
+              (click)="addToCart(product, quantity, auth.user$)"
             >
-              remove_circle
-            </i>
+              Add to Cart
+            </button>
+            <div *ngIf="cart$ | async as skus">
+              <button
+                *ngIf="skus.includes(product.sku)"
+                class="green-btn"
+                (click)="addToCart(product, quantity)"
+              >
+                Change
+              </button>
+
+              <i
+                class="material-icons"
+                matTooltip="Remove from cart"
+                style="font-size: 24px; color: #585353; margin: 15px;"
+                *ngIf="skus.includes(product.sku)"
+                (click)="removeCartItem(product)"
+              >
+                remove_circle
+              </i>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="details">
+    <div class="styling">
+      <div class="detail-section">
+        <h4 class="vertical">Styling</h4>
+        <p>{{ product.styling }}</p>
+      </div>
+    </div>
+    <div class="specs">
+      <div class="detail-section">
+        <h4 class="vertical">Color</h4>
+        <p>{{ product.color }}</p>
+      </div>
+      <div class="detail-section">
+        <h4 class="vertical">Style</h4>
+        <p>{{ product.styling }}</p>
+      </div>
+      <div class="detail-section">
+        <h4 class="vertical">Care</h4>
+
+        <p>{{ product.care }}</p>
+      </div>
+    </div>
+    <div class="bouquet-15"></div>
+    <!-- <div class="watercolor-1"></div> -->
+  </div>
 </div>
-
-<!-- </div> -->
-
-<!-- <div class="product-top">
-                <h2>{{product.title}}</h2>
-                <mat-tab-group mat-stretch-tabs>
-                        <mat-tab> 
-                                <ng-template mat-tab-label>
-                                        <span class="material-icons" 
-                                              style="padding-right: 10px; color: #5B88A3;">
-                                        notes
-                                        </span>
-                                        <h4>Description</h4>
-                                </ng-template>
-                                <div class="tab">
-                                        <p>{{product.description}}</p>
-                                        <div style="display: flex; align-items: center;">
-                                                <span class="material-icons">
-                                                color_lens
-                                                </span>  
-                                                <p style="margin-left: 15px;">Color</p>
-                                        </div>
-                                        
-                                        <mat-divider></mat-divider> 
-                                        <p>{{product.color}}</p>
-                                </div>
-                        </mat-tab>
-                        <mat-tab label="Style">
-                                <ng-template mat-tab-label>
-                                        <span class="material-icons" style="padding-right: 10px; color: #5B88A3;">
-                                        style
-                                        </span>
-                                        <h4>Style</h4>
-                                </ng-template> 
-                                <div class="tab">
-                                        <p>{{product.styling}}</p>
-                                </div>
-                        </mat-tab>
-                        <mat-tab label="Care"> 
-                                <ng-template mat-tab-label>
-                                        <span class="material-icons" style="padding-right: 10px; color: #5B88A3;">
-                                        local_laundry_service
-                                        </span>
-                                        <h4>Care</h4>
-                                </ng-template>
-                                <div class="tab">
-                                        <p>{{product.care}}</p> 
-                                </div>
-                        </mat-tab>
-                </mat-tab-group>       -->
+<div class="reccomended">
+  <div class="resuls" *ngFor="let product of recommended$ | async">
+    <product-card [product]="product"></product-card>
+  </div>
+</div>
