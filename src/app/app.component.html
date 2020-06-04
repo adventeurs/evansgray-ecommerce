@@ -11,9 +11,9 @@
     ></router-outlet>
   </div> -->
 
-  <main class="route-container content">
-    <router-outlet></router-outlet>
-  </main>
+  <div [@routeAnimations]="prepareRoute(outlet)" class="route-container content" >
+    <router-outlet #outlet="outlet"></router-outlet>
+  </div>
 
   <footer *ngIf="!_router.url.includes('checkout')">
     <app-footer *ngIf="show"></app-footer>
