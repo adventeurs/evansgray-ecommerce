@@ -218,3 +218,28 @@ select {
   bottom: -43px;
   transform: rotate(451deg);
 }
+
+.reccomended {
+  display: flex;
+  justify-content: center;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+.social-card {
+  @include shadow;
+  display: flex;
+  background: white;
+  padding: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-cta {
+  padding: 2em;
+  text-align: center;
+}

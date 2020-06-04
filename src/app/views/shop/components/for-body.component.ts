@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "for-body",
   template: `
-    <div class="feature">
+    <div class="feature slideIn">
       <div class="feature-img">
         <img
           src="../../../assets/scrunchies_mix_hands_highfive_apron_pink_cloud.jpg"

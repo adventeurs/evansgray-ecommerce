@@ -12,7 +12,7 @@ import { slide, fadeAnimation } from "src/app/common/animations/animations";
 @Component({
   selector: "shop-all",
   template: `
-    <div class="feature">
+    <div class="feature slideIn">
       <div class="feature-img">
         <img src="../../../assets/_DSC3356.jpg" />
       </div>
