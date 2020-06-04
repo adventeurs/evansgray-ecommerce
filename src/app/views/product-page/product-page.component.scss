@@ -2,40 +2,56 @@
 
 .hero {
   display: flex;
-  height: 1000px;
   align-items: center;
   flex-direction: column;
   margin-bottom: 100px;
 }
 
-.product-display {
-  @include shadow;
+.product-wrapper {
+  @include inner-shadow;
+  padding: 1em;
   background: white;
+}
+
+.product {
   display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.product-top {
+  padding: 2em;
+}
+
+.product-display {
+  display: flex;
+  width: 80%;
+  max-width: 1200px;
   flex-direction: row;
   flex-wrap: wrap;
   overflow: hidden;
   min-width: 600px;
   margin-top: 150px;
-  margin-bottom: 0;
+  margin-bottom: 5em;
+  position: relative;
 
   .product-img {
+    @include inner-shadow;
     flex: 1;
     overflow: hidden;
-    margin-bottom: -5px;
-    min-width: 500px;
+    min-width: 450px;
     max-width: 600px;
-    min-height: 500px;
+    min-height: 450px;
     background-size: cover;
     background-position: center;
   }
 
   .product-info {
-    flex: 1;
+    flex: 2;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-width: 600px;
+    padding: 0 2em 2em 2em;
   }
 }
 
@@ -43,8 +59,14 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
   padding: 0 2em;
+  text-align: start;
+  flex-direction: column;
+
+  h4 {
+    margin: 0;
+  }
 
   .product-selection {
     display: flex;
@@ -65,11 +87,13 @@
   }
 }
 
-.product-top {
-  h2 {
-    color: $blue;
-    text-align: center;
-  }
+.product-top h4:after {
+  content: "";
+  width: 90%;
+  height: 1px;
+  background: $gray;
+  display: block;
+  margin-top: 1em;
 }
 
 .tab {
@@ -86,6 +110,7 @@
 .thumbnails {
   position: relative;
   display: flex;
+  flex-direction: column;
 
   .thumbnail {
     @include shadow;
@@ -98,7 +123,8 @@
 }
 
 .thumbnail:hover {
-  size: 1.1;
+  @include shadow;
+  transform: scale(1.1);
 }
 
 .thumbnail-img {
@@ -117,4 +143,103 @@
     overflow: visible;
     min-width: 0;
   }
+}
+
+select {
+  padding: 9px;
+  border: none;
+  background: $teal;
+  color: $blue;
+  margin: 1em;
+  outline: none;
+  margin-left: 0;
+}
+
+.details {
+  @include shadow;
+  padding: 2em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 80%;
+  max-width: 1000px;
+  z-index: 1;
+  background: white;
+}
+
+.detail-section {
+  display: flex;
+  padding: 1em 1em;
+  align-items: center;
+  justify-content: center;
+
+  h4 {
+    transform: rotate(270deg);
+    padding: 10px;
+    color: $blue;
+  }
+}
+
+.specs {
+  flex: 1.2;
+  border-left: 1px $light-gray solid;
+}
+
+.styling {
+  flex: 1;
+  margin-right: 2em;
+}
+
+.bouquet-15 {
+  background: url(../../../assets/bouquet-15.png);
+  width: 251px;
+  height: 234px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 1;
+  position: absolute;
+  display: block;
+  left: -10%;
+  bottom: -70px;
+}
+
+.watercolor-1 {
+  background: url(../../../assets/watercolor-1.png);
+  width: 618px;
+  height: 562px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  z-index: 0;
+  position: absolute;
+  display: block;
+  left: -34%;
+  bottom: -43px;
+  transform: rotate(451deg);
+}
+
+.reccomended {
+  display: flex;
+  justify-content: center;
+}
+
+.social {
+  display: flex;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+.social-card {
+  @include shadow;
+  display: flex;
+  background: white;
+  padding: 2em;
+  justify-content: center;
+  align-items: center;
+}
+
+.social-cta {
+  padding: 2em;
+  text-align: center;
 }

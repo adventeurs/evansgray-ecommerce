@@ -1,11 +1,9 @@
 import { Component } from "@angular/core";
-import { transition, trigger, style, animate } from "@angular/animations";
-import { slide } from "src/app/common/animations/animations";
 
 @Component({
   selector: "ribbon",
   template: `
-    <div class="feature">
+    <div class="feature slideIn">
       <div class="feature-img">
         <img src="../../../assets/ribbon-texture-mix.jpg" />
       </div>

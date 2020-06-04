@@ -1,42 +1,43 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { Injectable } from "@angular/core";
+import { AngularFirestore } from "angularfire2/firestore";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root"
 })
-
 export class ProductService {
-  searchFilter
+  searchFilter;
 
-  constructor( 
-    public db: AngularFirestore 
-    ){ 
+  constructor(public db: AngularFirestore) {}
+
+  getProducts() {
+    return this.db.collection("products").valueChanges();
   }
 
-  getProducts(){
-   return this.db.collection('products')
-              .valueChanges()
-  }   
-
-  getProductBySku( sku ){
-    return this.db.collection('products').doc(sku).get()
-  
+  getProductBySku(sku) {
+    return this.db
+      .collection("products")
+      .doc(sku)
+      .get();
   }
 
-  retrieveFilters(){
-    return this.db.collection('filters').doc('product-filters')
-               .valueChanges()
+  getRecommendedProducts() {
+    return this.db
+      .collection("products", ref => ref.orderBy("inventory").limit(4))
+      .valueChanges();
   }
 
-  filter(  product, filter: String[]){
-    if(filter.length == 0)
-      return true
+  retrieveFilters() {
+    return this.db
+      .collection("filters")
+      .doc("product-filters")
+      .valueChanges();
+  }
 
-    for(let i = 0; i < filter.length; i++){
-      if(product.searchable.includes(filter[i]))
-        return true
+  filter(product, filter: String[]) {
+    if (filter.length == 0) return true;
+
+    for (let i = 0; i < filter.length; i++) {
+      if (product.searchable.includes(filter[i])) return true;
     }
-
   }
-  
 }

@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "notions",
   template: `
-    <div class="feature">
+    <div class="feature slideIn">
       <div class="feature-img">
         <img src="../../../assets/pincushion4_4.jpg" />
       </div>

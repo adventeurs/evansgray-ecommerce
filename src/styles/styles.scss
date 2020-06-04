@@ -81,6 +81,9 @@ p {
   @include light-blue-sm;
 }
 
+.orange-btn {
+  @include orange-btn-big;
+}
 .green-btn:hover {
   background: white;
   color: $blue;

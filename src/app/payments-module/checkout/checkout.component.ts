@@ -6,7 +6,7 @@ import { RefundInfoComponent } from "src/app/common/refund-info/refund-info.comp
 import { ShippingInfoComponent } from "src/app/common/shipping-info/shipping-info.component";
 import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cart.service";
-import { Observable, ReplaySubject } from "rxjs";
+import { Observable } from "rxjs";
 import { Product } from "src/app/models/product";
 
 @Component({

@@ -3,7 +3,7 @@ import { Component } from "@angular/core";
 @Component({
   selector: "for-home",
   template: `
-    <div class="feature">
+    <div class="feature slideIn">
       <div class="feature-img">
         <img src="../../../assets/_DSC3409.png" />
       </div>
