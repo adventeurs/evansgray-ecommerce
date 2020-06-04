@@ -59,7 +59,6 @@ export class PaymentService {
             await this.auth.orderSuccess({ paymentIntent: res, order })
             this.http.post('/api/email/confirmation', order).toPromise()
             this.cart.deleteCart()
-            this.cart.cartArray.next([])
             } catch(e){
               console.log(e)
             }
