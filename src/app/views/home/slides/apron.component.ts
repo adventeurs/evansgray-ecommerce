@@ -19,7 +19,13 @@ import { Component } from "@angular/core";
           colored apron is comfortable + functional with big, reinforced
           pockets.
         </p>
-        <button class="light-blue-btn">Shop</button>
+        <button
+          [routerLink]="['/shop']"
+          [queryParams]="{ filter: 'aprons' }"
+          class="light-blue-btn"
+        >
+          Shop
+        </button>
       </div>
     </div>
   `,

@@ -5,6 +5,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
   selector: "join",
   template: `
     <div class="join">
+      <img class="bouquet" src="../../../assets/Bouquet-16.png" />
       <h2>Join the newsletter</h2>
       <p>10% off your first order</p>
       <form [formGroup]="signUp">
@@ -12,7 +13,6 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
         <img class="watercolor-16" src="../../../assets/watercolor-16.png" />
       </form>
     </div>
-    <img class="bouquet" src="../../../assets/Bouquet-16.png" />
   `,
   styleUrls: ["../home.component.scss"]
 })

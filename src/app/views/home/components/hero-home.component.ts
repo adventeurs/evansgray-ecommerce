@@ -12,7 +12,7 @@ import { Component } from "@angular/core";
           Handmade
         </h1>
         <h3>Heirloom-quality textiles for the maker in you</h3>
-        <button class="green-btn">
+        <button class="green-btn" [routerLink]="['/shop']">
           Shop
         </button>
       </div>

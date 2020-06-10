@@ -308,6 +308,7 @@
   .category {
     @include shadow;
     @include inner-shadow;
+    cursor: pointer;
     height: 305px;
     width: 180px;
     overflow: hidden;
@@ -430,9 +431,11 @@
 }
 
 .bouquet {
-  width: 320px;
-  transform: translate(-16px, -146px);
+  width: 221px;
+  transform: translate(226px, -91px);
+  display: block;
   position: absolute;
+  z-index: 1;
 }
 
 // TIMELESS

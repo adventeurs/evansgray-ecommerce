@@ -5,7 +5,10 @@ import { Component } from "@angular/core";
   template: `
     <div class="feature slideIn">
       <div class="feature-img">
-        <img src="../../../assets/ribbon-texture-mix.jpg" />
+        <div
+          class="feature-img-bck"
+          [style.background-image]="'url(assets/ribbon_textured_mix.jpg)'"
+        ></div>
       </div>
       <div class="feature-cta">
         <h2>Ribbon</h2>

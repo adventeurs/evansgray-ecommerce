@@ -51,18 +51,7 @@
               >
             </select>
           </div>
-          <!-- <mat-form-field style="width: 55px; padding: 15px;">
-          <mat-label>Qty</mat-label>
-          <mat-select matNativeControl required [(value)]="quantity">
-            <mat-option
-              *ngFor="let number of product.inventory | inventory"
-              #quantity
-              value="{{ number }}"
-            >
-              {{ number }}</mat-option
-            >
-          </mat-select>
-        </mat-form-field> -->
+
           <div *ngIf="!(auth.user$ | async)">
             <button class="green-btn" style="margin: 15px; width: 100%">
               Please login or register

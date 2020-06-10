@@ -10,8 +10,6 @@ import { NotionsComponent } from "./components/notions.component";
 import { RibbonFeatureComponent } from "./components/ribbonFeature.component";
 import { ForHomeComponent } from "./components/for-home.component";
 import { ForBodyComponent } from "./components/for-body.component";
-import { trigger, transition, useAnimation } from "@angular/animations";
-import { fadeAnimation } from "src/app/common/animations/animations";
 
 @Component({
   selector: "app-shop",

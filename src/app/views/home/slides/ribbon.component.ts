@@ -18,7 +18,13 @@ import { Component } from "@angular/core";
           silk is cut on the bias, providing a slight stretch for smooth ribbon
           wraps without fraying.
         </p>
-        <button class="light-blue-btn">Shop</button>
+        <button
+          [routerLink]="['/shop']"
+          [queryParams]="{ filter: 'ribbon' }"
+          class="light-blue-btn"
+        >
+          Shop
+        </button>
       </div>
     </div>
   `,

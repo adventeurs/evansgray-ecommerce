@@ -17,7 +17,4 @@ export class HomeComponent {
   ];
 
   constructor(private cart: CartService) {}
-  abandon() {
-    this.cart.abandonedCart();
-  }
 }

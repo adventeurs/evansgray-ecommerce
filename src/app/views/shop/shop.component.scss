@@ -174,3 +174,11 @@ cdk-virtual-scroll-content-wrapper {
     transform: translateX(0);
   }
 }
+
+.feature-img-bck {
+  @include inner-shadow;
+  width: 100%;
+  height: 100%;
+  background-position: center;
+  background-size: cover;
+}

@@ -11,7 +11,10 @@
     ></router-outlet>
   </div> -->
 
-  <div [@routeAnimations]="prepareRoute(outlet)" class="route-container content" >
+  <div
+    [@routeAnimations]="prepareRoute(outlet)"
+    class="route-container content"
+  >
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 

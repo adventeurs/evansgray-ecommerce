@@ -35,6 +35,7 @@ export class CartDisplayComponent {
   }
 
   addToCart(product, _quantity) {
+    console.log(_quantity);
     let quantity = parseInt(_quantity);
     this.cart.addToCart(product, quantity);
   }

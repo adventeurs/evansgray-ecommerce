@@ -1,115 +1,100 @@
-<div class='shipping-form' style="font-size: 12px;" >
+<div class="shipping-form" style="font-size: 12px;">
+  <div *ngIf="!(auth.user$ | async)" class="register">
+    <img src="/assets/evansgray-full.png" alt="" />
+    <h4>Please register to proceed with checkout</h4>
+  </div>
 
-    <div *ngIf="!(auth.user$ | async)" class="register">
-      <img src="/assets/evansgray-full.png" alt="">
-      <h4>Please register to proceed with checkout</h4>
+  <form [formGroup]="orderForm" *ngIf="auth.user$ | async as user">
+    <div class="shipping-title">
+      <h4>Contact</h4>
+    </div>
+    <div class="form-group name">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Email</mat-label>
+        <input
+          formControlName="email"
+          matInput
+          required
+          id="email"
+          type="text"
+        />
+      </mat-form-field>
+      <mat-error *ngIf="email.touched && email.errors?.required">
+        Please enter a contact email
+      </mat-error>
+    </div>
+    <div class="shipping-title">
+      <h4>Shipping Information</h4>
     </div>
 
-    <form [formGroup]='orderForm' *ngIf="(auth.user$ | async) as user">
-      <div class="shipping-title" >
-          <h2>Contact</h2>
-        </div>
-      <div class="form-group name" >
-          <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Email</mat-label>
-              <input
-               formControlName="email"
-              matInput required
-              id="email"
-              type="text">
-          </mat-form-field>
-          <mat-error *ngIf="email.touched && email.errors?.required">
-            Please enter a contact email
-          </mat-error>
-        </div>
-        <div class="shipping-title" >
-          <h2>Shipping Information</h2>
-        </div>
-        
-      <div class="form-group name" >
-        <mat-form-field appearance="outline" style="width: 100%;">
-            <mat-label>Name</mat-label>
-            <input
-             formControlName="name"
-            matInput required
-            id="name"
-            type="text">
-            <mat-error *ngIf="name.errors?.required">
-              Name required
-            </mat-error>
-        </mat-form-field>
-        </div>
-        <div class="form-group line1" >
-          <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Address </mat-label>
-              <input
-              formControlName="line1"
-              matInput required
-              id="h"
-              type="text">
-              <mat-error *ngIf='line1.errors?.required'>
-                Address required
-              </mat-error>
-          </mat-form-field>
-        </div>
-        <div class="form-group line2" >
-          <mat-form-field appearance="outline" style="width: 100%;">
-              <mat-label>Line 2 </mat-label>
-              <input
-              formControlName="line2"
-              matInput 
-              id="hg"
-              type="text">
-          </mat-form-field>
-        </div>
-        <div class="form-group city" >
-          <mat-form-field appearance="outline" style="width: 50%;">
-              <mat-label>City</mat-label>
-              <input
-              formControlName="city"
-              matInput required
-              id="city"
-              type="text">
-              <mat-error *ngIf="city.errors?.required">
-                City is required
-              </mat-error>
-          </mat-form-field>
-          <mat-form-field appearance="outline">
-              <mat-label>Postal Code </mat-label>
-              <input
-              formControlName="postal_code"
-              matInput required
-              id="postal-code"
-              type="text">
-              <mat-error *ngIf='postalCode.errors?.required'>
-                Postal code is required
-              </mat-error>
-          </mat-form-field>
-        </div>
-        <mat-form-field class="form-group states" style="width: 100px;">
-            <mat-label>State</mat-label>
-            <mat-select matNativeControl 
-                        formControlName="state"
-                        required >
-              <mat-option *ngFor="let state of stateService.getStates();" 
-                          [value]="state">
-                          {{state}}</mat-option>
-            </mat-select>
-            <mat-error *ngIf='state.errors?.required'>
-              State required
-            </mat-error>
-        </mat-form-field>
-        <button [disabled]="!orderForm.valid || !cartTotal"
-                style="margin-left: 45%;"
-                class="pink-btn"
-                (click)="proceedToPayment(orderForm.value, user)"
-                [ngClass]="!orderForm.valid ? 'disabled' : ''">
-                Proceed to payment 
-                <span class="material-icons"
-                      style="padding-left: 15px;">
-                payment
-                </span>
-              </button>
-    </form>
+    <div class="form-group name">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Name</mat-label>
+        <input formControlName="name" matInput required id="name" type="text" />
+        <mat-error *ngIf="name.errors?.required">
+          Name required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group line1">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Address </mat-label>
+        <input formControlName="line1" matInput required id="h" type="text" />
+        <mat-error *ngIf="line1.errors?.required">
+          Address required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="form-group line2">
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Line 2 </mat-label>
+        <input formControlName="line2" matInput id="hg" type="text" />
+      </mat-form-field>
+    </div>
+    <div class="form-group city">
+      <mat-form-field appearance="outline" style="width: 50%;">
+        <mat-label>City</mat-label>
+        <input formControlName="city" matInput required id="city" type="text" />
+        <mat-error *ngIf="city.errors?.required">
+          City is required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Postal Code </mat-label>
+        <input
+          formControlName="postal_code"
+          matInput
+          required
+          id="postal-code"
+          type="text"
+        />
+        <mat-error *ngIf="postalCode.errors?.required">
+          Postal code is required
+        </mat-error>
+      </mat-form-field>
+    </div>
+    <div class="select">
+      <label><p style="margin: 0;">State</p></label>
+      <select formControlName="state" required>
+        <option
+          *ngFor="let state of stateService.getStates()"
+          #quantity
+          [ngValue]="state"
+          >{{ state }}</option
+        >
+      </select>
+    </div>
+    <button
+      [disabled]="!orderForm.valid || !cartTotal"
+      style="margin-left: 45%; font-size: 16px;"
+      class="orange-btn"
+      (click)="proceedToPayment(orderForm.value, user)"
+      [ngClass]="!orderForm.valid ? 'disabled' : ''"
+    >
+      Proceed to payment
+      <span class="material-icons" style="padding-left: 15px;">
+        payment
+      </span>
+    </button>
+  </form>
 </div>
-

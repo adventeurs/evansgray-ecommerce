@@ -1,0 +1,48 @@
+<form *ngIf="!complete" [formGroup]="contact" class="contact">
+  <div class="contact-title">
+    <h4>Let's get in touch</h4>
+  </div>
+  <div class="form-group name">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput required id="email" type="text" />
+    </mat-form-field>
+    <mat-error *ngIf="email.touched && email.errors?.required">
+      Please enter a contact email
+    </mat-error>
+  </div>
+  <div class="form-group name">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput required id="email" type="text" />
+    </mat-form-field>
+    <mat-error *ngIf="name.touched && name.errors?.required">
+      Please enter a contact email
+    </mat-error>
+  </div>
+  <div class="form-group name">
+    <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-label>Message</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        #autosize="cdkTextareaAutosize"
+        cdkAutosizeMinRows="3"
+        cdkAutosizeMaxRows="7"
+      ></textarea>
+    </mat-form-field>
+  </div>
+  <button class="light-blue-btn" (click)="sendContact(contact.value)">
+    Send
+  </button>
+</form>
+<h3 *ngIf="complete">Form sent!</h3>
+<h4 style="width: 500px; margin: auto; padding-top: 4em; text-align: center;">
+  Commissions
+</h4>
+<p style="width: 500px; margin: auto; padding-top: 2em;">
+  Evansgray welcomes all custom color or commissioned project inquiries! If you
+  are planning a wedding, decorating your home, or seeking out the ultimate gift
+  for a loved one, let’s bring your ideas to life. Please fill out the inquiry
+  form above to request an email or virtual consultation + estimate.
+</p>

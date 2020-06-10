@@ -67,6 +67,10 @@ p {
   background: $pink;
 }
 
+.mat-badge-content {
+  background: $blue;
+}
+
 .green-btn {
   @include green-btn;
   transition: 0.7s;
@@ -102,4 +106,22 @@ p {
 
 .open {
   overflow: hidden;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: $blue;
+  background: white;
+}
+
+.mat-form-field-label {
+  color: $blue;
+}
+
+.mat-select-value {
+  color: $blue;
+}
+
+.mat-dialog-container {
+  background: white;
+  height: auto !important;
 }
