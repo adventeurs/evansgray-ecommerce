@@ -10,7 +10,7 @@
   </button>
   <div *ngIf="auth.user$ | async as user">
     <ul class="links">
-      <li routerlink="/checkout" (click)="menuOpen = !menuOpen">
+      <li routerLink="/checkout" (click)="menuOpen = !menuOpen">
         <h3>View Cart</h3>
       </li>
       <li

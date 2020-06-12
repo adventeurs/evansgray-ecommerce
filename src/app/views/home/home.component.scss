@@ -11,6 +11,7 @@
   justify-content: center;
   align-items: center;
   margin: 7em 2em;
+  flex-wrap: wrap;
 }
 
 .cta {
@@ -304,6 +305,7 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
 
   .category {
     @include shadow;
@@ -351,6 +353,7 @@
   max-width: 900px;
   margin: auto;
   padding: 13em 0;
+  flex-wrap: wrap;
 
   .natural-color-pink {
     flex: 1;
@@ -431,8 +434,8 @@
 }
 
 .bouquet {
-  width: 221px;
-  transform: translate(226px, -91px);
+  width: 121px;
+  transform: translate(195px, -7px);
   display: block;
   position: absolute;
   z-index: 1;
@@ -451,16 +454,15 @@
   margin: 2em;
   position: relative;
   z-index: 2;
+  flex-wrap: wrap;
 }
 
 .bespoke-image {
   @include white-shadow;
-  width: 350px;
   overflow: hidden;
   padding: 20px;
   position: relative;
   background: white;
-  flex: 2;
   margin: 1em;
 
   img {
@@ -608,6 +610,7 @@
       transform: translateX(80px);
     }
   }
+
   .prm {
     display: flex;
     justify-content: center;
@@ -688,6 +691,58 @@
 }
 
 @media only screen and (max-width: 680px) {
+  .cta {
+    margin: 0;
+    align-items: center;
+  }
+
+  .hero-img .hero-image-wrapper {
+    margin: auto;
+    margin-top: 4em;
+    margin-bottom: 4em;
+  }
+
+  .handmade {
+    margin-right: -128px;
+  }
+
+  .watercolor-18 {
+    display: none;
+  }
+
+  .watercolor-10 {
+    display: none;
+  }
+
+  .carousel {
+    display: none;
+  }
+
+  .blue-section {
+    padding-top: 0;
+    padding-bottom: 8em;
+    margin-top: 0;
+  }
+
+  .natural-color {
+    padding: 13em 4em;
+  }
+
+  .wc1 {
+    transform: translate(-133px, -357px) rotate(91deg);
+  }
+
+  .wc3 {
+    transform: translate(4px, -307px) scaleX(-1) rotate(-23deg);
+  }
+
+  .bouquet {
+    display: none;
+  }
+}
+
+.timeless-p {
+  text-align: end;
 }
 
 .item {

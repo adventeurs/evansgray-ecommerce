@@ -15,20 +15,13 @@ import { fader } from "./common/animations/animations";
   animations: [fader]
 })
 export class AppComponent implements OnInit {
-  @HostListener("window:beforeunload", ["$event"])
-  async doSomething($event) {
-    $event.preventDefault();
-    await this.cart.abandonedCart();
-    return $event;
-  }
-
   title = "evansgray";
   show = false;
 
   constructor(public _router: Router, private cart: CartService) {
     _router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        setTimeout(() => (this.show = true), 1000);
+        setTimeout(() => (this.show = true), 1100);
       }
       if (event instanceof NavigationStart) {
         this.show = false;

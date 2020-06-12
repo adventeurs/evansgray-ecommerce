@@ -6,9 +6,9 @@ module.exports = (req, res) => {
 
   try {
     const msg = {
-      to: order.email,
+      to: "emily@shopevansgray.com",
       from: "emily@shopevansgray.com",
-      templateId: "d-9229a28e33e948f7a4eb8b1833557825",
+      templateId: "d-6a8c6a7b36f94b7d8033521513bd4d1c",
       dynamic_template_data: {
         email: email,
         name: name,
@@ -16,8 +16,8 @@ module.exports = (req, res) => {
       }
     };
 
-    const mail = sgMail.send(msg);
-    res.send(mail);
+    sgMail.send(msg);
+    res.send("complete");
   } catch (e) {
     res.send(e);
   }

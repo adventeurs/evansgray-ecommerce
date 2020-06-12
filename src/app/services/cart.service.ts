@@ -108,7 +108,6 @@ export class CartService {
         key => product[key].price * product[key].quantity
       );
       let finalTotal = totals.reduce((a, b) => a + b, 0);
-      console.log(finalTotal);
 
       return of(finalTotal);
     }

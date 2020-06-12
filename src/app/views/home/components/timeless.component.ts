@@ -10,7 +10,7 @@ import { Component } from "@angular/core";
       <span class="vertical-divider"></span>
       <div class="natural-color-cta flex-end">
         <h2>Timeless Design</h2>
-        <p>
+        <p class="timeless-p">
           Textiles are with us during our most monumental events and stick along
           for those easily overlooked, but so worthwhile in-between moments.
           Surround yourself with textiles deserving of your story.

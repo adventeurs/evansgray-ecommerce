@@ -50,16 +50,18 @@
   padding: 4em;
   align-items: center;
   background: $teal;
-  margin-top: -13%;
+  margin-top: -18%;
   padding-top: 23em;
   z-index: 1;
   position: relative;
+  flex-wrap: wrap;
 }
 
 .flex-1 {
   flex: 1;
   display: flex;
   justify-content: center;
+  min-width: 200px;
 }
 
 .letter {
@@ -90,6 +92,7 @@
 .nb {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 
   .why-img {
     @include shadow;
@@ -111,6 +114,7 @@
   padding: 6em 10%;
   background: $teal;
   margin-bottom: -5em;
+  flex-wrap: wrap;
 }
 
 .history-words {

@@ -8,7 +8,7 @@ import { Component } from "@angular/core";
         <h1 class="thoughtful">
           Thoughtful
         </h1>
-        <h1>
+        <h1 class="handmade">
           Handmade
         </h1>
         <h3>Heirloom-quality textiles for the maker in you</h3>

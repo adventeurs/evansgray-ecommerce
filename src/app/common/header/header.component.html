@@ -35,7 +35,7 @@
           (click)="openModal()"
           *ngIf="!(auth.user$ | async)"
         >
-          <h3 style="color: white;">Login</h3>
+          Login
         </button>
         <div *ngIf="auth.user$ | async as user">
           <div [matMenuTriggerFor]="userMenu">
