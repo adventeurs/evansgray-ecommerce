@@ -62,7 +62,7 @@ export class CartService {
     return this.db.doc<any>(`carts/${uid}`);
   }
 
-  abandonedCart() {
+  async abandonedCart() {
     const data = {
       abandonedCart: new Date()
     };
@@ -109,7 +109,7 @@ export class CartService {
       );
       let finalTotal = totals.reduce((a, b) => a + b, 0);
 
-      of(finalTotal);
+      return of(finalTotal);
     }
     return of(0);
   }

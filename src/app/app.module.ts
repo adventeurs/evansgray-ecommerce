@@ -47,6 +47,8 @@ import { ShopAllComponent } from "./views/shop/components/shop-all.component";
 import { ForBodyComponent } from "./views/shop/components/for-body.component";
 import { ForHomeComponent } from "./views/shop/components/for-home.component";
 import { RibbonFeatureComponent } from "./views/shop/components/ribbonFeature.component";
+import { AboutComponent } from "./views/about/about.component";
+import { ContactComponent } from "./views/contact/contact.component";
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { RibbonFeatureComponent } from "./views/shop/components/ribbonFeature.co
     NotionsComponent,
     ForBodyComponent,
     ForHomeComponent,
-    RibbonFeatureComponent
+    RibbonFeatureComponent,
+    AboutComponent,
+    ContactComponent
   ],
   entryComponents: [
     ShippingInfoComponent,

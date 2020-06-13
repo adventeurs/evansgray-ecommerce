@@ -5,7 +5,11 @@ import { Component } from "@angular/core";
   template: `
     <div class="feature slideIn">
       <div class="feature-img">
-        <img src="../../../assets/_DSC3409.png" />
+        <div
+          class="feature-img-bck"
+          style="background-size: 109%;"
+          [style.background-image]="'url(assets/table.png)'"
+        ></div>
       </div>
       <div class="feature-cta">
         <h2>For Home</h2>

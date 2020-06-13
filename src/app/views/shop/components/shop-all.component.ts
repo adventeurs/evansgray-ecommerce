@@ -1,20 +1,14 @@
-import { Component, OnDestroy } from "@angular/core";
-import {
-  trigger,
-  transition,
-  style,
-  animate,
-  state,
-  useAnimation
-} from "@angular/animations";
-import { slide, fadeAnimation } from "src/app/common/animations/animations";
+import { Component } from "@angular/core";
 
 @Component({
   selector: "shop-all",
   template: `
     <div class="feature slideIn">
       <div class="feature-img">
-        <img src="../../../assets/_DSC3356.jpg" />
+        <div
+          class="feature-img-bck"
+          [style.background-image]="'url(assets/_DSC3356.jpg)'"
+        ></div>
       </div>
       <div class="feature-cta">
         <h2>Shop All</h2>

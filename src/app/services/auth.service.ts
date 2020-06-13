@@ -155,4 +155,12 @@ export class AuthService {
         .catch(err => this.notification.snackbarAlert(err));
     });
   }
+
+  public emailList(_email) {
+    const { email } = _email;
+    this.db
+      .doc(`email/${email}`)
+      .set({ email })
+      .catch(e => console.log(e));
+  }
 }

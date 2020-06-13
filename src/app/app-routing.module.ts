@@ -6,6 +6,8 @@ import { HomeComponent } from "./views/home/home.component";
 import { AccountComponent } from "./views/account/account.component";
 import { DashboardComponent } from "./views/dashboard/dashboard.component";
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
+import { AboutComponent } from "./views/about/about.component";
+import { ContactComponent } from "./views/contact/contact.component";
 
 const routes: Routes = [
   { path: "", component: HomeComponent, data: { animation: "Home" } },
@@ -21,6 +23,16 @@ const routes: Routes = [
     path: "dashboard",
     component: DashboardComponent,
     canActivate: [AdminAuthGaurd]
+  },
+  {
+    path: "about",
+    component: AboutComponent,
+    data: { animation: "About" }
+  },
+  {
+    path: "contact",
+    component: ContactComponent,
+    data: { animation: "Product" }
   }
 ];
 
@@ -28,7 +40,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-
 export class AppRoutingModule {}
 export const routingComponents = [
   AccountComponent,

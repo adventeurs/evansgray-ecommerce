@@ -1,57 +1,27 @@
-import { Component, OnInit, ViewEncapsulation } from "@angular/core";
+import { Component, OnInit, HostListener } from "@angular/core";
 import {
   Router,
   RouterOutlet,
   NavigationEnd,
   NavigationStart
 } from "@angular/router";
-import { transition, trigger, query, style, animate, group } from '@angular/animations';
-
-export const fader =
-  trigger('routeAnimations', [
-    transition('* <=> *', [
-      // Set a default  style for enter and leave
-      query(':enter, :leave', [
-        style({
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          width: '100%',
-        }),
-      ]),
-      // Animate the new page in
-      query(':enter', [
-        style({ transform: `translateX(100%)`, opacity: 0 })
-      ]),
-      group([
-        query(':leave', [
-          animate('1s ease-out', style({ transform: 'translateX(-100%)', opacity: 1 }))
-        ], { optional: true }),
-        query(':enter', [
-          animate('1s ease-out', style({ transform: `translate(0, 0)`, opacity: 1}))
-        ])
-      ]),
-    ])
-  ]);
-
+import { CartService } from "./services/cart.service";
+import { fader } from "./common/animations/animations";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
-  styleUrls: ["./app.component.scss"], 
-  animations: [
-    fader
-  ]
+  styleUrls: ["./app.component.scss"],
+  animations: [fader]
 })
-
 export class AppComponent implements OnInit {
   title = "evansgray";
   show = false;
 
-  constructor(public _router: Router) {
+  constructor(public _router: Router, private cart: CartService) {
     _router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        setTimeout(() => (this.show = true), 1000);
+        setTimeout(() => (this.show = true), 1100);
       }
       if (event instanceof NavigationStart) {
         this.show = false;
@@ -86,6 +56,4 @@ export class AppComponent implements OnInit {
     }
     document.body.style.overflow = "visible";
   }
-
-  checkCartAbandoned() {}
 }

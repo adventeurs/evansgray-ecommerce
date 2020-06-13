@@ -1,8 +1,7 @@
-<button (click)="abandon()">Abandon</button>
-
 <hero></hero>
+
 <div class="blue-section">
-  <carousel>
+  <carousel class="carousel">
     <ng-container *ngFor="let slide of slides">
       <ng-container *carouselItem>
         <ng-template [ngComponentOutlet]="slide.component"></ng-template>

@@ -1,0 +1,137 @@
+@import "../../../styles/variables";
+
+.header {
+  width: 100%;
+  height: 750px;
+  background-position: bottom;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.about {
+  @include shadow;
+  width: 400px;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  padding: 2em 4em;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+  margin-top: -26%;
+  z-index: 2;
+  position: relative;
+
+  h3 {
+    margin: 2em 0;
+    width: 88%;
+  }
+  p {
+    margin: 2em 0;
+    width: 80%;
+  }
+  .about-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 100%;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    margin: 2em;
+    margin-top: 0;
+  }
+}
+
+.letter-container {
+  margin-top: 8em;
+  display: flex;
+  flex-direction: row;
+  padding: 4em;
+  align-items: center;
+  background: $teal;
+  margin-top: -18%;
+  padding-top: 23em;
+  z-index: 1;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.flex-1 {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 200px;
+}
+
+.letter {
+  @include shadow;
+  max-width: 450px;
+  background: white;
+  padding: 2em;
+}
+
+.letter-pic {
+  @include shadow;
+  max-width: 500px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.natural-dye {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4em 10%;
+}
+
+.nb {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .why-img {
+    @include shadow;
+    height: 300px;
+    padding: 2em;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  p {
+    padding: 2em;
+  }
+}
+
+.history {
+  display: flex;
+  padding: 6em 10%;
+  background: $teal;
+  margin-bottom: -5em;
+  flex-wrap: wrap;
+}
+
+.history-words {
+  flex-direction: column;
+  padding: 2em;
+}
+
+.square {
+  @include shadow;
+  flex: 1;
+  margin: 0.5em;
+  height: 100%;
+  height: 295px;
+  background-size: 437px;
+  background-position: center;
+}
+
+.left {
+  background-position: left;
+}

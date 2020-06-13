@@ -1,60 +1,70 @@
 <div class="cart">
-    <div *ngIf='auth.user$ | async ' class="cart-holder">
+  <div *ngIf="auth.user$ | async" class="cart-holder">
     <div class="checkout-card" *ngFor="let product of displayCart">
-        <div class="checkout-img"
-             [matBadge]="product.quantity">
-             <div [style.background-image]="'url(assets/products/' + product.main + '.jpg)'"
-                 class="img">
-             </div>
+      <div class="checkout-img" [matBadge]="product.quantity">
+        <div
+          [style.background-image]="
+            'url(assets/products/' + product.main + '.jpg)'
+          "
+          class="img"
+        ></div>
+      </div>
+      <div class="checkout-info">
+        <div class="top">
+          <h4>{{ product.title }}</h4>
         </div>
-        <div class="checkout-info">
-            <div class="top">
-                <h4>{{product.title}}</h4>              
+        <div class="bottom">
+          <p>{{ product.price | dollars }}</p>
+          <i
+            class="material-icons"
+            *ngIf="!close"
+            (click)="removeFromCart(product)"
+            matTooltip="Remove from cart"
+            style="font-size: 20px; color: gray;"
+          >
+            remove_circle
+          </i>
+          <div class="change-qty" *ngIf="!close">
+            <div class="select">
+              <label style="padding-right: 5px; color: #585353;">qty.</label>
+              <select
+                [(ngModel)]="quantity"
+                (ngModelChange)="addToCart(product, quantity)"
+              >
+                <option
+                  *ngFor="let number of product.inventory | inventory"
+                  #quantity
+                  [ngValue]="number"
+                  >{{ number }}</option
+                >
+              </select>
             </div>
-            <div class="bottom">
-                <p>{{product.price | dollars}}</p>
-                    <i class="material-icons"
-                        *ngIf="!close"
-                       (click)="removeFromCart(product)"
-                       matTooltip="Remove from cart"
-                       style="font-size: 20px;">
-                            remove_circle
-                    </i>
-                <div class="change-qty" *ngIf="!close">
-                        <mat-form-field class="qty" style="width: 45px;">
-                            <mat-label>
-                                qty.
-                            </mat-label>
-                            <mat-select (selectionChange)='addToCart(product, $event.value)' 
-                                        matNativeControl 
-                                        [value]="quantity" 
-                                        >
-                                <mat-option *ngFor="let number of product.inventory | inventory" 
-                                            value="{{number}}">
-                                    {{number}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-            </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
+  <div class="totals">
+    <mat-divider></mat-divider>
+    <div class="column">
+      <div class="shipping">
+        <h5>Shipping</h5>
+        <span
+          class="material-icons"
+          style="margin-left: 5px; font-size: 20px; cursor: pointer;"
+          (click)="openDialog()"
+        >
+          help
+        </span>
+      </div>
+      <div><h5>Free!</h5></div>
     </div>
-    <div class="totals">
-            <mat-divider></mat-divider>
-        <div class="column">
-            <div class="shipping"><h5>Shipping</h5>
-                <span class="material-icons" style="margin-left: 5px; font-size: 20px; cursor: pointer;"
-                      (click)="openDialog()">
-                      help
-                </span>
-            </div>
-            <div><h5>Free!</h5></div>
-        </div>
-        <mat-divider></mat-divider>
-        <div class="column">
-            <div><h5>Total</h5></div>
-            <div><h5>{{ cartTotal | dollars }}</h5></div>
-        </div>
+    <mat-divider></mat-divider>
+    <div class="column">
+      <div><h5>Total</h5></div>
+      <div>
+        <h5>{{ cartTotal | dollars }}</h5>
+      </div>
     </div>
+  </div>
 </div>

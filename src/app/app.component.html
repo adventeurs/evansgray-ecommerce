@@ -1,17 +1,10 @@
 <div class="container">
   <app-header *ngIf="!_router.url.includes('checkout')"></app-header>
 
-  <!-- <div
-    [@routerAnimations]="prepareRouteTransition(outlet)"
+  <div
+    [@routeAnimations]="prepareRoute(outlet)"
     class="route-container content"
   >
-    <router-outlet
-      #outlet="outlet"
-      (window:beforeunload)="sendCartAbandoned()"
-    ></router-outlet>
-  </div> -->
-
-  <div [@routeAnimations]="prepareRoute(outlet)" class="route-container content" >
     <router-outlet #outlet="outlet"></router-outlet>
   </div>
 
