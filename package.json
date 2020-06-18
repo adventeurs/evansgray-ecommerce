@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod --aot --vendor-chunk --common-chunk --buildOptimizer",
-    "serve": "concurrently \"ng serve\" \"node server\""
+    "postinstall": "ng build --prod --aot --vendor-chunk --common-chunk --buildOptimizer"
   },
   "private": true,
   "dependencies": {
