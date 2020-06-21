@@ -59,12 +59,9 @@ export class ShopComponent implements OnInit {
       this.feature.component = NotionsComponent;
     else if (this.filter.includes("ribbon"))
       this.feature.component = RibbonFeatureComponent;
-    else if (this.filter.includes("aprons"))
+    else if (this.filter.includes("for-body"))
       this.feature.component = ForBodyComponent;
-    else if (
-      this.filter.includes("table-runners") ||
-      this.filter.includes("napkins")
-    )
+    else if (this.filter.includes("for-home"))
       this.feature.component = ForHomeComponent;
   }
 }
