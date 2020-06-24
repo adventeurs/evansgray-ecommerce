@@ -18,7 +18,7 @@ import { Component } from "@angular/core";
           batch is developed, layer by layer, over multiple days in order to
           create truly special color for every collection.
         </p>
-        <button class="green-btn">Shop</button>
+        <button [routerLink]="['/shop']" class="green-btn">Shop</button>
       </div>
     </div>
   `,

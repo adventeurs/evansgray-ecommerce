@@ -3,7 +3,7 @@
     <mat-card-title>
       <h3>Categories</h3>
     </mat-card-title>
-    <div *ngFor="let cat of f.category">
+    <div *ngFor="let cat of f.category.sort()">
       <mat-checkbox
         value="{{ cat }}"
         style="color: #585353"
@@ -21,7 +21,7 @@
       <h3>Colors</h3>
     </mat-card-title>
     <div class="color-selection">
-      <div *ngFor="let color of f.color">
+      <div *ngFor="let color of f.color.sort()">
         <mat-checkbox
           value="{{ color }}"
           style="color:#585353;"
@@ -39,7 +39,7 @@
     <mat-card-title>
       <h3>Material</h3>
     </mat-card-title>
-    <div *ngFor="let mat of f.material">
+    <div *ngFor="let mat of f.material.sort()">
       <mat-checkbox
         value="{{ mat }}"
         style="color:#585353;"

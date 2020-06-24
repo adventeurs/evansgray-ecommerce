@@ -15,7 +15,9 @@ import { Component } from "@angular/core";
           Are you interested in custom quilts, wedding accents, or wall
           hangings? Let’s work together to bring your dream to life!
         </p>
-        <button class="light-blue-btn">Shop</button>
+        <button [routerLink]="['/Contact']" class="light-blue-btn">
+          Contact
+        </button>
       </div>
     </div>
     <img class="wc1" src="../../../assets/watercolor-1.png" />

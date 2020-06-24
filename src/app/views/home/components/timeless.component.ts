@@ -15,7 +15,7 @@ import { Component } from "@angular/core";
           for those easily overlooked, but so worthwhile in-between moments.
           Surround yourself with textiles deserving of your story.
         </p>
-        <button class="green-btn">Commision</button>
+        <button [routerLink]="['/contact']" class="green-btn">Commision</button>
       </div>
     </div>
   `,

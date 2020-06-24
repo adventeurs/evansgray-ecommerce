@@ -49,8 +49,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   openDialog(value: string) {
-    if (value.toLowerCase() === "refunds")
-      this.dialog.open(RefundInfoComponent);
+    if (value === "Terms & Conditions") this.dialog.open(RefundInfoComponent);
 
     if (value.toLowerCase() === "shipping")
       this.dialog.open(ShippingInfoComponent);

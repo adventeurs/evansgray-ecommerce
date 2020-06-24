@@ -15,7 +15,7 @@ import { Component } from "@angular/core";
             'url(assets/products/napkin_copper_plate_setting_1.jpg)'
           "
         >
-          <h4>Home</h4>
+          <h4>For Home</h4>
           <div class="white-cover"></div>
         </div>
         <div
@@ -39,7 +39,7 @@ import { Component } from "@angular/core";
             'url(assets/products/apron_mustard_front_1.jpg)'
           "
         >
-          <h4>Aprons</h4>
+          <h4>For Body</h4>
           <div class="white-cover"></div>
         </div>
         <div
