@@ -20,7 +20,13 @@ import { Component } from "@angular/core";
           little more flair - pair with Classic Silk Ribbon to create fun,
           floppy bow scrunchies.
         </p>
-        <button class="light-blue-btn">Shop</button>
+        <button
+          [routerLink]="['/shop']"
+          [queryParams]="{ filter: 'scrunchie' }"
+          class="light-blue-btn"
+        >
+          Shop
+        </button>
       </div>
     </div>
   `,

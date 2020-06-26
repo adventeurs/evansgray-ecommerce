@@ -2,12 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { Location } from "@angular/common";
 import { OrderData } from "src/app/models/orderData";
 import { MatDialog } from "@angular/material";
-import { RefundInfoComponent } from "src/app/common/refund-info/refund-info.component";
-import { ShippingInfoComponent } from "src/app/common/shipping-info/shipping-info.component";
+import { RefundInfoComponent } from "src/app/payments-module/checkout/refund-info/refund-info.component";
+import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping-info/shipping-info.component";
 import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cart.service";
 import { Observable } from "rxjs";
 import { Product } from "src/app/models/product";
+import { TermsComponent } from "src/app/payments-module/checkout/terms/terms.component";
 
 @Component({
   selector: "app-checkout",
@@ -49,9 +50,11 @@ export class CheckoutComponent implements OnInit {
   }
 
   openDialog(value: string) {
-    if (value === "Terms & Conditions") this.dialog.open(RefundInfoComponent);
+    console.log(value);
+    if (value.includes("Term")) this.dialog.open(TermsComponent);
 
-    if (value.toLowerCase() === "shipping")
-      this.dialog.open(ShippingInfoComponent);
+    if (value.includes("Shipping")) this.dialog.open(ShippingInfoComponent);
+
+    if (value.includes("Privacy")) this.dialog.open(RefundInfoComponent);
   }
 }

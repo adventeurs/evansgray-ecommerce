@@ -7,8 +7,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { ShippingComponent } from "./checkout/shipping/shipping.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { CartDisplayComponent } from "./checkout/cart-display/cart-display.component";
-import { ShippingInfoComponent } from "../common/shipping-info/shipping-info.component";
-import { RefundInfoComponent } from "../common/refund-info/refund-info.component";
+import { ShippingInfoComponent } from "./checkout/shipping-info/shipping-info.component";
+import { RefundInfoComponent } from "./checkout/refund-info/refund-info.component";
 import { SuccessComponent } from "./checkout/success/success.component";
 import { Routes, RouterModule } from "@angular/router";
 import { MdComponentsModule } from "../md-components.module";
@@ -17,6 +17,7 @@ import { DollarsPipe } from "../common/pipes/dollars.pipe";
 import { InventoryPipe } from "../common/pipes/inventory.pipe";
 import { AuthService } from "../services/auth.service";
 import { CartService } from "../services/cart.service";
+import { TermsComponent } from "./checkout/terms/terms.component";
 
 const appRoutes: Routes = [
   {
@@ -39,9 +40,12 @@ const appRoutes: Routes = [
     CartDisplayComponent,
     SuccessComponent,
     DollarsPipe,
-    InventoryPipe
+    InventoryPipe,
+    ShippingInfoComponent,
+    RefundInfoComponent,
+    TermsComponent
   ],
-  entryComponents: [ShippingInfoComponent, RefundInfoComponent],
+  entryComponents: [ShippingInfoComponent, RefundInfoComponent, TermsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

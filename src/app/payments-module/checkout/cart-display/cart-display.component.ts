@@ -3,9 +3,10 @@ import { CartService } from "src/app/services/cart.service";
 import { Product } from "src/app/models/product";
 import { AuthService } from "src/app/services/auth.service";
 import { Observable } from "rxjs";
-import { ShippingInfoComponent } from "src/app/common/shipping-info/shipping-info.component";
+import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping-info/shipping-info.component";
 import { MatDialog } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-cart-display",
@@ -18,16 +19,20 @@ export class CartDisplayComponent {
   @Input() cartTotal: Observable<Number>;
   show: boolean = false;
   quantity;
-  coupon: string;
 
-  discount = new FormGroup({
+  coupon = new FormGroup({
     code: new FormControl([""])
   });
+
+  get code() {
+    return this.coupon.get("code");
+  }
 
   constructor(
     private cart: CartService,
     public auth: AuthService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private http: HttpClient
   ) {}
 
   removeFromCart(product) {
@@ -35,12 +40,21 @@ export class CartDisplayComponent {
   }
 
   addToCart(product, _quantity) {
-    console.log(_quantity);
     let quantity = parseInt(_quantity);
     this.cart.addToCart(product, quantity);
   }
 
   openDialog() {
     this.dialog.open(ShippingInfoComponent);
+  }
+
+  submitCoupon() {
+    let code = this.code.value;
+
+    this.http.post("/api/payment/discount", code).subscribe(res => {
+      if (res) {
+        console.log(res);
+      }
+    });
   }
 }

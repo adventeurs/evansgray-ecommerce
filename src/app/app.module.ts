@@ -19,8 +19,6 @@ import { MdComponentsModule } from "./md-components.module";
 import { SearchFilterComponent } from "./views/shop/search-filter/search-filter.component";
 import { ProductCardComponent } from "./common/product-card/product-card.component";
 import { ScrollingModule } from "@angular/cdk/scrolling";
-import { ShippingInfoComponent } from "./common/shipping-info/shipping-info.component";
-import { RefundInfoComponent } from "./common/refund-info/refund-info.component";
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
@@ -59,8 +57,6 @@ import { ContactComponent } from "./views/contact/contact.component";
     LoginModalComponent,
     SearchFilterComponent,
     ProductCardComponent,
-    ShippingInfoComponent,
-    RefundInfoComponent,
     routingComponents,
     SearchFilterComponent,
     MobileNavComponent,
@@ -85,8 +81,6 @@ import { ContactComponent } from "./views/contact/contact.component";
     ContactComponent
   ],
   entryComponents: [
-    ShippingInfoComponent,
-    RefundInfoComponent,
     ApronComponent,
     ScrunchieComponent,
     RibbonComponent,

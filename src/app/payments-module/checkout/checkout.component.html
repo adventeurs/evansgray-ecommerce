@@ -28,13 +28,25 @@
     <div class="info">
       <mat-divider></mat-divider>
       <ul class="info-ul">
-        <li #refunds (click)="openDialog(refunds.innerHTML)">
+        <li
+          #refunds
+          (click)="openDialog(refunds.innerHTML)"
+          style="cursor:pointer;"
+        >
           Terms & Conditions
         </li>
-        <li #shipping (click)="openDialog(shipping.innerHTML)">
+        <li
+          #shipping
+          (click)="openDialog(shipping.innerHTML)"
+          style="cursor:pointer;"
+        >
           Shipping & Returns
         </li>
-        <li #shipping (click)="openDialog(shipping.innerHTML)">
+        <li
+          #privacy
+          (click)="openDialog(privacy.innerHTML)"
+          style="cursor:pointer;"
+        >
           Privacy Policy
         </li>
       </ul>

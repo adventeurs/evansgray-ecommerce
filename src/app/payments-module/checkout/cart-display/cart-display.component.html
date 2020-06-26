@@ -61,6 +61,21 @@
     </div>
     <mat-divider></mat-divider>
     <div class="column">
+      <div>
+        <form [formGroup]="coupon" (ngSubmit)="submitCoupon()">
+          <mat-form-field>
+            <input
+              type="text"
+              placeholder="coupon"
+              formControlName="code"
+              matInput
+            />
+          </mat-form-field>
+        </form>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="column">
       <div><h5>Total</h5></div>
       <div>
         <h5>{{ cartTotal | dollars }}</h5>
