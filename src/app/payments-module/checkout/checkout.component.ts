@@ -38,10 +38,12 @@ export class CheckoutComponent implements OnInit {
   }
 
   receiveOrder($event) {
+    console.log($event);
     this.orderData = $event;
   }
 
   receiveClose($event) {
+    console.log($event);
     this.close = $event;
   }
 

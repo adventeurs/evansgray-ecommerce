@@ -49,7 +49,7 @@ export class CartDisplayComponent {
   }
 
   submitCoupon() {
-    let code = this.code.value;
+    let code = { code: this.code.value };
 
     this.http.post("/api/payment/discount", code).subscribe(res => {
       if (res) {
