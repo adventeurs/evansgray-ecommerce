@@ -2,9 +2,10 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET);
 
 module.exports = async (req, res) => {
   const { code } = req.body;
-
-  stripe.coupons.retrieve(code, (err, coupon) => {
-    if (err) res.send(err);
-    if (coupon) res.send(coupon);
-  });
+  try {
+    let discount = awaitstripe.coupons.retrieve(code);
+    res.send(discount);
+  } catch (err) {
+    res.send(err);
+  }
 };
