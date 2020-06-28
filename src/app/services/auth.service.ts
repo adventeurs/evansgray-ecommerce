@@ -6,8 +6,8 @@ import {
   AngularFirestoreDocument
 } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
-import { Observable, of, ReplaySubject, BehaviorSubject } from "rxjs";
-import { switchMap, tap, mergeMap } from "rxjs/operators";
+import { Observable, of, BehaviorSubject } from "rxjs";
+import { switchMap, tap } from "rxjs/operators";
 import { auth, firestore } from "firebase/app";
 import { NotificationService } from "./notification.service";
 import { HttpClient } from "@angular/common/http";
@@ -63,6 +63,8 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.auth.auth.signInWithPopup(provider);
+    await this.http.post("/api/customer", credential.user).toPromise().catch( e =>
+      this.notification.snackbarAlert(e))
 
     this.updateUserData(credential.user);
   }
@@ -73,6 +75,8 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(async res => {
         this.updateUserData(res.user, name);
+        await this.http.post("/api/customer", res.user).toPromise().catch( e =>
+          this.notification.snackbarAlert(e))
       })
       .catch(err => {
         console.log(err);
