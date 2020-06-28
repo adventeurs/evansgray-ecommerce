@@ -8,10 +8,10 @@ module.exports = (req, res) => {
     const msg = {
       to: email,
       from: "emily@shopevansgray.com",
-      templateId: "d-6a8c6a7b36f94b7d8033521513bd4d1c",
+      templateId: " d-b69871b7ea9d4b218b6696e6fa146d75",
       dynamic_template_data: {
         name: displayName
-          }
+      }
     };
 
     sgMail.send(msg);

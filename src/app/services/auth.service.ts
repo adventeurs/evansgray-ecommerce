@@ -63,8 +63,10 @@ export class AuthService {
   async googleSignin() {
     const provider = new auth.GoogleAuthProvider();
     const credential = await this.auth.auth.signInWithPopup(provider);
-    await this.http.post("/api/customer", credential.user).toPromise().catch( e =>
-      this.notification.snackbarAlert(e))
+    await this.http
+      .post("/api/customer", credential.user)
+      .toPromise()
+      .catch(e => this.notification.snackbarAlert(e));
 
     this.updateUserData(credential.user);
   }
@@ -75,8 +77,10 @@ export class AuthService {
       .createUserWithEmailAndPassword(email, password)
       .then(async res => {
         this.updateUserData(res.user, name);
-        await this.http.post("/api/customer", res.user).toPromise().catch( e =>
-          this.notification.snackbarAlert(e))
+        await this.http
+          .post("/api/customer", res.user)
+          .toPromise()
+          .catch(e => this.notification.snackbarAlert(e));
       })
       .catch(err => {
         console.log(err);
