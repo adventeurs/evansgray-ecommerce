@@ -161,6 +161,9 @@ export class AuthService {
     this.db
       .doc(`email/${email}`)
       .set({ email })
+      .then(_ => {
+        this.http.post("/api/email/signup", email);
+      })
       .catch(e => console.log(e));
   }
 }

@@ -31,6 +31,7 @@ export class JoinComponent {
 
   submit(value) {
     this.auth.emailList(value);
+
     this.signUp.reset();
     this.notification.email();
   }
