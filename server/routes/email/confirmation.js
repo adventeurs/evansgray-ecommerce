@@ -4,7 +4,12 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 module.exports = (req, res) => {
   let { items, amount, id, name, shipping } = req.body;
 
-  let dollars = amount / 100;
+  for (let i = 0; i < items.length; i++) {
+    items[i].amount = items[i].amount / 100;
+  }
+
+  items = items.filter(item => item.type != "sku");
+
   try {
     const msg = {
       to: order.email,

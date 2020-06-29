@@ -495,14 +495,14 @@
 .wc3 {
   width: 100px;
   position: absolute;
-  transform: translate(734px, -307px) scaleX(-1) rotate(-23deg);
+  transform: translate(790px, -307px) scaleX(-1) rotate(-23deg);
   z-index: 1;
 }
 
 .wc1 {
   width: 413px;
   position: absolute;
-  transform: translate(571px, -357px) rotate(91deg);
+  transform: translate(620px, -357px) rotate(91deg);
   z-index: 0;
 }
 
@@ -728,14 +728,6 @@
 
   .natural-color {
     padding: 13em 4em;
-  }
-
-  .wc1 {
-    transform: translate(-133px, -357px) rotate(91deg);
-  }
-
-  .wc3 {
-    transform: translate(4px, -307px) scaleX(-1) rotate(-23deg);
   }
 
   .bouquet {
