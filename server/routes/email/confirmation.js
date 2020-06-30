@@ -2,7 +2,7 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 module.exports = (req, res) => {
-  let { items, id, name, shipping } = req.body;
+  let { items, id, name, shipping, order } = req.body;
 
   for (let i = 0; i < items.length; i++) {
     items[i].amount = items[i].amount / 100;
@@ -23,8 +23,8 @@ module.exports = (req, res) => {
       }
     };
 
-    gMail.send(msg);
-    res.send("hello");
+    sgMail.send(msg);
+    res.send("complete");
   } catch (e) {
     res.send(e);
   }

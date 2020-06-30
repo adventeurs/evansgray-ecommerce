@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "app-contact",
@@ -13,7 +14,8 @@ export class ContactComponent {
     name: new FormControl("", [Validators.required]),
     message: new FormControl("", [Validators.required])
   });
-  http: any;
+
+  constructor(private http: HttpClient) {}
 
   get email() {
     return this.contact.get("email");

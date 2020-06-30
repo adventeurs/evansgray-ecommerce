@@ -17,7 +17,7 @@ module.exports = (req, res) => {
     };
 
     sgMail.send(msg);
-    res.send("complete");
+    res.send(email);
   } catch (e) {
     res.send(e);
   }
