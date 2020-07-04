@@ -193,7 +193,7 @@ select {
 }
 
 .bouquet-15 {
-  background: url("/assets/bouquet-15.png");
+  background: url("/assets/Bouquet-15.png");
   width: 251px;
   height: 234px;
   background-repeat: no-repeat;
@@ -242,4 +242,12 @@ select {
 .social-cta {
   padding: 2em;
   text-align: center;
+}
+
+.left {
+  transform: translateX(-29px);
+
+  p {
+    transform: translateX(-27px);
+  }
 }

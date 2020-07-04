@@ -53,11 +53,11 @@ export class PaymentService {
       stripe.retrievePaymentIntent(clientSecret).then(async res => {
         try {
           await this.auth.orderSuccess({ paymentIntent: res, order });
-          console.log(order);
           this.http
             .post("/api/email/confirmation", order)
-            .toPromise()
-            .catch(e => this.notification.snackbarAlert(e));
+            .subscribe((res: any) => {
+              if (res.error) this.notification.snackbarAlert(res);
+            });
           this.cart.deleteCart();
         } catch (e) {
           console.log(e);
