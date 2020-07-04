@@ -54,7 +54,7 @@ export class PaymentService {
         try {
           await this.auth.orderSuccess({ paymentIntent: res, order });
           this.http
-            .post("/api/email/confirmation", order)
+            .post("/api/email/confirmation", JSON.stringify(order))
             .subscribe((res: any) => {
               if (res.error) this.notification.snackbarAlert(res);
             });
