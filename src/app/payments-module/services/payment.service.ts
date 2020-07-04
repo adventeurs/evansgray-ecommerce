@@ -48,16 +48,14 @@ export class PaymentService {
     } catch (e) {
       console.log(e);
     }
+
     // Display order confirmation
     let completeOrder = (clientSecret, order) => {
       stripe.retrievePaymentIntent(clientSecret).then(async res => {
         try {
           await this.auth.orderSuccess({ paymentIntent: res, order });
-          this.http
-            .post("/api/email/confirmation", JSON.stringify(order))
-            .subscribe((res: any) => {
-              if (res.error) this.notification.snackbarAlert(res);
-            });
+          await this.http.post("/api/email/confirmation", order).toPromise();
+
           this.cart.deleteCart();
         } catch (e) {
           console.log(e);
