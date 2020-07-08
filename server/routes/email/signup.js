@@ -22,8 +22,7 @@
 //         "authorization": `Bearer ${process.env.SENDGRID_API_KEY}`
 //     }
 // }
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+const sgMail = require("./sendgrid");
 
 module.exports = (req, res) => {
   let { email } = req.body;
