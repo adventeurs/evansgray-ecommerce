@@ -31,16 +31,19 @@ export class JoinComponent {
     private http: HttpClient
   ) {}
 
-  submit(value) {
+  async submit(value) {
     this.auth.emailList(value);
-    this.http.post("/api/email/signup", value).subscribe(
-      _ => {
-        this.signUp.reset();
-        this.notification.email();
-      },
-      error => {
+    await this.http
+      .post("/api/email/signup", value)
+      .toPromise()
+      .then(res => {
+        if (res) {
+          this.signUp.reset();
+          this.notification.email();
+        }
+      })
+      .catch(error => {
         console.log(error);
-      }
-    );
+      });
   }
 }
