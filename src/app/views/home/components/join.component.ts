@@ -33,7 +33,7 @@ export class JoinComponent {
 
   submit(value) {
     this.auth.emailList(value);
-    this.http.post("/api/email/confirmation", value).subscribe(
+    this.http.post("/api/email/signup", value).subscribe(
       _ => {
         this.signUp.reset();
         this.notification.email();
