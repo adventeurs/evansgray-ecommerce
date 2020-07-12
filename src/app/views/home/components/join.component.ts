@@ -36,14 +36,10 @@ export class JoinComponent {
     await this.http
       .post("/api/email/signup", value)
       .toPromise()
-      .then(res => {
-        if (res) {
-          this.signUp.reset();
-          this.notification.email();
-        }
-      })
       .catch(error => {
         console.log(error);
       });
+    this.signUp.reset();
+    this.notification.email();
   }
 }
