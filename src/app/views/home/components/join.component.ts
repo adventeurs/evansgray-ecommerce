@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
-import { MatSnackBar } from "@angular/material";
 import { NotificationService } from "src/app/services/notification.service";
 import { HttpClient } from "@angular/common/http";
 

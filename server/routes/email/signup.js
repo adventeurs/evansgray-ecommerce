@@ -37,7 +37,8 @@ module.exports = (req, res) => {
       }
     };
 
-    sgMail.send(msg);
+    const mail = sgMail.send(msg);
+    res.send(mail);
   } catch (e) {
     res.send(e);
   }
