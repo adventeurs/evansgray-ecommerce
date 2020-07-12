@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { MatSnackBar } from "@angular/material";
 import { NotificationService } from "src/app/services/notification.service";
+import { HttpClient } from "@angular/common/http";
 
 @Component({
   selector: "join",
@@ -26,13 +27,20 @@ export class JoinComponent {
 
   constructor(
     private auth: AuthService,
-    private notification: NotificationService
+    private notification: NotificationService,
+    private http: HttpClient
   ) {}
 
   submit(value) {
     this.auth.emailList(value);
-
-    this.signUp.reset();
-    this.notification.email();
+    this.http.post("/api/email/confirmation", value).subscribe(
+      _ => {
+        this.signUp.reset();
+        this.notification.email();
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 }

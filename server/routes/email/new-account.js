@@ -19,7 +19,7 @@ const sgMail = require("./sendgrid");
 
 module.exports = async (req, res) => {
   let { email, displayName } = req.body;
-  console.log("what the fuck");
+
   const msg = {
     to: email,
     from: "emily@shopevansgray.com",
@@ -32,8 +32,8 @@ module.exports = async (req, res) => {
   sgMail.send(msg).then(
     () => {},
     error => {
-      console.log(error.response.body);
-      res.send(error.response.body);
+      console.log(error);
+      res.send(error);
     }
   );
 };

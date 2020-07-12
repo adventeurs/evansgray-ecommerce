@@ -37,10 +37,23 @@ sgMail.setApiKey(API_KEY);
 //     }
 //   });
 
-exports.abandonedCart = functions.auth.user().onCreate(user => {
+// exports.abandonedCart = functions.auth.user().onCreate(user => {
+//   const msg = {
+//     to: user.email,
+//     from: "emily@shopevansgray.com",
+//     templateId: "d-788882243f934cc9809f1614c42faba6",
+//     dynamic_template_data: {
+//       name: user.displayName
+//     }
+//   };
+
+//   return sgMail.send(msg);
+// });
+
+exports.welcome = functions.auth.user().onCreate(user => {
   const msg = {
     to: user.email,
-    from: "emily@shopevansgray.com",
+    from: "Emily from Evansgray <emily@shopevansgray.com>",
     templateId: "d-788882243f934cc9809f1614c42faba6",
     dynamic_template_data: {
       name: user.displayName

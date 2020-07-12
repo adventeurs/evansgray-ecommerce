@@ -2,18 +2,18 @@ const sgMail = require("./sendgrid");
 
 module.exports = (req, res) => {
   let { items, id, name, shipping, email } = req.body;
-
+  console.log(email);
   for (let i = 0; i < items.length; i++) {
     items[i].amount = items[i].amount / 100;
   }
 
-  items = items.filter(item => item.type != "sku");
+  items = items.filter(item => (item.type = "sku"));
 
   try {
     const msg = {
       to: email,
-      from: "emily@shopevansgray.com",
-      templateId: "d-9229a28e33e948f7a4eb8b1833557825",
+      from: "Emily from Evansgray <emily@shopevansgray.com>",
+      templateId: "d-04dc14d886284fe1a52b05d4ca685364",
       dynamic_template_data: {
         items: items,
         orderNumber: id,
@@ -22,8 +22,15 @@ module.exports = (req, res) => {
       }
     };
 
-    sgMail.send(msg);
-    res.send("complete");
+    sgMail.send(msg).then(
+      () => {
+        res.send(msg);
+      },
+      error => {
+        console.log(error.response.body);
+        res.send(error.response.body);
+      }
+    );
   } catch (e) {
     res.send(e);
   }

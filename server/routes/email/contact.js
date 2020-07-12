@@ -6,7 +6,7 @@ module.exports = (req, res) => {
   try {
     const msg = {
       to: "emily@shopevansgray.com",
-      from: "emily@shopevansgray.com",
+      from: "Emily from Evansgray <emily@shopevansgray.com>",
       templateId: "d-6a8c6a7b36f94b7d8033521513bd4d1c",
       dynamic_template_data: {
         email: email,
