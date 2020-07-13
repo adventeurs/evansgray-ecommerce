@@ -28,15 +28,13 @@ export class ContactComponent {
   }
 
   sendContact(value) {
-    try {
-      this.http
-        .post("/api/email/contact", value)
-        .toPromise()
-        .then(res => {
-          this.complete = true;
-        });
-    } catch (e) {
-      console.log(e);
-    }
+    console.log(value);
+    this.http
+      .post("/api/email/contact", value)
+      .toPromise()
+      .then(res => {
+        this.complete = true;
+      })
+      .catch(e => console.log(e));
   }
 }
