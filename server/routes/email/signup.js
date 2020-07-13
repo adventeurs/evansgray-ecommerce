@@ -27,19 +27,22 @@ const sgMail = require("./sendgrid");
 module.exports = (req, res) => {
   let { email } = req.body;
 
-  try {
-    const msg = {
-      to: "adventeurs@gmail.com",
-      from: "Emily from Evansgray <emily@shopevansgray.com>",
-      templateId: "d-ff657ec5e38c44baa1ee420770e3251f ",
-      dynamic_template_data: {
-        email: email
-      }
-    };
+  const msg = {
+    to: "adventeurs@gmail.com",
+    from: "Emily from Evansgray <emily@shopevansgray.com>",
+    templateId: "d-ff657ec5e38c44baa1ee420770e3251f",
+    dynamic_template_data: {
+      email: email
+    }
+  };
 
-    const mail = sgMail.send(msg);
-    res.send(mail);
-  } catch (e) {
-    res.send(e);
-  }
+  sgMail.send(msg).then(
+    () => {
+      res.send("complete");
+    },
+    error => {
+      console.log(error.body);
+      res.send(error);
+    }
+  );
 };
