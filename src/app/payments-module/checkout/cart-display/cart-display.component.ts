@@ -58,6 +58,7 @@ export class CartDisplayComponent {
           console.log(res);
           this.cartTotal.pipe(switchMap(this.cart.nextTotal));
         }
+        console.log(res);
       },
       error => console.log(error)
     );
