@@ -102,13 +102,13 @@ export class CartService {
   }
 
   // Find Total Price Of Items In Cart
-  private nextTotal(product): Observable<number> {
+  public nextTotal(product, discount?): Observable<number> {
     if (product) {
       let totals = Object.keys(product).map(
         key => product[key].price * product[key].quantity
       );
       let finalTotal = totals.reduce((a, b) => a + b, 0);
-
+      finalTotal = discount ? finalTotal * 0.1 : finalTotal;
       return of(finalTotal);
     }
     return of(0);

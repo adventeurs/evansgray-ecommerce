@@ -7,6 +7,7 @@ import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping
 import { MatDialog } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: "app-cart-display",
@@ -51,8 +52,14 @@ export class CartDisplayComponent {
   submitCoupon() {
     let code = this.code.value;
 
-    this.http.get("/api/payment/discount", code).subscribe(res => {
-      console.log(res);
-    });
+    this.http.get("/api/payment/discount", code).subscribe(
+      (res: any) => {
+        if (res.discount) {
+          console.log(res);
+          this.cartTotal.pipe(switchMap(this.cart.nextTotal));
+        }
+      },
+      error => console.log(error)
+    );
   }
 }
