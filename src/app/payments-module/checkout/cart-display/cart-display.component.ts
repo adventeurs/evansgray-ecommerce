@@ -55,7 +55,7 @@ export class CartDisplayComponent {
     let code = this.code.value;
     code = { code };
     await this.http
-      .get("/api/payment/discount", code)
+      .post("/api/payment/discount", code)
       .toPromise()
       .then(
         (res: any) => {

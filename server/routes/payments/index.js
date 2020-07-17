@@ -3,6 +3,6 @@ const pay = require("./payment");
 const discount = require("./coupon");
 
 payment.post("/", pay);
-payment.get("/discount", discount);
+payment.post("/discount", discount);
 
 module.exports = payment;
