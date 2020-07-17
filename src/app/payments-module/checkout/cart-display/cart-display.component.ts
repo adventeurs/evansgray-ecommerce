@@ -59,6 +59,7 @@ export class CartDisplayComponent {
       .toPromise()
       .then(
         (res: any) => {
+          console.log(res);
           if (res.percent_off) {
             this.cartTotal.pipe(
               switchMap(products =>
