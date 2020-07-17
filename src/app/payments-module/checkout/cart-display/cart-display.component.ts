@@ -8,6 +8,7 @@ import { MatDialog } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
 import { switchMap } from "rxjs/operators";
+import { NotificationService } from "src/app/services/notification.service";
 
 @Component({
   selector: "app-cart-display",
@@ -33,7 +34,8 @@ export class CartDisplayComponent {
     private cart: CartService,
     public auth: AuthService,
     private dialog: MatDialog,
-    private http: HttpClient
+    private http: HttpClient,
+    private notification: NotificationService
   ) {}
 
   removeFromCart(product) {
@@ -60,9 +62,14 @@ export class CartDisplayComponent {
               this.cart.nextTotal(products, res.percent_off)
             )
           );
+          this.notification.snackbarAlert("Coupon applied");
         }
+        console.log(res);
       },
-      error => console.log(error)
+      error => {
+        console.log(error);
+        this.notification.snackbarAlert("Coupon not found");
+      }
     );
   }
 }
