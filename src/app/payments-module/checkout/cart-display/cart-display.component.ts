@@ -60,17 +60,14 @@ export class CartDisplayComponent {
       .then(
         (res: any) => {
           if (res.percent_off) {
-            this.cart.total.pipe(
-              switchMap(products =>
-                this.cart.nextTotal(products, res.percent_off)
-              )
-            );
+            console.log(res.percent_off);
             this.notification.snackbarAlert("Coupon applied");
+          } else {
+            this.notification.snackbarAlert("Coupon not found");
           }
         },
         error => {
           console.log(error);
-          this.notification.snackbarAlert("Coupon not found");
         }
       );
   }

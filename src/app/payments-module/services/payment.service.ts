@@ -9,9 +9,6 @@ import { CartService } from "src/app/services/cart.service";
   providedIn: "root"
 })
 export class PaymentService {
-  // TODO: create stripe user
-  // TODO: create stripe order
-  // TODO: process payment stripe
   stripe: any;
 
   constructor(
