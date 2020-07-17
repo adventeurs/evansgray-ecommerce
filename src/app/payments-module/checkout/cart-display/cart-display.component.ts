@@ -51,26 +51,27 @@ export class CartDisplayComponent {
     this.dialog.open(ShippingInfoComponent);
   }
 
-  submitCoupon() {
+  async submitCoupon() {
     let code = this.code.value;
     code = { code };
-    console.log(code);
-    this.http.get("/api/payment/discount", code).subscribe(
-      (res: any) => {
-        if (res.percent_off) {
-          this.cartTotal.pipe(
-            switchMap(products =>
-              this.cart.nextTotal(products, res.percent_off)
-            )
-          );
-          this.notification.snackbarAlert("Coupon applied");
+    await this.http
+      .get("/api/payment/discount", code)
+      .toPromise()
+      .then(
+        (res: any) => {
+          if (res.percent_off) {
+            this.cartTotal.pipe(
+              switchMap(products =>
+                this.cart.nextTotal(products, res.percent_off)
+              )
+            );
+            this.notification.snackbarAlert("Coupon applied");
+          }
+        },
+        error => {
+          console.log(error);
+          this.notification.snackbarAlert("Coupon not found");
         }
-        console.log(res);
-      },
-      error => {
-        console.log(error);
-        this.notification.snackbarAlert("Coupon not found");
-      }
-    );
+      );
   }
 }
