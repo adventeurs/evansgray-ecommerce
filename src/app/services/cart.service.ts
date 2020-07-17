@@ -108,7 +108,7 @@ export class CartService {
         key => product[key].price * product[key].quantity
       );
       let finalTotal = totals.reduce((a, b) => a + b, 0);
-      finalTotal = discount ? finalTotal * 0.1 : finalTotal;
+      finalTotal = discount ? finalTotal * (discount / 100) : finalTotal;
       return of(finalTotal);
     }
     return of(0);

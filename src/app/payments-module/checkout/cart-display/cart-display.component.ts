@@ -54,11 +54,13 @@ export class CartDisplayComponent {
 
     this.http.get("/api/payment/discount", code).subscribe(
       (res: any) => {
-        if (res.discount) {
-          console.log(res);
-          this.cartTotal.pipe(switchMap(this.cart.nextTotal));
+        if (res.percent_off) {
+          this.cartTotal.pipe(
+            switchMap(products =>
+              this.cart.nextTotal(products, res.percent_off)
+            )
+          );
         }
-        console.log(res);
       },
       error => console.log(error)
     );
