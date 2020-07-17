@@ -52,7 +52,8 @@ export class CartDisplayComponent {
   }
 
   submitCoupon() {
-    let { code } = this.code.value;
+    let code = this.code.value;
+    code = { code };
     console.log(code);
     this.http.get("/api/payment/discount", code).subscribe(
       (res: any) => {
