@@ -59,9 +59,8 @@ export class CartDisplayComponent {
       .toPromise()
       .then(
         (res: any) => {
-          console.log(res);
           if (res.percent_off) {
-            this.cartTotal.pipe(
+            this.cart.total.pipe(
               switchMap(products =>
                 this.cart.nextTotal(products, res.percent_off)
               )
