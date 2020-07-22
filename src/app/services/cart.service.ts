@@ -131,8 +131,7 @@ export class CartService {
     else return of([]);
   }
 
-  // Calculation methods
-
+  // Delete Cart
   async deleteCart() {
     this.cartRef.delete();
   }

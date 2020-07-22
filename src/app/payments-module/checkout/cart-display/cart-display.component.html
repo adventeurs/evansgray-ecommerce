@@ -62,7 +62,7 @@
     <mat-divider></mat-divider>
     <div class="column">
       <div>
-        <form [formGroup]="coupon" (ngSubmit)="submitCoupon()">
+        <form [formGroup]="coupon" (ngSubmit)="submitCoupon(displayCart)">
           <mat-form-field>
             <input
               type="text"

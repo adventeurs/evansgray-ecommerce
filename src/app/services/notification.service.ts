@@ -29,4 +29,16 @@ export class NotificationService {
       duration: 3000
     });
   }
+
+  public discount() {
+    this.snackBar.open("Coupon applied!", "close", {
+      duration: 3000
+    });
+  }
+
+  public notFound() {
+    this.snackBar.open("Coupon not valid", "close", {
+      duration: 3000
+    });
+  }
 }

@@ -18,7 +18,7 @@ import { NotificationService } from "src/app/services/notification.service";
 export class CartDisplayComponent {
   @Input() close: boolean = false;
   @Input() displayCart: Product[];
-  @Input() cartTotal: Observable<Number>;
+  @Input() cartTotal: number;
   show: boolean = false;
   quantity;
 
@@ -51,27 +51,26 @@ export class CartDisplayComponent {
     this.dialog.open(ShippingInfoComponent);
   }
 
-  async submitCoupon() {
+  async submitCoupon(products) {
     let code = this.code.value;
     code = { code };
+
+    this.cart.nextTotal(products, 10);
     await this.http
       .post("/api/payment/discount", code)
       .toPromise()
       .then(
         (res: any) => {
           if (res.percent_off) {
-            this.cart.total.pipe(
-              switchMap(products =>
-                this.cart.nextTotal(products, res.percent_off)
-              )
-            );
-            this.notification.snackbarAlert("Coupon applied");
+            this.cartTotal = res.percent_off * this.cartTotal;
+            this.notification.discount();
           } else {
-            this.notification.snackbarAlert("Coupon not found");
+            this.notification.notFound();
           }
         },
         error => {
           console.log(error);
+          this.notification.notFound();
         }
       );
   }
