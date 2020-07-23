@@ -15,4 +15,5 @@ export interface OrderData {
     };
     name: string;
   };
+  discount?: string;
 }

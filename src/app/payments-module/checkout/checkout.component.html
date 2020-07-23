@@ -16,6 +16,7 @@
       [close]="close"
       [items]="cart$ | async"
       [cartTotal]="cartTotal$ | async"
+      [discount]="discount"
       (orderEvent)="receiveOrder($event)"
       (closeEvent)="receiveClose($event)"
     ></app-shipping>
@@ -58,6 +59,7 @@
       [close]="close"
       [displayCart]="cart$ | async"
       [cartTotal]="cartTotal$ | async"
+      (discount)="recieveDiscount($event)"
     ></app-cart-display>
   </div>
 </div>

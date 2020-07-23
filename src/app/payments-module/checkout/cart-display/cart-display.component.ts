@@ -1,13 +1,11 @@
-import { Component, Input } from "@angular/core";
+import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CartService } from "src/app/services/cart.service";
 import { Product } from "src/app/models/product";
 import { AuthService } from "src/app/services/auth.service";
-import { Observable } from "rxjs";
 import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping-info/shipping-info.component";
 import { MatDialog } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
-import { switchMap } from "rxjs/operators";
 import { NotificationService } from "src/app/services/notification.service";
 
 @Component({
@@ -16,6 +14,7 @@ import { NotificationService } from "src/app/services/notification.service";
   styleUrls: ["./cart-display.component.scss"]
 })
 export class CartDisplayComponent {
+  @Output() discountEvent = new EventEmitter<string>();
   @Input() close: boolean = false;
   @Input() displayCart: Product[];
   @Input() cartTotal: number;
@@ -55,14 +54,15 @@ export class CartDisplayComponent {
     let code = this.code.value;
     code = { code };
 
-    this.cart.nextTotal(products, 10);
     await this.http
       .post("/api/payment/discount", code)
       .toPromise()
       .then(
         (res: any) => {
           if (res.percent_off) {
-            this.cartTotal = res.percent_off * this.cartTotal;
+            this.cartTotal =
+              this.cartTotal - res.percent_off * 100 * this.cartTotal;
+            this.discountEvent.emit(res.id);
             this.notification.discount();
           } else {
             this.notification.notFound();

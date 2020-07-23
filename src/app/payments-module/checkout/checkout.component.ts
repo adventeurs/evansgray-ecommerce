@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import { Location } from "@angular/common";
 import { OrderData } from "src/app/models/orderData";
 import { MatDialog } from "@angular/material";
@@ -20,6 +20,7 @@ export class CheckoutComponent implements OnInit {
   close: boolean = false;
   cart$: Observable<Product[]>;
   cartTotal$: Observable<Number>;
+  discount: string;
 
   constructor(
     private _location: Location,
@@ -38,13 +39,15 @@ export class CheckoutComponent implements OnInit {
   }
 
   receiveOrder($event) {
-    console.log($event);
     this.orderData = $event;
   }
 
   receiveClose($event) {
-    console.log($event);
     this.close = $event;
+  }
+
+  receiveDiscount($event) {
+    this.discount = $event;
   }
 
   returnToShipping() {
@@ -52,7 +55,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   openDialog(value: string) {
-    console.log(value);
     if (value.includes("Term")) this.dialog.open(TermsComponent);
 
     if (value.includes("Shipping")) this.dialog.open(ShippingInfoComponent);

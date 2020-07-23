@@ -17,9 +17,10 @@ import { HttpClient } from "@angular/common/http";
 export class ShippingComponent {
   @Input() cartTotal: Number;
   @Input() items: Product[];
+  @Input() close: boolean;
+  @Input() discount: string;
   @Output() orderEvent = new EventEmitter<OrderData>();
   @Output() closeEvent = new EventEmitter<boolean>();
-  @Input() close: boolean;
   // orderData: OrderData;
 
   orderForm = new FormGroup({
@@ -73,9 +74,13 @@ export class ShippingComponent {
             return res.id;
           })
           .catch(error => console.log(error));
-        orderObject = this.createOrderObject(value, customer);
+        orderObject = this.createOrderObject(value, customer, this.discount);
       } else {
-        orderObject = this.createOrderObject(value, user.stripeCustomerId);
+        orderObject = this.createOrderObject(
+          value,
+          user.stripeCustomerId,
+          this.discount
+        );
       }
 
       this.orderEvent.emit(orderObject);
@@ -103,7 +108,8 @@ export class ShippingComponent {
       name: string;
       email: string;
     },
-    customer: string
+    customer: string,
+    discount: string
   ): OrderData {
     let items = this.createStripeObject(this.items);
 
@@ -121,7 +127,8 @@ export class ShippingComponent {
           state
         },
         name
-      }
+      },
+      discount
     };
   }
 
