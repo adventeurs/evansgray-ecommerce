@@ -1,6 +1,8 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
+import { PaymentService } from "./payments-module/services/payment.service";
+import { PaymentModule } from "./payments-module/payment.module";
 
 import { AngularFireAuthModule } from "@angular/fire/auth";
 import { AngularFireModule } from "@angular/fire";
@@ -9,28 +11,18 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { AppRoutingModule, routingComponents } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./shared/header/header.component";
-import { FooterComponent } from "./shared/footer/footer.component";
 import { ProductPageComponent } from "./views/product-page/product-page.component";
 import { HttpClientModule } from "@angular/common/http";
 import { LoginModalComponent } from "./shared/header/login-modal/login-modal.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MdComponentsModule } from "./md-components.module";
 import { SearchFilterComponent } from "./views/shop/search-filter/search-filter.component";
-import { ProductCardComponent } from "./common/product-card/product-card.component";
 import { ScrollingModule } from "@angular/cdk/scrolling";
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
-import { PaymentService } from "./payments-module/services/payment.service";
 import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
-import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
-import {
-  CarouselComponent,
-  CarouselItemElement
-} from "./shared/carousel/carousel.component";
-import { CarouselItemDirective } from "./shared/carousel-item.directive";
 import { ApronComponent } from "./views/home/slides/apron.component";
 import { ScrunchieComponent } from "./views/home/slides/scrunchie.component";
 import { RibbonComponent } from "./views/home/slides/ribbon.component";
@@ -47,22 +39,17 @@ import { ForHomeComponent } from "./views/shop/components/for-home.component";
 import { RibbonFeatureComponent } from "./views/shop/components/ribbonFeature.component";
 import { AboutComponent } from "./views/about/about.component";
 import { ContactComponent } from "./views/contact/contact.component";
+import { SharedModule } from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
-    FooterComponent,
     ProductPageComponent,
     LoginModalComponent,
     SearchFilterComponent,
-    ProductCardComponent,
     routingComponents,
     SearchFilterComponent,
     MobileNavComponent,
-    CarouselComponent,
-    CarouselItemDirective,
-    CarouselItemElement,
     ApronComponent,
     ScrunchieComponent,
     RibbonComponent,
@@ -91,6 +78,7 @@ import { ContactComponent } from "./views/contact/contact.component";
     RibbonFeatureComponent
   ],
   imports: [
+    SharedModule,
     BrowserModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase, "evansgray"),

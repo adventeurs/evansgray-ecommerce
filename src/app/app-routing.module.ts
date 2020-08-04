@@ -14,6 +14,12 @@ const routes: Routes = [
   { path: "home", component: HomeComponent, data: { animation: "Home" } },
   { path: "shop", component: ShopComponent, data: { animation: "Shop" } },
   {
+    path: "checkout",
+    loadChildren: () =>
+      import("./payments-module/payment.module").then(m => m.PaymentModule),
+    data: { animation: "Checkout" }
+  },
+  {
     path: "product/:sku",
     component: ProductPageComponent,
     data: { animation: "Product" }

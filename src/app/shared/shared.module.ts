@@ -1,6 +1,9 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { CarouselComponent } from "./carousel/carousel.component";
+import {
+  CarouselComponent,
+  CarouselItemElement
+} from "./carousel/carousel.component";
 import { FooterComponent } from "./footer/footer.component";
 import { HeaderComponent } from "../shared/header/header.component";
 import { DollarsPipe } from "./pipes/dollars.pipe";
@@ -10,6 +13,8 @@ import { CarouselItemDirective } from "./carousel-item.directive";
 
 const components = [
   CarouselComponent,
+  CarouselItemDirective,
+  CarouselItemElement,
   FooterComponent,
   HeaderComponent,
   ProductCardComponent

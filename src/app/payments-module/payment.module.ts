@@ -13,11 +13,10 @@ import { SuccessComponent } from "./checkout/success/success.component";
 import { Routes, RouterModule } from "@angular/router";
 import { MdComponentsModule } from "../md-components.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
-import { DollarsPipe } from "../common/pipes/dollars.pipe";
-import { InventoryPipe } from "../common/pipes/inventory.pipe";
 import { AuthService } from "../services/auth.service";
 import { CartService } from "../services/cart.service";
 import { TermsComponent } from "./checkout/terms/terms.component";
+import { SharedModule } from "../shared/shared.module";
 
 const appRoutes: Routes = [
   {
@@ -39,14 +38,13 @@ const appRoutes: Routes = [
     MakePaymentComponent,
     CartDisplayComponent,
     SuccessComponent,
-    DollarsPipe,
-    InventoryPipe,
     ShippingInfoComponent,
     RefundInfoComponent,
     TermsComponent
   ],
   entryComponents: [ShippingInfoComponent, RefundInfoComponent, TermsComponent],
   imports: [
+    SharedModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
@@ -61,9 +59,7 @@ const appRoutes: Routes = [
     CartDisplayComponent,
     MakePaymentComponent,
     CheckoutComponent,
-    SuccessComponent,
-    DollarsPipe,
-    InventoryPipe
+    SuccessComponent
   ]
 })
 export class PaymentModule {}
