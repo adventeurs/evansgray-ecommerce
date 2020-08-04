@@ -60,8 +60,9 @@ export class CartDisplayComponent {
       .then(
         (res: any) => {
           if (res.percent_off) {
-            this.cartTotal =
-              this.cartTotal - res.percent_off * 100 * this.cartTotal;
+            let percentOff = res.percent_off / 100;
+            let discount = this.cartTotal * percentOff;
+            this.cartTotal = this.cartTotal - discount;
             this.discountEvent.emit(res.id);
             this.notification.discount();
           } else {

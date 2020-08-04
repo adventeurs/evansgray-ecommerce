@@ -20,9 +20,10 @@ import { Component } from "@angular/core";
         </button>
       </div>
     </div>
-    <img class="wc1" src="../../../assets/watercolor-1.png" />
-    <img class="wc3" src="../../../assets/3.png" />
   `,
   styleUrls: ["../home.component.scss"]
 })
 export class BespokeComponent {}
+
+// <img class="wc1" src="../../../assets/watercolor-1.png" /> //
+// <img class="wc3" src="../../../assets/3.png" /> //

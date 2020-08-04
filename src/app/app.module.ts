@@ -9,11 +9,11 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 
 import { AppRoutingModule, routingComponents } from "./app-routing.module";
 import { AppComponent } from "./app.component";
-import { HeaderComponent } from "./common/header/header.component";
-import { FooterComponent } from "./common/footer/footer.component";
+import { HeaderComponent } from "./shared/header/header.component";
+import { FooterComponent } from "./shared/footer/footer.component";
 import { ProductPageComponent } from "./views/product-page/product-page.component";
 import { HttpClientModule } from "@angular/common/http";
-import { LoginModalComponent } from "./common/header/login-modal/login-modal.component";
+import { LoginModalComponent } from "./shared/header/login-modal/login-modal.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MdComponentsModule } from "./md-components.module";
 import { SearchFilterComponent } from "./views/shop/search-filter/search-filter.component";
@@ -23,14 +23,14 @@ import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
 import { PaymentService } from "./payments-module/services/payment.service";
-import { MobileNavComponent } from "./common/header/mobile-nav/mobile-nav.component";
+import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
 import { PaymentModule } from "./payments-module/payment.module";
 import { environment } from "src/environments/environment.prod";
 import {
   CarouselComponent,
   CarouselItemElement
-} from "./common/carousel/carousel.component";
-import { CarouselItemDirective } from "./common/carousel-item.directive";
+} from "./shared/carousel/carousel.component";
+import { CarouselItemDirective } from "./shared/carousel-item.directive";
 import { ApronComponent } from "./views/home/slides/apron.component";
 import { ScrunchieComponent } from "./views/home/slides/scrunchie.component";
 import { RibbonComponent } from "./views/home/slides/ribbon.component";

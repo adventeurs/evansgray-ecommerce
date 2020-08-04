@@ -15,5 +15,5 @@ export interface OrderData {
     };
     name: string;
   };
-  discount?: string;
+  coupon?: string;
 }

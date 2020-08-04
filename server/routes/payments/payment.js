@@ -1,4 +1,5 @@
-const stripe = require("stripe")(process.env.STRIPE_SECRET);
+// const stripe = require("stripe")(process.env.STRIPE_SECRET);
+const stripe = require("./stripe");
 
 module.exports = async (req, res) => {
   const {
@@ -7,29 +8,33 @@ module.exports = async (req, res) => {
     items,
     shipping,
     customer,
-    email
+    email,
+    coupon
   } = req.body;
 
   try {
+    // Create stripe order
     let order = await stripe.orders.create({
       currency,
       items,
       email,
       shipping,
-      customer
+      customer,
+      coupon
     });
 
     let paymentIntent;
     if (paymentMethodId) {
+      // create stripe payment intent object
       paymentIntent = await stripe.paymentIntents.create({
-        // create stripe payment intent object
         amount: order.amount,
         currency: currency,
         payment_method: paymentMethodId,
         confirmation_method: "manual",
         customer: customer,
         shipping: shipping,
-        confirm: true
+        confirm: true,
+        coupon
       });
     }
     res.send({ intent: generateResponse(paymentIntent), order: order });

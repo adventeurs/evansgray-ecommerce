@@ -3,7 +3,8 @@ import {
   Router,
   RouterOutlet,
   NavigationEnd,
-  NavigationStart
+  NavigationStart,
+  RouterEvent
 } from "@angular/router";
 import { CartService } from "./services/cart.service";
 import { fader } from "./common/animations/animations";
@@ -30,13 +31,18 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._router.events.subscribe(event => {
+    this._router.events.subscribe((event: RouterEvent) => {
       if (!(event instanceof NavigationEnd)) {
         return;
       }
 
       if (!event.url.includes("filter")) {
         window.scrollTo(0, 0);
+      }
+
+      if (this._router.url.includes("filter")) {
+        window.scrollTo(0, 0);
+        console.log("hello");
       }
     });
   }
@@ -50,7 +56,6 @@ export class AppComponent implements OnInit {
   }
 
   receiveOverflow(event: Event) {
-    console.log(event);
     if (event) {
       document.body.style.overflow = "hidden";
     }

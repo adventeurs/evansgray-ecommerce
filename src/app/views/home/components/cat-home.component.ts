@@ -9,7 +9,7 @@ import { Component } from "@angular/core";
         <div
           class="category"
           [routerLink]="['/shop']"
-          [queryParams]="{ filter: 'table-runners,napkins' }"
+          [queryParams]="{ filter: 'for-home' }"
           style="background-position-x: -172px;"
           [style.background-image]="
             'url(assets/products/napkin_copper_plate_setting_1.jpg)'
@@ -33,7 +33,7 @@ import { Component } from "@angular/core";
         <div
           class="category"
           [routerLink]="['/shop']"
-          [queryParams]="{ filter: 'aprons' }"
+          [queryParams]="{ filter: 'for-body' }"
           style="background-position-x: -50px;"
           [style.background-image]="
             'url(assets/products/apron_mustard_front_1.jpg)'

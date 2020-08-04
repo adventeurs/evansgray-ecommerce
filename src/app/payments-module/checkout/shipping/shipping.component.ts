@@ -128,7 +128,7 @@ export class ShippingComponent {
         },
         name
       },
-      discount
+      coupon: discount
     };
   }
 

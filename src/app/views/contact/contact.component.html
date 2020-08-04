@@ -1,4 +1,4 @@
-<form *ngIf="!complete" [formGroup]="contact" class="contact">
+<form [formGroup]="contact" class="contact">
   <div class="contact-title">
     <h4>Let's get in touch</h4>
   </div>
@@ -33,11 +33,15 @@
       ></textarea>
     </mat-form-field>
   </div>
-  <button class="light-blue-btn" (click)="sendContact(contact.value)">
+  <button
+    *ngIf="!complete"
+    class=" light-blue-btn"
+    (click)="sendContact(contact.value)"
+  >
     Send
   </button>
+  <h3 *ngIf="complete" class="complete">Form sent!</h3>
 </form>
-<h3 *ngIf="complete">Form sent!</h3>
 <h4 style="width: 500px; margin: auto; padding-top: 4em; text-align: center;">
   Commissions
 </h4>
