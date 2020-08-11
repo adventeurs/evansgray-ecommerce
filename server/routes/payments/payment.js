@@ -63,3 +63,5 @@ const generateResponse = intent => {
       };
   }
 };
+
+// create tax object

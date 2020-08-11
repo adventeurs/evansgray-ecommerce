@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core";
+import { Component, Output, EventEmitter, Input } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { OrderData } from "src/app/models/orderData";
@@ -15,7 +15,7 @@ import * as taxrates from "src/assets/taxrates/rates.json";
   templateUrl: "./shipping.component.html",
   styleUrls: ["./shipping.component.scss"]
 })
-export class ShippingComponent implements OnInit {
+export class ShippingComponent {
   private rates = (taxrates as any).default;
   @Input() cartTotal: Number;
   @Input() items: Product[];
@@ -66,29 +66,13 @@ export class ShippingComponent implements OnInit {
     private http: HttpClient
   ) {}
 
-  ngOnInit() {
-    let zip = this.rates.filter(rate => rate.ZipCode === 64086);
-    console.log(zip);
-  }
-
   async proceedToPayment(value, user: User) {
+    let zip = Number(value.postalCode);
     let orderObject: OrderData;
     try {
-      if (!user.stripeCustomerId) {
-        let customer = await this.auth
-          .createStripeCustomer(value.name, value.email, user)
-          .then((res: any) => {
-            return res.id;
-          })
-          .catch(error => console.log(error));
-        orderObject = this.createOrderObject(value, customer, this.discount);
-      } else {
-        orderObject = this.createOrderObject(
-          value,
-          user.stripeCustomerId,
-          this.discount
-        );
-      }
+      let taxRate = this.rates.filter(rate => rate.ZipCode === zip);
+      let taxObject = this.createTaxObject(taxRate);
+      await this.createCustomer(orderObject, value, user, taxObject);
 
       this.orderEvent.emit(orderObject);
       this.closeEvent.emit(true);
@@ -116,9 +100,10 @@ export class ShippingComponent implements OnInit {
       email: string;
     },
     customer: string,
-    discount: string
+    discount: string,
+    taxObject
   ): OrderData {
-    let items = this.createStripeObject(this.items);
+    let items = { ...this.createStripeObject(this.items), taxObject };
 
     return {
       email,
@@ -151,5 +136,39 @@ export class ShippingComponent implements OnInit {
     });
 
     return stripeOrderObject;
+  }
+
+  async createCustomer(orderObject, value, user, taxObject) {
+    if (!user.stripeCustomerId) {
+      let customer = await this.auth
+        .createStripeCustomer(value.name, value.email, user)
+        .then((res: any) => {
+          return res.id;
+        })
+        .catch(error => console.log(error));
+      orderObject = this.createOrderObject(
+        value,
+        customer,
+        this.discount,
+        taxObject
+      );
+    } else {
+      orderObject = this.createOrderObject(
+        value,
+        user.stripeCustomerId,
+        this.discount,
+        taxObject
+      );
+    }
+  }
+
+  createTaxObject(taxRate) {
+    return {
+      object: "order_item",
+      amount: taxRate,
+      currency: "usd",
+      description: "Caluculated Tax",
+      type: "tax"
+    };
   }
 }
