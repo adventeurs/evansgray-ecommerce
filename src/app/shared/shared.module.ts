@@ -10,6 +10,11 @@ import { DollarsPipe } from "./pipes/dollars.pipe";
 import { InventoryPipe } from "./pipes/inventory.pipe";
 import { ProductCardComponent } from "./product-card/product-card.component";
 import { CarouselItemDirective } from "./carousel-item.directive";
+import { RouterModule } from "@angular/router";
+import { MdComponentsModule } from "../md-components.module";
+import { MobileNavComponent } from "./header/mobile-nav/mobile-nav.component";
+import { LoginModalComponent } from "./header/login-modal/login-modal.component";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 const components = [
   CarouselComponent,
@@ -17,7 +22,9 @@ const components = [
   CarouselItemElement,
   FooterComponent,
   HeaderComponent,
-  ProductCardComponent
+  ProductCardComponent,
+  MobileNavComponent,
+  LoginModalComponent
 ];
 
 @NgModule({
@@ -27,7 +34,13 @@ const components = [
     InventoryPipe,
     CarouselItemDirective
   ],
-  imports: [CommonModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    MdComponentsModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
   exports: [...components, DollarsPipe, InventoryPipe, CarouselItemDirective]
 })
 export class SharedModule {}

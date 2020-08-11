@@ -1,14 +1,10 @@
 import {
-  animation,
   trigger,
-  animateChild,
   group,
   transition,
   animate,
   style,
-  query,
-  stagger,
-  state
+  query
 } from "@angular/animations";
 
 export const fader = trigger("routeAnimations", [

@@ -20,7 +20,7 @@ import { SharedModule } from "../shared/shared.module";
 
 const appRoutes: Routes = [
   {
-    path: "checkout",
+    path: "",
     component: CheckoutComponent,
     children: [
       {
@@ -50,7 +50,7 @@ const appRoutes: Routes = [
     FormsModule,
     HttpClientModule,
     MdComponentsModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forChild(appRoutes)
   ],
   providers: [PaymentService, Location, AuthService, CartService],
   exports: [

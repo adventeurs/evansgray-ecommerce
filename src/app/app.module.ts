@@ -13,7 +13,6 @@ import { AppRoutingModule, routingComponents } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { ProductPageComponent } from "./views/product-page/product-page.component";
 import { HttpClientModule } from "@angular/common/http";
-import { LoginModalComponent } from "./shared/header/login-modal/login-modal.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MdComponentsModule } from "./md-components.module";
 import { SearchFilterComponent } from "./views/shop/search-filter/search-filter.component";
@@ -21,7 +20,6 @@ import { ScrollingModule } from "@angular/cdk/scrolling";
 import { AdminAuthGaurd } from "./services/adminauthgaurd.service";
 import { StatesService } from "./services/states.service";
 import { AuthService } from "./services/auth.service";
-import { MobileNavComponent } from "./shared/header/mobile-nav/mobile-nav.component";
 import { environment } from "src/environments/environment.prod";
 import { ApronComponent } from "./views/home/slides/apron.component";
 import { ScrunchieComponent } from "./views/home/slides/scrunchie.component";
@@ -45,11 +43,9 @@ import { SharedModule } from "./shared/shared.module";
   declarations: [
     AppComponent,
     ProductPageComponent,
-    LoginModalComponent,
     SearchFilterComponent,
     routingComponents,
     SearchFilterComponent,
-    MobileNavComponent,
     ApronComponent,
     ScrunchieComponent,
     RibbonComponent,

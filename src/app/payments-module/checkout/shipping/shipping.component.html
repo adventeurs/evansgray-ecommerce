@@ -11,13 +11,7 @@
     <div class="form-group name">
       <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Email</mat-label>
-        <input
-          formControlName="email"
-          matInput
-          required
-          id="email"
-          type="text"
-        />
+        <input formControlName="email" matInput required type="text" />
       </mat-form-field>
       <mat-error *ngIf="email.touched && email.errors?.required">
         Please enter a contact email

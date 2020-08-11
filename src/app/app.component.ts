@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import {
   Router,
   RouterOutlet,
@@ -7,7 +7,7 @@ import {
   RouterEvent
 } from "@angular/router";
 import { CartService } from "./services/cart.service";
-import { fader } from "./common/animations/animations";
+import { fader } from "./shared/animations/animations";
 
 @Component({
   selector: "app-root",

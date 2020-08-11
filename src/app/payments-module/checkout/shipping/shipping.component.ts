@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, Input } from "@angular/core";
+import { Component, Output, EventEmitter, Input, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { AuthService } from "src/app/services/auth.service";
 import { OrderData } from "src/app/models/orderData";
@@ -8,13 +8,15 @@ import { NotificationService } from "src/app/services/notification.service";
 import { StripeOrderObject } from "src/app/models/stripeOrderObject";
 import { User } from "src/app/models/user";
 import { HttpClient } from "@angular/common/http";
+import * as taxrates from "src/assets/taxrates/rates.json";
 
 @Component({
   selector: "app-shipping",
   templateUrl: "./shipping.component.html",
   styleUrls: ["./shipping.component.scss"]
 })
-export class ShippingComponent {
+export class ShippingComponent implements OnInit {
+  private rates = (taxrates as any).default;
   @Input() cartTotal: Number;
   @Input() items: Product[];
   @Input() close: boolean;
@@ -63,6 +65,11 @@ export class ShippingComponent {
     private notification: NotificationService,
     private http: HttpClient
   ) {}
+
+  ngOnInit() {
+    let zip = this.rates.filter(rate => rate.ZipCode === 64086);
+    console.log(zip);
+  }
 
   async proceedToPayment(value, user: User) {
     let orderObject: OrderData;
