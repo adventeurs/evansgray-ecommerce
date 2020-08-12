@@ -13,16 +13,6 @@ module.exports = async (req, res) => {
   } = req.body;
 
   try {
-    // Create stripe order
-    let order = await stripe.orders.create({
-      currency,
-      items,
-      email,
-      shipping,
-      customer,
-      coupon
-    });
-
     let paymentIntent;
     if (paymentMethodId) {
       // create stripe payment intent object
