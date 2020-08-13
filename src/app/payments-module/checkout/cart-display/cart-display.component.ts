@@ -50,6 +50,7 @@ export class CartDisplayComponent {
     this.dialog.open(ShippingInfoComponent);
   }
 
+  // Submit Coupon To Stripe
   async submitCoupon(products) {
     let code = this.code.value;
     code = { code };
@@ -60,6 +61,7 @@ export class CartDisplayComponent {
       .then(
         (res: any) => {
           if (res.percent_off) {
+            // Update Price And Send Coupon Code To Shipping Component
             let percentOff = res.percent_off / 100;
             let discount = this.cartTotal * percentOff;
             this.cartTotal = this.cartTotal - discount;
@@ -74,5 +76,12 @@ export class CartDisplayComponent {
           this.notification.notFound();
         }
       );
+  }
+
+  // Update Total Based On Tax Information
+  recieveTax($event) {
+    // Recieve Tax Info
+    // Update Price To Reflect Tax Object
+    // Send Tax Object To Shipping To Create Order
   }
 }
