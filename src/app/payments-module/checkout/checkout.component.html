@@ -60,6 +60,7 @@
       [displayCart]="cart$ | async"
       [cartTotal]="cartTotal$ | async"
       (discount)="recieveDiscount($event)"
+      [taxRate]="tax"
     ></app-cart-display>
   </div>
 </div>

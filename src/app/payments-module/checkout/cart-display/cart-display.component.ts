@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { CartService } from "src/app/services/cart.service";
 import { Product } from "src/app/models/product";
 import { AuthService } from "src/app/services/auth.service";
-import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping-info/shipping-info.component";
+import { ShippingInfoComponent } from "src/app/payments-module/entry/shipping-info/shipping-info.component";
 import { MatDialog } from "@angular/material";
 import { FormGroup, FormControl } from "@angular/forms";
 import { HttpClient } from "@angular/common/http";
@@ -28,6 +28,16 @@ export class CartDisplayComponent {
   get code() {
     return this.coupon.get("code");
   }
+
+  @Input()
+  get taxRate() {
+    return this._taxRate;
+  }
+  set taxRate(taxRate) {
+    this._taxRate = taxRate / 100;
+  }
+
+  private _taxRate = 0;
 
   constructor(
     private cart: CartService,
@@ -76,12 +86,5 @@ export class CartDisplayComponent {
           this.notification.notFound();
         }
       );
-  }
-
-  // Update Total Based On Tax Information
-  recieveTax($event) {
-    // Recieve Tax Info
-    // Update Price To Reflect Tax Object
-    // Send Tax Object To Shipping To Create Order
   }
 }

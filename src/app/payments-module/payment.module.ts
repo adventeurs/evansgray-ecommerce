@@ -7,15 +7,15 @@ import { HttpClientModule } from "@angular/common/http";
 import { ShippingComponent } from "./checkout/shipping/shipping.component";
 import { CheckoutComponent } from "./checkout/checkout.component";
 import { CartDisplayComponent } from "./checkout/cart-display/cart-display.component";
-import { ShippingInfoComponent } from "./checkout/shipping-info/shipping-info.component";
-import { RefundInfoComponent } from "./checkout/refund-info/refund-info.component";
+import { ShippingInfoComponent } from "./entry/shipping-info/shipping-info.component";
+import { RefundInfoComponent } from "./entry/refund-info/refund-info.component";
 import { SuccessComponent } from "./checkout/success/success.component";
 import { Routes, RouterModule } from "@angular/router";
 import { MdComponentsModule } from "../md-components.module";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AuthService } from "../services/auth.service";
 import { CartService } from "../services/cart.service";
-import { TermsComponent } from "./checkout/terms/terms.component";
+import { TermsComponent } from "./entry/terms/terms.component";
 import { SharedModule } from "../shared/shared.module";
 
 const appRoutes: Routes = [

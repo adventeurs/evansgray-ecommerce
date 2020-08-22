@@ -2,13 +2,13 @@ import { Component, OnInit, Input } from "@angular/core";
 import { Location } from "@angular/common";
 import { OrderData } from "src/app/models/orderData";
 import { MatDialog } from "@angular/material";
-import { RefundInfoComponent } from "src/app/payments-module/checkout/refund-info/refund-info.component";
-import { ShippingInfoComponent } from "src/app/payments-module/checkout/shipping-info/shipping-info.component";
+import { RefundInfoComponent } from "src/app/payments-module/entry/refund-info/refund-info.component";
+import { ShippingInfoComponent } from "src/app/payments-module/entry/shipping-info/shipping-info.component";
 import { Router } from "@angular/router";
 import { CartService } from "src/app/services/cart.service";
 import { Observable } from "rxjs";
 import { Product } from "src/app/models/product";
-import { TermsComponent } from "src/app/payments-module/checkout/terms/terms.component";
+import { TermsComponent } from "src/app/payments-module/entry/terms/terms.component";
 
 @Component({
   selector: "app-checkout",
@@ -20,6 +20,7 @@ export class CheckoutComponent implements OnInit {
   close: boolean = false;
   cart$: Observable<Product[]>;
   cartTotal$: Observable<Number>;
+  tax;
   discount: string;
 
   constructor(
@@ -48,6 +49,10 @@ export class CheckoutComponent implements OnInit {
 
   receiveDiscount($event) {
     this.discount = $event;
+  }
+
+  receiveTax($event) {
+    this.tax = $event;
   }
 
   returnToShipping() {

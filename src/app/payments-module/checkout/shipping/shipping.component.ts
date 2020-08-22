@@ -23,6 +23,7 @@ export class ShippingComponent {
   @Input() discount: string;
   @Output() orderEvent = new EventEmitter<OrderData>();
   @Output() closeEvent = new EventEmitter<boolean>();
+  @Output() taxEvent = new EventEmitter<number>();
   // orderData: OrderData;
 
   orderForm = new FormGroup({
@@ -72,6 +73,7 @@ export class ShippingComponent {
     try {
       let taxRate = this.rates.filter(rate => rate.ZipCode === zip);
       let taxObject = this.createTaxObject(taxRate);
+      this.taxEvent.emit(taxRate);
       await this.createCustomer(orderObject, value, user, taxObject);
 
       this.orderEvent.emit(orderObject);
