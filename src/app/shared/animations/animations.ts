@@ -9,7 +9,7 @@ import {
 
 export const fader = trigger("routeAnimations", [
   transition("* <=> *", [
-    // Set a default  style for enter and leave
+    // Set A Default Value For Enter And Leave
     query(
       ":enter, :leave",
       [
@@ -22,7 +22,7 @@ export const fader = trigger("routeAnimations", [
       ],
       { optional: true }
     ),
-    // Animate the new page in
+    // Animate The New Page In
     query(":enter", [style({ transform: `translateX(100%)`, opacity: 0 })], {
       optional: true
     }),

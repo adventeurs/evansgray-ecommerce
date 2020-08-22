@@ -57,21 +57,10 @@ export class CartService {
     return this._currentCart$;
   }
 
+  // Firebase Cart Reference
   private get cartRef() {
     const uid = this.auth.getCurrentUser().uid;
     return this.db.doc<any>(`carts/${uid}`);
-  }
-
-  async abandonedCart() {
-    const data = {
-      abandonedCart: new Date()
-    };
-    try {
-      const uid = this.auth.getCurrentUser().uid;
-      this.db.doc(`users/${uid}`).update(data);
-    } catch (e) {
-      console.log(e);
-    }
   }
 
   // Add Product To Cart With Only Essential Information

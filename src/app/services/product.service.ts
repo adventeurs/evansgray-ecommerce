@@ -1,7 +1,5 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "angularfire2/firestore";
-import { BehaviorSubject } from "rxjs";
-import { Product } from "../models/product";
 
 @Injectable({
   providedIn: "root"

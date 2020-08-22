@@ -18,6 +18,7 @@ import {
   style
 } from "@angular/animations";
 
+// Carousel Item
 @Directive({
   selector: ".carousel-item"
 })
@@ -57,10 +58,12 @@ export class CarouselComponent implements AfterViewInit {
     CarouselItemDirective
   >;
   @ViewChildren(CarouselItemElement, { read: ElementRef })
-  private itemsElements: QueryList<ElementRef>;
-  @ViewChild("carousel", { static: true }) private carousel: ElementRef;
-  @Input() timing = "1s cubic-bezier(.5,-0.25,.28,1.69)";
+  @ViewChild("carousel", { static: true })
+  @Input()
+  timing = "1s cubic-bezier(.5,-0.25,.28,1.69)";
   @Input() showControls = true;
+  private carousel: ElementRef;
+  private itemsElements: QueryList<ElementRef>;
   private player: AnimationPlayer;
   private itemWidth: number;
   private currentSlide = 0;
@@ -77,16 +80,18 @@ export class CarouselComponent implements AfterViewInit {
     };
   }
 
+  // Translate X Animation Based On Calculated Offset
   private slideAnimation(offset) {
     return this.builder.build([
       animate(this.timing, style({ transform: `translateX(-${offset}px)` }))
     ]);
   }
 
+  // Determine Offset For Slide Animation
   private getOffset(value) {
-    // increment slide if positive
+    // Increment If True
     if (value) this.currentSlide = (this.currentSlide + 1) % this.items.length;
-    // decrement if false
+    // Decrement If False
     else {
       this.currentSlide =
         (this.currentSlide - 1 + this.items.length) % this.items.length;
@@ -94,6 +99,7 @@ export class CarouselComponent implements AfterViewInit {
     return this.currentSlide * this.itemWidth;
   }
 
+  // Next Slide
   next() {
     if (this.currentSlide === this.items.length) this.currentSlide = 0;
 
@@ -104,6 +110,7 @@ export class CarouselComponent implements AfterViewInit {
     this.player.play();
   }
 
+  // Previous Slide
   prev() {
     if (this.currentSlide === 0) this.currentSlide = this.items.length;
 

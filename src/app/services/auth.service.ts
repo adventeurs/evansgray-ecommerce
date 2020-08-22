@@ -164,6 +164,7 @@ export class AuthService {
     });
   }
 
+  // Add Email To Email List
   public emailList(_email) {
     const { email } = _email;
     this.db
